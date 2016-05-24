@@ -1,0 +1,4 @@
+useDynLib(ImbalancedPG)
+import(RcppArmadillo)
+importFrom(Rcpp, evalCpp)
+exportPattern("^[[:alpha:]]+")
