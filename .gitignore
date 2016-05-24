@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+# Junk in Mac OS
+**/.DS_Store
+
