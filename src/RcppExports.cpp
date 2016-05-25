@@ -18,9 +18,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// multinomial
-SEXP multinomial(SEXP n, SEXP y, double b, double B, int burnin, int run, double r_ratio);
-RcppExport SEXP ImbalancedPG_multinomial(SEXP nSEXP, SEXP ySEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r_ratioSEXP) {
+// binomial
+SEXP binomial(SEXP n, SEXP y, double b, double B, int burnin, int run, double r_ratio);
+RcppExport SEXP ImbalancedPG_binomial(SEXP nSEXP, SEXP ySEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r_ratioSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -31,7 +31,25 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< double >::type r_ratio(r_ratioSEXP);
-    __result = Rcpp::wrap(multinomial(n, y, b, B, burnin, run, r_ratio));
+    __result = Rcpp::wrap(binomial(n, y, b, B, burnin, run, r_ratio));
+    return __result;
+END_RCPP
+}
+// logit_reg
+SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r_ratio, int mc_draws);
+RcppExport SEXP ImbalancedPG_logit_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r_ratioSEXP, SEXP mc_drawsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type run(runSEXP);
+    Rcpp::traits::input_parameter< double >::type r_ratio(r_ratioSEXP);
+    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
+    __result = Rcpp::wrap(logit_reg(y, X, b, B, burnin, run, r_ratio, mc_draws));
     return __result;
 END_RCPP
 }

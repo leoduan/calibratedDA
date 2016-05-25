@@ -5,7 +5,11 @@ rpg <- function(b, c) {
     .Call('ImbalancedPG_rpg', PACKAGE = 'ImbalancedPG', b, c)
 }
 
-multinomial <- function(n, y, b = 0, B = 1000, burnin = 500L, run = 500L, r_ratio = 20) {
-    .Call('ImbalancedPG_multinomial', PACKAGE = 'ImbalancedPG', n, y, b, B, burnin, run, r_ratio)
+binomial <- function(n, y, b = 0, B = 1000, burnin = 500L, run = 500L, r_ratio = 20) {
+    .Call('ImbalancedPG_binomial', PACKAGE = 'ImbalancedPG', n, y, b, B, burnin, run, r_ratio)
+}
+
+logit_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r_ratio = 20, mc_draws = 1E4L) {
+    .Call('ImbalancedPG_logit_reg', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r_ratio, mc_draws)
 }
 
