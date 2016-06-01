@@ -6,18 +6,6 @@
 
 using namespace Rcpp;
 
-// rpg
-SEXP rpg(SEXP b, SEXP c);
-RcppExport SEXP ImbalancedPG_rpg(SEXP bSEXP, SEXP cSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type c(cSEXP);
-    __result = Rcpp::wrap(rpg(b, c));
-    return __result;
-END_RCPP
-}
 // binomial
 SEXP binomial(SEXP n, SEXP y, double b, double B, int burnin, int run, double r_ratio);
 RcppExport SEXP ImbalancedPG_binomial(SEXP nSEXP, SEXP ySEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r_ratioSEXP) {
@@ -36,8 +24,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // logit_reg
-SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r_ratio, int mc_draws);
-RcppExport SEXP ImbalancedPG_logit_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r_ratioSEXP, SEXP mc_drawsSEXP) {
+SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0_ratio, int mc_draws, double r1, bool downsampling);
+RcppExport SEXP ImbalancedPG_logit_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0_ratioSEXP, SEXP mc_drawsSEXP, SEXP r1SEXP, SEXP downsamplingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -47,9 +35,23 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r_ratio(r_ratioSEXP);
+    Rcpp::traits::input_parameter< double >::type r0_ratio(r0_ratioSEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(logit_reg(y, X, b, B, burnin, run, r_ratio, mc_draws));
+    Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
+    Rcpp::traits::input_parameter< bool >::type downsampling(downsamplingSEXP);
+    __result = Rcpp::wrap(logit_reg(y, X, b, B, burnin, run, r0_ratio, mc_draws, r1, downsampling));
+    return __result;
+END_RCPP
+}
+// rpg
+SEXP rpg(SEXP b, SEXP c);
+RcppExport SEXP ImbalancedPG_rpg(SEXP bSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type c(cSEXP);
+    __result = Rcpp::wrap(rpg(b, c));
     return __result;
 END_RCPP
 }
