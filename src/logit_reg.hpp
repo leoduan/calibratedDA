@@ -2,7 +2,9 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500, double r0_ratio = 20, int mc_draws = 1E4, double r1 = 2.0, bool downsampling= true) {
+SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500,
+               double r0_ratio = 20, int mc_draws = 1E4, double r1 = 2.0,
+               bool downsampling = true) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -11,11 +13,11 @@ SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500, 
   Rcpp::NumericMatrix Xr(X);
   Rcpp::NumericMatrix Br(B);
 
-  colvec y_vec(yr.begin(), yr.size(), false);
-  colvec b_vec(br.begin(), br.size(), false);
+  colvec y_vec(yr.begin(), yr.size(), true);
+  const colvec b_vec(br.begin(), br.size(), false);
 
-  mat X_mat(Xr.begin(), Xr.nrow(), Xr.ncol(), false);
-  mat B_mat(Br.begin(), Br.nrow(), Br.ncol(), false);
+  const mat X_mat(Xr.begin(), Xr.nrow(), Xr.ncol(), false);
+  const mat B_mat(Br.begin(), Br.nrow(), Br.ncol(), false);
 
   int n = X_mat.n_rows;
   int p = X_mat.n_cols;
@@ -24,22 +26,16 @@ SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500, 
   mat B_inv = inv(B_mat);
   vec B_invb = solve(B_mat, b_vec);
 
-  // colvec w2 = ones(nr.size());
-
-  // colvec theta = ones(nr.size());
-  // colvec var = ones(nr.size());
-  // colvec m = ones(nr.size());
-
   // set y=1
   uvec pos_group = find(y_vec == 1);
+  int n_y1 = pos_group.n_elem;
 
   // set y=0
   uvec zero_group = find(y_vec == 0);
-  int n_y0 = zero_group.n_elem;
 
-  // thresholding r_tilde
-  double r_tilde = accu(y_vec) / (double)y_vec.size() * r0_ratio;
-  double log_r = log(r_tilde);
+  // threshold: r_tilde
+  double r_tilde = n_y1 / (double)y_vec.size() * r0_ratio;
+  double log_r0 = log(r_tilde);
 
   if (r_tilde > 1) {
     stop("r_tilde>1");
@@ -48,64 +44,81 @@ SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500, 
   // PG latent variable
   colvec w = ones(yr.size());
 
-  mat X_tilde1 = X_mat.rows(pos_group);
+  // X corresponds to y=1
+  // mat X1 = X_mat.rows(pos_group);
+  // X corresponds to y=0
+  // mat X0 = X_mat.rows(zero_group);
 
   mat trace_beta(run, p);
   vec filter_count(run);
 
   vec eta;
+
   for (int i = 0; i < (burnin + run); ++i) {
     // compute  Xbeta
     vec Xbeta = X_mat * beta;
+    vec exp_Xbeta = exp(Xbeta);
 
-    // sample Monte Carlo weight, eta: keep zero_group_subsample, throw away
+    // keep those with exp(Xbeta) > r_tilde
+
+    const double r_star = 1.1;//little wiggle room for the threshold
+    uvec group_r_fixed_1 = find(exp_Xbeta > r_star * r_tilde);
+    uvec pos_group_r1 =  find((exp_Xbeta <= r_star * r_tilde) && (y_vec == 1));
+    uvec zero_group_r0 = find((exp_Xbeta <= r_star * r_tilde) && (y_vec == 0));
+
+    // sample Monte Carlo weight, eta: keep zero_group_r0_subsample, throw away
     // other y=0.
-    if(downsampling){
-    eta = c11r.draw_binomial(mc_draws, r_tilde, n_y0);
-    }else{
-      eta = ones(n_y0) * mc_draws * r_tilde;
+    if (downsampling) {
+      eta = c11r.draw_binomial(mc_draws, r_tilde, zero_group_r0.n_elem);
+    } else {
+      eta = ones(zero_group_r0.n_elem) * mc_draws * r_tilde; //eta/k set to equally r_tilde
     }
-    uvec zero_group_subsample = zero_group(find(eta > 0));
+
+    uvec zero_group_r0_subsample = zero_group_r0(find(eta>0));
+    vec eta_subsample = eta(find(eta > 0));
 
     // sample PG: w
 
     w.fill(0);
-
     vec alpha1 = zeros(n);
     vec alpha2 = zeros(n);
 
-    // w for y=1
-    alpha1(pos_group).fill(r1);
-    alpha2(pos_group) = Xbeta(pos_group) - log(r1);
+    // w for r = 1
+    alpha1(group_r_fixed_1).fill(1);
+    alpha2(group_r_fixed_1) = Xbeta(group_r_fixed_1);
+    w(group_r_fixed_1) = rpg(alpha1(group_r_fixed_1), alpha2(group_r_fixed_1));
 
-    w(pos_group) = rpg(alpha1(pos_group), alpha2(pos_group));
+    // w for r = r1
+    alpha1(pos_group_r1).fill(r1);
+    alpha2(pos_group_r1) = Xbeta(pos_group_r1) - log(r1);
 
-    // w for y=0 and eta>0
+    w(pos_group_r1) = rpg(alpha1(pos_group_r1), alpha2(pos_group_r1));
 
-    alpha1(zero_group_subsample) = eta(find(eta > 0)) / (double)mc_draws;
-    alpha2(zero_group_subsample) = Xbeta(zero_group_subsample) - log_r;
+    // w for r = r0 under downsampling
 
-    w(zero_group_subsample) =
-        rpg(alpha1(zero_group_subsample), alpha2(zero_group_subsample));
+    alpha1(zero_group_r0_subsample) = eta_subsample / (double)mc_draws;
+    alpha2(zero_group_r0_subsample) = Xbeta(zero_group_r0_subsample) - log_r0;
+
+    w(zero_group_r0_subsample) =
+        rpg(alpha1(zero_group_r0_subsample), alpha2(zero_group_r0_subsample));
 
     // sample beta
 
-    mat X_tilde2 = X_mat.rows(zero_group_subsample);
-    mat X_tilde = join_vert(X_tilde1, X_tilde2);
+    uvec keep_idx = join_vert( join_vert(group_r_fixed_1, pos_group_r1), zero_group_r0_subsample);
+    
+    mat X123 = X_mat.rows(keep_idx);
+    vec w123 = w(keep_idx);
 
-    vec w1 = w(pos_group);
-    vec w2 = w(zero_group_subsample);
-    vec w12 = join_vert(w1, w2);
+    vec k1 = y_vec(group_r_fixed_1) - 0.5;
+    vec k2 = y_vec(pos_group_r1) - r1 / 2.0 + w(pos_group_r1) * log(r1);
+    vec k3 = - eta_subsample / (double)mc_draws / 2.0 + w(zero_group_r0_subsample) * log_r0;
+    vec k123 = join_vert(join_vert(k1, k2), k3);
 
-    vec k1 = y_vec(pos_group) - r1 / 2 + w1 * log(r1);
-    vec k2 = -eta(find(eta > 0)) / (double)mc_draws / 2.0 + w2 * log_r;
-    vec k12 = join_vert(k1, k2);
+    mat wX_tilde = X123;
+    wX_tilde.each_col() %= w123;
 
-    mat wX_tilde = X_tilde;
-    wX_tilde.each_col() %= w12;
-
-    mat V = inv(X_tilde.t() * wX_tilde + B_inv);
-    vec m = V * (X_tilde.t() * k12 + B_invb);
+    mat V = inv(X123.t() * wX_tilde + B_inv);
+    vec m = V * (X123.t() * k123 + B_invb);
 
     beta = trans(chol(V)) * randn(p) + m;
 

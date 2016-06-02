@@ -24,4 +24,19 @@ class C11RNG {
     }
     return result;
   };
+
+  arma::vec draw_binomial(int n, arma::vec p, int size) {
+
+    arma::vec result(size);
+    for (int i = 0; i < size; ++i) {
+      if(p(i)<1){
+         std::binomial_distribution<int> distribution(n, p(i));
+        result(i) = (double)distribution(gen);
+      }else{
+        result(i) = n;
+      }
+     
+    }
+    return result;
+  };
 };
