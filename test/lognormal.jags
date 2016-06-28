@@ -1,0 +1,13 @@
+model {
+	for (i in 1:N){
+		y[i] ~ dlnorm(mu[i] , 1/sigma2)
+		xbeta[i] <- a + b * X[i]
+    mu[i]<- xbeta[i]
+	}
+	a ~ dnorm(0, .0001)
+	b ~ dnorm(0, .0001)
+	c ~ dnorm(0, .0001)
+	d ~ dnorm(0, .0001)
+	p ~ dbeta(1,1)
+	sigma2 ~ dgamma(0.1,0.1)
+}

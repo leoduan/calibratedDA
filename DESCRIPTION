@@ -2,10 +2,10 @@ Package: ImbalancedPG
 Type: Package
 Title: What the package does (short line)
 Version: 1.0
-Date: 2014-03-22
+Date: 2016-06-13
 Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
-Imports: Rcpp (>= 0.11.1), RcppArmadillo (>= 0.4.100.2.1)
+Imports: Rcpp (>= 0.12.5)
 LinkingTo: Rcpp, RcppArmadillo

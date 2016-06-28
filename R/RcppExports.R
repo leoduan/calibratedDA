@@ -5,8 +5,24 @@ binomial <- function(n, y, b = 0, B = 1000, burnin = 500L, run = 500L, r_ratio =
     .Call('ImbalancedPG_binomial', PACKAGE = 'ImbalancedPG', n, y, b, B, burnin, run, r_ratio)
 }
 
+binomial_simple <- function(y_r, n_r, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L) {
+    .Call('ImbalancedPG_binomial_simple', PACKAGE = 'ImbalancedPG', y_r, n_r, burnin, run, r0, mc_draws)
+}
+
+logit_reg_simple <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L) {
+    .Call('ImbalancedPG_logit_reg_simple', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0, mc_draws)
+}
+
 logit_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0_ratio = 20, mc_draws = 1E4L, r1 = 2.0, downsampling = TRUE) {
     .Call('ImbalancedPG_logit_reg', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0_ratio, mc_draws, r1, downsampling)
+}
+
+poisson_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L) {
+    .Call('ImbalancedPG_poisson_reg', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0, mc_draws)
+}
+
+probit_reg_simple <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L) {
+    .Call('ImbalancedPG_probit_reg_simple', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0, mc_draws)
 }
 
 rpg <- function(b, c) {

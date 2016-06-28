@@ -12,6 +12,8 @@
 #include "rpg.hpp"
 #include "logit_reg.hpp"
 #include "binomial.hpp"
-
-
+#include "poisson_reg.hpp"
+#include "logistic_reg_simple.hpp"
+#include "binomial_simple.hpp"
+#include "probit_reg_simple.hpp"
 

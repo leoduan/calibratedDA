@@ -1,0 +1,16 @@
+model {
+	for (i in 1:N){
+		y[i] ~ dpois(mu[i])
+		xbeta[i] <- a + b * X[i]
+  	theta[i] <- c + d * X[i]
+    # p[i] <- ilogit(theta[i])
+    # C[i] ~ dbern(p[i])
+    C[i] ~ dbern(p)
+    mu[i]<- exp(xbeta[i])*C[i] + 1E-8
+	}
+	a ~ dnorm(0, .0001)
+	b ~ dnorm(0, .0001)
+	c ~ dnorm(0, .0001)
+	d ~ dnorm(0, .0001)
+	p ~ dbeta(1,1)
+}
