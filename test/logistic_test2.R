@@ -1,11 +1,11 @@
 require("ImbalancedPG")
 
-N<- 1E4
+N<- 1E3
 
 X0<- 1#rnorm(N, 1, 1)
 X1<- rnorm(N, 0, 1)
 X<- cbind(X0,X1)
-beta<- c(1,-5)
+beta<- c(2,3)
 
 Xbeta<- X%*%beta
 theta<-  exp(Xbeta)/(1+exp(Xbeta))
@@ -16,14 +16,15 @@ sum(y)
 B<- diag(1000,2,2)
 b<- rep(0,2)
 
+fit<- ImbalancedPG::logit_reg_bias_correction(y , X,b,B,r0 = 100)
 fit<- ImbalancedPG::logit_reg_simple(y , X,b,B,r0 = 10)
 
 fit$beta
 acf(fit$beta[,1])
 acf(fit$beta[,2])
 
-# hist(fit$beta[,1])
-# hist(fit$beta[,2])
+hist(fit$beta[,1])
+hist(fit$beta[,2])
 
 sd(fit$beta[,1])
 sd(fit$beta[,2])

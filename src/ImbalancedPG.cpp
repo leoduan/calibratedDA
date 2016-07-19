@@ -17,3 +17,4 @@
 #include "binomial_simple.hpp"
 #include "probit_reg_simple.hpp"
 
+#include "logistic_reg_bias_correction.hpp"

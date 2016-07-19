@@ -2,8 +2,8 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
-                 int run = 500, double r0 = 10, double c = 20, int mc_draws = 1E4) {
+SEXP logit_reg_bias_correction(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500,  double r0 = 20, int mc_draws = 1E4) {
+  
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -12,7 +12,7 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   Rcpp::NumericMatrix Xr(X);
   Rcpp::NumericMatrix Br(B);
 
-  const colvec y_vec(yr.begin(), yr.size(), false);
+  const  colvec y_vec(yr.begin(), yr.size(), false);
   const colvec b_vec(br.begin(), br.size(), false);
 
   const mat X_mat(Xr.begin(), Xr.nrow(), Xr.ncol(), false);
@@ -25,6 +25,8 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   mat B_inv = inv(B_mat);
   vec B_invb = solve(B_mat, b_vec);
 
+  double log_r0 = log(r0);
+
   // PG latent variable
   colvec w = ones(yr.size());
 
@@ -34,34 +36,23 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   // mat X0 = X_mat.rows(zero_group);
 
   mat trace_beta(run, p);
+  mat trace_w(run, n);
+
+
+  vec r = ones(n) * r0;
 
   for (int i = 0; i < (burnin + run); ++i) {
     // compute  Xbeta
     vec Xbeta = X_mat * beta;
+    
+    vec exp_Xbeta = exp(Xbeta);
+    r = exp_Xbeta* r0;
+    // r(find(exp_Xbeta>1)).fill(1);
+    // r(find(r>1)).fill(1);
 
-    vec expBeta = exp(Xbeta);  // max( exp(Xbeta), exp(Xbeta*2));
+    vec log_r = Xbeta - log( exp(log(1 +exp(Xbeta))/r)-1);
 
-    // double r0 = c;
-    // double r0 = sqrt(accu(expBeta)) / c;
-    // if (r0 < 10) r0 = 10;
-
-    vec r = expBeta * r0;
-
-    // r(find(r>1)) = exp( Xbeta(find(r>1)) *2 ) *c;
-
-    vec log_r = log(r);
-
-
-
-    /*
-    uvec setExpBetaGt1 = find_finite(Xbeta);
-    // uvec setExpBetaGt1 = find(Xbeta>0);
-    vec log_r2 = -log(
-        exp(expBeta(setExpBetaGt1) / r(setExpBetaGt1) - Xbeta(setExpBetaGt1)) -
-        1.0 / expBeta(setExpBetaGt1));
-    // r(find(Xbeta > 0)) = exp(Xbeta(find(Xbeta > 0)) * 2) * r0;
-        log_r(setExpBetaGt1) = log_r2;
-    */
+    log_r(find(r<1)) = log(r(find(r<1)));
 
     vec alpha1 = ones(n) % r;
     vec alpha2 = Xbeta - log_r;
@@ -79,8 +70,11 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
 
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
+      trace_w.row(i - burnin) = w.t();
     }
   }
 
-  return Rcpp::List::create(Rcpp::Named("beta") = trace_beta);
+  return Rcpp::List::create(Rcpp::Named("beta") = trace_beta,
+                            Rcpp::Named("w") = trace_w
+    );
 }

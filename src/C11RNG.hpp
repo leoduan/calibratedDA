@@ -1,21 +1,21 @@
-// #include <boost/math/distributions/normal.hpp>
+#include <boost/math/distributions/normal.hpp>
 #include <random>
 
 using namespace arma;
 
-// double pnorm(double q, double a, double b) {
-//   boost::math::normal_distribution<double> distribution(a, b);
-//   return cdf(distribution, q);
-// }
+double pnorm(double q, double a, double b) {
+  boost::math::normal_distribution<double> distribution(a, b);
+  return cdf(distribution, q);
+}
 
-// vec pnorm_std(vec q) {
-//   int n = q.n_elem;
-//   vec p = zeros(n);
-//   for (int i = 0; i < n; ++i) {
-//     p(i) = pnorm(q(i), 0, 1);
-//   }
-//   return p;
-// }
+vec pnorm_std(vec q) {
+  int n = q.n_elem;
+  vec p = zeros(n);
+  for (int i = 0; i < n; ++i) {
+    p(i) = pnorm(q(i), 0, 1);
+  }
+  return p;
+}
 
 class C11RNG {
  public:

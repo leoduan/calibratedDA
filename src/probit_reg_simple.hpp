@@ -41,30 +41,35 @@ SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   uvec zero_set = find(y_vec == 0);
   vec r = ones(n) * r0;
   vec C = ones(n);
-  
+  vec Z = y_vec;
+
   for (int i = 0; i < (burnin + run); ++i) {
     // compute  Xbeta
+    
     vec Xbeta = X_mat * beta;
 
-    // vec tail_prob = 0.5 - erf(abs(Xbeta)/sqrt(2))/2;
+    r = 1.0 /r0 / pnorm_std(Xbeta);
 
-    // r = 1.0 / tail_prob * r0;
-    if (i < burnin) {
-      r.fill(r0);
-      r(find(abs(Xbeta) < 2)).fill(1);
-      C = (1.0 - sqrt(r)) % Xbeta;
-    }
+    r(r<1).fill(1);
 
-    
+    // if (i < burnin) {
+      C = (1.0 - r) % Xbeta;
+      // r.fill(r0);
+
+      r(find((Z <= C) && (y_vec == 1))).fill(1);
+      r(find((Z > C) && (y_vec == 0))).fill(1);
+
+      C = (1.0 - r) % Xbeta;
+    // }
 
     lb(pos_set) = C(pos_set);
     ub(zero_set) = C(zero_set);
 
-    vec Z = c11r.rtruncnorm(Xbeta, sqrt(r), lb, ub);
+    Z = c11r.rtruncnorm(Xbeta, r, lb, ub);
 
-    mat V = inv(X_mat.t() * diagmat(1.0 / r) * X_mat + B_inv);
+    mat V = inv(X_mat.t() * diagmat(1.0 / r / r) * X_mat + B_inv);
 
-    vec m = V * (X_mat.t() * diagmat(1.0 / r) * Z + B_invb);
+    vec m = V * (X_mat.t() * diagmat(1.0 / r / r) * Z + B_invb);
 
     mat cholV = trans(chol(V));
 

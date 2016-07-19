@@ -1,21 +1,16 @@
 require(msm)
+rm(list=ls())
+N <- 1E2
 
-r<- 1E2
-
-N <- 1E3
-
-X0 <- 1#rnorm(N, 1, 1)
+X0 <- 1
 X1 <- rnorm(N, 1, 1)
 X <- cbind(X0, X1)
-beta <- c(-3, 0)
+beta <- c(0, 4)
 
 
 theta<- pnorm(X%*%beta)
 
-# y<- as.numeric( runif(N)<theta)
-# sum(y)
-y<- rep(0,N)
-y[1]<-1
+y<- runif(N)< theta
 
 vecInf<- rep(Inf, N)
 
@@ -26,36 +21,49 @@ ub<- vecInf
 lb[y==1]<- 0
 ub[y==0]<- 0
 
-# beta<- rnorm(2)
+ beta<- rnorm(2)
 
 # r<- 1E5
 
 trace_beta<- numeric()
-trace_r2<- numeric()
+trace_r<- numeric()
 
-for(i in 1:300){
+# r<- 1.01
+
+r<-1
+
+
+for(i in 1:500){
   
-  theta<- X%*%beta *r
-  Z<- rtnorm(N, theta, r, lb, ub )
-  m<- X2inv%*% (t(X)%*% (Z)) /r
+  xbeta<- X%*%beta
+  Z<- rtnorm(N, xbeta, 1, lb, ub )
   
+  beta_hat<- X2inv%*% (t(X)%*% (Z))
   
+  RSS = sum((Z- X%*%beta_hat)^2)
+  
+  # r<- sqrt(RSS/ rchisq(1, N))
+
+  
+  m<-  beta_hat/r
   
   beta <- cholX2inv%*%rnorm(2) + m 
 
   if(i>100){
     trace_beta<- rbind(trace_beta, t(beta))
-    trace_r2<- c(trace_r2, r2)
+    trace_r<- c(trace_r, r)
   }
   print(i)
 }
 
 beta
  
-ts.plot(trace_beta[,1])
-acf(trace_beta[,1],lag.max = 40)
+ts.plot(trace_beta[,2])
+acf(trace_beta[,2],lag.max = 40)
 # acf(trace_beta[,2],lag.max = 40)
 
-# ts.plot(trace_r2)
+# ts.plot(trace_r)
 # ts.plot(trace_beta[,2])
 # acf(trace_beta[,1],lag.max = 40)
+
+

@@ -39,6 +39,24 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// logit_reg_bias_correction
+SEXP logit_reg_bias_correction(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
+RcppExport SEXP ImbalancedPG_logit_reg_bias_correction(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type run(runSEXP);
+    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
+    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
+    __result = Rcpp::wrap(logit_reg_bias_correction(y, X, b, B, burnin, run, r0, mc_draws));
+    return __result;
+END_RCPP
+}
 // logit_reg_simple
 SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
 RcppExport SEXP ImbalancedPG_logit_reg_simple(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
@@ -78,8 +96,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP ImbalancedPG_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
+SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, double c, int mc_draws);
+RcppExport SEXP ImbalancedPG_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP cSEXP, SEXP mc_drawsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -90,8 +108,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0, mc_draws));
+    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0, c, mc_draws));
     return __result;
 END_RCPP
 }
