@@ -25,6 +25,25 @@ class C11RNG {
     gen = std::mt19937(std_rand());
   };
 
+  double draw_gamma(double alpha, double beta) {
+    std::gamma_distribution<> gamma1(alpha, 1. / beta);
+    return gamma1(gen);
+  }
+
+  double draw_chisq(double alpha) {
+    std::gamma_distribution<> gamma1(alpha / 2, 2.0);
+    return gamma1(gen);
+  }
+
+  vec draw_gamma(vec alpha, vec beta) {
+    int N = alpha.n_elem;
+    vec randvec(N);
+    for (int i = 0; i < N; i++) {
+      randvec(i) = draw_gamma(alpha(i), beta(i));
+    }
+    return randvec;
+  }
+
   int draw_binomial(int n, double p) {
     std::binomial_distribution<int> distribution(n, p);
     return distribution(gen);
@@ -98,7 +117,7 @@ class C11RNG {
   double rtruncnorm_std_ub(double ub) { return -rtruncnorm_std_lb(-ub); }
 
   double rtruncnorm_std_lb_ub(double lb, double ub) {
-    double trunc = 6;
+    double trunc = 10;
     if (ub > trunc) ub = trunc;
     if (lb < -trunc) lb = -trunc;
 

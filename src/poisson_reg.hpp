@@ -3,7 +3,8 @@ using namespace arma;
 
 // [[Rcpp::export]]
 SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
-                 int run = 500, double r0 = 10, double c = 20, int mc_draws = 1E4) {
+                 int run = 500, double r0ini = 10, double c = 1,
+                 int mc_draws = 1E4) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -34,24 +35,41 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   // mat X0 = X_mat.rows(zero_group);
 
   mat trace_beta(run, p);
+  mat trace_r(run, n);
+  mat trace_w(run, n);
+
+  vec r, log_r;
+
+  vec max_xbeta = -ones(n) * INFINITY;
+
+  double r0 = r0ini;
 
   for (int i = 0; i < (burnin + run); ++i) {
     // compute  Xbeta
     vec Xbeta = X_mat * beta;
 
-    vec expBeta = exp(Xbeta);  // max( exp(Xbeta), exp(Xbeta*2));
-
     // double r0 = c;
     // double r0 = sqrt(accu(expBeta)) / c;
     // if (r0 < 10) r0 = 10;
 
-    vec r = expBeta * r0;
+    if (i < burnin) {
+      vec expBeta = exp(max(Xbeta, c * Xbeta));
+      r = expBeta * r0;
 
-    // r(find(r>1)) = exp( Xbeta(find(r>1)) *2 ) *c;
+      // r(find(r > 10000)).fill(10000);
 
-    vec log_r = log(r);
+      log_r = log(r);
+    } else {
+      max_xbeta = max(max_xbeta, max(Xbeta, Xbeta * c));
+      r = exp(max_xbeta) * r0;
+      // r(find(r > 10000)).fill(10000);
 
+      log_r = log(r);
+    }
 
+    // r(find(Xbeta > 20)) = pow(expBeta(find(Xbeta > 20)), 1.5) * r0;
+
+    // r(find(r>1)) = exp( Xbeta(fid(r>1)) *2 ) *c;
 
     /*
     uvec setExpBetaGt1 = find_finite(Xbeta);
@@ -67,6 +85,15 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
     vec alpha2 = Xbeta - log_r;
     w = rpg(alpha1, alpha2);
 
+    if (w.has_nan()) {
+      // throw std::runtime_error("w nan");
+      // cout << r0 << endl;
+      beta = ones(p);
+      r0 *= 1.1;
+      i = 0;
+      continue;
+    }
+
     mat wX_tilde = X_mat;
     wX_tilde.each_col() %= w;
 
@@ -79,8 +106,12 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
 
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
+      trace_r.row(i - burnin) = r.t();
+      trace_w.row(i - burnin) = w.t();
     }
   }
 
-  return Rcpp::List::create(Rcpp::Named("beta") = trace_beta);
+  return Rcpp::List::create(Rcpp::Named("beta") = trace_beta,
+                            Rcpp::Named("r") = trace_r,
+                            Rcpp::Named("w") = trace_w);
 }

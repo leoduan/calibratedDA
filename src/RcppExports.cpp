@@ -6,23 +6,6 @@
 
 using namespace Rcpp;
 
-// binomial
-SEXP binomial(SEXP n, SEXP y, double b, double B, int burnin, int run, double r_ratio);
-RcppExport SEXP ImbalancedPG_binomial(SEXP nSEXP, SEXP ySEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r_ratioSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type n(nSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    Rcpp::traits::input_parameter< double >::type B(BSEXP);
-    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
-    Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r_ratio(r_ratioSEXP);
-    __result = Rcpp::wrap(binomial(n, y, b, B, burnin, run, r_ratio));
-    return __result;
-END_RCPP
-}
 // binomial_simple
 SEXP binomial_simple(SEXP y_r, SEXP n_r, int burnin, int run, double r0, int mc_draws);
 RcppExport SEXP ImbalancedPG_binomial_simple(SEXP y_rSEXP, SEXP n_rSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
@@ -36,24 +19,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
     __result = Rcpp::wrap(binomial_simple(y_r, n_r, burnin, run, r0, mc_draws));
-    return __result;
-END_RCPP
-}
-// logit_reg_bias_correction
-SEXP logit_reg_bias_correction(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP ImbalancedPG_logit_reg_bias_correction(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
-    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
-    Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
-    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(logit_reg_bias_correction(y, X, b, B, burnin, run, r0, mc_draws));
     return __result;
 END_RCPP
 }
@@ -75,9 +40,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// logit_reg
-SEXP logit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0_ratio, int mc_draws, double r1, bool downsampling);
-RcppExport SEXP ImbalancedPG_logit_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0_ratioSEXP, SEXP mc_drawsSEXP, SEXP r1SEXP, SEXP downsamplingSEXP) {
+// poisson_reg
+SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0ini, double c, int mc_draws);
+RcppExport SEXP ImbalancedPG_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0iniSEXP, SEXP cSEXP, SEXP mc_drawsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -87,17 +52,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0_ratio(r0_ratioSEXP);
+    Rcpp::traits::input_parameter< double >::type r0ini(r0iniSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    Rcpp::traits::input_parameter< double >::type r1(r1SEXP);
-    Rcpp::traits::input_parameter< bool >::type downsampling(downsamplingSEXP);
-    __result = Rcpp::wrap(logit_reg(y, X, b, B, burnin, run, r0_ratio, mc_draws, r1, downsampling));
+    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0ini, c, mc_draws));
     return __result;
 END_RCPP
 }
-// poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, double c, int mc_draws);
-RcppExport SEXP ImbalancedPG_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP cSEXP, SEXP mc_drawsSEXP) {
+// probit_reg_px
+SEXP probit_reg_px(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws, double nu0);
+RcppExport SEXP ImbalancedPG_probit_reg_px(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP, SEXP nu0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -108,9 +72,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0, c, mc_draws));
+    Rcpp::traits::input_parameter< double >::type nu0(nu0SEXP);
+    __result = Rcpp::wrap(probit_reg_px(y, X, b, B, burnin, run, r0, mc_draws, nu0));
     return __result;
 END_RCPP
 }
