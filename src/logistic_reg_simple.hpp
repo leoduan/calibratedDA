@@ -2,8 +2,8 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500,  double r0 = 20, int mc_draws = 1E4) {
-  
+SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
+                      int run = 500, double r0 = 20, int mc_draws = 1E4) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -12,7 +12,7 @@ SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run 
   Rcpp::NumericMatrix Xr(X);
   Rcpp::NumericMatrix Br(B);
 
-  const  colvec y_vec(yr.begin(), yr.size(), false);
+  const colvec y_vec(yr.begin(), yr.size(), false);
   const colvec b_vec(br.begin(), br.size(), false);
 
   const mat X_mat(Xr.begin(), Xr.nrow(), Xr.ncol(), false);
@@ -37,15 +37,28 @@ SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run 
 
   mat trace_beta(run, p);
   mat trace_w(run, n);
+  mat trace_r(run, n);
+
+  vec max_xbeta = -ones(n) * INFINITY;
+
+  vec r = ones(n);
 
   for (int i = 0; i < (burnin + run); ++i) {
     // compute  Xbeta
     vec Xbeta = X_mat * beta;
-    
-    vec exp_Xbeta = exp(Xbeta);
-    vec r = exp_Xbeta* r0;
-    r(find(exp_Xbeta>1)).fill(1);
-    r(find(r>1)).fill(1);
+
+    if (i < burnin) {
+      vec exp_Xbeta = exp(Xbeta);
+      r = exp_Xbeta * r0;
+      r(find(exp_Xbeta > 1)).fill(1);
+      r(find(r > 1)).fill(1);
+    } else {
+      max_xbeta = max(max_xbeta, Xbeta);
+      vec exp_Xbeta = exp(max_xbeta);
+      r = exp_Xbeta * r0;
+      r(find(exp_Xbeta > 1)).fill(1);
+      r(find(r > 1)).fill(1);
+    }
 
     vec log_r = log(r);
 
@@ -63,13 +76,15 @@ SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run 
 
     beta = trans(chol(V)) * randn(p) + m;
 
+    R_CheckUserInterrupt();
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
+      trace_r.row(i - burnin) = r.t();
       trace_w.row(i - burnin) = w.t();
     }
   }
 
   return Rcpp::List::create(Rcpp::Named("beta") = trace_beta,
-                            Rcpp::Named("w") = trace_w
-    );
+                            Rcpp::Named("w") = trace_w,
+                            Rcpp::Named("r") = trace_r);
 }

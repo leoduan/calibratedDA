@@ -5,6 +5,7 @@ colvec rpg(colvec shape, colvec scale) {
   // C++-only interface to PolyaGamma class
   // draws random PG variates from arma::vectors of n's and psi's
   RNG r;
+
   PolyaGamma dv;
   PolyaGammaSmallB pg_smallb;
   PolyaGammaAlt alt;

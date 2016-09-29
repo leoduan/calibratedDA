@@ -41,8 +41,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0ini, double c, int mc_draws);
-RcppExport SEXP ImbalancedPG_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0iniSEXP, SEXP cSEXP, SEXP mc_drawsSEXP) {
+SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0ini, double c, int fixed_R);
+RcppExport SEXP ImbalancedPG_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0iniSEXP, SEXP cSEXP, SEXP fixed_RSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -54,8 +54,27 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< double >::type r0ini(r0iniSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< int >::type fixed_R(fixed_RSEXP);
+    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0ini, c, fixed_R));
+    return __result;
+END_RCPP
+}
+// poisson_reg_random_effect
+SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double r0ini, double c, int mc_draws, int da_ver, bool update_sigma2);
+RcppExport SEXP ImbalancedPG_poisson_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0iniSEXP, SEXP cSEXP, SEXP mc_drawsSEXP, SEXP da_verSEXP, SEXP update_sigma2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type run(runSEXP);
+    Rcpp::traits::input_parameter< double >::type r0ini(r0iniSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0ini, c, mc_draws));
+    Rcpp::traits::input_parameter< int >::type da_ver(da_verSEXP);
+    Rcpp::traits::input_parameter< bool >::type update_sigma2(update_sigma2SEXP);
+    __result = Rcpp::wrap(poisson_reg_random_effect(y, X, burnin, run, r0ini, c, mc_draws, da_ver, update_sigma2));
     return __result;
 END_RCPP
 }

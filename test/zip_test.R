@@ -1,39 +1,31 @@
 require("ImbalancedPG")
 
-
-N<- 1000
-
-X1<- rnorm(N, 1, 1)
-X<- cbind(1,X1)
-beta<- c(-5,2)
-
-theta<-  exp(X%*%beta)
-
-y<- rpois(N,theta)
-hist(y)
-# sum(y==0)
-
 require("rjags")
 
 
 setwd("~/git/ImbalancedPG/test/")
 
+source("maxpoint_data.r")                      
+
+N<- 1000
+
+X<- X[1:N,1:p]
+y<- y[1:N]
+
 jags <- jags.model('zip.jags',
-                   data = list('X' = X1,
+                   data = list('X' = as.matrix(X),
                                'y' = y,
-                               'N' = N),
+                               'N' = N,
+                               'P' = p
+                               ),
                    n.chains = 1,
                    n.adapt = 200)
 
 update(jags, 1000)
 
-out<- coda.samples(jags,
-             c('a', 'b', 'c','d', 'p'),
+jags_zip_fit<- coda.samples(jags,
+             c( 'b', 'p'),
              1000)
 
-acf(out[[1]][,1])
-acf(out[[1]][,2])
-# acf(out[[1]][,3])
-# acf(out[[1]][,4])
-acf(out[[1]][,5])
 
+save(jags_zip_fit, file="jags_zip_fit.Rda")

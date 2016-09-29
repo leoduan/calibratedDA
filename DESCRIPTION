@@ -9,3 +9,5 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Imports: Rcpp (>= 0.12.5)
 LinkingTo: Rcpp, RcppArmadillo
+NeedsCompilation: yes
+Packaged: 2016-09-29 20:27:53 UTC; leo

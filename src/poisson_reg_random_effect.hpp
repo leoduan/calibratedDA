@@ -1,0 +1,147 @@
+using namespace Rcpp;
+using namespace arma;
+
+// [[Rcpp::export]]
+SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
+                               double r0ini = 10, double c = 1,
+                               int mc_draws = 1E4, int da_ver = 1,
+                               bool update_sigma2 = false) {
+  C11RNG c11r;
+
+  Rcpp::NumericVector yr(y);
+
+  Rcpp::NumericMatrix Xr(X);
+
+  const colvec y_vec(yr.begin(), yr.size(), false);
+
+  const mat X_mat(Xr.begin(), Xr.nrow(), Xr.ncol(), false);
+
+  int n = X_mat.n_rows;
+  int p = X_mat.n_cols;
+  vec beta = solve(X_mat.t() * X_mat, X_mat.t() * log(y_vec + 1));
+  double sigma2 = 0.01;
+
+  // PG latent variable
+  colvec w = ones(n);
+
+  mat trace_beta(run, p);
+  mat trace_theta(run, n);
+  mat trace_r(run, n);
+  mat trace_w(run, n);
+  vec trace_sigma2(run);
+
+  vec r, log_r;
+
+  vec max_xbeta = -ones(n) * INFINITY;
+
+  double r0 = r0ini;
+
+  vec Xbeta = X_mat * beta;
+  vec theta =
+      Xbeta + randn(n) * sqrt(sigma2);  // ones with random effects xbeta+eta
+  vec eta = theta - Xbeta;              // random effects eta
+
+  r = ones(n) * r0;
+  log_r = log(r);
+
+  mat X_mat2 = X_mat.t() * X_mat;
+  mat X_mat2inv = inv(X_mat2 + eye<mat>(p, p) * 1E-5);
+  mat cholX_mat2inv = trans(chol(X_mat2inv));
+
+  for (int i = 0; i < (burnin + run); ++i) {
+    vec Xbeta = X_mat * beta;
+
+    if (i < burnin) {
+      vec expBeta = exp(max(theta, c * theta));
+      r = expBeta * r0;
+
+      log_r = log(r);
+    } else {
+      // max_xbeta = max(max_xbeta, max(theta, theta * c));
+
+      max_xbeta = max(theta, theta * c);
+      r = exp(max_xbeta) * r0;
+    }
+    log_r = log(r);
+
+    {
+      vec alpha1 = r;
+      vec alpha2 = abs(theta - log_r);
+      w = rpg(alpha1, alpha2);
+
+      uvec fail = find_nonfinite(w);
+      w(fail) = alpha1(fail) / 2. / alpha2(fail) % tanh(alpha2(fail) / 2.0);
+    }
+
+    {
+      vec var_theta = 1.0 / (w + 1.0 / sigma2);
+
+      vec m_theta = var_theta % (w % log_r + Xbeta / sigma2 + y_vec - r / 2.0);
+
+      theta = randn(n) % sqrt(var_theta) + m_theta;
+
+      eta = theta - Xbeta;
+    }
+
+    if (da_ver == 1) {
+      mat wX_tilde = X_mat;
+      wX_tilde.each_col() %= w;
+
+      vec k = y_vec - r / 2.0 + w % (log_r - eta);
+
+      mat V = (X_mat.t() * wX_tilde + eye<mat>(p, p) * 1E-5);
+      vec m = solve(V, (X_mat.t() * k));
+
+      mat cholV = chol(V);
+      beta = solve(cholV, randn(p)) + m;
+      Xbeta = X_mat * beta;
+    }
+
+    if (da_ver == 2) {
+      beta = cholX_mat2inv * randn(p) + X_mat2inv * (X_mat.t() * theta);
+
+      Xbeta = X_mat * beta;
+    }
+
+    if (update_sigma2) {
+      double a = (double)n / 2.0 + 1;
+      vec diff = eta;
+      double b = dot(diff, diff) / 2.0 + 2;
+      // sigma2 = 1.0 / c11r.draw_gamma(a, b);
+      sigma2 = b / a;
+    }
+
+    if (w.has_nan()) {
+      throw std::runtime_error("w nan, consider reduce c & increase r0ini");
+      cout << r0 << endl;
+      // beta = ones(p);
+      // r0 *= 1.1;
+      // i = 0;
+      continue;
+    }
+
+    if (beta.has_nan()) {
+      throw std::runtime_error("beta nan, consider reduce c & increase r0ini");
+      cout << r0 << endl;
+      // beta = ones(p);
+      // r0 *= 1.1;
+      // i = 0;
+      continue;
+    }
+
+    cout << i << endl;
+
+    if (i >= burnin) {
+      trace_beta.row(i - burnin) = beta.t();
+      trace_theta.row(i - burnin) = theta.t();
+      trace_r.row(i - burnin) = r.t();
+      trace_w.row(i - burnin) = w.t();
+      trace_sigma2(i - burnin) = sigma2;
+    }
+  }
+
+  return Rcpp::List::create(
+      Rcpp::Named("beta") = trace_beta, Rcpp::Named("sigma2") = trace_sigma2,
+      Rcpp::Named("r") = trace_r, Rcpp::Named("w") = trace_w,
+      Rcpp::Named("theta") = trace_theta);
+}

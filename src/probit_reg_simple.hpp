@@ -34,6 +34,7 @@ SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   // mat X0 = X_mat.rows(zero_group);
 
   mat trace_beta(run, p);
+  mat trace_beta_prop(run, p);
 
   vec lb = -ones(n) * INFINITY;
   vec ub = ones(n) * INFINITY;
@@ -57,9 +58,14 @@ SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
     return cholV * randn(p) + m;
   };
 
+  // compute  Xbeta
+  vec Xbeta = X_mat * beta;
+
+  vec prob = pnorm_std(Xbeta);
+
+  vec loglik = (1 - prob) % (y_vec == 0) + prob % (y_vec == 1);
+
   for (int i = 0; i < (burnin + run); ++i) {
-    // compute  Xbeta
-    vec Xbeta = X_mat * beta;
     C = (1.0 - r) % Xbeta;
     // C = zeros(n);
 
@@ -76,33 +82,56 @@ SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
 
     // beta = cholV * randn(p) + m;
 
-    beta = genBeta();
+    vec new_beta = genBeta();
 
-    Xbeta = X_mat * beta;
-    C = (1.0 - r) % Xbeta;
+    vec new_Xbeta = X_mat * new_beta;
+
+    vec mu1 = (sqrt(2) / r) % ((0.5 - r) % Xbeta - 0.5 * new_Xbeta);
+    vec pmu1 = pnorm_std(mu1);
+    vec Qf = pmu1 % (y_vec == 0) + (1 - pmu1) % (y_vec == 1);
+
+    vec mu2 = (sqrt(2) / r) % ((0.5 - r) % new_Xbeta - 0.5 * Xbeta);
+    vec pmu2 = pnorm_std(mu2);
+    vec Qb = pmu2 % (y_vec == 0) + (1 - pmu2) % (y_vec == 1);
+
+    vec new_prob = pnorm_std(new_Xbeta);
+    vec new_loglik = (1 - new_prob) % (y_vec == 0) + new_prob % (y_vec == 1);
+
+    vec mh = new_loglik % Qb / loglik / Qf;
+
+    if (mh.has_nan() | mh.has_inf()) {
+      uvec problem = find_nonfinite(mh);
+      // cout << trans(loglik(problem)) << endl
+      // << trans(new_loglik(problem)) << endl
+      // << trans(Qf(problem)) << endl
+      // << trans(Qb(problem)) << endl;
+      mh(problem) = new_loglik(problem) / loglik(problem);
+    }
+
+    if (i < burnin) {
+      uvec mh_less1 = find(mh < 1);
+      r(mh_less1) %= pow(mh(mh_less1), 1);
+      // r %= exp(0.8 - mh);
+      r(find(r < 1)).fill(1);
+    }
+
+    if (c11r.runif() < prod(mh) & mh.is_finite()) {
+      beta = new_beta;
+      Xbeta = new_Xbeta;
+      prob = new_prob;
+      loglik = new_loglik;
+    }
+
     R_CheckUserInterrupt();
-
-    uvec violate1 = find((Z <= C) && (y_vec == 1));
-    uvec violate0 = find((Z > C) && (y_vec == 0));
-
-    // while (violate1.n_elem + violate0.n_elem > 1) {
-    // r(violate1) = 1 - Z(violate1) / Xbeta(violate1);
-    // r(violate0) = 1 - Z(violate0) / Xbeta(violate0);
-    r(violate1) *= 0.5;
-    r(violate0) *= 0.5;
-    r(find(r < 1)).fill(1);
-    // r(violate1).fill(1);
-    // r(violate0).fill(1);
-    R_CheckUserInterrupt();
-
-    cout << violate1.n_elem + violate0.n_elem << endl;
 
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
+      trace_beta_prop.row(i - burnin) = new_beta.t();
     }
-    cout << i << endl;
+    cout << i << " " << prod(mh) << endl;
   }
 
   return Rcpp::List::create(Rcpp::Named("beta") = trace_beta,
+                            Rcpp::Named("beta_prop") = trace_beta_prop,
                             Rcpp::Named("r") = r);
 }

@@ -9,8 +9,12 @@ logit_reg_simple <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_
     .Call('ImbalancedPG_logit_reg_simple', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0, mc_draws)
 }
 
-poisson_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0ini = 10, c = 1, mc_draws = 1E4L) {
-    .Call('ImbalancedPG_poisson_reg', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0ini, c, mc_draws)
+poisson_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0ini = 10, c = 1, fixed_R = FALSE) {
+    .Call('ImbalancedPG_poisson_reg', PACKAGE = 'ImbalancedPG', y, X, b, B, burnin, run, r0ini, c, fixed_R)
+}
+
+poisson_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, r0ini = 10, c = 1, mc_draws = 1E4L, da_ver = 1L, update_sigma2 = FALSE) {
+    .Call('ImbalancedPG_poisson_reg_random_effect', PACKAGE = 'ImbalancedPG', y, X, burnin, run, r0ini, c, mc_draws, da_ver, update_sigma2)
 }
 
 probit_reg_px <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L, nu0 = 1) {

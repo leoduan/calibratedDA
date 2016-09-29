@@ -30,6 +30,7 @@ SEXP binomial_simple(SEXP y_r, SEXP n_r, int burnin = 500, int run = 500,  doubl
     vec V = 1.0 / w;
     vec m = V % k;
 
+    R_CheckUserInterrupt();
     
     theta = randn(y.n_elem) % sqrt(V) + m ;
 

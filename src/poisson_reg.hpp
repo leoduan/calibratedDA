@@ -4,7 +4,7 @@ using namespace arma;
 // [[Rcpp::export]]
 SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
                  int run = 500, double r0ini = 10, double c = 1,
-                 int mc_draws = 1E4) {
+                 int fixed_R = false) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -21,7 +21,7 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
 
   int n = X_mat.n_rows;
   int p = X_mat.n_cols;
-  vec beta = ones(p);
+  vec beta = solve(X_mat.t() * X_mat, X_mat.t() * log(y_vec + 1));
 
   mat B_inv = inv(B_mat);
   vec B_invb = solve(B_mat, b_vec);
@@ -38,7 +38,8 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   mat trace_r(run, n);
   mat trace_w(run, n);
 
-  vec r, log_r;
+  vec r = ones(n);
+  vec log_r = log(r);
 
   vec max_xbeta = -ones(n) * INFINITY;
 
@@ -52,18 +53,18 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
     // double r0 = sqrt(accu(expBeta)) / c;
     // if (r0 < 10) r0 = 10;
 
-    if (i < burnin) {
-      vec expBeta = exp(max(Xbeta, c * Xbeta));
-      r = expBeta * r0;
-
-      // r(find(r > 10000)).fill(10000);
-
+    if (fixed_R) {
+      r.fill(1000);
       log_r = log(r);
+      r(find(y_vec > 1000)) = y_vec(find(y_vec > 1000)) * 10;
     } else {
-      max_xbeta = max(max_xbeta, max(Xbeta, Xbeta * c));
-      r = exp(max_xbeta) * r0;
-      // r(find(r > 10000)).fill(10000);
-
+      if (i < burnin) {
+        vec expBeta = exp(max(Xbeta, c * Xbeta));
+        r = expBeta * r0;
+      } else {
+        max_xbeta = max(max_xbeta, max(Xbeta, Xbeta * c));
+        r = exp(max_xbeta) * r0;
+      }
       log_r = log(r);
     }
 
@@ -82,15 +83,15 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
     */
 
     vec alpha1 = ones(n) % r;
-    vec alpha2 = Xbeta - log_r;
+    vec alpha2 = abs(Xbeta - log_r);
     w = rpg(alpha1, alpha2);
 
     if (w.has_nan()) {
-      // throw std::runtime_error("w nan");
-      // cout << r0 << endl;
-      beta = ones(p);
-      r0 *= 1.1;
-      i = 0;
+      throw std::runtime_error("w nan, consider reduce c & increase r0ini");
+      cout << r0 << endl;
+      // beta = ones(p);
+      // r0 *= 1.1;
+      // i = 0;
       continue;
     }
 
@@ -103,6 +104,17 @@ SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
     vec m = V * (X_mat.t() * k + B_invb);
 
     beta = trans(chol(V)) * randn(p) + m;
+
+    if (beta.has_nan()) {
+      throw std::runtime_error("beta nan, consider reduce c & increase r0ini");
+      cout << r0 << endl;
+      // beta = ones(p);
+      // r0 *= 1.1;
+      // i = 0;
+      continue;
+    }
+
+    cout << i << endl;
 
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();

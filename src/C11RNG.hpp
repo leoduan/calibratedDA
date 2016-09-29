@@ -1,6 +1,8 @@
 #include <boost/math/distributions/normal.hpp>
 #include <random>
 
+#include <omp.h>
+
 using namespace arma;
 
 double pnorm(double q, double a, double b) {
@@ -11,8 +13,19 @@ double pnorm(double q, double a, double b) {
 vec pnorm_std(vec q) {
   int n = q.n_elem;
   vec p = zeros(n);
+#pragma omp parallel for
   for (int i = 0; i < n; ++i) {
     p(i) = pnorm(q(i), 0, 1);
+  }
+  return p;
+}
+
+vec log_lefttail_pnorm_std(vec q) {
+  int n = q.n_elem;
+  vec p = zeros(n);
+#pragma omp parallel for
+  for (int i = 0; i < n; ++i) {
+    p(i) = -q(i) * q(i) / 2 - log(abs(q(i)));
   }
   return p;
 }
@@ -20,34 +33,51 @@ vec pnorm_std(vec q) {
 class C11RNG {
  public:
   std::mt19937 gen;
+  std::vector<std::mt19937> gen_vec;
   C11RNG() {
     std::random_device std_rand;
+    int tMax = omp_get_max_threads();
+    gen_vec.resize(tMax);
     gen = std::mt19937(std_rand());
+    for (int i = 0; i < tMax; ++i) {
+      gen_vec[i] = std::mt19937(std_rand());
+    }
   };
 
-  double draw_gamma(double alpha, double beta) {
+  double draw_gamma(double alpha, double beta, std::mt19937& gen) {
     std::gamma_distribution<> gamma1(alpha, 1. / beta);
     return gamma1(gen);
   }
 
-  double draw_chisq(double alpha) {
+  double draw_gamma(double alpha, double beta) {
+    return draw_gamma(alpha, beta, gen);
+  }
+
+  double draw_chisq(double alpha, std::mt19937& gen) {
     std::gamma_distribution<> gamma1(alpha / 2, 2.0);
     return gamma1(gen);
   }
 
+  double draw_chisq(double alpha) { return draw_chisq(alpha, gen); }
+
   vec draw_gamma(vec alpha, vec beta) {
     int N = alpha.n_elem;
     vec randvec(N);
+
+#pragma omp parallel for
     for (int i = 0; i < N; i++) {
-      randvec(i) = draw_gamma(alpha(i), beta(i));
+      int tid = omp_get_thread_num();
+      randvec(i) = draw_gamma(alpha(i), beta(i), gen_vec[tid]);
     }
     return randvec;
   }
 
-  int draw_binomial(int n, double p) {
+  int draw_binomial(int n, double p, std::mt19937& gen) {
     std::binomial_distribution<int> distribution(n, p);
     return distribution(gen);
   };
+
+  int draw_binomial(int n, double p) { return draw_binomial(n, p, gen); }
 
   arma::vec draw_binomial(int n, double p, int size) {
     std::binomial_distribution<int> distribution(n, p);
@@ -72,12 +102,14 @@ class C11RNG {
     return result;
   };
 
-  double rnorm(double m, double sd) {
+  double rnorm(double m, double sd, std::mt19937& gen) {
     std::normal_distribution<double> distribution(m, sd);
     return distribution(gen);
   }
 
-  double rexp(double alpha) {
+  double rnorm(double m, double sd) { return rnorm(m, sd, gen); }
+
+  double rexp(double alpha, std::mt19937& gen) {
     std::exponential_distribution<> exp1(alpha);
     double r = exp1(gen);
     while (std::isnan(r)) {
@@ -86,14 +118,18 @@ class C11RNG {
     return r;
   }
 
-  double runif() {
+  double rexp(double alpha) { return rexp(alpha, gen); }
+
+  double runif(std::mt19937& gen) {
     std::uniform_real_distribution<> unif(0., 1.);
     return unif(gen);
   }
 
+  double runif() { return runif(gen); }
+
   // truncated normal
 
-  double rtruncnorm_std_lb(double lb) {
+  double rtruncnorm_std_lb(double lb, std::mt19937& gen) {
     double alpha = (lb + sqrt(lb * lb + 4)) / 2.0;
 
     double delta = 1;
@@ -101,7 +137,7 @@ class C11RNG {
     double z = 0;
 
     while (u > delta) {
-      z = rexp(alpha) + lb;
+      z = rexp(alpha, gen) + lb;
 
       if (lb < alpha) {
         delta = exp(-(alpha - z) * (alpha - z) / 2);
@@ -109,15 +145,17 @@ class C11RNG {
         delta = exp(-(alpha - z) * (alpha - z) / 2 +
                     (lb - alpha) * (lb - alpha) / 2);
       }
-      u = runif();
+      u = runif(gen);
     }
     return z;
   }
 
-  double rtruncnorm_std_ub(double ub) { return -rtruncnorm_std_lb(-ub); }
+  double rtruncnorm_std_ub(double ub, std::mt19937& gen) {
+    return -rtruncnorm_std_lb(-ub, gen);
+  }
 
-  double rtruncnorm_std_lb_ub(double lb, double ub) {
-    double trunc = 10;
+  double rtruncnorm_std_lb_ub(double lb, double ub, std::mt19937& gen) {
+    double trunc = 100;
     if (ub > trunc) ub = trunc;
     if (lb < -trunc) lb = -trunc;
 
@@ -130,7 +168,7 @@ class C11RNG {
       double u = 1.5;
 
       while (u > delta) {
-        z = runif() * (ub - lb) + lb;
+        z = runif(gen) * (ub - lb) + lb;
 
         if (ub < 0) {
           delta = exp((ub * ub - z * z) / 2);
@@ -142,7 +180,7 @@ class C11RNG {
           delta = exp(-z * z / 2);
         }
 
-        u = runif();
+        u = runif(gen);
       }
     } else {
       if (fabs(lb) < fabs(ub)) {
@@ -154,29 +192,30 @@ class C11RNG {
     return z;
   }
 
-  double rtruncnorm_std(double lb, double ub) {
+  double rtruncnorm_std(double lb, double ub, std::mt19937& gen) {
     double r = 0;
     if (lb == -INFINITY && ub == INFINITY) {
-      r = rnorm(0, 1);
+      r = rnorm(0, 1, gen);
     } else if (lb == -INFINITY && ub < INFINITY) {
-      r = rtruncnorm_std_ub(ub);
+      r = rtruncnorm_std_ub(ub, gen);
     } else if (ub == INFINITY && lb > -INFINITY) {
-      r = rtruncnorm_std_lb(lb);
+      r = rtruncnorm_std_lb(lb, gen);
     } else {
-      r = rtruncnorm_std_lb_ub(lb, ub);
+      r = rtruncnorm_std_lb_ub(lb, ub, gen);
     }
     return r;
   }
 
-  double rtruncnorm(double mean, double sigma, double lb, double ub) {
+  double rtruncnorm(double mean, double sigma, double lb, double ub,
+                    std::mt19937& gen) {
     double lb1 = (lb - mean) / sigma;
     double ub1 = (ub - mean) / sigma;
 
-    double r = rtruncnorm_std(lb1, ub1);
+    double r = rtruncnorm_std(lb1, ub1, gen);
     r = r * sigma + mean;
 
     while (std::isnan(r) || r < lb || r > ub) {
-      r = rtruncnorm(mean, sigma, lb, ub);
+      r = rtruncnorm(mean, sigma, lb, ub, gen);
     }
 
     return r;
@@ -185,8 +224,11 @@ class C11RNG {
   vec rtruncnorm(vec mean, vec sigma, vec lb, vec ub) {
     int n = mean.n_elem;
     vec r = zeros(n);
+
+#pragma omp parallel for
     for (int i = 0; i < n; ++i) {
-      r(i) = rtruncnorm(mean(i), sigma(i), lb(i), ub(i));
+      int tid = omp_get_thread_num();
+      r(i) = rtruncnorm(mean(i), sigma(i), lb(i), ub(i), gen_vec[tid]);
     }
     return r;
   }
