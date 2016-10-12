@@ -8,7 +8,7 @@ X0<- 1#rnorm(N, 1, 1)
 X1<- rnorm(N, 1, 1)
 X<- cbind(X0,X1)
 # beta<- c(-11,1)
-beta<- c(-9,1)
+beta<- c(-5,1)
 
 
 Xbeta<- X%*%beta
@@ -52,10 +52,10 @@ dev.off()
 
 
 
-df<- data.frame("z"=c((fit$w[1000,]), (fit2$w[1000,])),"Method"=rep(c("ADA","DA"),each=N))
+df<- data.frame("z"=c((fit$w[1000,]), (fit2$w[1000,])),"Method"=rep(c("CDA","DA"),each=N))
 
 pdf("./logit_z.pdf",4,3)
-ggplot(df, aes(x=z, fill=Method, col=Method)) + geom_histogram(alpha=0.2, position="identity", bins=50)+xlim(0,0.15)+ylim(0,1250)+ scale_fill_grey(start = 0,end = 0.5)+ scale_color_grey(start = 0,end = 0.5)
+ggplot(df, aes(x=z, fill=Method, col=Method)) + geom_histogram(alpha=0.2, position="identity", bins=50)+xlim(-1,0.3)+ylim(0,15000)+ scale_fill_grey(start = 0,end = 0.5)+ scale_color_grey(start = 0,end = 0.5)
 dev.off()
 
 
@@ -64,8 +64,14 @@ dev.off()
 ada<- c(acf(fit$beta[, 1], lag.max = 40, main="DA",plot = F)$acf)
 da<- c(acf(fit2$beta[, 1], lag.max = 40, main="DA",plot = F)$acf)
 
-df<- data.frame("ACF"=c(da,ada),"Method"=rep(c("DA","ADA"),each=41),"Lag"=rep(c(0:40),2))
+df<- data.frame("ACF"=c(da,ada),"Method"=rep(c("DA","CDA"),each=41),"Lag"=rep(c(0:40),2))
+df$Method<- ordered(df$Method, levels = c("DA","CDA"))
 
+
+
+pdf("./logit_11.pdf",4,3)
+ggplot(data=df, aes(x=Lag, y=ACF,linetype=Method))+ geom_line(size=.75)
+dev.off()
 
 pdf("./logit_15.pdf",4,3)
 ggplot(data=df, aes(x=Lag, y=ACF,linetype=Method))+ geom_line(size=.75)

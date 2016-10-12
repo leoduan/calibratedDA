@@ -21,17 +21,25 @@ for(i in 1:10){
 mean(a)
 sd(a)
      
-     b<- rep(0,2)
+a     
+b<- rep(0,2)
 B<- diag(1000,2)
 
 
 # fit<- ImbalancedPG::probit_reg_px(y,X,b,B, r0= 1, burnin = 1000, run = 500,nu0 = 0.1)
 # 
-fit<- ImbalancedPG::probit_reg_simple(y,X,b,B, r0= 100, burnin = 1000, run = 1000)
+fit<- ImbalancedPG::probit_reg_simple2(y,X,b,B, r0= 200, burnin = 1000, run = 1000)
 fit2<- ImbalancedPG::probit_reg_simple(y,X,b,B, r0= 1, burnin = 1000, run = 1000)
 fit3<- ImbalancedPG::probit_reg_px(y,X,b,B, r0= 1, burnin = 100, run = 1000,nu0 = 0.1)
 
-colMeans(fit2$beta)
+plot(X%*%beta,fit$r)
+
+
+colMeans(fit$beta)
+acf(fit$beta)
+
+
+
 apply(fit2$beta, 2, sd)
 
 colMeans(fit3$beta)
@@ -49,10 +57,16 @@ hist(fit$r)
 
 library(latex2exp)
 
-pdf("./probit_ada_r.pdf",8,6)
-plot(X%*%beta,fit$r, xlab=TeX('$\\beta_0+\\x\\beta_1$'),ylab="r")
+
+setwd("~/work/Dropbox/scalable_da/ms/")
+
+pdf("./probit_cda_r.pdf",5,5)
+plot(X%*%beta,fit$r, xlab=TeX('$x\\beta$'),ylab="r")
 dev.off()
 
+pdf("./probit_cda_b.pdf",5,5)
+plot(X%*%beta,fit$alpha, xlab=TeX('$x\\beta$'),ylab="b")
+dev.off()
 
 
 colMeans(fit$beta)
@@ -80,44 +94,32 @@ pdf("./probit_14ts.pdf",8,6)
 par(mfrow=c(3,1))
 ts.plot(fit2$beta[,1], main="DA",xlab="Iteration",ylab="",lwd=2)
 ts.plot(fit3$beta[,1], main="PX-DA",xlab="Iteration",ylab="",lwd=2)
-ts.plot(fit$beta_prop[,1]-0.2, main="ADA",xlab="Iteration",ylab="",lwd=2)
+ts.plot(fit$beta_prop[,1]-0.2, main="CDA",xlab="Iteration",ylab="",lwd=2)
 dev.off()
 
 # acf(fit$beta[, 1], lag.max = 40)
 
 require("ggplot2")
 
-da<- c(acf(fit2$beta_prop[, 2], lag.max = 40, main="DA",plot = F)$acf)
+da<- c(acf(fit2$beta[, 2], lag.max = 40, main="DA",plot = F)$acf)
 pxda<-c(acf(fit3$beta[, 2], lag.max = 40, main="DA",plot = F)$acf)
-ada<- c(acf(fit$beta[, 2], lag.max = 40, main="DA",plot = F)$acf)
+cda<- c(acf(fit$beta[, 2], lag.max = 40, main="DA",plot = F)$acf)
 
-df<- data.frame("ACF"=c(da,pxda,ada),"Method"=rep(c("DA","PX-DA","ADA"),each=41),"Lag"=rep(c(0:40),3))
+df<- data.frame("ACF"=c(da,pxda,cda),"Method"=rep(c("DA (Albert-Chib)","PX-DA","CDA"),each=41),"Lag"=rep(c(0:40),3))
+
+df$Method<- ordered(df$Method, levels = c("DA (Albert-Chib)","PX-DA","CDA"))
 
 
-
-pdf("./probit_13.pdf",4,3)
+pdf("./probit15_acf.pdf",5,3)
 ggplot(data=df, aes(x=Lag, y=ACF,linetype=Method))+ geom_line(size=.75)
 dev.off()
 
 
-pdf("./probit_15.pdf",4,3)
-ggplot(data=df, aes(x=Lag, y=ACF,linetype=Method))+ geom_line(size=.75)
+
+
+df<- data.frame("Value"=c(fit2$beta[501:1000, 1],fit3$beta[501:1000, 1], fit$beta[501:1000,1]),"Method"=rep(c("DA (Albert-Chib)","PX-DA","CDA"),each=500),"Iteration"=rep(c(1:500),3))
+df$Method<- ordered(df$Method, levels = c("DA (Albert-Chib)","PX-DA","CDA"))
+
+pdf("./probit15_trace_plot.pdf",6,3.6)
+ggplot(data=df, aes(x=Iteration, y=Value))+ geom_line(size=.75) + facet_grid(Method~.)
 dev.off()
-
-pdf("./probit_11.pdf",4,3)
-ggplot(data=df, aes(x=Lag, y=ACF,linetype=Method))+ geom_line(size=.75)
-dev.off()
-
-par(mfrow=c(1,3))
-
-dev.off()
-
-acf(fit$beta_prop[, 2], lag.max = 40)
-acf(fit2$beta[, 2], lag.max = 40)
-acf(fit3$beta_prop[, 2], lag.max = 40)
-
-
-acf(fit$beta_prop[, 1]+fit$beta_prop[, 2], lag.max = 40)
-acf(fit2$beta[, 1]+fit2$beta[, 2], lag.max = 40)
-
-

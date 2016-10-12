@@ -20,19 +20,23 @@ lines(logn,1/n_series)
 
 # lines(logn,1/logn*v[1]/2.5)
 
+cv100<- log(n_series)
 
 
 
 require("ggplot2")
 
-df<- data.frame("log n"=rep(logn,4),"Distribution"= as.factor( rep(c("Marginal","Original Conditional r=1","Calibriated Conditional r=n/100", "Calibriated Conditional r=n"),each=length(logn))),"Variance"=c(v,1/n_series, v*2/3, v*5/6))
+df<- data.frame("log10 n"=rep(logn,3),"Distribution"= as.factor( rep(c("Marginal","Original Conditional r=1","Calibriated Conditional r=1000"),each=length(logn))),"Variance Ratio"=c(v/v,1/n_series/v, pmin(1000/n_series/v,1)))
 
 levels(df$Distribution)
 
-df$Distribution<- ordered(df$Distribution, levels = c("Marginal", "Calibriated Conditional r=n", "Calibriated Conditional r=n/100","Original Conditional r=1"))
+df$Distribution<- ordered(df$Distribution, levels = c("Marginal", "Calibriated Conditional r=1000","Original Conditional r=1"))
+
+ggplot(data=df, aes(x=log10.n, y=Variance.Ratio,linetype=Distribution,length(n_series)))+ geom_line(size=c(.75))
+
 
 pdf("./probit_rate.pdf",6,3)
-ggplot(data=df, aes(x=log.n, y=Variance,linetype=Distribution,length(n_series)))+ geom_line(size=c(.75))
+ggplot(data=df, aes(x=log10.n, y=Variance.Ratio,linetype=Distribution,length(n_series)))+ geom_line(size=c(.75))
 dev.off()
 
 

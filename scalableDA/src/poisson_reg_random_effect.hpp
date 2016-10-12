@@ -3,9 +3,7 @@ using namespace arma;
 
 // [[Rcpp::export]]
 SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
-                               double r0ini = 10, double c = 1,
-                               int mc_draws = 1E4, int da_ver = 1,
-                               bool update_sigma2 = false) {
+                               double tau = 10, double c = 1, int da_ver = 1) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -32,16 +30,14 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
 
   vec r, log_r;
 
-  vec max_xbeta = -ones(n) * INFINITY;
-
-  double r0 = r0ini;
+  vec max_theta = -ones(n) * INFINITY;
 
   vec Xbeta = X_mat * beta;
   vec theta =
       Xbeta + randn(n) * sqrt(sigma2);  // ones with random effects xbeta+eta
   vec eta = theta - Xbeta;              // random effects eta
 
-  r = ones(n) * r0;
+  r = ones(n) * tau;
   log_r = log(r);
 
   mat X_mat2 = X_mat.t() * X_mat;
@@ -51,17 +47,15 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
   for (int i = 0; i < (burnin + run); ++i) {
     vec Xbeta = X_mat * beta;
 
-    if (i < burnin) {
-      vec expBeta = exp(max(theta, c * theta));
-      r = expBeta * r0;
+    vec c_theta = max(theta, c * theta);
 
-      log_r = log(r);
+    if (i > burnin) {
+      max_theta = max(c_theta, max_theta);
+      r = exp(max_theta) * tau;
     } else {
-      // max_xbeta = max(max_xbeta, max(theta, theta * c));
-
-      max_xbeta = max(theta, theta * c);
-      r = exp(max_xbeta) * r0;
+      r = exp(c_theta) * tau;
     }
+
     log_r = log(r);
 
     {
@@ -74,13 +68,22 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
     }
 
     {
-      vec var_theta = 1.0 / (w + 1.0 / sigma2);
+      // vec var_theta = 1.0 / (w + 1.0 / sigma2);
 
-      vec m_theta = var_theta % (w % log_r + Xbeta / sigma2 + y_vec - r / 2.0);
+      // vec m_theta = var_theta % (w % log_r + Xbeta / sigma2 + y_vec - r /
+      // 2.0);
 
-      theta = randn(n) % sqrt(var_theta) + m_theta;
+      // theta = randn(n) % sqrt(var_theta) + m_theta;
 
-      eta = theta - Xbeta;
+      // eta = theta - Xbeta;
+
+      vec var_eta = 1.0 / (w + 1.0 / sigma2);
+
+      vec m_eta = var_eta % (y_vec - r / 2.0 + w % (log_r - Xbeta));
+
+      eta = randn(n) % sqrt(var_eta) + m_eta;
+
+      theta = Xbeta + eta;
     }
 
     if (da_ver == 1) {
@@ -103,28 +106,25 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
       Xbeta = X_mat * beta;
     }
 
-    if (update_sigma2) {
-      double a = (double)n / 2.0 + 1;
-      vec diff = eta;
-      double b = dot(diff, diff) / 2.0 + 2;
-      // sigma2 = 1.0 / c11r.draw_gamma(a, b);
-      sigma2 = b / a;
-    }
+    double a = (double)n / 2.0;
+    vec diff = eta;
+    double b = dot(diff, diff) / 2.0;
+    sigma2 = 1.0 / c11r.draw_gamma(a, b);
 
     if (w.has_nan()) {
-      throw std::runtime_error("w nan, consider reduce c & increase r0ini");
-      cout << r0 << endl;
+      throw std::runtime_error("w nan, consider reduce c & increase tauini");
+      cout << tau << endl;
       // beta = ones(p);
-      // r0 *= 1.1;
+      // tau *= 1.1;
       // i = 0;
       continue;
     }
 
     if (beta.has_nan()) {
-      throw std::runtime_error("beta nan, consider reduce c & increase r0ini");
-      cout << r0 << endl;
+      throw std::runtime_error("beta nan, consider reduce c & increase tauini");
+      cout << tau << endl;
       // beta = ones(p);
-      // r0 *= 1.1;
+      // tau *= 1.1;
       // i = 0;
       continue;
     }
@@ -133,15 +133,14 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
 
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
-      trace_theta.row(i - burnin) = theta.t();
-      trace_r.row(i - burnin) = r.t();
-      trace_w.row(i - burnin) = w.t();
+      // trace_theta.row(i - burnin) = theta.t();
+      // trace_r.row(i - burnin) = r.t();
+      // trace_w.row(i - burnin) = w.t();
       trace_sigma2(i - burnin) = sigma2;
     }
   }
 
   return Rcpp::List::create(
       Rcpp::Named("beta") = trace_beta, Rcpp::Named("sigma2") = trace_sigma2,
-      Rcpp::Named("r") = trace_r, Rcpp::Named("w") = trace_w,
-      Rcpp::Named("theta") = trace_theta);
+      Rcpp::Named("r") = r, Rcpp::Named("w") = w, Rcpp::Named("theta") = theta);
 }

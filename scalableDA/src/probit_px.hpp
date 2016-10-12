@@ -2,9 +2,9 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
-                       int run = 500, double r0 = 20, int mc_draws = 1E4,
-                       double c = 1) {
+SEXP probit_reg_px(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
+                   int run = 500, double r0 = 20, int mc_draws = 1E4,
+                   double nu0 = 1) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -42,45 +42,35 @@ SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
   vec ub = ones(n) * INFINITY;
   uvec pos_set = find(y_vec == 1);
   uvec zero_set = find(y_vec == 0);
-  vec r = ones(n) * r0;
-  vec C = ones(n);
+  // vec r = ones(n) * r0;
+  // vec C = ones(n);
   vec Z = y_vec;
 
-  r.fill(r0);
+  // r.fill(r0);
 
   lb(pos_set).fill(0);
   ub(zero_set).fill(0);
+
+  // double nu0 = 5;
 
   for (int i = 0; i < (burnin + run); ++i) {
     // compute  Xbeta
 
     vec Xbeta = X_mat * beta;
 
-    // r.fill(r0);
-    // r(find(Xbeta > -2)).fill(1);
-
-    // C = (1.0 - r) * c;
-
-    Z = c11r.rtruncnorm(Xbeta, ones(n), lb, ub) % r;
-
-    double a = (double)n / 2.0;
-    vec diff = (Z - r % Xbeta);
-    double b = dot(diff, diff) / 2.0;
-    double r1 = sqrt(1.0 / c11r.draw_gamma(a, b));
-    // if (r1 > r0 & c > 1) r0 = r1;
-    // r.fill(r0);
-
-    // vec a = ones(n) / 2 + 0.1;
-    // vec b = diff % diff / 2.0 + 0.1;
-    // r = sqrt(1.0 / c11r.draw_gamma(a, b));
+    Z = c11r.rtruncnorm(Xbeta, ones(n), lb, ub);
 
     mat V = inv(X_mat.t() * X_mat + B_inv);
 
-    vec m = V * (X_mat.t() * diagmat(1.0 / r) * Z + B_invb);
+    vec beta_tilde = V * X_mat.t() * Z;
+
+    vec diff = Z - X_mat * beta_tilde;
+    double RSS = dot(diff, diff);
+    double alpha = sqrt(RSS / c11r.draw_chisq(n));
 
     mat cholV = trans(chol(V));
 
-    beta = cholV * randn(p) + m;
+    beta = cholV * randn(p) + beta_tilde / alpha;  //* sigma2tilde / sigma2hat;
 
     // Xbeta = X_mat * beta;
     // C = (1.0 - r) % Xbeta;
@@ -95,12 +85,11 @@ SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
 
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
-      trace_r0(i - burnin) = r0;
     }
     cout << i << endl;
   }
 
   return Rcpp::List::create(Rcpp::Named("beta") = trace_beta,
-                            Rcpp::Named("r") = r,
+                            // Rcpp::Named("r") = r,
                             Rcpp::Named("trace_r0") = trace_r0);
 }
