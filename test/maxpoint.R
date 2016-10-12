@@ -1,15 +1,18 @@
 # .rs.restartR()
 
-require("ImbalancedPG")
+require("scalableDA")
 setwd("~/git/ImbalancedPG/test/")
 
 source("maxpoint_data.r")
 
 # fit<- ImbalancedPG::poisson_reg_random_effect(y , X, r0ini =  10,c = 1,burnin = 1000,run = 1000,update_sigma2 = T)
 
-fit<- ImbalancedPG::poisson_reg(y , X,b,B, r0ini =  10,c = 1.1,burnin = 1000,run = 1000,fixed_R = T)
+# fit<- poisson_reg(y , X,b,B, r0ini =  10,c = 1.1,burnin = 1000,run = 1000,fixed_R = T)
 
-fit2<- ImbalancedPG::poisson_reg(y , X,b,B, r0ini =  10,c = 1.1,burnin = 1000,run = 1000,fixed_R = F)
+# fit2<- poisson_reg(y , X,b,B, r0ini =  10,c = 1.1,burnin = 1000,run = 1000,fixed_R = F)
+
+fit<- poisson_reg_random_effect(y , X, tau =  10,c = 1,burnin = 1000,run = 1000,da_ver = 1)
+
 
 ts.plot(fit$beta[,1])
 

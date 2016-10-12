@@ -1,7 +1,7 @@
 
 require('R.matlab')
 
-mp<-readMat("~/Downloads/convdat.mat")
+mp<-readMat("./convdat.mat")
 
 
 dim(mp$Ntr)
