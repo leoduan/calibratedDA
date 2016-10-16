@@ -11,15 +11,25 @@ source("maxpoint_data.r")
 
 # fit2<- poisson_reg(y , X,b,B, r0ini =  10,c = 1.1,burnin = 1000,run = 1000,fixed_R = F)
 
-fit<- poisson_reg_random_effect(y , X, tau =  10,c = 1,burnin = 1000,run = 1000,da_ver = 1)
+# fit<- poisson_reg_random_effect(y , X, tau =  10,c = 1,burnin = 1000,run = 1000,da_ver = 1)
 
 
-ts.plot(fit$beta[,1])
+load(file="maxpoint_fit1_random.rda")
+load(file="maxpoint_fit2_random.rda")
+
+ts.plot(fit1$beta[,1])
+ts.plot(fit1$sigma2)
+
+plot(exp(fit1$theta),y)
 
 ts.plot(fit2$beta[,1])
-ts.plot(fit2$beta[,1])
+ts.plot(fit2$sigma2)
 
-acf(fit2_beta_trace[,1],lag.max = 40)
+acf(fit1$beta[,1],lag.max = 40)
+acf(fit2$beta[,1],lag.max = 40)
+
+ts.plot(fit1$sigma2)
+ts.plot(fit2$sigma2)
 
 # fit2_beta_trace<- fit2$beta
 # save(fit2_beta_trace,file="fit_maxpoint_ada.rda")

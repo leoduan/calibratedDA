@@ -23,8 +23,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // logistic_reg_random_effect
-SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int mc_draws, int da_ver);
-RcppExport SEXP scalableDA_logistic_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP mc_drawsSEXP, SEXP da_verSEXP) {
+SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int mc_draws, int da_ver, double sigma2_ini, bool track_r, bool update_sigma2);
+RcppExport SEXP scalableDA_logistic_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP mc_drawsSEXP, SEXP da_verSEXP, SEXP sigma2_iniSEXP, SEXP track_rSEXP, SEXP update_sigma2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -36,7 +36,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
     Rcpp::traits::input_parameter< int >::type da_ver(da_verSEXP);
-    __result = Rcpp::wrap(logistic_reg_random_effect(y, X, burnin, run, tau, c, mc_draws, da_ver));
+    Rcpp::traits::input_parameter< double >::type sigma2_ini(sigma2_iniSEXP);
+    Rcpp::traits::input_parameter< bool >::type track_r(track_rSEXP);
+    Rcpp::traits::input_parameter< bool >::type update_sigma2(update_sigma2SEXP);
+    __result = Rcpp::wrap(logistic_reg_random_effect(y, X, burnin, run, tau, c, mc_draws, da_ver, sigma2_ini, track_r, update_sigma2));
     return __result;
 END_RCPP
 }
@@ -78,8 +81,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poisson_reg_random_effect
-SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int da_ver);
-RcppExport SEXP scalableDA_poisson_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP da_verSEXP) {
+SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int da_ver, double max_r, bool update_sigma);
+RcppExport SEXP scalableDA_poisson_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP da_verSEXP, SEXP max_rSEXP, SEXP update_sigmaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -90,7 +93,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< int >::type da_ver(da_verSEXP);
-    __result = Rcpp::wrap(poisson_reg_random_effect(y, X, burnin, run, tau, c, da_ver));
+    Rcpp::traits::input_parameter< double >::type max_r(max_rSEXP);
+    Rcpp::traits::input_parameter< bool >::type update_sigma(update_sigmaSEXP);
+    __result = Rcpp::wrap(poisson_reg_random_effect(y, X, burnin, run, tau, c, da_ver, max_r, update_sigma));
     return __result;
 END_RCPP
 }

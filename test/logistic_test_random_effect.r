@@ -4,7 +4,7 @@ require("BayesLogit")
 
 setwd("~/git/ImbalancedPG/test/")
 
-N<- 1E5
+N<- 1E4
 
 X0<- 1#rnorm(N, 1, 1)
 X1<- rnorm(N, 1, 1)
@@ -14,8 +14,14 @@ beta<- c(-9,1)
 p<- ncol(X)
 
 
+Xinv<- solve(t(X)%*%X,t(X))
+sum(abs(Xinv))
+max(abs(Xinv))
+sqrt(sum((Xinv)^2))
+
+
 Xbeta<- X%*%beta
-XbetaEps<- rnorm(N,Xbeta,sd = 0.1)
+XbetaEps<- rnorm(N,Xbeta,sd = sqrt(0.5))
 theta<-  exp(XbetaEps)/(1+exp(XbetaEps))
 
 a<-numeric()
@@ -28,28 +34,39 @@ mean(a)/N
 sd(a)/N
 
 
+fit<- scalableDA::logistic_reg_random_effect(y,X,tau = 2,burnin = 100,run = 20000, da_ver = 1,sigma2_ini = 0.01,track_r = T,update_sigma2 = F)
+# fit3<- scalableDA::logistic_reg_random_effect(y,X,tau = 10,run = 500,da_ver = 3)
+
+ts.plot(1/fit$trace_r[,1:20])
+
+# fit2<- scalableDA::logistic_reg_random_effect(y,X,tau = 1E6,run = 500,sigma2_ini = 0.5)
+
+acf(fit$beta)
 
 
-sigma<- 1
-beta<- c(-9,1)
-Xbeta <- X%*%beta
-trace_beta<- numeric()
-trace_sigma<- numeric()
-eps<- rnorm(N,0,sqrt(0.01))
-w<- rep(1,N)
-r<- pmin( exp(Xbeta +eps) *100,1)
-logr<- log(r)
 
-theta<- XbetaEps
+require("ggplot2")
+require("reshape")
 
-r<- 0.9
-logr<- log(r)
-k = y - r / 2.0 + w * logr;
-
-fit<- scalableDA::logistic_reg_random_effect(y,X,tau = 10,run = 500)
+df<- melt(1/fit$trace_r[1:10000,1:20])
 
 
-fit2<- scalableDA::logistic_reg_random_effect(y,X,tau = 1E6,run = 1000)
+pdf("./r_adaptation.pdf",3,3)
+ggplot(data=df, aes(x=X1, y=value,col= factor(X2)))+ geom_line(size=0.5)+  scale_colour_manual(values = rep("black",100))+ylab("r")+xlab("Iteration")+  theme(legend.position="none")
+dev.off()
+
+
+
+
+sum(exp(2*fit$theta[fit$theta< log(1E-3)]))
+
+ts.plot(fit$sigma2)
+ts.plot(fit$beta[,1])
+ts.plot(fit$beta[,2])
+
+acf(fit$beta[,1],lag.max = 40)
+acf(fit$beta[,2],lag.max = 40)
+
 
 
 
@@ -99,6 +116,26 @@ max(fit$r[500,])
 acf(fit$beta)
 ts.plot(fit$sigma2)
 
+require("BayesLogit")
+
+
+
+
+sigma<- 1
+beta<- c(-9,1)
+Xbeta <- X%*%beta
+trace_beta<- numeric()
+trace_sigma<- numeric()
+eps<- rnorm(N,0,sqrt(1))
+w<- rep(1,N)
+r<- pmin( exp(Xbeta +eps) *100,1)
+logr<- log(r)
+
+theta<- XbetaEps
+
+r<- 0.9
+logr<- log(r)
+k = y - r / 2.0 + w * logr;
 
 for(i in 1:200){
   
@@ -255,4 +292,16 @@ fit$beta
 #binomial
 fit3<- logit(1,n = 1, X=1)
 acf(fit3$w)
+
+
+
+
+
+
+r0<- 1/fit$r
+
+err<- (r0-1)/2/r0^2
+tv_err<- sqrt(0.5*err)
+
+max(tv_err)*2*10
 

@@ -5,8 +5,8 @@ binomial_simple <- function(y_r, n_r, burnin = 500L, run = 500L, r0 = 20, mc_dra
     .Call('scalableDA_binomial_simple', PACKAGE = 'scalableDA', y_r, n_r, burnin, run, r0, mc_draws)
 }
 
-logistic_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, tau = 10, c = 1, mc_draws = 1E4L, da_ver = 1L) {
-    .Call('scalableDA_logistic_reg_random_effect', PACKAGE = 'scalableDA', y, X, burnin, run, tau, c, mc_draws, da_ver)
+logistic_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, tau = 10, c = 1, mc_draws = 1E4L, da_ver = 1L, sigma2_ini = 0.01, track_r = FALSE, update_sigma2 = FALSE) {
+    .Call('scalableDA_logistic_reg_random_effect', PACKAGE = 'scalableDA', y, X, burnin, run, tau, c, mc_draws, da_ver, sigma2_ini, track_r, update_sigma2)
 }
 
 logit_reg_simple <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L) {
@@ -17,8 +17,8 @@ poisson_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0ini = 10, c = 1
     .Call('scalableDA_poisson_reg', PACKAGE = 'scalableDA', y, X, b, B, burnin, run, r0ini, c, fixed_R)
 }
 
-poisson_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, tau = 10, c = 1, da_ver = 1L) {
-    .Call('scalableDA_poisson_reg_random_effect', PACKAGE = 'scalableDA', y, X, burnin, run, tau, c, da_ver)
+poisson_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, tau = 10, c = 1, da_ver = 1L, max_r = 1000, update_sigma = FALSE) {
+    .Call('scalableDA_poisson_reg_random_effect', PACKAGE = 'scalableDA', y, X, burnin, run, tau, c, da_ver, max_r, update_sigma)
 }
 
 probit_reg_px <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L, nu0 = 1) {

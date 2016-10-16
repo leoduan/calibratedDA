@@ -3,7 +3,8 @@ using namespace arma;
 
 // [[Rcpp::export]]
 SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
-                               double tau = 10, double c = 1, int da_ver = 1) {
+                               double tau = 10, double c = 1, int da_ver = 1,
+                               double max_r = 1000, bool update_sigma = false) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -49,12 +50,14 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
 
     vec c_theta = max(theta, c * theta);
 
-    if (i > burnin) {
+    if (i > burnin / 10) {
       max_theta = max(c_theta, max_theta);
       r = exp(max_theta) * tau;
     } else {
       r = exp(c_theta) * tau;
     }
+
+    r(find(r > max_r)).fill(max_r);
 
     log_r = log(r);
 
@@ -86,7 +89,30 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
       theta = Xbeta + eta;
     }
 
+    if (update_sigma) {
+      eta = theta - Xbeta;
+      double a = (double)n / 2.0;
+      vec diff = eta;
+      double b = dot(diff, diff) / 2.0;
+      sigma2 = 1.0 / c11r.draw_gamma(a, b);
+    }
+
     if (da_ver == 1) {
+      mat wX_tilde = X_mat;
+      vec v = w - w % w / (w + 1 / sigma2);
+      wX_tilde.each_col() %= v;
+      mat V = (X_mat.t() * wX_tilde + eye<mat>(p, p) * 1E-8);
+
+      vec k = y_vec - r / 2.0 + w % log_r;
+
+      vec m = solve(V, (X_mat.t() * (k % (1 - w / (w + 1 / sigma2)))));
+
+      mat cholV = chol(V);
+      beta = solve(cholV, randn(p)) + m;
+      Xbeta = X_mat * beta;
+    }
+
+    if (da_ver == 2) {
       mat wX_tilde = X_mat;
       wX_tilde.each_col() %= w;
 
@@ -100,19 +126,16 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
       Xbeta = X_mat * beta;
     }
 
-    if (da_ver == 2) {
+    if (da_ver == 3) {
       beta = cholX_mat2inv * randn(p) + X_mat2inv * (X_mat.t() * theta);
 
       Xbeta = X_mat * beta;
     }
 
-    double a = (double)n / 2.0;
-    vec diff = eta;
-    double b = dot(diff, diff) / 2.0;
-    sigma2 = 1.0 / c11r.draw_gamma(a, b);
+    // sigma2 = b / a;
 
     if (w.has_nan()) {
-      throw std::runtime_error("w nan, consider reduce c & increase tauini");
+      throw std::runtime_error("w nan, consider reduce c & increase tau");
       cout << tau << endl;
       // beta = ones(p);
       // tau *= 1.1;
@@ -121,7 +144,7 @@ SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
     }
 
     if (beta.has_nan()) {
-      throw std::runtime_error("beta nan, consider reduce c & increase tauini");
+      throw std::runtime_error("beta nan, consider reduce c & increase tau");
       cout << tau << endl;
       // beta = ones(p);
       // tau *= 1.1;

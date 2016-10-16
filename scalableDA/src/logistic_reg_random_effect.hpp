@@ -4,7 +4,9 @@ using namespace arma;
 // [[Rcpp::export]]
 SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
                                 double tau = 10, double c = 1,
-                                int mc_draws = 1E4, int da_ver = 1) {
+                                int mc_draws = 1E4, int da_ver = 1,
+                                double sigma2_ini = 0.01, bool track_r = false,
+                                bool update_sigma2 = false) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -18,14 +20,17 @@ SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
   int n = X_mat.n_rows;
   int p = X_mat.n_cols;
   vec beta = solve(X_mat.t() * X_mat, X_mat.t() * log(y_vec + 1));
-  double sigma2 = 0.01;
+  double sigma2 = sigma2_ini;
 
   // PG latent variable
   colvec w = ones(n);
 
   mat trace_beta(run, p);
   mat trace_theta(run, n);
-  mat trace_r(run, n);
+  mat trace_r;
+  if (track_r) {
+    trace_r = zeros<mat>(run, n);
+  }
   mat trace_w(run, n);
   vec trace_sigma2(run);
 
@@ -48,11 +53,11 @@ SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
   for (int i = 0; i < (burnin + run); ++i) {
     vec Xbeta = X_mat * beta;
 
-    if (i > burnin) {
+    if (i > burnin / 10) {
       max_theta = max(theta, max_theta);
-      r = exp(max_theta) * tau;
+      r = max(exp(max_theta) * tau, exp(2 * max_theta) / 1000000);
     } else {
-      r = exp(theta) * tau;
+      r = max(exp(theta) * tau, exp(2 * theta) / 1000000);
     }
 
     r(find(r > 1)).fill(1);
@@ -68,32 +73,39 @@ SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
     }
 
     {
-      // vec var_theta = 1.0 / (w + 1.0 / sigma2);
+      vec var_theta = 1.0 / (w + 1.0 / sigma2);
 
-      // vec m_theta = var_theta % (w % log_r + Xbeta / sigma2 + y_vec - r /
-      // 2.0);
+      vec m_theta = var_theta % (w % log_r + Xbeta / sigma2 + y_vec - r / 2.0);
 
-      // theta = randn(n) % sqrt(var_theta) + m_theta;
+      theta = randn(n) % sqrt(var_theta) + m_theta;
 
-      // eta = theta - Xbeta;
+      eta = theta - Xbeta;
 
-      vec var_eta = 1.0 / (w + 1.0 / sigma2);
+      // vec var_eta = 1.0 / (w + 1.0 / sigma2);
 
-      vec m_eta = var_eta % (y_vec - r / 2.0 + w % (log_r - Xbeta));
+      // vec m_eta = var_eta % (y_vec - r / 2.0 + w % (log_r - Xbeta));
 
-      eta = randn(n) % sqrt(var_eta) + m_eta;
+      // eta = randn(n) % sqrt(var_eta) + m_eta;
 
-      theta = Xbeta + eta;
+      // theta = Xbeta + eta;
+    }
+
+    if (update_sigma2) {
+      double a = (double)n / 2.0;
+      vec diff = eta;
+      double b = dot(diff, diff) / 2.0;
+      sigma2 = 1.0 / c11r.draw_gamma(a, b);
     }
 
     if (da_ver == 1) {
       mat wX_tilde = X_mat;
-      wX_tilde.each_col() %= w;
+      vec v = w - w % w / (w + 1 / sigma2);
+      wX_tilde.each_col() %= v;
+      mat V = (X_mat.t() * wX_tilde + eye<mat>(p, p) * 1E-8);
 
-      vec k = y_vec - r / 2.0 + w % (log_r - eta);
+      vec k = y_vec - r / 2.0 + w % log_r;
 
-      mat V = (X_mat.t() * wX_tilde + eye<mat>(p, p) * 1E-5);
-      vec m = solve(V, (X_mat.t() * k));
+      vec m = solve(V, (X_mat.t() * (k % (1 - w / (w + 1 / sigma2)))));
 
       mat cholV = chol(V);
       beta = solve(cholV, randn(p)) + m;
@@ -101,15 +113,25 @@ SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
     }
 
     if (da_ver == 2) {
+      mat wX_tilde = X_mat;
+      wX_tilde.each_col() %= w;
+
+      vec k = y_vec - r / 2.0 + w % (log_r - eta);
+
+      mat V = (X_mat.t() * wX_tilde + eye<mat>(p, p) * 1E-8);
+      vec m = solve(V, (X_mat.t() * k));
+
+      mat cholV = chol(V);
+      beta = solve(cholV, randn(p)) + m;
+      Xbeta = X_mat * beta;
+    }
+
+    if (da_ver == 3) {
       beta = cholX_mat2inv * randn(p) + X_mat2inv * (X_mat.t() * theta);
 
       Xbeta = X_mat * beta;
     }
 
-    double a = (double)n / 2.0;
-    vec diff = eta;
-    double b = dot(diff, diff) / 2.0;
-    sigma2 = 1.0 / c11r.draw_gamma(a, b);
     // sigma2 = b / a;
 
     if (w.has_nan()) {
@@ -135,7 +157,9 @@ SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
     if (i >= burnin) {
       trace_beta.row(i - burnin) = beta.t();
       // trace_theta.row(i - burnin) = theta.t();
-      // trace_r.row(i - burnin) = r.t();
+      if (track_r) {
+        trace_r.row(i - burnin) = r.t();
+      }
       // trace_w.row(i - burnin) = w.t();
       trace_sigma2(i - burnin) = sigma2;
     }
@@ -143,5 +167,6 @@ SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin = 500, int run = 500,
 
   return Rcpp::List::create(
       Rcpp::Named("beta") = trace_beta, Rcpp::Named("sigma2") = trace_sigma2,
-      Rcpp::Named("r") = r, Rcpp::Named("w") = w, Rcpp::Named("theta") = theta);
+      Rcpp::Named("r") = r, Rcpp::Named("w") = w, Rcpp::Named("theta") = theta,
+      Rcpp::Named("trace_r") = trace_r);
 }
