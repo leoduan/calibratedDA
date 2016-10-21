@@ -2,8 +2,8 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
-                      int run = 500, double r0 = 20, int mc_draws = 1E4) {
+SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
+                  int run = 500, double r0 = 20, int mc_draws = 1E4) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);

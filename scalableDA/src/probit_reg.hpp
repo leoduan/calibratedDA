@@ -2,8 +2,8 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP probit_reg_simple2(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
-                        int run = 500, double r0 = 20, int mc_draws = 1E4) {
+SEXP probit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500,
+                double r0 = 20, int mc_draws = 1E4) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -87,10 +87,6 @@ SEXP probit_reg_simple2(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
 
     if (mh.has_nan() | mh.has_inf()) {
       uvec problem = find_nonfinite(mh);
-      // cout << trans(loglik(problem)) << endl
-      // << trans(new_loglik(problem)) << endl
-      // << trans(Qf(problem)) << endl
-      // << trans(Qb(problem)) << endl;
       mh(problem).fill(1);
     }
 
@@ -98,12 +94,14 @@ SEXP probit_reg_simple2(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
       mh.fill(1);
     }
 
+    // adaptively changes  r and b, in the first half of burnin
+
     if (i < burnin / 2) {
       uvec mh_less1 = find((mh < 1) && (Xbeta > -4));
       alpha = (sqrt(r) - 1) % new_Xbeta;
     }
 
-    if (i < burnin) {
+    if (i < burnin / 2) {
       uvec mh_less1 = find((mh < 1) && (Xbeta > -4));
       r(mh_less1) %= pow(mh(mh_less1), 0.5);
       r(find(r < 1)).fill(1);

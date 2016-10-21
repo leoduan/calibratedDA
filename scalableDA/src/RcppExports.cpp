@@ -6,9 +6,9 @@
 
 using namespace Rcpp;
 
-// binomial_simple
-SEXP binomial_simple(SEXP y_r, SEXP n_r, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP scalableDA_binomial_simple(SEXP y_rSEXP, SEXP n_rSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
+// binomial_reg
+SEXP binomial_reg(SEXP y_r, SEXP n_r, int burnin, int run, double r0, int mc_draws);
+RcppExport SEXP scalableDA_binomial_reg(SEXP y_rSEXP, SEXP n_rSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -18,7 +18,25 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(binomial_simple(y_r, n_r, burnin, run, r0, mc_draws));
+    __result = Rcpp::wrap(binomial_reg(y_r, n_r, burnin, run, r0, mc_draws));
+    return __result;
+END_RCPP
+}
+// logistic_reg
+SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
+RcppExport SEXP scalableDA_logistic_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type run(runSEXP);
+    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
+    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
+    __result = Rcpp::wrap(logistic_reg(y, X, b, B, burnin, run, r0, mc_draws));
     return __result;
 END_RCPP
 }
@@ -40,24 +58,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type track_r(track_rSEXP);
     Rcpp::traits::input_parameter< bool >::type update_sigma2(update_sigma2SEXP);
     __result = Rcpp::wrap(logistic_reg_random_effect(y, X, burnin, run, tau, c, mc_draws, da_ver, sigma2_ini, track_r, update_sigma2));
-    return __result;
-END_RCPP
-}
-// logit_reg_simple
-SEXP logit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP scalableDA_logit_reg_simple(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
-    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
-    Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
-    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(logit_reg_simple(y, X, b, B, burnin, run, r0, mc_draws));
     return __result;
 END_RCPP
 }
@@ -118,9 +118,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// probit_reg_simple
-SEXP probit_reg_simple(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP scalableDA_probit_reg_simple(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
+// probit_reg
+SEXP probit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
+RcppExport SEXP scalableDA_probit_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -132,25 +132,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
     Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(probit_reg_simple(y, X, b, B, burnin, run, r0, mc_draws));
-    return __result;
-END_RCPP
-}
-// probit_reg_simple2
-SEXP probit_reg_simple2(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP scalableDA_probit_reg_simple2(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
-    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
-    Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
-    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(probit_reg_simple2(y, X, b, B, burnin, run, r0, mc_draws));
+    __result = Rcpp::wrap(probit_reg(y, X, b, B, burnin, run, r0, mc_draws));
     return __result;
 END_RCPP
 }

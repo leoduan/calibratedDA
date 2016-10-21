@@ -12,15 +12,13 @@
 #include "RNG.h"
 #include "rpg.hpp"
 
-#include "binomial_simple.hpp"
+#include "binomial_reg.hpp"
+
+#include "logistic_reg.hpp"
 #include "logistic_reg_random_effect.hpp"
-#include "logistic_reg_simple.hpp"
 
 #include "poisson_reg.hpp"
 #include "poisson_reg_random_effect.hpp"
+
 #include "probit_px.hpp"
-#include "probit_reg_simple.hpp"
-
-#include "probit_reg_simple2.hpp"
-
-// #include "logistic_reg_bias_correction.hpp"
+#include "probit_reg.hpp"

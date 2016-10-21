@@ -1,5 +1,5 @@
 # .rs.restartR()
-require("ImbalancedPG")
+require("scalableDA")
 setwd("~/git/ImbalancedPG/test/")
 
 N <- 1E4
@@ -28,9 +28,9 @@ B<- diag(1000,2)
 
 # fit<- ImbalancedPG::probit_reg_px(y,X,b,B, r0= 1, burnin = 1000, run = 500,nu0 = 0.1)
 # 
-fit<- ImbalancedPG::probit_reg_simple2(y,X,b,B, r0= 200, burnin = 1000, run = 1000)
+fit<- probit_reg_simple2(y,X,b,B, r0= 200, burnin = 5000, run = 10)
 fit2<- ImbalancedPG::probit_reg_simple(y,X,b,B, r0= 1, burnin = 1000, run = 1000)
-fit3<- ImbalancedPG::probit_reg_px(y,X,b,B, r0= 1, burnin = 100, run = 1000,nu0 = 0.1)
+fit3<- probit_reg_px(y,X,b,B, r0= 1, burnin = 100, run = 1000,nu0 = 0.1)
 
 plot(X%*%beta,fit$r)
 
@@ -61,11 +61,11 @@ library(latex2exp)
 setwd("~/work/Dropbox/scalable_da/ms/")
 
 pdf("./probit_cda_r.pdf",5,5)
-plot(X%*%beta,fit$r, xlab=TeX('$x\\beta$'),ylab="r")
+plot(X%*%beta,fit$r, xlab=TeX('Posterior mean $x_i^T\\beta$'),ylab=TeX('Adapted $r_i'))
 dev.off()
 
 pdf("./probit_cda_b.pdf",5,5)
-plot(X%*%beta,fit$alpha, xlab=TeX('$x\\beta$'),ylab="b")
+plot(  (sqrt(fit$r)-1)*X%*%colMeans(fit$beta),fit$alpha, xlab=TeX('Posterior mean $( \\sqrt{r_i}-1 ) x_i^T\\beta$'),ylab=TeX('Adapted $b_i'),xlim=c(-80,0),ylim=c(-80,0))
 dev.off()
 
 
