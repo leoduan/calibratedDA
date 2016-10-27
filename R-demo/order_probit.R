@@ -1,6 +1,6 @@
 #.rs.restartR()
 require("ImbalancedPG")
-setwd("~/git/ImbalancedPG/test/")
+setwd("~/Documents/Projects/calibratedDA/test/")
 require(truncnorm)
 
 n <- 1E3
@@ -8,7 +8,12 @@ n <- 1E3
 X0 <- 1#rnorm(N, 1, 1)
 X1 <- rnorm(n, 1, 1)
 X <- cbind(X0, X1)
-beta <- c(-1, 1)
+beta <- c(1, 1)
+
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
 
 
 # X<- matrix(rep(1,n))
@@ -16,6 +21,7 @@ beta <- c(-1, 1)
 
 p<- length(beta)
 # hist(X %*% beta)
+
 Z <- rnorm(n,X %*% beta,1)
 
 g <- c(0, 1,2, Inf) 
@@ -36,15 +42,12 @@ probit_r<- function(r,steps=1000, ver =1){
   
   trace_beta<- numeric()
   trace_g<- numeric()
+  AUGY <- matrix(0,n,steps)
   
   for(i in 1:steps){
     
     lb<- rep(-Inf,n)
     ub<- rep(Inf,n)
-    
-    
-    
-    
     
     Xbeta <- X%*%beta
     
@@ -55,33 +58,45 @@ probit_r<- function(r,steps=1000, ver =1){
     
     
     if(ver==1){
-      Z[y>1]  <- rtruncnorm(sum(y>1) ,mean= Xbeta[ (y>1)],a= g[1], b =Inf)
-      s_z<- sort(Z[y>1],decreasing = F)
+      
+      for(j in c(2:(J-1))){
+        Z[y == J]  <- rtruncnorm(sum(y == J ),mean= Xbeta[y == J],a= max(Z[y== J-1]), b =Inf)
+      }
+      
+      # s_z<- sort(Z[y>1],decreasing = F)
+      
+      
+      # for(j in c(2:(J-1))){
+      #   g[j]<- runif(1,  s_z[sum(y<=j)-count_y1],s_z[sum(y<=j)-count_y1+1])
+      # }
       
       for(j in c(2:(J-1))){
         
-        g[j]<- runif(1,s_z[sum(y<=j)-count_y1],s_z[sum(y<=j)-count_y1+1])
-        
+        min_g<- max(Z[y==j])
+        max_g<- min(Z[y==j+1])
+        g[j]<- runif(1, min_g,max_g)
       }
+      
+      
     } 
     
     
-    if(ver==2){
-      for(j in c(2:(J-1))){
-        
-        count_y1<- sum(y==j)
-        count_y2<- sum(y==j+1)
-        
-        z<- rtruncnorm(count_y1+count_y2 ,mean= Xbeta[ (y==j) | (y== j+1)],a= g[j-1], b = g[j+1])
-        
-        s_z<- sort(z,decreasing = F)
-        g[j]<- runif(1,s_z[count_y1],s_z[count_y1+1])
-        
-        
-        Z[y==j]<- z[z < g[j]]
-        Z[y==j+1]<- z [z > g[j]]
-        
-      }}
+    # if(ver==2){
+    #   for(j in c(2:(J-1))){
+    #     
+    #     count_y1<- sum(y==j)
+    #     count_y2<- sum(y==j+1)
+    #     
+    #     z<- rtruncnorm(count_y1+count_y2 ,mean= Xbeta[ (y==j) | (y== j+1)],a= g[j-1], b = g[j+1])
+    #     
+    #     s_z<- sort(z,decreasing = F)
+    #     g[j]<- runif(1,s_z[count_y1],s_z[count_y1+1])
+    #     
+    #     
+    #     Z[y==j]<- z[z < g[j]]
+    #     Z[y==j+1]<- z [z > g[j]]
+    #     
+    #   }}
     
     if(ver==3){
       for(j in c(1:J)){
@@ -92,7 +107,6 @@ probit_r<- function(r,steps=1000, ver =1){
       }
       
       Z<- rtruncnorm(n, lb,ub, X%*%beta, sd= 1)
-      
       
       for(j in c(2:(J-1))){
         if(j>1)
@@ -113,24 +127,41 @@ probit_r<- function(r,steps=1000, ver =1){
     cholvar<- t(chol(solve(XRX)))
     beta<- cholvar%*% rnorm(p)+m
     
+
+    # obtain the value of y from the value of z
+    # this should always be right
+    repg <- t(matrix(rep(g,n),length(g),n))
+    repz <- matrix(rep(Z,length(g)),n,length(g))
+    augy <- apply(repz>repg,1,sum)+1
+    AUGY[,i] <- augy
+
     if(i>(steps/2)){
       trace_beta<- rbind(trace_beta,t(beta))
       trace_g<- rbind(trace_g,t(g))
     }
     
-    print(i)
+    #print(i)
   }
   
-  list('beta'= trace_beta, 'g'=trace_g)
+  list('beta'= trace_beta, 'g'=trace_g, 'AUGY'=AUGY)
 }
 # fit<- probit_r(1,10)
 
 fit<- probit_r(1,1000, ver=1)
-fit2<- probit_r(1,1000, ver=2)
+# fit2<- probit_r(1,1000, ver=2)
 fit3<- probit_r(1,1000, ver=3)
 
+nerr <- apply(fit$AUGY,2,function(x){sum(x!=y)})
+nerr2 <- apply(fit2$AUGY,2,function(x){sum(x!=y)})
+nerr3 <- apply(fit3$AUGY,2,function(x){sum(x!=y)}) 
+
+# these should all be zero, avg # of times per iteration that the thresholded value of z \ne y
+sum(nerr/1000)
+sum(nerr2/1000)
+sum(nerr3/1000)
+
+
 acf(fit$beta, lag.max = 40)
-acf(fit2$beta, lag.max = 40)
 
 acf(fit$g[,2], lag.max = 40)
 acf(fit3$g[,2], lag.max = 40)
