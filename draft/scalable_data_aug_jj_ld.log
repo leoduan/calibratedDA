@@ -1,15 +1,16 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.10.29)  10 NOV 2016 11:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  10 NOV 2016 14:54
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **scalable_data_aug_jj_ld.tex
 (./scalable_data_aug_jj_ld.tex
-LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 78 languages loaded.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -23,58 +24,58 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2016/01/03 v1.1b Standard LaTeX Color (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2014/04/23 v1.1a Standard LaTeX Color (DPC)
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: pdftex.def on input line 143.
+Package color Info: Driver file: pdftex.def on input line 137.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count87
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip43
 \bibsep=\skip44
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count88
 )
-(/usr/share/texlive/texmf-dist/tex/latex/rotating/rotating.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/rotating/rotating.sty
 Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 95.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 )
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \c@r@tfl@t=\count89
 \rotFPtop=\skip45
@@ -82,15 +83,15 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \rot@float@box=\box26
 \rot@mess@toks=\toks15
 )
-(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 67.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen105
 \captionmargin@=\dimen106
 \captionwidth=\dimen107
@@ -105,7 +106,7 @@ Package caption Info: rotating package is loaded.
 \c@subfigure=\count91
 \c@subtable=\count92
 )
-(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count93
 \float@exts=\toks16
@@ -113,8 +114,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks17
 \@floatcapt=\box28
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
-Package: amsthm 2015/03/04 v2.20.2
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks18
 \thm@bodyfont=\toks19
 \thm@headfont=\toks20
@@ -125,41 +126,41 @@ Package: amsthm 2015/03/04 v2.20.2
 \thm@headsep=\skip49
 \dth@everypar=\toks23
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/03/03 v2.15a AMS math features
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip50
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks24
 \ex@=\dimen112
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen113
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count94
-LaTeX Info: Redefining \frac on input line 199.
+LaTeX Info: Redefining \frac on input line 210.
 \uproot@=\count95
 \leftroot@=\count96
-LaTeX Info: Redefining \overline on input line 297.
+LaTeX Info: Redefining \overline on input line 306.
 \classnum@=\count97
 \DOTSCASE@=\count98
-LaTeX Info: Redefining \ldots on input line 394.
-LaTeX Info: Redefining \dots on input line 397.
-LaTeX Info: Redefining \cdots on input line 518.
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box29
 \strutbox@=\box30
 \big@size=\dimen114
-LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count99
 \c@MaxMatrixCols=\count100
 \dotsspace@=\muskip10
@@ -180,13 +181,13 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \multlinegap=\skip51
 \multlinetaggap=\skip52
 \mathdisplay@stack=\toks28
-LaTeX Info: Redefining \[ on input line 2735.
-LaTeX Info: Redefining \] on input line 2736.
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
@@ -198,16 +199,16 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 \c@corollary=\count108
 \c@remark=\count109
 
-(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 \@float@every@algorithm=\toks29
 \c@algorithm=\count110
 )
-(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
 
-(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
@@ -223,10 +224,10 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip55
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (/usr/share/texlive/texmf-dist/tex/latex/mhequ/mhequ.sty
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/mhequ/mhequ.sty
 Package: mhequ 
-\@MHnocols=\count118
-\@MHnocolstot=\count119
+\@nocols=\count118
+\@nocolstot=\count119
 \@MHLength=\count120
 \MHcenter=\skip56
 \MHbig=\skip57
@@ -251,7 +252,7 @@ LaTeX Font Info:    ... okay on input line 76.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
 LaTeX Font Info:    ... okay on input line 76.
 
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count124
 \scratchdimen=\dimen121
@@ -264,15 +265,15 @@ LaTeX Font Info:    ... okay on input line 76.
 \MPnumerator=\count128
 \makeMPintoPDFobject=\count129
 \everyMPtoPDFconversion=\toks31
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
@@ -281,22 +282,22 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
@@ -308,7 +309,7 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
@@ -317,12 +318,12 @@ Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+msa on input line 78.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 78.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
@@ -339,7 +340,7 @@ ine 95.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
 Package natbib Warning: Citation `minsker2014robust' on page 2 undefined on inp
 ut line 99.
@@ -377,90 +378,91 @@ t line 137.
 Package natbib Warning: Citation `meng1999seeking' on page 4 undefined on input
  line 137.
 
-
-Package natbib Warning: Citation `johndrow2016inefficiency' on page 4 undefined
- on input line 154.
-
 [4]
 
+Package natbib Warning: Citation `johndrow2016inefficiency' on page 5 undefined
+ on input line 164.
+
+
 Package natbib Warning: Citation `albert1993bayesian' on page 5 undefined on in
-put line 161.
+put line 171.
 
 
 Package natbib Warning: Citation `fill1991eigenvalue' on page 5 undefined on in
-put line 161.
+put line 171.
 
 <probit_demo_acf_prop.pdf, id=31, 361.35pt x 216.81pt>
 File: probit_demo_acf_prop.pdf Graphic file (type pdf)
 
 <use probit_demo_acf_prop.pdf>
-Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 167.
+Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 177.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
 
 <probit_demo_acf.pdf, id=32, 361.35pt x 216.81pt>
 File: probit_demo_acf.pdf Graphic file (type pdf)
  <use probit_demo_acf.pdf>
-Package pdftex.def Info: probit_demo_acf.pdf used on input line 173.
+Package pdftex.def Info: probit_demo_acf.pdf used on input line 183.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
 
-[5 <./probit_demo_acf_prop.pdf> <./probit_demo_acf.pdf>]
+[5]
 
 Package natbib Warning: Citation `albert1993bayesian' on page 6 undefined on in
-put line 193.
+put line 203.
 
 
 Package natbib Warning: Citation `liu1999parameter' on page 6 undefined on inpu
-t line 193.
+t line 203.
 
-<probit15_trace_plot.pdf, id=50, 433.62pt x 259.97125pt>
+[6 <./probit_demo_acf_prop.pdf> <./probit_demo_acf.pdf>]
+<probit15_trace_plot.pdf, id=54, 433.62pt x 259.97125pt>
 File: probit15_trace_plot.pdf Graphic file (type pdf)
 
 <use probit15_trace_plot.pdf>
-Package pdftex.def Info: probit15_trace_plot.pdf used on input line 201.
+Package pdftex.def Info: probit15_trace_plot.pdf used on input line 211.
 (pdftex.def)             Requested size: 231.02411pt x 138.51003pt.
- <probit15_acf.pdf, id=51, 361.35pt x 216.81pt>
+ <probit15_acf.pdf, id=55, 361.35pt x 216.81pt>
 File: probit15_acf.pdf Graphic file (type pdf)
 
 <use probit15_acf.pdf>
-Package pdftex.def Info: probit15_acf.pdf used on input line 207.
+Package pdftex.def Info: probit15_acf.pdf used on input line 217.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- <probit_cda_r.pdf, id=52, 361.35pt x 361.35pt>
+ <probit_cda_r.pdf, id=56, 361.35pt x 361.35pt>
 File: probit_cda_r.pdf Graphic file (type pdf)
 
 <use probit_cda_r.pdf>
-Package pdftex.def Info: probit_cda_r.pdf used on input line 212.
+Package pdftex.def Info: probit_cda_r.pdf used on input line 222.
 (pdftex.def)             Requested size: 231.02411pt x 231.02612pt.
- <probit_cda_b.pdf, id=53, 361.35pt x 361.35pt>
+ <probit_cda_b.pdf, id=57, 361.35pt x 361.35pt>
 File: probit_cda_b.pdf Graphic file (type pdf)
 
 <use probit_cda_b.pdf>
-Package pdftex.def Info: probit_cda_b.pdf used on input line 217.
+Package pdftex.def Info: probit_cda_b.pdf used on input line 227.
 (pdftex.def)             Requested size: 231.02411pt x 231.02612pt.
 
 
-Package natbib Warning: Citation `albert1993bayesian' on page 6 undefined on in
-put line 221.
+Package natbib Warning: Citation `albert1993bayesian' on page 7 undefined on in
+put line 231.
 
 
-Package natbib Warning: Citation `liu1999parameter' on page 6 undefined on inpu
-t line 221.
+Package natbib Warning: Citation `liu1999parameter' on page 7 undefined on inpu
+t line 231.
 
 
-Package natbib Warning: Citation `albert1993bayesian' on page 6 undefined on in
-put line 221.
+Package natbib Warning: Citation `albert1993bayesian' on page 7 undefined on in
+put line 231.
 
 
-Package natbib Warning: Citation `liu1999parameter' on page 6 undefined on inpu
-t line 221.
+Package natbib Warning: Citation `liu1999parameter' on page 7 undefined on inpu
+t line 231.
 
-[6] [7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf> <./probit_cda_r.pdf> <.
-/probit_cda_b.pdf>]
+[7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf> <./probit_cda_r.pdf> <./pro
+bit_cda_b.pdf>]
 
 Package natbib Warning: Citation `polson2013bayesian' on page 8 undefined on in
-put line 233.
+put line 243.
 
 
-Overfull \hbox (23.49103pt too wide) in paragraph at lines 238--240
+Overfull \hbox (23.49103pt too wide) in paragraph at lines 248--250
 \OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 Z \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 di
 ag\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 z[]; [] ; z[]\OT1/cmr/m/n/10 )$. This is du
 e to the in-te-gra-tion $\OML/cmm/m/it/10 L\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[
@@ -474,82 +476,83 @@ m/n/10 ^^@ \OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 2)\OMS/cmsy/m/n/1
 [8] [9]
 
 Package natbib Warning: Citation `roberts2007coupling' on page 10 undefined on 
-input line 313.
+input line 323.
 
 <logit_random_trace_plot.pdf, id=95, 433.62pt x 259.97125pt>
 File: logit_random_trace_plot.pdf Graphic file (type pdf)
 
 <use logit_random_trace_plot.pdf>
-Package pdftex.def Info: logit_random_trace_plot.pdf used on input line 322.
+Package pdftex.def Info: logit_random_trace_plot.pdf used on input line 332.
 (pdftex.def)             Requested size: 231.02411pt x 138.51003pt.
 
 <logit_random_acf.pdf, id=96, 361.35pt x 216.81pt>
 File: logit_random_acf.pdf Graphic file (type pdf)
  <use logit_random_acf.pdf>
-Package pdftex.def Info: logit_random_acf.pdf used on input line 327.
+Package pdftex.def Info: logit_random_acf.pdf used on input line 337.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
 
 
 Package natbib Warning: Citation `polson2013bayesian' on page 10 undefined on i
-nput line 330.
+nput line 340.
 
 
 Package natbib Warning: Citation `polson2013bayesian' on page 10 undefined on i
-nput line 330.
+nput line 340.
 
-[10 <./logit_random_trace_plot.pdf> <./logit_random_acf.pdf>]
+[10]
 
 Package natbib Warning: Citation `liu2008monte' on page 11 undefined on input l
-ine 340.
+ine 350.
 
 
 Package natbib Warning: Citation `fill1991eigenvalue' on page 11 undefined on i
-nput line 340.
+nput line 350.
 
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 378--379
+[11 <./logit_random_trace_plot.pdf> <./logit_random_acf.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 388--389
 
  []
 
+[12]
 
-Package natbib Warning: Citation `roberts2007coupling' on page 12 undefined on 
-input line 395.
+Package natbib Warning: Citation `roberts2007coupling' on page 13 undefined on 
+input line 405.
 
-[12] <r_adaptation.pdf, id=116, 216.81pt x 216.81pt>
+<r_adaptation.pdf, id=116, 216.81pt x 216.81pt>
 File: r_adaptation.pdf Graphic file (type pdf)
  <use r_adaptation.pdf>
-Package pdftex.def Info: r_adaptation.pdf used on input line 405.
+Package pdftex.def Info: r_adaptation.pdf used on input line 415.
 (pdftex.def)             Requested size: 141.44318pt x 141.45084pt.
-
-[13 <./r_adaptation.pdf>]
+ [13]
 
 Package natbib Warning: Citation `zhou2012lognormal' on page 14 undefined on in
-put line 420.
+put line 430.
 
-[14] <traceplot_poisson_da.pdf, id=129, 433.62pt x 433.62pt>
+[14 <./r_adaptation.pdf>]
+<traceplot_poisson_da.pdf, id=129, 433.62pt x 433.62pt>
 File: traceplot_poisson_da.pdf Graphic file (type pdf)
 
 <use traceplot_poisson_da.pdf>
-Package pdftex.def Info: traceplot_poisson_da.pdf used on input line 441.
+Package pdftex.def Info: traceplot_poisson_da.pdf used on input line 451.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
 <poisson_da_acf.pdf, id=130, 216.81pt x 216.81pt>
 File: poisson_da_acf.pdf Graphic file (type pdf)
  <use poisson_da_acf.pdf>
-Package pdftex.def Info: poisson_da_acf.pdf used on input line 447.
+Package pdftex.def Info: poisson_da_acf.pdf used on input line 457.
 (pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
 
 <traceplot_poisson_ada.pdf, id=131, 433.62pt x 433.62pt>
 File: traceplot_poisson_ada.pdf Graphic file (type pdf)
 
 <use traceplot_poisson_ada.pdf>
-Package pdftex.def Info: traceplot_poisson_ada.pdf used on input line 452.
+Package pdftex.def Info: traceplot_poisson_ada.pdf used on input line 462.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
 <poisson_ada_acf.pdf, id=132, 216.81pt x 216.81pt>
 File: poisson_ada_acf.pdf Graphic file (type pdf)
  <use poisson_ada_acf.pdf>
-Package pdftex.def Info: poisson_ada_acf.pdf used on input line 458.
+Package pdftex.def Info: poisson_ada_acf.pdf used on input line 468.
 (pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
 
 [15] [16 <./traceplot_poisson_da.pdf> <./poisson_da_acf.pdf> <./traceplot_poiss
@@ -558,21 +561,21 @@ on_ada.pdf> <./poisson_ada_acf.pdf>] [17] (./scalable_data_aug_jj_ld.bbl
 Package natbib Warning: Empty `thebibliography' environment on input line 8.
 
 )
-Overfull \hbox (14.89609pt too wide) detected at line 530
+Overfull \hbox (14.89609pt too wide) detected at line 540
 [] []
  []
 
 
 Package natbib Warning: Citation `liu1994collapsed' on page 18 undefined on inp
-ut line 537.
+ut line 547.
 
 [18]
-Overfull \hbox (41.86168pt too wide) detected at line 563
+Overfull \hbox (41.86168pt too wide) detected at line 573
 [] []
  []
 
 [19]
-Overfull \hbox (4.69505pt too wide) in paragraph at lines 580--581
+Overfull \hbox (4.69505pt too wide) in paragraph at lines 590--591
 []\OT1/cmr/m/n/10 To prove Corol-lary 1, us-ing Cauchy-Schwarz in-equal-ity $\O
 MS/cmsy/m/n/10 f\OML/cmm/m/it/10 E^^R[]^^R[]\OT1/cmr/m/n/10 1(\OML/cmm/m/it/10 
 ^^R[] > M[]\OT1/cmr/m/n/10 )1(\OML/cmm/m/it/10 ^^R[] > M[]\OT1/cmr/m/n/10 )\OMS
@@ -581,12 +584,12 @@ MS/cmsy/m/n/10 f\OML/cmm/m/it/10 E^^R[]^^R[]\OT1/cmr/m/n/10 1(\OML/cmm/m/it/10
  []
 
 
-Overfull \hbox (0.4846pt too wide) detected at line 607
+Overfull \hbox (0.4846pt too wide) detected at line 617
 [] []
  []
 
 [20]
-Overfull \hbox (24.25366pt too wide) in paragraph at lines 642--643
+Overfull \hbox (24.25366pt too wide) in paragraph at lines 652--653
 []\OT1/cmr/m/n/10 Consider the ap-prox-i-mate den-sity $\OML/cmm/m/it/10 L[]\OT
 1/cmr/m/n/10 (\OML/cmm/m/it/10 y[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 ^^Q[]\OT1/
 cmr/m/n/10 ) = []\OML/cmm/m/it/10 p[]\OT1/cmr/m/n/10 (1 \OMS/cmsy/m/n/10 ^^@ \O
@@ -595,7 +598,7 @@ ML/cmm/m/it/10 p\OT1/cmr/m/n/10 )[]$, where $\OML/cmm/m/it/10 p \OT1/cmr/m/n/10
  []
 
 [21] [22]
-Overfull \hbox (7.92673pt too wide) in paragraph at lines 692--693
+Overfull \hbox (7.92673pt too wide) in paragraph at lines 702--703
 []\OT1/cmr/m/n/10 Similar to the lo-gis-tic ap-prox-i-mate, con-sider the ap-pr
 ox-i-mate den-sity $\OML/cmm/m/it/10 L[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[]\O
 MS/cmsy/m/n/10 j\OML/cmm/m/it/10 ^^Q[]\OT1/cmr/m/n/10 ) = []\OML/cmm/m/it/10 p[
@@ -606,56 +609,56 @@ MS/cmsy/m/n/10 j\OML/cmm/m/it/10 ^^Q[]\OT1/cmr/m/n/10 ) = []\OML/cmm/m/it/10 p[
 File: traceplot_poisson_zip_da.pdf Graphic file (type pdf)
 
 <use traceplot_poisson_zip_da.pdf>
-Package pdftex.def Info: traceplot_poisson_zip_da.pdf used on input line 716.
+Package pdftex.def Info: traceplot_poisson_zip_da.pdf used on input line 726.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
 <poisson_zip_da_acf.pdf, id=182, 216.81pt x 216.81pt>
 File: poisson_zip_da_acf.pdf Graphic file (type pdf)
 
 <use poisson_zip_da_acf.pdf>
-Package pdftex.def Info: poisson_zip_da_acf.pdf used on input line 721.
+Package pdftex.def Info: poisson_zip_da_acf.pdf used on input line 731.
 (pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
  [23]
 <poisson_fitting_da.png, id=186, 1204.5pt x 1204.5pt>
 File: poisson_fitting_da.png Graphic file (type png)
 
 <use poisson_fitting_da.png>
-Package pdftex.def Info: poisson_fitting_da.png used on input line 735.
+Package pdftex.def Info: poisson_fitting_da.png used on input line 745.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
 
 <poisson_fitting_ada.png, id=188, 1204.5pt x 1204.5pt>
 File: poisson_fitting_ada.png Graphic file (type png)
 
 <use poisson_fitting_ada.png>
-Package pdftex.def Info: poisson_fitting_ada.png used on input line 740.
+Package pdftex.def Info: poisson_fitting_ada.png used on input line 750.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
  <poisson_cv_da.png, id=189, 1204.5pt x 1204.5pt>
 File: poisson_cv_da.png Graphic file (type png)
 
 <use poisson_cv_da.png>
-Package pdftex.def Info: poisson_cv_da.png used on input line 744.
+Package pdftex.def Info: poisson_cv_da.png used on input line 754.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
  <poisson_cv_ada.png, id=190, 1204.5pt x 1204.5pt>
 File: poisson_cv_ada.png Graphic file (type png)
 
 <use poisson_cv_ada.png>
-Package pdftex.def Info: poisson_cv_ada.png used on input line 749.
+Package pdftex.def Info: poisson_cv_ada.png used on input line 759.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
  [24 <./traceplot_poisson_zip_da.pdf> <./poisson_zip_da_acf.pdf>] <CDAvsHMC_mea
 n.pdf, id=205, 433.62pt x 433.62pt>
 File: CDAvsHMC_mean.pdf Graphic file (type pdf)
 
 <use CDAvsHMC_mean.pdf>
-Package pdftex.def Info: CDAvsHMC_mean.pdf used on input line 761.
+Package pdftex.def Info: CDAvsHMC_mean.pdf used on input line 771.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
  <CDAvsHMC_sd.pdf, id=206, 433.62pt x 433.62pt>
 File: CDAvsHMC_sd.pdf Graphic file (type pdf)
 
 <use CDAvsHMC_sd.pdf>
-Package pdftex.def Info: CDAvsHMC_sd.pdf used on input line 766.
+Package pdftex.def Info: CDAvsHMC_sd.pdf used on input line 776.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
-Underfull \hbox (badness 1748) in paragraph at lines 767--767
+Underfull \hbox (badness 1748) in paragraph at lines 777--777
 []\OT1/cmr/m/n/9 (b) |Com-par-ing pos-te-rior stan-dard de-vi-a-tion for
  []
 
@@ -663,13 +666,13 @@ Underfull \hbox (badness 1748) in paragraph at lines 767--767
 > <./poisson_cv_ada.png>]
 File: traceplot_poisson_ada.pdf Graphic file (type pdf)
  <use traceplot_poisson_ada.pdf>
-Package pdftex.def Info: traceplot_poisson_ada.pdf used on input line 778.
+Package pdftex.def Info: traceplot_poisson_ada.pdf used on input line 788.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
 <poisson_hmc_acf.pdf, id=215, 216.81pt x 216.81pt>
 File: poisson_hmc_acf.pdf Graphic file (type pdf)
  <use poisson_hmc_acf.pdf>
-Package pdftex.def Info: poisson_hmc_acf.pdf used on input line 783.
+Package pdftex.def Info: poisson_hmc_acf.pdf used on input line 793.
 (pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
 
 
@@ -678,37 +681,38 @@ Package natbib Warning: There were undefined citations.
 [26 <./CDAvsHMC_mean.pdf> <./CDAvsHMC_sd.pdf> <./poisson_hmc_acf.pdf>]
 (./scalable_data_aug_jj_ld.aux) ) 
 Here is how much of TeX's memory you used:
- 4968 strings out of 493029
- 71932 string characters out of 6136233
- 142682 words of memory out of 5000000
- 8395 multiletter control sequences out of 15000+600000
+ 4934 strings out of 493117
+ 71898 string characters out of 6135433
+ 141584 words of memory out of 5000000
+ 8288 multiletter control sequences out of 15000+600000
  14633 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,41p,1398b,484s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/symbols/msbm10.pfb>
-Output written on scalable_data_aug_jj_ld.pdf (26 pages, 1279696 bytes).
+ 42i,12n,40p,1398b,480s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7
+.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
+b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/
+local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/loca
+l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local
+/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on scalable_data_aug_jj_ld.pdf (26 pages, 1281147 bytes).
 PDF statistics:
  312 PDF objects out of 1000 (max. 8388607)
  213 compressed objects within 3 object streams

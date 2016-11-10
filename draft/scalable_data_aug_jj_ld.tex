@@ -141,7 +141,17 @@ The update in \eqref{eq:cda-probit} alters the invariant measure; thus, we use i
 \be
 1 \wedge \frac{Q(\beta; \beta^*) \prod_i L(\xbeta^*;y_i)}{Q(\beta^*; \beta) \prod_i L(\xbeta;y_i) } = \frac{ \prod_i L(\xbeta^*;y_i)}{\prod_i L(\xbeta;y_i) },
 \ee
-where $L(\theta;y_i)=\Phi(\theta)^{y_i} (1-\Phi(\theta))^{(1-y_i)}$ and the second equality follows since $Q(\beta; \beta^*)=Q(\beta^*; \beta) = \prod_i \int \pi(\xbeta^*|z_i;y_i)\pi(z_i|\xbeta;y_i)d z_i$, so the proposal is symmetric. \James{are we sure about this? I have not tried to check it but it isn't obvious to me that this truncated normal integral will end up being symmetric in $\beta$. Have you written this out? can we put into the appendix somewhere?}
+where $L(\theta;y_i)=\Phi(\theta)^{y_i} (1-\Phi(\theta))^{(1-y_i)}$ and the second equality follows since $Q(\beta; \beta^*)=Q(\beta^*; \beta) = \prod_i \int \pi(\xbeta^*|z_i;y_i)\pi(z_i|\xbeta;y_i)d z_i$, so the proposal is symmetric. 
+
+\James{I'm unsure that it is symmetric. I do a calculation here}
+\be
+\int \pi(\beta^* \mid z, y, X) \pi(z \mid \beta, y, X) dz = \int \prod_i &\left( \frac{1}{\sqrt{2\pi} \Phi(-(x_i \beta+b_i)/\sqrt{r_i})} \exp\left\{-\frac{(x_i\beta+b_i-z_i)^2}{2r_i} \right\} \right)^{y_i} \\
+&\times \left( \frac{1}{\sqrt{2\pi} \Phi((x_i \beta+b_i)/\sqrt{r_i})} \exp\left\{-\frac{(x_i\beta+b_i-z_i)^2}{2r_i} \right\} \right)^{1-y_i} \\
+&\times |X'R^{-1}X|^{-1/2} \phi((X'R^{-1}X)^{-1/2} (\beta^*-(X'R^{-1}X)^{-1}X'R^{-1}(z-b))) dz \\
+&= \left[ \prod_i  \left( \frac{1}{\sqrt{2\pi} \Phi(-(x_i \beta+b_i)/\sqrt{r_i})} \right)^{y_i}  \left( \frac{1}{\sqrt{2\pi} \Phi((x_i \beta+b_i)/\sqrt{r_i})} \right)^{1-y_i} \right] \\
+&\times \text{Some gaussian integral depending on } \beta dz
+\ee
+\James{ it looks to me like there will be normalizing constants depending on $\beta$, so the proposal ratio should be the ratio of these normalizing constants. }
 
 When the proposal is accepted $\beta_t = \beta^*$, the covariance:
 \be
