@@ -136,12 +136,12 @@ z_i \mid \beta, x_i, y_i &\sim \left\{ \begin{array}{cc} \No_{[0,\infty)}(x_i \b
 \ee
 where $R = \diag(r_1,\ldots,r_n)$, $b = (b_1,\ldots,b_n)'$. Note that the parameter expansion algorithms of \cite{liu1999parameter} and \cite{meng1999seeking} rescale $\beta$ by $1/\sqrt{r}$, which does not change in the conditional variance for $\beta$. In contrast, we adjust the mean, allowing us to control the variance of the step sizes through the value of $r$.
 
-The update in \eqref{eq:cda-probit} alters the invariant measure; thus, we use it as a M-H proposal. Letting $Q(\beta^*;\beta)$ be the proposal defined by \eqref{eq:cda-probit}, the proposal is accepted with probability
+The update in \eqref{eq:cda-probit} alters the invariant measure; thus, we use it as a M-H proposal. Letting $Q(\beta;\beta^*)$ be the proposal defined by \eqref{eq:cda-probit}, the proposal is accepted with probability
 %Generate one uniform random variable $u\sim \U(0,1)$ and accept the new $\beta^*$ if
 \be
-1 \wedge \frac{Q(\beta; \beta^*) \prod_i L(\xbeta^*;y_i)}{Q(\beta^*; \beta) \prod_i L(\xbeta;y_i) } = \frac{ \prod_i L(\xbeta^*;y_i)}{\prod_i L(\xbeta;y_i) },
+1 \wedge \frac{\prod_i L(\xbeta^*) Q(\beta^* \Rightarrow \beta)}{\prod_i L(\xbeta) Q(\beta \Rightarrow \beta^*)},
 \ee
-where $L(\theta;y_i)=\Phi(\theta)^{y_i} (1-\Phi(\theta))^{(1-y_i)}$ and the second equality follows since $Q(\beta; \beta^*)=Q(\beta^*; \beta) = \prod_i \int \pi(\xbeta^*|z_i;y_i)\pi(z_i|\xbeta;y_i)d z_i$, so the proposal is symmetric. \James{are we sure about this? I have not tried to check it but it isn't obvious to me that this truncated normal integral will end up being symmetric in $\beta$. Have you written this out? can we put into the appendix somewhere?}
+where $L(a)=\Phi(a)^{y_i} (1-\Phi(a))^{(1-y_i)}$ and $Q(\beta^* \Rightarrow \beta)=Q(\beta \Rightarrow \beta^*) = \prod_i \int\pi(\xbeta^*|z_i)\pi(z_i|\xbeta)d z_i$, due to the symmetry.
 
 When the proposal is accepted $\beta_t = \beta^*$, the covariance:
 \be
