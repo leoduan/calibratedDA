@@ -1,0 +1,120 @@
+\relax 
+\citation{ngai2011application}
+\citation{wakefield2007disease}
+\citation{wang2010click}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
+\citation{minsker2014robust,srivastava2015wasp,conrad2015accelerating}
+\citation{rajaratnam2015mcmc}
+\citation{johndrow2016inefficiency}
+\citation{albert1993bayesian}
+\citation{polson2013bayesian}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Calibrated Data Augmentation}{3}}
+\newlabel{eq:da}{{1}{3}}
+\citation{liu1999parameter}
+\citation{meng1999seeking}
+\citation{johndrow2016inefficiency}
+\newlabel{eq:prop-marginal-probit}{{2}{4}}
+\newlabel{eq:varlb-probit}{{3}{4}}
+\citation{albert1993bayesian}
+\citation{fill1991eigenvalue}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{probit_demo_intercept_proposal}{{1a}{5}}
+\newlabel{sub@probit_demo_intercept_proposal}{{a}{5}}
+\newlabel{probit_demo_intercept_posteriorsample}{{1b}{5}}
+\newlabel{sub@probit_demo_intercept_posteriorsample}{{b}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Panel (a) demonstrates the adjustment of the step size via increasing the conditional variance in the proposal $\beta ^*$ and panel (b) shows its effect after the proposal from the calibrated distribution is accepted as $\beta $ into the Markov chain by the M-H criterion.\relax }}{5}}
+\newlabel{probit_demo_intercept}{{1}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Adaptation of $r$ and $b$}{5}}
+\citation{albert1993bayesian}
+\citation{liu1999parameter}
+\citation{albert1993bayesian}
+\citation{liu1999parameter}
+\citation{albert1993bayesian}
+\citation{liu1999parameter}
+\newlabel{probit_reg_trace}{{2a}{7}}
+\newlabel{sub@probit_reg_trace}{{a}{7}}
+\newlabel{probit_reg_acf}{{2b}{7}}
+\newlabel{sub@probit_reg_acf}{{b}{7}}
+\newlabel{probit_reg_r}{{2c}{7}}
+\newlabel{sub@probit_reg_r}{{c}{7}}
+\newlabel{probit_reg_b}{{2d}{7}}
+\newlabel{sub@probit_reg_b}{{d}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in probit regression with rare event data, compared with the original \citep  {albert1993bayesian} and parameter-expanded methods \citep  {liu1999parameter}. Panel (c) shows the degree of the variance increase in $r_i$ (if $r_i=1$: no increase) with respect to the value of $ x_i \beta $. Panel (d) shows the adapted bias correction is close to the true bias baesed on the posterior mean.\relax }}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Alternative Adjustment by Controlling the Latent Variable}{7}}
+\citation{polson2013bayesian}
+\newlabel{eq:prop-marginal-logit}{{4}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}General Algorithm}{8}}
+\newlabel{eq:da_decomposition}{{5}{9}}
+\newlabel{eq:cda_decomposition}{{6}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Special Case without Metropolis-Hastings}{9}}
+\citation{roberts2007coupling}
+\citation{polson2013bayesian}
+\citation{polson2013bayesian}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in logistic regression with rare event data, compared with the original \citep  {polson2013bayesian}.\relax }}{10}}
+\newlabel{logit_random_mixing}{{3}{10}}
+\citation{liu2008monte}
+\citation{fill1991eigenvalue}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Theory}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Mixing Accelaration}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Error Control in Approximate CDA}{11}}
+\citation{roberts2007coupling}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Ergodicity}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The diminishing adaptation of the working parameter $r_{ij}$ in mixed effects logistic regression.\relax }}{13}}
+\newlabel{diminishing_adapt}{{4}{13}}
+\citation{zhou2012lognormal}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Real Data Application: Poisson Regression for Online Advertisement Tracking}{14}}
+\newlabel{traceplot_poi_da}{{5a}{16}}
+\newlabel{sub@traceplot_poi_da}{{a}{16}}
+\newlabel{acf_poi_da}{{5b}{16}}
+\newlabel{sub@acf_poi_da}{{b}{16}}
+\newlabel{traceplot_poi_ada}{{5c}{16}}
+\newlabel{sub@traceplot_poi_ada}{{c}{16}}
+\newlabel{acf_poi_ada}{{5d}{16}}
+\newlabel{sub@acf_poi_ada}{{d}{16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Compared with DA, CDA produces much faster mixing posterior sample.\relax }}{16}}
+\newlabel{data_poisson}{{5}{16}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of DA, CDA and HMC in Poisson log-linear regression with online advertisement tracking data. Posterior estimates for the intercept and sum-of-slopes are shown. The CDA shows much better fit statistics such as root-mean-squared error (RMSE) and deviance (D). In cross-validation (CV-RMSE), the CDA outperforms DA as well. The CDA converges much more rapidly than DA. Compared to the reference, CDA agrees with the HMC very well but takes significantly less time.\relax }}{17}}
+\newlabel{table:Poisson}{{1}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{17}}
+\bibdata{reference}
+\bibcite{albert1993bayesian}{{1}{1993}{{Albert and Chib}}{{}}}
+\bibcite{conrad2015accelerating}{{2}{2015}{{Conrad et~al.}}{{Conrad, Marzouk, Pillai, and Smith}}}
+\bibcite{fill1991eigenvalue}{{3}{1991}{{Fill}}{{}}}
+\bibcite{johndrow2016inefficiency}{{4}{2016}{{Johndrow et~al.}}{{Johndrow, Smith, Pillai, and Dunson}}}
+\bibcite{liu1994collapsed}{{5}{1994}{{Liu}}{{}}}
+\bibcite{liu2008monte}{{6}{2008}{{Liu}}{{}}}
+\bibcite{liu1999parameter}{{7}{1999}{{Liu and Wu}}{{}}}
+\bibcite{meng1999seeking}{{8}{1999}{{Meng and Van~Dyk}}{{}}}
+\bibcite{minsker2014robust}{{9}{2014}{{Minsker et~al.}}{{Minsker, Srivastava, Lin, and Dunson}}}
+\bibcite{ngai2011application}{{10}{2011}{{Ngai et~al.}}{{Ngai, Hu, Wong, Chen, and Sun}}}
+\bibcite{polson2013bayesian}{{11}{2013}{{Polson et~al.}}{{Polson, Scott, and Windle}}}
+\bibcite{rajaratnam2015mcmc}{{12}{2015}{{Rajaratnam and Sparks}}{{}}}
+\bibcite{roberts2007coupling}{{13}{2007}{{Roberts and Rosenthal}}{{}}}
+\bibcite{srivastava2015wasp}{{14}{2015}{{Srivastava et~al.}}{{Srivastava, Cevher, Tran-Dinh, and Dunson}}}
+\bibcite{wakefield2007disease}{{15}{2007}{{Wakefield}}{{}}}
+\bibcite{wang2010click}{{16}{2010}{{Wang et~al.}}{{Wang, Li, Cui, Zhang, and Mao}}}
+\bibcite{zhou2012lognormal}{{17}{2012}{{Zhou et~al.}}{{Zhou, Li, Dunson, and Carin}}}
+\bibstyle{plainnat}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Proof of Theorems}{19}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Proof of Theorem 1:}{19}}
+\citation{liu1994collapsed}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Proof of Theorem 2:}{20}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3}Proof of Theorem 3:}{20}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.4}Proof of Theorem 4:}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Approximation Error in Logistic Regression}{22}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Total Variation Distance}{22}}
+\newlabel{KL_logit}{{12}{22}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Tail Integral}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Approximation Error in Poisson Log-Linear Model}{23}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Total Variation Distance}{23}}
+\newlabel{KL_poisson}{{16}{24}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2}Tail Integral}{24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Mixing of Zero-inflated Poisson without Calibration}{25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The hierarchy in the zero-inflated Poisson model does NOT help reduce the autocorrelation.\relax }}{25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Goodness-of-Fit and Cross-Validation for Poisson Regression}{26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The posterior estimates produced by CDA is better fitted to the data and have more accurate prediction than DA.\relax }}{26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Comparing posterior samples of CDA with HMC}{27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The results from CDA and HMC agree very well.\relax }}{27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Mixing of HMC}{27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The posterior estimates produced by HMC.\relax }}{27}}
