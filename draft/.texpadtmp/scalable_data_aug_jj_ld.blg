@@ -1,6 +1,6 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
+This is BibTeX, Version 0.99d (TeX Live 2015)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: /Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug_jj_ld.aux
+The top-level auxiliary file: /Volumes/home/Users/leo/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug_jj_ld.aux
 The style file: plainnat.bst
 Database file #1: ../reference.bib
 Repeated entry---line 336 of file ../reference.bib
@@ -10,7 +10,7 @@ I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in conrad2015accelerating
 You've used 17 entries,
             2773 wiz_defined-function locations,
-            699 strings with 8178 characters,
+            699 strings with 8174 characters,
 and the built_in function-call counts, 8184 in all, are:
 = -- 734
 > -- 466

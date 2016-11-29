@@ -79,12 +79,11 @@
 
 % generally I don't use abbreviations in an abstract; some journals don't allow it
 {\bf Abstract:} Data augmentation is a common technique for building tuning-free Markov chain Monte Carlo algorithms. Although these algorithms are very popular, 
-autocorrelations are often high in large samples, leading to poor computational efficiency.  This phenomenon has been attributed to a discrepancy between Gibbs step sizes and the rate of posterior concentration in large samples.  In this article, we propose a family of calibrated data augmentation algorithms, which adjust for this discrepancy by inflating Gibbs step sizes with an auxiliary parameter. The bias introduced by the scale parameter can be eliminated through a Metropolis-Hastings step, or in some cases, controlled with suitable working parameters. The approach is applicable to a broad variety of existing data augmentation algorithms, and we focus on three popular models: probit, logistic and Poisson log-linear.  Theoretical support is provided and dramatic gains are shown in applications.
+autocorrelations are often high in large samples, leading to poor computational efficiency.  This phenomenon has been attributed to a discrepancy between Gibbs step sizes and the rate of posterior concentration in large samples.  In this article, we propose a family of calibrated data augmentation algorithms, which adjust for this discrepancy by inflating Gibbs step sizes with an auxiliary parameter. The bias introduced by the scale parameter can be eliminated through a Metropolis-Hastings step. The approach is applicable to a broad variety of existing data augmentation algorithms, and we focus on three popular models: probit, logistic and Poisson log-linear.  Theoretical support is provided and dramatic gains are shown in applications.
 \vskip 12pt
 
 %\baselineskip=12pt
 %\par\vfill\noindent
-% ``scaling limit'' refers to the limiting differential equation that an MCMC algorithm converges to as dimension \to \infty, so I removed that
 {\noindent  KEY WORDS:  Bayesian probit; Bayesian logit; Approximate Markov chain Monte Carlo; Big $n$; Data Augmentation; Maximal Correlation; Polya-Gamma.}
 %\par\medskip\noindent
 %\clearpage\pagebreak\newpage
@@ -96,21 +95,21 @@ With the deluge of data in many modern application areas, there is pressing need
 
 The standard approach to Bayesian posterior computation is Markov chain Monte Carlo (MCMC) and related sampling algorithms. Non-sampling alternatives, such as variational Bayes, tend lack general accuracy guarantees. However, it is well known that conventional MCMC algorithms often scale poorly in problem size and complexity. Due to its sequential nature, the computational cost of MCMC is the product of two factors: the evaluation cost at each sampling iteration and the total number of iterations needed to obtain an acceptably low Monte Carlo error. The latter is related to the properties of the Markov transition kernel; we will refer to this informally as the \emph{mixing properties} of the Markov chain. 
 
-In recent years, a substantial literature has developed focusing on decreasing computational cost per iteration (\cite{minsker2014robust,srivastava2015wasp,conrad2015accelerating} among others), mainly through accelerating or parallelizing the sampling procedures at each iteration. Moreover, myriad strategies for improving mixing have been described in the literature. For Metropolis-Hastings (M-H) algorithms, improving mixing is usually a matter of contructing a better proposal distribution. An important difference between M-H and Gibbs is that one has direct control over step sizes in M-H through choice of the proposal, while Gibbs step sizes are generally not tunable. Thus, improving mixing for Gibbs has historically focused on decreasing autocorrelation by changing the update rule itself, for example by parameter expansion (PX), marginalization, or slice sampling.\footnote{Although strictly speaking, slice sampling is just an alternative approach to sampling from a full conditional distribution, in practice, it is often an alternative to data augmentation, so that using a slice sampling strategy results in the removal of a data augmentation step from an alternative Gibbs sampler.} 
+In recent years, a substantial literature has developed focusing on decreasing computational cost per iteration (\cite{minsker2014robust,srivastava2015wasp,conrad2015accelerating} among others), mainly through accelerating or parallelizing the sampling procedures at each iteration. Moreover, myriad strategies for improving mixing have been described in the literature. For Metropolis-Hastings (M-H) algorithms, improving mixing is usually a matter of contructing a better proposal distribution. An important difference between M-H and Gibbs is that one has direct control over step sizes in M-H through choice of the proposal, while Gibbs step sizes are generally not tunable; on the other hand, finding a good proposal for multi-dimensional parameters in M-H is significantly more challenging compared to Gibbs sampling. Thus, improving mixing for Gibbs has historically focused on decreasing autocorrelation by changing the update rule itself, for example by parameter expansion (PX), marginalization, or slice sampling.\footnote{Although strictly speaking, slice sampling is just an alternative approach to sampling from a full conditional distribution, in practice, it is often an alternative to data augmentation, so that using a slice sampling strategy results in the removal of a data augmentation step from an alternative Gibbs sampler.} 
 
 The treatment of the behavior of MCMC for large $n$ and/or $p$ in the theory literature is arguably somewhat limited. Historically, many authors have focused on studying the mixing properties of MCMC by showing a general ergodicity condition, such as the geometric ergodicity condition of (cite Meyn and Tweedie, Roberts and Rosenthal). This generally yields bounds on the convergence rate and spectral gap of the Markov chain under consideration, but \cite{rajaratnam2015mcmc} observe that in many cases, these bounds converge to zero exponentially fast in $p$ or $n$, so that no meaningful guarantee of performance for large problem sizes is provided by most existing bounds. In the probability literature, a series of papers have developed an analogue of Harris' theorem and ergodic theory for infinite-dimensional state spaces (cite Hairer, Mattingly and friends papers). Recent work verifies the existence of MCMC algorithms for computation in differential equation models with dimension-independent spectral gap (Hairer, Stuart, Vollmer). In this example, the algorithm under consideration is a M-H algorithm, and it is clear that the proposal must be tuned very carefully to achieve dimension independence. Other work has studied the properties of the limiting differential equation that describes infinite-dimensional dynamics of MCMC.
 
-A recent paper (\cite{johndrow2016inefficiency}) studies the popular data augmentation algorithms for posterior computation in probit, \citep{albert1993bayesian} and logistic models \citep{polson2013bayesian}, showing that the algorithm fails to mix in large sample sizes when the data are imbalanced. An important insight is that the performance can be largely explained by a discrepancy between the rate at which Gibbs step sizes and the width of the high-probability region of the posterior converge to zero as the sample size increases. Thus, since Gibbs step sizes are generally not tunable, slow mixing is likely to occur as the sample size grows unless the order of the step size happens to match the order of the posterior width. This implies that if a way to directly control the step sizes of the Gibbs sampler could be devised, it would be possible to make the mixing properties of the sampler insensitive to sample size by scaling the step sizes appropriately. This is similar to the conclusion of (HSV), except in this case, we have growing $n$ instead of growing $p$, and the Markov chain under consideration evolves according to a Gibbs sampler instead of M-H.
+A recent paper (\cite{johndrow2016inefficiency}) studies the popular data augmentation algorithms for posterior computation in probit, \citep{albert1993bayesian} and logistic models \citep{polson2013bayesian}, showing that the algorithm fails to mix in large sample sizes when the data are imbalanced. An important insight is that the performance can be largely explained by a discrepancy between the rate at which Gibbs step sizes and the width of the high-probability region of the posterior converge to zero as the sample size increases. Thus, since Gibbs step sizes are generally not tunable, slow mixing is likely to occur as the sample size grows unless the order of the step size happens to match the order of the posterior width. This implies that if a way to directly control the step sizes of the Gibbs sampler could be devised, it would be possible to make the mixing properties of the sampler insensitive to sample size by scaling the step sizes appropriately. This is similar to the conclusion of (HSV), except in this case, we have growing $n$ instead of growing $p$.
 
-In this article, we propose a method for tuning Gibbs step sizes by introducing auxiliary parameters that change the variance of full conditional distributions for one or more parameters. Although we focus on data augmentation algorithms for logit, probit, and poisson log-linear models, in principle the strategy can be applied more generally to align Gibbs step sizes with the size of the space being explored. In some cases, these ``calibrated'' data augmentation samplers leave the invariant measure unchanged. In other cases, the invariant measure is altered, in which case one can use the Gibbs step as an efficient M-H proposal, thereby recovering the correct invariant, or view the resulting algorithm as a perturbation of the original Markov chain. If the latter strategy is taken, we suggest bias correction through a second set of working parameters. Some theoretical support for the bias-corrected algorithms is provided in terms of bounds on approximation error to full conditionals. 
+In this article, we propose a method for tuning Gibbs step sizes by introducing auxiliary parameters that change the variance of full conditional distributions for one or more parameters. Although we focus on data augmentation algorithms for logit, probit, and poisson log-linear models, in principle the strategy can be applied more generally to align Gibbs step sizes with the size of the space being explored. As these ``calibrated'' data augmentation alters the invariant measure, one can use the Gibbs step as an efficient M-H proposal, thereby recovering the correct invariant, or view the resulting algorithm as a perturbation of the original Markov chain. We use bias correction through a second set of working parameters.
 
 \section{Calibrated Data Augmentation}
-The method is developed primarily in the context of Data augmentation Gibbs samples, which take the general form
+The method is developed primarily in the context of Data augmentation Gibbs samples, which are based on the integral $ \pi(\theta|y)=\int\pi(\theta|z,y)\pi(z|y) dz$ and take the general form
 \be \label{eq:da}
 z \mid \theta, y &\sim p(z;\theta,y) \\
-\theta \mid z,y &\sim N(\mu(z),\Sigma(z)),
+\theta \mid z,y &\sim f(\mu(z),\Sigma(z)),
 \ee
-thereby allowing conditionally Gaussian updates for the frequently high-dimensional parameter $\theta$. As such, data augmentation is an important computational strategy when the difficulty of tuning Metropolis-Hastings algorithms is prohibitive due to dimension or complexity of the target distribution. An important class of data augmentation algorithms are those for generalized linear models (GLMs) with $\bb E[y_i \mid x_i, \theta] = g^{-1}(x_i \theta)$ and conditionally Gaussian prior on $\theta$. We focus in particular on poisson log-linear, binomial logistic, and binomial probit as motivating examples.
+where $f$ belongs to the location-scale family such as Gaussian. This allows conditional updates for the frequently high-dimensional parameter $\theta$. As such, data augmentation is an important computational strategy when the difficulty of tuning Metropolis-Hastings algorithms is prohibitive due to dimension or complexity of the target distribution. An important class of data augmentation algorithms are those for generalized linear models (GLMs) with $\bb E[y_i \mid x_i, \theta] = g^{-1}(x_i \theta)$ and conditionally Gaussian prior on $\theta$. We focus in particular on poisson log-linear, binomial logistic, and binomial probit as motivating examples.
 
 The calibration of step sizes is best illustrated by an example. Consider the binomial probit, with sampling model
 \be
@@ -134,41 +133,33 @@ yielding the update rule
 z_i \mid \beta, x_i, y_i &\sim \left\{ \begin{array}{cc} \No_{[0,\infty)}(x_i \beta+b_i,r_i) & \text{ if } y_i = 1 \\ \No_{(-\infty,0]}(x_i \beta+b_i,r_i) & \text{ if } y_i = 0 \end{array} \right. \\
 \beta^* \mid z, X &\sim \No((X'R^{-1}X)^{-1} X'R^{-1}(z-b), (X'R^{-1}X)^{-1}),
 \ee
-where $R = \diag(r_1,\ldots,r_n)$, $b = (b_1,\ldots,b_n)'$. Note that the parameter expansion algorithms of \cite{liu1999parameter} and \cite{meng1999seeking} rescale $\beta$ by $1/\sqrt{r}$, which does not change in the conditional variance for $\beta$. In contrast, we adjust the mean, allowing us to control the variance of the step sizes through the value of $r$.
+where $R = \diag(r_1,\ldots,r_n)$, $b = (b_1,\ldots,b_n)'$. Note that the parameter expansion algorithms of \cite{liu1999parameter} and \cite{meng1999seeking} rescale $\beta$ by $1/\sqrt{r}$, which does not change in the conditional variance for $\beta$. Our formulation allows a direct control of the step sizes through the value of $r$.
 
 The update in \eqref{eq:cda-probit} alters the invariant measure; thus, we use it as a M-H proposal. Letting $Q(\beta^*;\beta)$ be the proposal defined by \eqref{eq:cda-probit}, the proposal is accepted with probability
 %Generate one uniform random variable $u\sim \U(0,1)$ and accept the new $\beta^*$ if
 \be
-1 \wedge \frac{Q(\beta; \beta^*) \prod_i L(\xbeta^*;y_i)}{Q(\beta^*; \beta) \prod_i L(\xbeta;y_i) } = \frac{ \prod_i L(\xbeta^*;y_i)}{\prod_i L(\xbeta;y_i) },
+1 \wedge \frac{Q(\beta; \beta^*) \pi(\beta^*) \prod_i L(\xbeta^*;y_i)}{Q(\beta^*; \beta)\pi(\beta) \prod_i L(\xbeta;y_i) } = 1 \wedge  \frac{  \prod_i L_r(\xbeta;y_i) L(\xbeta^*;y_i)}{\prod_i  L_r(\xbeta^*;y_i)L(\xbeta;y_i) },
+\label{eq:mh-criterion}
 \ee
-where $L(\theta;y_i)=\Phi(\theta)^{y_i} (1-\Phi(\theta))^{(1-y_i)}$ and the second equality follows since $Q(\beta; \beta^*)=Q(\beta^*; \beta) = \prod_i \int \pi(\xbeta^*|z_i;y_i)\pi(z_i|\xbeta;y_i)d z_i$, so the proposal is symmetric. 
+where $L(\theta;y_i)=\Phi(\theta)^{y_i} (1-\Phi(\theta))^{(1-y_i)}$ and  $L_r(\theta;y_i)=\Phi( \frac{\theta+b_i}{\sqrt{r_i}} )^{y_i} (1-\Phi(\frac{\theta+b_i}{\sqrt{r_i}}))^{(1-y_i)}$. The second equality holds since $Q(\beta; \beta^*) Q(\beta^*) = Q(\beta; \beta^*)Q(\beta)$ and $ Q(\beta) = C\pi(\beta) \prod_i L_r(\xbeta;y_i)$ as the posterior density under the altered $L_r$ with $C$ as the constant free from $\beta$. It is worth noting that setting $r_i=1$ and $b_i=0$ leads to acceptance rate of $1$, which corresponds to the original Gibbs sampling step.
 
-\James{I'm unsure that it is symmetric. I do a calculation here}
-\be
-\int \pi(\beta^* \mid z, y, X) \pi(z \mid \beta, y, X) dz = \int \prod_i &\left( \frac{1}{\sqrt{2\pi} \Phi(-(x_i \beta+b_i)/\sqrt{r_i})} \exp\left\{-\frac{(x_i\beta+b_i-z_i)^2}{2r_i} \right\} \right)^{y_i} \\
-&\times \left( \frac{1}{\sqrt{2\pi} \Phi((x_i \beta+b_i)/\sqrt{r_i})} \exp\left\{-\frac{(x_i\beta+b_i-z_i)^2}{2r_i} \right\} \right)^{1-y_i} \\
-&\times |X'R^{-1}X|^{-1/2} \phi((X'R^{-1}X)^{-1/2} (\beta^*-(X'R^{-1}X)^{-1}X'R^{-1}(z-b))) dz \\
-&= \left[ \prod_i  \left( \frac{1}{\sqrt{2\pi} \Phi(-(x_i \beta+b_i)/\sqrt{r_i})} \right)^{y_i}  \left( \frac{1}{\sqrt{2\pi} \Phi((x_i \beta+b_i)/\sqrt{r_i})} \right)^{1-y_i} \right] \\
-&\times \text{Some gaussian integral depending on } \beta dz
-\ee
-\James{ it looks to me like there will be normalizing constants depending on $\beta$, so the proposal ratio should be the ratio of these normalizing constants. }
 
 When the proposal is accepted $\beta_t = \beta^*$, the covariance:
 \be
 \cov(\beta_t \mid \beta_{t-1}, r,X,z) = (X'R^{-1}X)^{-1} + (X'R^{-1}X)^{-1} X'R^{-1}\cov(z-b | R) R^{-1}X(X'R^{-1}X)^{-1} 
 \ee
-so that
+so that the step size:
 \be
-\diag((X'R^{-1}X)^{-1}) \le \var(\beta_t \mid \beta_{t-1}, r,X,z), \label{eq:varlb-probit}
+ \var(\beta_t \mid \beta_{t-1}, r,X,z)   \ge  \diag((X'R^{-1}X)^{-1}), \label{eq:varlb-probit}
 \ee
-where the variance of $\beta_t \mid \beta_{t-1}$ is lower bounded by linear combination of the $r_i$. In the intercept-only model, the variance is bounded by $\left(\sum_i r_i^{-1}\right)^{-1}$ via \eqref{eq:varlb-probit}, $1/n$ times the harmonic mean of the $r_i$. \cite{johndrow2016inefficiency} show that when $\sum_i y_i = 1$ and $r_i = 1$, $\var(\beta_t \mid \beta_{t-1})$ is approximately $n^{-1} \log n$, while the width of the high probability region of the posterior is order $(\log n)^{-1}$, leading to slow mixing. Thus, to achieve step sizes consistent with the width of the space, we need
+is lower bounded by linear combination of the $r_i$. In an intercept-only model, the variance is bounded by $\left(\sum_i r_i^{-1}\right)^{-1}$ via \eqref{eq:varlb-probit}, $1/n$ times the harmonic mean of the $r_i$. \cite{johndrow2016inefficiency} show that when $\sum_i y_i = 1$ and $r_i = 1$, $\var(\beta_t \mid \beta_{t-1})$ is approximately $n^{-1} \log n$, while the width of the high probability region of the posterior is order $(\log n)^{-1}$, leading to slow mixing. Thus, to achieve step sizes consistent with the width of the space, we need
 \be
 \left(\sum_i r_i^{-1}\right)^{-1} &\approx (\log n)^{-1} \\
 \intertext{ so if $r_i = r$ for all $i$ }
 \frac{n}{r} \approx \log n \Rightarrow r \approx \frac{n}{\log n}. 
 \ee
 
-To illustrate, consider a simple case with an intercept only, with $\sum_i y_i =1$ and $n=10^4$. We set $r_i=r$ for all $i$. As a rough estimate of the intercept near $-3.7$, we fix $b_i = -3.7 (\sqrt r -1)$ to have the effective probability near $\Phi(-3.7)= 10^{-4}$ in the proposal distribution (later we will show the adaptation for $b_i$ without using prior knowledge). As shown in Figure~\ref{probit_demo_intercept_proposal}, increasing the conditional variance by $r$ leads to substantial decrease of the autocorrelation of $\beta^*$ in the proposal distribution; after the M-H step at each iteration, the proposal is accepted as $\beta$ into the Markov chain (Figure~\ref{probit_demo_intercept_posteriorsample}) with large probability. This M-H step guarantees that the increase in the step size in the conditional variance does not exceed the real gap in the marginal, since $\mbox{var}(\beta)\ge \mbox E \mbox{var}(\beta|z)$. Consistent with the previous calculation, $r= 1000\approx \frac{n}{\log n}$ leads to the near-optimal adjustment of the step size. It is worth noting that $r=1$ in the proposal and with M-H step corresponds to the original \cite{albert1993bayesian} Gibbs sampler and its reversibilized version \citep{fill1991eigenvalue}, respectively. Apparently, they both suffer from extremely slow mixing.
+To illustrate the effect of this calibration, consider an intercept only probit model, with $\sum_i y_i =1$ and $n=10^4$. We set $r_i=r$ for all $i$. To increase the acceptance rate of the M-H step, we use a rough estimate of $b_i = -3.7 (\sqrt r -1)$ to have the effective probability near $\Phi(-3.7)= 10^{-4}$ in the proposal distribution (later we will show the adaptation for $b_i$ without using prior knowledge). Setting $r=1$ in the proposal corresponds to the original \cite{albert1993bayesian} Gibbs sampler, which suffers from extremely slow mixing. As shown in Figure~\ref{probit_demo_intercept_proposal}, increasing the conditional variance by $r$ leads to substantial decrease of the autocorrelation of $\beta^*$ in the proposal distribution; after the M-H step at each iteration, the proposal is accepted as $\beta$ into the Markov chain (Figure~\ref{probit_demo_intercept_posteriorsample}) according to \eqref{eq:mh-criterion}. This M-H step guarantees that the increase in the step size in the conditional variance does not exceed the real gap in the marginal. Consistent with the previous calculation, $r= 1000\approx \frac{n}{\log n}$ leads to the near-optimal adjustment of the step size.
 
 
 \begin{figure}[H]
@@ -190,19 +181,19 @@ To illustrate, consider a simple case with an intercept only, with $\sum_i y_i =
 
 
 \subsection{Adaptation of $r$ and $b$}
-Intercept-only probit is a special case where it is possible to estimate the high posterior density region, hence select $b$ and $r$ before sampling. To apply CDA more broadly, we need to be able to handle cases where this condition fails. In this section, we develop a strategy for adaptation of $r$ and $b$.
+The chosen value for $r$ and $b$ are important to ensure good calibration and sufficiently large acceptance rate. Intercept-only probit is a special case where it is possible to estimate the high posterior density region, hence select $b$ and $r$ before sampling. To apply CDA more broadly, we need to be able to handle cases where this is not possible. In this section, we develop a strategy for adaptation of $r$ and $b$. After the acceptance rate reaches a pre-set threshold, we stop adapting and collect the posterior sample.
 
-We set up two sampling periods: first $r$ and $b$ are tuned adaptatively to optimize the acceptance rate; then their values are fixed and the posterior samples are collected.
+In the adapting period, we start from an moderately large value for all $r_i$. And  $r_i$ is bounded in the region of $[1, \kappa]$, where the lower bound $1$ corresponds to no adjustment and $\kappa$ is a maximal value set to prevent numeric error. As the lower bound of the acceptance probability in \eqref{eq:mh-criterion} is the product of  $\alpha_i= \frac{   L_r(\xbeta;y_i) L(\xbeta^*;y_i)}{ L_r(\xbeta^*;y_i)L(\xbeta;y_i) }$ over all $i$. When $\alpha_i<1$, we decrease $r_i$ to reduce the step size; when $\alpha_i>1$, we increase $r_i$ to raise the step size.  As an empirical value, we multiply $r_i$ by $\sqrt \alpha_i$ at the end of each iteration. In the meantime, we set $b_i= \xbeta (\sqrt{r_i}-1)$ as it minimizes the difference between $\Phi( \frac{\xbeta+b_i}{\sqrt{r_i}})$ and $\Phi(\xbeta)$.
 
-In the tuning period, we assume $r_i$ is bounded in the region of $[1, \kappa]$, where the lower bound $1$ corresponds to no adjustment and $\kappa$ is a maximal value set to prevent numeric error in the cumulative density function (approximately $5000$ for normal distribution). We start from an moderately large value for all $r_i$. When the step size is large, the proposal distribution is almost free from the mixing problem, but the acceptance rate can be too small if the proposed is out of the high posterior density region; when the step size is small, the acceptance rate is high but the algorithm is inefficient in exploring the region. Note the acceptance rate is the product of  $\alpha_i=\frac{L(x_i \beta^{*})}{L(x_i \beta)}$ over all $i$. When $\alpha_i<1$, we decrease $r_i$ to reduce the step size; when $\alpha_i>1$, we increase $r_i$ to raise the step size. As a heuristic value, we multiply $r_i$ by $\sqrt \alpha_i$ each time. In the meantime, we set $b_i= \xbeta (\sqrt{r_i}-1)$ in each iteration as it minimizes the difference between (\ref{eq:prop-marginal-probit}) and $\Phi(\xbeta)$ given $r_i$ and $\xbeta$.
+The acceptance rate is calculated as the total count of acceptance divided by the adapting iterations taken thus far. After it reaches satisfactory level (e.g. $0.3$), we stop the adaption and keep $r$ and $b$ fixed. The posterior is collected as ordinary Metropolis-Hastings sampling.
 
-After the acceptance rate reaches satisfactory level (e.g. $0.3$), we stop tuning and keep $r$ and $b$ fixed. The posterior is collected as ordinary Metropolis-Hastings sampling.
+To illustrate the case where $r$ and $b$ are difficult to pre-set, we consider a probit regression with an intercept and two predictors $x_{i,1},x_{i,2}\sim \No(1,1)$, with $\beta=\{-5,1,-1\}'$, generating $20$ positive outcomes among $n=10,000$. 
 
-As illustration, we consider regression with an intercept and two predictors $x_{i,1},x_{i,2}\sim \No(1,1)$, with $\beta=\{-5,1,-1\}'$, generating $20$ positive outcomes among $n=10,000$. We apply CDA with initial value of 200 for all $r_i$ and tune the algorithm for 100 iterations, obtaining an acceptance rate of $0.36$.
+In this testing case, the \cite{albert1993bayesian} DA algorithm suffers from extremely slow mixing (Figure~\ref{probit_reg_trace} and \ref{probit_reg_acf}). To compare with an early method, we tested the parameter expansion algorithm (PX-DA) proposed by \cite{liu1999parameter}. PX-DA only mildly reduces the correlation, as it does not solve the variance mismatch problem.
 
-In this testing case, the \cite{albert1993bayesian} DA algorithm suffers from extremely slow mixing. To compare, we test the parameter expansion algorithm (PX-DA) proposed by \cite{liu1999parameter}. PX-DA reduces the correlation to some extent, however, it does not solve the variance mismatch problem. As shown in Figure~\ref{probit_reg_trace} and \ref{probit_reg_acf}, both DA and PX-DA result in extremely slow mixing. 
+To calibrate, we apply CDA with initial value of $200$ for all $r_i$ and use the adaptive algorithm for 100 iterations, obtaining an acceptance rate of $0.36$. We use the fixed $r$ and $b$ to collect the posterior sample. The calibrated algorithm leads to significant improvement of the mixing.
 
-In contrast, the calibrated algorithm leads to significant improvement of the mixing (Figure~\ref{probit_reg_trace} and \ref{probit_reg_acf}). In the numerically adapted proposal, the tuned $r_i$ is related to the posterior value of $\xbeta$ (Figure~\ref{probit_reg_r}). The very negative $\xbeta$ ($< -2$) suffers the mis-match in the conditional and marginal variance, hence allows large $r_i$ to adjust the step size. The bias correction is linear in $(\sqrt{r_i}-1 ) \xbeta$ as expected (Figure~\ref{probit_reg_b}).
+It is interesting to note relation between the adapted $r_i$ and the posterior value of $\xbeta$ (Figure~\ref{probit_reg_r}). The very negative $\xbeta$ ($< -2$) suffers the mis-match in the conditional and marginal variance, hence allows large $r_i$ to adjust the step size. The bias reducing term $b_i$ is linear in $(\sqrt{r_i}-1 ) \xbeta$ as expected (Figure~\ref{probit_reg_b}).
  
  
 \begin{figure}[H]
@@ -228,12 +219,12 @@ In contrast, the calibrated algorithm leads to significant improvement of the mi
   \caption{Numerically adapted $b_i$ learned during the tuning period is close to $(1-\sqrt{r_i} ) \xbeta$ based on the posterior mean.}
       \label{probit_reg_b}
 \end{subfigure}
- \caption{Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in probit regression with rare event data, compared with the original \citep{albert1993bayesian} and parameter-expanded methods \citep{liu1999parameter}. Panel (c) shows the degree of the variance increase in $r_i$ (if $r_i=1$: no increase) with respect to the value of $\xbeta$. Panel (d) shows the adapted bias correction is close to the true bias baesed on the posterior mean.}
+ \caption{Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in probit regression with rare event data, compared with the original \citep{albert1993bayesian} and parameter-expanded methods \citep{liu1999parameter}. Panel (c) shows the room for the variance increase in $r_i$ ($r_i=1$: no increase) with respect to the value of $\xbeta$. Panel (d) shows the adapted bias reducing term is close to the true bias based on the posterior mean.}
  \end{figure}
 
-\subsection{Alternative Adjustment by Controlling the Latent Variable}
+\subsection{Latent Variable Control in Conditional Variance}
 
-The success of CDA relies on the fact that the calibrated conditional with increased variance can still yield the similar marginal form as the original. Using $\pi(\theta|y)=\int\pi(\theta|z,y)\pi(z|y) dz$, when the variance of $\pi(\theta|z,y)$ does not involve $z$, perturbing it does not affect the integrability. As in the probit example, the original conditional variance for $\beta$ is $(X'X)^{-1}$ and we can multiply $R^{-1}$ in the middle directly. In the other cases, when $z$ is part of the variance, this could pose challenge. Under this scenario, we influence the value of $z$ instead by modifying $\pi(z|y)$.
+The success of CDA relies on the fact that the calibrated conditional with increased variance can still yield the similar marginal form as the original. Using $\pi(\theta|y)=\int\pi(\theta|z,y)\pi(z|y) dz$, when $\mbox{cov}(\theta|z,y)$ does not involve the latent variable $z$ (like in the probit example), the multiplication with $r$ does not affect the integrability. Otherwise, when $z$ is part of the variance, multiply $r$ directly on the conditional variance might make the integration difficult. To solve this issue, one can influence the value of $z$ by modifying $\pi(z|y)$ instead, while still maintain the closed-form marginal.
 
 To illustrate, consider the logistic regression:
 
@@ -246,84 +237,36 @@ and improper prior $\pi(\beta)=1$. The Polya-Gamma data augmentation has the upd
  z_i &\sim {\PG}(1, |\xbeta|),\\
 \beta &\sim \No \left(  (X' Z X)^{-1}   X'  (y-\frac{1}{2})  ,  (X' Z X)^{-1}  \right),
 \ee
-where $Z= diag(z_1,\ldots,z_n)$. This is due to the integration $L(y_i \mid \xbeta)=  \int \exp\{ \xbeta (y_i-1/2)\} \exp(-\frac{z_i (\xbeta)^2}{2}) \PG(z_i \mid 1,0) dz_i$. Multiplying $r_i$ to $z_i$ would make the integration difficult. Instead, we focus $\PG(z_i \mid 1,0)$ and replace $1$ with the auxiliary parameter $r_i$. Applying bias correction term $b_i$ on $\xbeta$, leading to:
+where $Z= diag(z_1,\ldots,z_n)$. This is due to the integration $L(y_i \mid \xbeta)=  \int \exp\{ \xbeta (y_i-1/2)\} \exp(-\frac{z_i (\xbeta)^2}{2}) \PG(z_i \mid 1,0) dz_i$. As described above, the direct multiplying $r_i$ to $z_i$ would make it difficult to integrate over $z$.
+
+Observing the value of $z$ is influenced by the first parameter in Polya-Gamma, we modify $\PG(z_i \mid 1,0)$ by replacing $1$ with the auxiliary parameter $r_i$. This calibration does not affect the integrability, applying bias correction term $b_i$ on $\xbeta$, leading to:
 
 
 \be
-\int_{0}^{\infty}  \exp\{ (\xbeta+b_i) (y_i-r_i/2)\} \exp(-\frac{z_i (\xbeta+b_i)^2}{2}) \PG(z_i \mid r_i,0) dz_i =  \frac{\exp \{ (x_i \beta + b_i)y_i \}}{\{1+\exp(x_i +b_i)\}^{r_i}},
+L_r(\xbeta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xbeta+b_i) (y_i-r_i/2)\} \exp(-\frac{z_i (\xbeta+b_i)^2}{2}) \PG(z_i \mid r_i,0) dz_i \\
+= &  \frac{\exp \{ (x_i \beta + b_i)y_i \}}{\{1+\exp(x_i +b_i)\}^{r_i}},
 \label{eq:prop-marginal-logit}
 \ee
-yielding the update rule 
+yielding the update rule for the proposal:
 
 \be
  z_i &\sim {\PG}(r_i, |\xbeta+b_i|),\\
 \beta^* &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r_i/2- Zb) ,  (X' Z X)^{-1}  \right),
 \ee
 
-Unlike the probit example where the variance increase is deterministic, the step size tuning here is stochastic, based $\bb{E}z_i= \frac{r_i}{2 (|\xbeta+b_i|)}\tanh(\frac{|\xbeta+b_i|}{2})$. With small $r_i<1$, $z_i$ will have small value with high probability, leading to large variance in $(X' Z X)^{-1}$.
+Unlike the probit example where the variance increase is deterministic, the step size tuning here is stochastic: utilizing $\bb{E}z_i= \frac{r_i}{2 (|\xbeta+b_i|)}\tanh(\frac{|\xbeta+b_i|}{2})$, when $r_i<1$, $z_i$ will have small value with high probability, leading to large variance in $(X' Z X)^{-1}$.
 
-Factoring out the constant $\exp(b_i y_i)$ in (\ref{eq:prop-marginal-logit}) and compare with the original density, it can derived the adaptive form for $b_i$ should be $\log[  \{1+\exp(\xbeta)\}^{1/r_i} -1] - \xbeta$. Similar to probit example, M-H step can be used to accept $\beta^*$ if the uniform:
-
-\be
-u < \frac{\prod_i L(\xbeta^*) Q(\beta^* \Rightarrow \beta) }{\prod_i L(\xbeta)Q(\beta \Rightarrow \beta^*)},
-\ee
-where $L(a)=\frac{\exp(a)y_i}{1+\exp(a)}$ and $Q(\beta^* \Rightarrow \beta) =Q(\beta\Rightarrow \beta^* ) $
-
-\subsection{General Algorithm}
-
-Before proceeding into theory, we summarize the general algorithm for CDA. We assume the parameters are multidimensional and divided into two groups $\{ \theta, \eta\}$, where $\theta$ are the ones that suffers from slow mixing. Using Gibbs sampling, we alternatively sample in $\pi(\eta\mid\theta, y)$ and $\pi(\theta\mid \eta,y)$. Omitting $\eta$ for notational ease, using data augmentation form of  $\theta$:
-
-\be \label{eq:da_decomposition}
-\pi(f_i(\theta)|y_i) = \int \pi\left(f_i(\theta)|z_i,y_i \right)\pi(z_i|y_i) d z_i
-\ee
-where $f_i(\theta)$ is the function $f:\bb R^p \mapsto \bb R$, e.g. the individual $x_i\theta$ in regression, and the conditional distribution for $\theta$ is:
+Similar to probit example, M-H step can be derived to accept the proposal $\beta^*$:
 
 \be
-\theta \mid z,y &\sim G(\mu,\Sigma).
-\ee
-We first increase $\Sigma$ by introducing the auxiliary parameter $r_i$: if $\Sigma$ is free from $z$, we modify $\pi\left(f_i(\theta)|z_i,y_i \right)$; otherwise, we change $\pi(z_i|y_i)$. Adding the other parameter $b_i$ to accomodate the bias, we obtain the calibrated data augmentation, integrating to:
-
-\be \label{eq:cda_decomposition}
-\pi^{*}(f_i(\theta)+b_i|y_i, r_i) = \int \pi^{*}\left(f_i(\theta)+b_i|z_i,y_i \right)\pi^{*}(z_i|y_i) d z_i
+1 \wedge  \frac{  \prod_i L_r(\xbeta;y_i) L(\xbeta^*;y_i)}{\prod_i  L_r(\xbeta^*;y_i)L(\xbeta;y_i) },
+\label{eq:mh-criterion}
 \ee
 
-Then the proposal update rule can be formed:
-
-\be
-z_i & \sim \pi(z_i| f(\theta)+b_i) \\
-\theta^* &\sim G(\mu^*(f(\theta)+b_i, z),\Sigma^*(z)).
-\ee
-
-Using the original likelihood, the individual likelihood ratio can be calculated:
-\be
-\alpha_i = &\frac{L(f_i(\theta^*))} {L(f_i(\theta))}.
-\ee
-with the M-H criterion, accepting new $\theta^*$ if the $\U(0,1)$:
-\be
-u<\frac{ Q(\theta^* \Rightarrow \theta)} {Q(\theta \Rightarrow \theta^*)} \prod_i \alpha_i .
-\ee
-
-In tuning period, we start from an $r_i$ that corresponds to moderate increase in the step size. Then at the end of each iteration, increase or decrease $r_i$ based on $\alpha_i>1$ or $\alpha_i<1$ (assuming smaller $r_i$ has larger chance of $\alpha_i>1$); and update $b_i$ to the value that makes $\pi^{*}(f_i(\theta)+b_i|y_i, r_i) = \pi(f_i(\theta)|y_i)$. After the acceptance reaches the preset threshold (e.g. $30\%$), stop adaptation and run MCMC as usual.
+where $L(\theta;y_i)=\frac{\exp(\theta y_i)}{1+\exp(\theta)}$. It then can derived the adaptive form for $b_i$ should be $\log[  \{1+\exp(\xbeta)\}^{1/r_i} -1] - \xbeta$. 
 
 
-\subsection{Special Case without Metropolis-Hastings}
-
-In some cases, if the distance between the proposal $\pi^{*}(f_i(\theta)+b_i \mid y_i, r_i)$ and original $\pi(f_i(\theta)\mid y_i)$ can be strictly bounded, the Metropolis-Hastings step can be skipped, directly accepting $\theta^*$. This generates an approximate Gibbs sampler, a non-reversible Markov chain with a modified target distribution. But since the error is non-noticeable, it can be used as a good and fast approximate to the original slow algorithm.
-
-Taking the logit CDA as an example, note the value for $b_i$ to correct the difference would be $\log[  \{1+\exp(\xbeta)\}^{1/r_i} -1] - \xbeta$. Its expansion yields $\log\{ 1/r_{i} + \frac{1/r_{i}(1/r_{i}-1)}{2!} \exp(\xbeta)+ \frac{1/r_{i}(1/r_{i}-1)(1/r_{i}-2)}{3!} \exp(2\xbeta) +\ldots \ \}$. The suggests when $\exp(\xbeta)$ is close to $0$, $b_i \approx -\log r_{i}$. Then the bound can be calculated between the marginal likelihoods based on the original and calibrated form. We postpone the details of total variation distance to the next section.
-
-This simplifies the update rule to:
-
-\be
- z_i &\sim {\PG}(r_i, |\xbeta - \log r_i|),\\
-\beta &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r_i/2- Z \log r) ,  (X' Z X)^{-1}, \right)
-\ee
-where $r_i$ is taking a small value when $\exp(\xbeta) < \eta$, otherwise $r_i=1$. 
-
-As the posterior are directly generated from the approximate, the bound needs to be carefully controlled via $r_i$. Therefore, instead of  being fixed after the tuning as in the general case, $r_i$ is used adaptively throughout the sampling. This would cause convergence issue; however, choosing $r_{i} = \sup[\tau{\exp(2\xbeta)}  \vee {\exp(\xbeta)} ]  \wedge 1$ ($\tau>1$) as the maximal function of posterior samples leads to a diminishing adaptation scenario: the probability of $r_i$ changing converges to $0$ hence the difference in two consecutive transition kernels diminishes,  ensuring the convergence of the chain \citep{roberts2007coupling}.
-
-For illustration, we use $\beta=\{-9,1\}$ as the intercept and the slope to $x_1\sim \mathcal{N}(0,1)$, $n= 10^5$. This setting leads to rare positive outcome $\sum y_{ij} = 50 $. The different mixing performances in the original DA and the calibrated one are shown in Figure~\ref{logit_random_mixing}.
-
+For illustration, we use a two parameter intercept-slope model with $x_1\sim \No(0,1)$ and $\beta=\{-9,1\}$. With $n= 10^5$, it leads to rare positive outcome $\sum y_{i} = 50 $. We adapt the $r$ and $b$ for $100$ steps, reaching acceptance rate of $0.9$; then stopp adaption and collect the posterior sample. The different mixing performances in the original DA and the calibrated one are shown in Figure~\ref{logit_random_mixing}.
 
 
 \begin{figure}[H]
@@ -340,7 +283,62 @@ For illustration, we use $\beta=\{-9,1\}$ as the intercept and the slope to $x_1
  \caption{Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in logistic regression with rare event data, compared with the original \citep{polson2013bayesian}.}
     \label{logit_random_mixing}
  \end{figure}
- 
+
+
+
+\subsection{General Algorithm}
+
+Before proceeding into theory, we summarize the general algorithm for CDA. We assume the parameters are multi-dimensional and can be divided into two groups $\{ \theta, \eta\}$, where only $\theta$ are the ones suffering from slow mixing. With Gibbs sampling, we alternatively sample $\eta\mid\theta, y$ and $\theta\mid \eta,y$. To calibrate, we now focus on $\theta\mid \eta,y$ and omit $\eta$ for notational ease. Breaking down the likelihood into the product of the augmented likelihoods, each has:
+
+\be \label{eq:da_decomposition}
+L(m_i(\theta);y_i) = C\int \pi\left(m_i(\theta)|z_i,y_i \right)\pi(z_i|y_i) d z_i
+\ee
+where $m_i(\theta)$ is the function $m_i:\bb R^p \mapsto \bb R$. For example, $m_i (\beta) = x_i\beta$ in regression. Let the the conditional distribution for $\theta$ be:
+
+\be
+\theta \mid z,y &\sim f(\mu,\Sigma).
+\ee
+We increase $\Sigma$ with the auxiliary parameter $r_i$: if $\Sigma$ is free from $z$, we multiply $r_i$ in $\pi\left(m_i(\theta)|z_i,y_i \right)$; otherwise, we change the parameters in $\pi(z_i|y_i)$ to influence the value of $z_i$. With a second parameter $b_i$ to reduce the bias, we obtain the calibrated data augmentation, integrating to:
+
+\be \label{eq:cda_decomposition}
+L_r(m_i(\theta) ; y_i) = C_r\int \pi_r\left(m_i(\theta)+b_i|z_i,y_i \right)\pi_r(z_i|y_i) d z_i
+\ee
+
+Then the proposal update rule can be formed:
+
+\be
+z_i & \sim \pi(z_i| m_i(\theta)+b_i) \\
+\theta^* &\sim f(\mu(m_i(\theta)+b_i, z),\Sigma(z)).
+\ee
+
+Using the original and perturbed likelihoods, the individual ratio can be calculated:
+\be
+\alpha_i = &\frac{L(m_i(\theta^*); y_i) L_r(m_i(\theta) ; y_i)} {L(m_i(\theta); y_i) L_r(m_i(\theta^*); y_i)}.
+\ee
+and accepting new $\theta^*$ with probability:
+\be
+1 \wedge \prod_i \alpha_i .
+\ee
+
+In tuning period, we start from an $r_i$ that corresponds to moderate increase in the step size. Then at the end of each iteration, increase or decrease $r_i$ based on $\alpha_i>1$ or $\alpha_i<1$ (assuming smaller $r_i$ has larger chance of $\alpha_i>1$); and update $b_i$ to the value that makes $\pi^{*}(f_i(\theta)+b_i|y_i, r_i) = \pi(f_i(\theta)|y_i)$. After the acceptance reaches the preset threshold (e.g. $30\%$), stop adaptation and run MCMC as usual.
+
+%
+%\subsection{Special Case without Metropolis-Hastings}
+%
+%In some cases, if the distance between the proposal $\pi^{*}(f_i(\theta)+b_i \mid y_i, r_i)$ and original $\pi(f_i(\theta)\mid y_i)$ can be strictly bounded, the Metropolis-Hastings step can be skipped, directly accepting $\theta^*$. This generates an approximate Gibbs sampler, a non-reversible Markov chain with a modified target distribution. But since the error is non-noticeable, it can be used as a good and fast approximate to the original slow algorithm.
+%
+%Taking the logit CDA as an example, note the value for $b_i$ to correct the difference would be $\log[  \{1+\exp(\xbeta)\}^{1/r_i} -1] - \xbeta$. Its expansion yields $\log\{ 1/r_{i} + \frac{1/r_{i}(1/r_{i}-1)}{2!} \exp(\xbeta)+ \frac{1/r_{i}(1/r_{i}-1)(1/r_{i}-2)}{3!} \exp(2\xbeta) +\ldots \ \}$. The suggests when $\exp(\xbeta)$ is close to $0$, $b_i \approx -\log r_{i}$. Then the bound can be calculated between the marginal likelihoods based on the original and calibrated form. We postpone the details of total variation distance to the next section.
+%
+%This simplifies the update rule to:
+%
+%\be
+% z_i &\sim {\PG}(r_i, |\xbeta - \log r_i|),\\
+%\beta &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r_i/2- Z \log r) ,  (X' Z X)^{-1}, \right)
+%\ee
+%where $r_i$ is taking a small value when $\exp(\xbeta) < \eta$, otherwise $r_i=1$. 
+%
+%As the posterior are directly generated from the approximate, the bound needs to be carefully controlled via $r_i$. Therefore, instead of  being fixed after the tuning as in the general case, $r_i$ is used adaptively throughout the sampling. This would cause convergence issue; however, choosing $r_{i} = \sup[\tau{\exp(2\xbeta)}  \vee {\exp(\xbeta)} ]  \wedge 1$ ($\tau>1$) as the maximal function of posterior samples leads to a diminishing adaptation scenario: the probability of $r_i$ changing converges to $0$ hence the difference in two consecutive transition kernels diminishes,  ensuring the convergence of the chain \citep{roberts2007coupling}.
+% 
 \section{Theory}
 
 \subsection{Mixing Accelaration}

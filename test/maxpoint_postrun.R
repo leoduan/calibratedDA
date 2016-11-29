@@ -5,6 +5,12 @@ setwd("~/git/ImbalancedPG/test/")
 
 source("maxpoint_data.r")
 
+Xinv<-  solve(t(X)%*%X,t(X))
+
+max(abs(Xinv))
+sum(abs(Xinv))
+
+
 load("maxpoint_fit1.rda")
 load("maxpoint_fit2.rda")
 
