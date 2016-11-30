@@ -17,7 +17,7 @@ Patrick~R Conrad, Youssef~M Marzouk, Natesh~S Pillai, and Aaron Smith.
 \newblock Accelerating asymptotically exact mcmc for computationally intensive
   models via local approximations.
 \newblock \emph{Journal of the American Statistical Association}, \penalty0
-  (just-accepted):\penalty0 00--00, 2015.
+  ((to appear)), 2015.
 
 \bibitem[Fill(1991)]{fill1991eigenvalue}
 James~Allen Fill.
@@ -81,11 +81,13 @@ Bala Rajaratnam and Doug Sparks.
   of the convergence complexity of high-dimensional chains.
 \newblock \emph{arXiv preprint arXiv:1508.00947}, 2015.
 
-\bibitem[Roberts and Rosenthal(2007)]{roberts2007coupling}
-Gareth~O Roberts and Jeffrey~S Rosenthal.
-\newblock Coupling and ergodicity of adaptive markov chain monte carlo
-  algorithms.
-\newblock \emph{Journal of applied probability}, pages 458--475, 2007.
+\bibitem[Scott et~al.(2016)Scott, Blocker, Bonassi, Chipman, George, and
+  McCulloch]{scott2016bayes}
+Steven~L Scott, Alexander~W Blocker, Fernando~V Bonassi, Hugh~A Chipman,
+  Edward~I George, and Robert~E McCulloch.
+\newblock Bayes and big data: The consensus monte carlo algorithm.
+\newblock \emph{International Journal of Management Science and Engineering
+  Management}, 11\penalty0 (2):\penalty0 78--88, 2016.
 
 \bibitem[Srivastava et~al.(2015)Srivastava, Cevher, Tran-Dinh, and
   Dunson]{srivastava2015wasp}

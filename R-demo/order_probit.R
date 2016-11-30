@@ -24,7 +24,7 @@ p<- length(beta)
 
 Z <- rnorm(n,X %*% beta,1)
 
-g <- c(0, 1,2, Inf) 
+g <- c(0, 1,3, Inf) 
 J= length(g)
 
 y<- (Z<= g[1])*1 

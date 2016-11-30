@@ -1,6 +1,6 @@
 # .rs.restartR()
 
-require("ImbalancedPG")
+require("scalableDA")
 setwd("~/git/ImbalancedPG/test/")
 
 source("maxpoint_data.r")
@@ -22,20 +22,27 @@ library(latex2exp)
 library(reshape)
 library(ggplot2)
 
-pdf("./traceplot_poisson_ada.pdf",6,6)
-par(mfrow=c(3,1))
-ts.plot((fit2$beta[,1]),xlab="Iteration",ylab=TeX('$\\beta_0$'))
-ts.plot((fit2$beta[,9]),xlab="Iteration",ylab=TeX('$\\beta_8$'))
-ts.plot((fit2$beta[,46]),xlab="Iteration",ylab=TeX('$\\beta_45$'))
-dev.off()
+
+
+df1<-data.frame("Value"= c( fit1$beta[1001:2000,1], fit1$beta[1001:2000,9], fit1$beta[1001:2000,46] ),
+                "Iteration" = rep(c(1:1000),3),
+                "Parameter" = as.factor( rep(c("beta.0","beta.8","beta.45"),each=1000)))
 
 
 pdf("./traceplot_poisson_da.pdf",6,6)
-par(mfrow=c(3,1))
-ts.plot((fit1$beta[1001:2000,1]),xlab="Iteration",ylab=TeX('$\\beta_0$'))
-ts.plot((fit1$beta[1001:2000,9]),xlab="Iteration",ylab=TeX('$\\beta_8$'))
-ts.plot((fit1$beta[1001:2000,46]),xlab="Iteration",ylab=TeX('$\\beta_45$'))
+ggplot(data=df1, aes(x=Iteration, y=Value))+ geom_line(size=.75) + facet_grid(Parameter~., scale="free_y")
 dev.off()
+
+df2<-data.frame("Value"= c( fit2$beta[,1], fit2$beta[,9], fit2$beta[,46] ),
+           "Iteration" = rep(c(1:1000),3),
+           "Parameter" = as.factor( rep(c("beta.0","beta.8","beta.45"),each=1000)))
+
+
+pdf("./traceplot_poisson_cda.pdf",6,6)
+ggplot(data=df2, aes(x=Iteration, y=Value))+ geom_line(size=.75) + facet_grid(Parameter~., scale="free_y")
+dev.off()
+
+
 
 ######acf
 
@@ -54,7 +61,7 @@ df$X2<- as.factor(df$X2)
 
 names(df)<- c("Lag","ParIndex","ACF")
 
-pdf("./poisson_ada_acf.pdf",3,3)
+pdf("./poisson_cda_acf.pdf",6,6)
 ggplot(data=df, aes(x=Lag, y=ACF,col= as.factor(ParIndex)))+ geom_line(size=.75)+   theme(legend.position="none")+  scale_colour_manual(values = rep("black",100))
 dev.off()
 
@@ -70,7 +77,7 @@ df$X2<- as.factor(df$X2)
 
 names(df)<- c("Lag","ParIndex","ACF")
 
-pdf("./poisson_da_acf.pdf",3,3)
+pdf("./poisson_da_acf.pdf",6,6)
 ggplot(data=df, aes(x=Lag, y=ACF,col= as.factor(ParIndex)))+ geom_line(size=.75)+   theme(legend.position="none")+  scale_colour_manual(values = rep("black",100))
 dev.off()
 
@@ -89,8 +96,11 @@ sd(fit2$beta[,1])
 mean(rowSums(fit1$beta[,-1]))
 sd(rowSums(fit1$beta[,-1]))
 
-mean(rowSums(fit2$beta[,-1]))
-sd(rowSums(fit2$beta[,-1]))
+mean(rowSums(abs(fit1$beta)))
+sd(rowSums(abs(fit1$beta)))
+
+mean(rowSums(abs(fit2$beta)))
+sd(rowSums(abs(fit2$beta)))
 
 
 sqrt( mean( (y-exp(X%*%colMeans(fit1$beta)))^2))
@@ -206,3 +216,32 @@ hmc_beta<- hmc_beta[1001:2000,]
 
 cor(fit2$beta)
 
+hmc_beta
+
+mean(rowSums(abs(hmc_beta)))
+sd(rowSums(abs(hmc_beta)))
+
+plot(colMeans(hmc_beta[,-1]), colMeans(fit2$beta[,-1]))
+
+
+sqrt(mean((colMeans(hmc_beta[,-1])- colMeans(fit2$beta[,-1]))^2))
+
+
+
+
+colSD<- function(x){
+  apply(x, 2, function(t){sd(t)})
+}
+
+sqrt(mean((colSD(hmc_beta[,-1])- colSD(fit2$beta[,-1]))^2))
+
+
+
+df3<-data.frame("Value"= c( hmc_beta[,1], hmc_beta[,9], hmc_beta[,46] ),
+                "Iteration" = rep(c(1:1000),3),
+                "Parameter" = as.factor( rep(c("beta.0","beta.8","beta.45"),each=1000)))
+
+
+pdf("./traceplot_poisson_hmc.pdf",6,6)
+ggplot(data=df3, aes(x=Iteration, y=Value))+ geom_line(size=.75) + facet_grid(Parameter~., scale="free_y")
+dev.off()

@@ -1,5 +1,5 @@
 # .rs.restartR()
-require("ImbalancedPG")
+require("scalableDA")
 setwd("~/git/ImbalancedPG/test/")
 
 N<- 1E5
@@ -26,7 +26,7 @@ sd(a)/N
 B<- diag(1000,2,2)
 b<- rep(0,2)
 
-fit<- ImbalancedPG::logit_reg_simple(y , X,b,B,r0 = 10,burnin = 1000,run = 1000)
+fit<- logistic_reg(y , X,b,B,r0 = 10,burnin = 1000,run = 1000)
 fit2<- ImbalancedPG::logit_reg_simple(y , X,b,B,r0 = N,burnin = 1000,run = 1000)
 
 colMeans(fit2$beta)

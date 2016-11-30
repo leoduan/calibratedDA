@@ -3,7 +3,7 @@ using namespace arma;
 
 // [[Rcpp::export]]
 SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
-                  int run = 500, double r0 = 20, int mc_draws = 1E4) {
+                  int run = 500, double r0 = 20) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -69,7 +69,8 @@ SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500,
     mat wX_tilde = X_mat;
     wX_tilde.each_col() %= w;
 
-    vec k = y_vec - r / 2.0 + w % log_r;
+    // vec k = y_vec - r / 2.0 + w % log_r;
+    vec k = y_vec - 1 / 2.0 + w % log_r;
 
     mat V = inv(X_mat.t() * wX_tilde + B_inv);
     vec m = V * (X_mat.t() * k + B_invb);
