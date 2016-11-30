@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: /Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.aux
+The style file: plainnat.bst
+Database file #1: ../reference.bib
+Repeated entry---line 346 of file ../reference.bib
+ : @article{polson2013bayesian
+ :                            ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in conrad2015accelerating
+You've used 17 entries,
+            2773 wiz_defined-function locations,
+            699 strings with 8264 characters,
+and the built_in function-call counts, 8209 in all, are:
+= -- 722
+> -- 502
+< -- 12
++ -- 170
+- -- 153
+* -- 677
+:= -- 1266
+add.period$ -- 52
+call.type$ -- 17
+change.case$ -- 101
+chr.to.int$ -- 17
+cite$ -- 35
+duplicate$ -- 372
+empty$ -- 652
+format.name$ -- 178
+if$ -- 1709
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 18
+newline$ -- 93
+num.names$ -- 68
+pop$ -- 201
+preamble$ -- 1
+purify$ -- 85
+quote$ -- 0
+skip$ -- 288
+stack$ -- 0
+substring$ -- 291
+swap$ -- 41
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 182
+warning$ -- 1
+while$ -- 74
+width$ -- 0
+write$ -- 225
+(There was 1 error message)
