@@ -255,7 +255,7 @@ yielding the update rule for the proposal:
 \beta^* &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r_i/2- Zb) ,  (X' Z X)^{-1}  \right),
 \ee
 
-Unlike the probit example where the variance increase is deterministic, the step size tuning here is stochastic: utilizing $\bb{E}z_i= \frac{r_i}{2 (|\xbeta+b_i|)}\tanh(\frac{|\xbeta+b_i|}{2})$, when $r_i<1$, $z_i$ will have small value with high probability, leading to large variance in $(X' Z X)^{-1}$.
+Unlike the probit example where the variance increase is deterministic, the step size tuning here is stochastic: utilizing $\bb{E}z_i= \frac{r_i}{2 (|\xbeta+b_i|)}\tanh(\frac{|\xbeta+b_i|}{2})$ and $\bb{E}z_i^{-1}= \int_0^{\infty} \prod_{k=1}^{\infty} (1+ d_k^{-1} t) ^{-r_i} dt$ with $d_k=2(k-\frac{1}{2})^2\pi^2 + \frac{(x_i\beta+b_i)^2}{2}$ (combining results from \cite{cressie1981moment} and \cite{polson2013bayesian}), with smaller $r_i$, $z_i^{-1}$ will have larger value with high probability, leading to large variance in $(X' Z X)^{-1}$.
 
 Similar to probit example, M-H step can be derived to accept the proposal $\beta^*$:
 
@@ -374,7 +374,7 @@ $$||{\bf F}_{CDA}||\le 1- \gamma p_0 \cdot \underset{s(\theta)\in L^2(\pi)}{\inf
 \le ||{\bf F}_{DA}||.$$
 \end{theorem}
 
-%In practice, $\underset{k=1\ldots p}{\sup}\;\mbox{corr}(\theta_k,\theta^{'}_k) $ is often used as a more tractable approximate to $||\bf F||$. In the probit example, since $z$ is not in the conditional variance, direct increase of $r$ in $\bb E [\mbox {var}_{CDA}\{ s(\theta)|z,y\}] =(X'R^{-1}X)^{-1}$ leads to mixing acceleration. In the logit example, the increase in $\bb E [\mbox {var}_{CDA}\{ s(\theta)|z,y\}] =\bb E(X'ZX)^{-1}$ is induced with smaller $z$; the magnitude of the increase lacks closed-form but can be numerically evaluated.
+%In practice, $\underset{k=1\ldots p}{\sup}\;\mbox{corr}(\theta_k,\theta^{'}_k) $ is often used as a more tractable approximate to $||\bf F||$. In the probit example, since $z$ is not in the conditional variance, direct increase of $r$ in $\bb E [\mbox {var}_{CDA}\{ s(\theta)|z,y\}] =(X'R^{-1}X)^{-1}$ leads to mixing acceleration. In the logit example, the increase in $\bb E [\mbox {var}_{CDA}\{ s(\theta)|z,y\}] =\bb E(X'ZX)^{-1}$ can be numerically evaluated  (see section 2.2).
 
 As the result, with an increase in $\gamma$ by raising the conditional variance, and a $p_0$ away from $0$, one can significantly accelerate the mixing. The large $p_0$ is attributed to the similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}, as the result of adaptation. For example, in the logit CDA:
 
