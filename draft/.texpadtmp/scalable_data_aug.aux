@@ -4,10 +4,15 @@
 \citation{wang2010click}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
 \citation{minsker2014robust,srivastava2015wasp,conrad2015accelerating}
+\citation{meyn2012markov,roberts2004general}
 \citation{rajaratnam2015mcmc}
+\citation{hairer2011asymptotic}
+\citation{hairer2014spectral}
 \citation{johndrow2016inefficiency}
 \citation{albert1993bayesian}
 \citation{polson2013bayesian}
+\citation{hairer2014spectral}
+\citation{tanner1987calculation,albert1993bayesian}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Calibrated Data Augmentation}{3}}
 \newlabel{eq:da}{{1}{3}}
 \citation{liu1999parameter}
@@ -32,37 +37,35 @@
 \citation{liu1999parameter}
 \citation{albert1993bayesian}
 \citation{liu1999parameter}
-\newlabel{probit_reg_trace}{{2a}{7}}
-\newlabel{sub@probit_reg_trace}{{a}{7}}
-\newlabel{probit_reg_acf}{{2b}{7}}
-\newlabel{sub@probit_reg_acf}{{b}{7}}
-\newlabel{probit_reg_r}{{2c}{7}}
-\newlabel{sub@probit_reg_r}{{c}{7}}
-\newlabel{probit_reg_b}{{2d}{7}}
-\newlabel{sub@probit_reg_b}{{d}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in probit regression with rare event data, compared with the original \citep  {albert1993bayesian} and parameter-expanded methods \citep  {liu1999parameter}. Panel (c) shows the room for the variance increase in $r_i$ ($r_i=1$: no increase) with respect to the value of $ x_i \beta $. Panel (d) shows the adapted bias reducing term is close to the true bias based on the posterior mean.\relax }}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Controlling Latent Variable in Conditional Variance}{7}}
+\newlabel{probit_reg_trace}{{2a}{6}}
+\newlabel{sub@probit_reg_trace}{{a}{6}}
+\newlabel{probit_reg_acf}{{2b}{6}}
+\newlabel{sub@probit_reg_acf}{{b}{6}}
+\newlabel{probit_reg_r}{{2c}{6}}
+\newlabel{sub@probit_reg_r}{{c}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in probit regression with rare event data, compared with the original \citep  {albert1993bayesian} and parameter-expanded methods \citep  {liu1999parameter}. Panel (c) shows the room for the variance increase in $r_i$ ($r_i=1$: no increase) with respect to the value of $ x_i \beta $.\relax }}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Controlling Latent Variable in Conditional Variance}{6}}
 \citation{polson2013bayesian}
 \citation{cressie1981moment}
 \citation{polson2013bayesian}
-\newlabel{eq:prop-marginal-logit}{{6}{8}}
+\newlabel{eq:prop-marginal-logit}{{6}{7}}
 \citation{polson2013bayesian}
 \citation{polson2013bayesian}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in logistic regression with rare event data, compared with the original \citep  {polson2013bayesian}.\relax }}{9}}
-\newlabel{logit_random_mixing}{{3}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}General Algorithm}{9}}
-\newlabel{eq:da_decomposition}{{7}{9}}
-\newlabel{eq:cda_decomposition}{{8}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in logistic regression with rare event data, compared with the original \citep  {polson2013bayesian}.\relax }}{8}}
+\newlabel{logit_random_mixing}{{3}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}General Algorithm}{8}}
+\newlabel{eq:da_decomposition}{{7}{8}}
 \citation{scott2016bayes}
 \citation{liu2008monte}
 \citation{fill1991eigenvalue}
+\newlabel{eq:cda_decomposition}{{8}{9}}
+\newlabel{eq:mh-criterion}{{9}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Theory: Mixing Acceleration}{9}}
 \citation{liu1994collapsed}
-\newlabel{eq:mh-criterion}{{9}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Theory: Mixing Acceleration}{10}}
-\newlabel{eq:norm_da}{{10}{11}}
-\newlabel{eq:norm_cda}{{11}{11}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Real Data Application: Poisson Regression for Online Advertisement Tracking}{11}}
+\newlabel{eq:norm_da}{{10}{10}}
+\newlabel{eq:norm_cda}{{11}{10}}
 \citation{zhou2012lognormal}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Real Data Application: Poisson Regression for Online Advertisement Tracking}{11}}
 \newlabel{traceplot_poi_da}{{4a}{13}}
 \newlabel{sub@traceplot_poi_da}{{a}{13}}
 \newlabel{acf_poi_da}{{4b}{13}}
@@ -81,20 +84,25 @@
 \bibcite{conrad2015accelerating}{{2}{2015}{{Conrad et~al.}}{{Conrad, Marzouk, Pillai, and Smith}}}
 \bibcite{cressie1981moment}{{3}{1981}{{Cressie et~al.}}{{Cressie, Davis, Folks, and Folks}}}
 \bibcite{fill1991eigenvalue}{{4}{1991}{{Fill}}{{}}}
-\bibcite{johndrow2016inefficiency}{{5}{2016}{{Johndrow et~al.}}{{Johndrow, Smith, Pillai, and Dunson}}}
-\bibcite{liu1994collapsed}{{6}{1994}{{Liu}}{{}}}
-\bibcite{liu2008monte}{{7}{2008}{{Liu}}{{}}}
-\bibcite{liu1999parameter}{{8}{1999}{{Liu and Wu}}{{}}}
-\bibcite{meng1999seeking}{{9}{1999}{{Meng and Van~Dyk}}{{}}}
-\bibcite{minsker2014robust}{{10}{2014}{{Minsker et~al.}}{{Minsker, Srivastava, Lin, and Dunson}}}
-\bibcite{ngai2011application}{{11}{2011}{{Ngai et~al.}}{{Ngai, Hu, Wong, Chen, and Sun}}}
-\bibcite{polson2013bayesian}{{12}{2013}{{Polson et~al.}}{{Polson, Scott, and Windle}}}
-\bibcite{rajaratnam2015mcmc}{{13}{2015}{{Rajaratnam and Sparks}}{{}}}
-\bibcite{scott2016bayes}{{14}{2016}{{Scott et~al.}}{{Scott, Blocker, Bonassi, Chipman, George, and McCulloch}}}
-\bibcite{srivastava2015wasp}{{15}{2015}{{Srivastava et~al.}}{{Srivastava, Cevher, Tran-Dinh, and Dunson}}}
-\bibcite{wakefield2007disease}{{16}{2007}{{Wakefield}}{{}}}
-\bibcite{wang2010click}{{17}{2010}{{Wang et~al.}}{{Wang, Li, Cui, Zhang, and Mao}}}
-\bibcite{zhou2012lognormal}{{18}{2012}{{Zhou et~al.}}{{Zhou, Li, Dunson, and Carin}}}
+\bibcite{hairer2011asymptotic}{{5}{2011}{{Hairer et~al.}}{{Hairer, Mattingly, and Scheutzow}}}
+\bibcite{hairer2014spectral}{{6}{2014}{{Hairer et~al.}}{{Hairer, Stuart, Vollmer, et~al.}}}
+\bibcite{johndrow2016inefficiency}{{7}{2016}{{Johndrow et~al.}}{{Johndrow, Smith, Pillai, and Dunson}}}
+\bibcite{liu1994collapsed}{{8}{1994}{{Liu}}{{}}}
+\bibcite{liu2008monte}{{9}{2008}{{Liu}}{{}}}
+\bibcite{liu1999parameter}{{10}{1999}{{Liu and Wu}}{{}}}
+\bibcite{meng1999seeking}{{11}{1999}{{Meng and Van~Dyk}}{{}}}
+\bibcite{meyn2012markov}{{12}{2012}{{Meyn and Tweedie}}{{}}}
+\bibcite{minsker2014robust}{{13}{2014}{{Minsker et~al.}}{{Minsker, Srivastava, Lin, and Dunson}}}
+\bibcite{ngai2011application}{{14}{2011}{{Ngai et~al.}}{{Ngai, Hu, Wong, Chen, and Sun}}}
+\bibcite{polson2013bayesian}{{15}{2013}{{Polson et~al.}}{{Polson, Scott, and Windle}}}
+\bibcite{rajaratnam2015mcmc}{{16}{2015}{{Rajaratnam and Sparks}}{{}}}
+\bibcite{roberts2004general}{{17}{2004}{{Roberts et~al.}}{{Roberts, Rosenthal, et~al.}}}
+\bibcite{scott2016bayes}{{18}{2016}{{Scott et~al.}}{{Scott, Blocker, Bonassi, Chipman, George, and McCulloch}}}
+\bibcite{srivastava2015wasp}{{19}{2015}{{Srivastava et~al.}}{{Srivastava, Cevher, Tran-Dinh, and Dunson}}}
+\bibcite{tanner1987calculation}{{20}{1987}{{Tanner and Wong}}{{}}}
+\bibcite{wakefield2007disease}{{21}{2007}{{Wakefield}}{{}}}
+\bibcite{wang2010click}{{22}{2010}{{Wang et~al.}}{{Wang, Li, Cui, Zhang, and Mao}}}
+\bibcite{zhou2012lognormal}{{23}{2012}{{Zhou et~al.}}{{Zhou, Li, Dunson, and Carin}}}
 \bibstyle{plainnat}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{17}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Proofs}{17}}

@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -32,6 +32,22 @@ James~Allen Fill.
   markov chains, with an application to the exclusion process.
 \newblock \emph{The annals of applied probability}, pages 62--87, 1991.
 
+\bibitem[Hairer et~al.(2011)Hairer, Mattingly, and
+  Scheutzow]{hairer2011asymptotic}
+Martin Hairer, Jonathan~C Mattingly, and Michael Scheutzow.
+\newblock Asymptotic coupling and a general form of harris’ theorem with
+  applications to stochastic delay equations.
+\newblock \emph{Probability Theory and Related Fields}, 149\penalty0
+  (1-2):\penalty0 223--259, 2011.
+
+\bibitem[Hairer et~al.(2014)Hairer, Stuart, Vollmer,
+  et~al.]{hairer2014spectral}
+Martin Hairer, Andrew~M Stuart, Sebastian~J Vollmer, et~al.
+\newblock Spectral gaps for a {Metropolis--Hastings} algorithm in infinite
+  dimensions.
+\newblock \emph{The Annals of Applied Probability}, 24\penalty0 (6):\penalty0
+  2455--2490, 2014.
+
 \bibitem[Johndrow et~al.(2016)Johndrow, Smith, Pillai, and
   Dunson]{johndrow2016inefficiency}
 James~E Johndrow, Aaron Smith, Natesh Pillai, and David~B Dunson.
@@ -62,6 +78,11 @@ Xiao-Li Meng and David~A Van~Dyk.
   marginal augmentation.
 \newblock \emph{Biometrika}, 86\penalty0 (2):\penalty0 301--320, 1999.
 
+\bibitem[Meyn and Tweedie(2012)]{meyn2012markov}
+Sean~P Meyn and Richard~L Tweedie.
+\newblock \emph{Markov chains and stochastic stability}.
+\newblock Springer Science \& Business Media, 2012.
+
 \bibitem[Minsker et~al.(2014)Minsker, Srivastava, Lin, and
   Dunson]{minsker2014robust}
 Stanislav Minsker, Sanvesh Srivastava, Lizhen Lin, and David~B Dunson.
@@ -88,6 +109,11 @@ Bala Rajaratnam and Doug Sparks.
   of the convergence complexity of high-dimensional chains.
 \newblock \emph{arXiv preprint arXiv:1508.00947}, 2015.
 
+\bibitem[Roberts et~al.(2004)Roberts, Rosenthal, et~al.]{roberts2004general}
+Gareth~O Roberts, Jeffrey~S Rosenthal, et~al.
+\newblock General state space {Markov chains and MCMC algorithms}.
+\newblock \emph{Probability Surveys}, 1:\penalty0 20--71, 2004.
+
 \bibitem[Scott et~al.(2016)Scott, Blocker, Bonassi, Chipman, George, and
   McCulloch]{scott2016bayes}
 Steven~L Scott, Alexander~W Blocker, Fernando~V Bonassi, Hugh~A Chipman,
@@ -101,6 +127,12 @@ Steven~L Scott, Alexander~W Blocker, Fernando~V Bonassi, Hugh~A Chipman,
 Sanvesh Srivastava, Volkan Cevher, Quoc Tran-Dinh, and David~B Dunson.
 \newblock Wasp: Scalable bayes via barycenters of subset posteriors.
 \newblock In \emph{AISTATS}, 2015.
+
+\bibitem[Tanner and Wong(1987)]{tanner1987calculation}
+Martin~A Tanner and Wing~Hung Wong.
+\newblock The calculation of posterior distributions by data augmentation.
+\newblock \emph{Journal of the American statistical Association}, 82\penalty0
+  (398):\penalty0 528--540, 1987.
 
 \bibitem[Wakefield(2007)]{wakefield2007disease}
 Jon Wakefield.

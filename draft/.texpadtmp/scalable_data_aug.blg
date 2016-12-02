@@ -3,50 +3,50 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: /Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.aux
 The style file: plainnat.bst
 Database file #1: ../reference.bib
-Repeated entry---line 357 of file ../reference.bib
+Repeated entry---line 395 of file ../reference.bib
  : @article{polson2013bayesian
  :                            ,
 I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in conrad2015accelerating
-You've used 18 entries,
+You've used 23 entries,
             2773 wiz_defined-function locations,
-            706 strings with 8448 characters,
-and the built_in function-call counts, 8765 in all, are:
-= -- 771
-> -- 541
-< -- 12
-+ -- 183
-- -- 165
-* -- 731
-:= -- 1352
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 108
-chr.to.int$ -- 18
-cite$ -- 37
-duplicate$ -- 393
-empty$ -- 693
-format.name$ -- 191
-if$ -- 1822
+            738 strings with 9322 characters,
+and the built_in function-call counts, 11121 in all, are:
+= -- 982
+> -- 680
+< -- 14
++ -- 230
+- -- 207
+* -- 934
+:= -- 1717
+add.period$ -- 70
+call.type$ -- 23
+change.case$ -- 134
+chr.to.int$ -- 23
+cite$ -- 47
+duplicate$ -- 496
+empty$ -- 887
+format.name$ -- 242
+if$ -- 2309
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 19
-newline$ -- 98
-num.names$ -- 72
-pop$ -- 213
+missing$ -- 25
+newline$ -- 123
+num.names$ -- 92
+pop$ -- 262
 preamble$ -- 1
-purify$ -- 91
+purify$ -- 113
 quote$ -- 0
-skip$ -- 304
+skip$ -- 381
 stack$ -- 0
-substring$ -- 318
-swap$ -- 42
+substring$ -- 428
+swap$ -- 47
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 193
+type$ -- 243
 warning$ -- 1
-while$ -- 79
+while$ -- 102
 width$ -- 0
-write$ -- 238
+write$ -- 302
 (There was 1 error message)
