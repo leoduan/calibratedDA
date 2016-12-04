@@ -39,32 +39,20 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
   cholV<- t(chol(V))
   ind_normal<- rnorm(p)
   beta <- cholV%*% ind_normal + m
-  Xbeta <- X%*%new_beta
+  Xbeta <- X%*%beta
   
   for(i in 1: (burnin+run)){
     
     # generate proposal:
     
-    # 1. generate latent variable
-    newZ<- rtruncnorm(n,a= lb,b= ub,mean = Xbeta + b, sd = sqrt(r))
-    densityNewZ<- log(dtruncnorm(newZ, a=lb, b=ub, mean = Xbeta + b, sd= sqrt(r)))
-    
+    Z<- rtruncnorm(n,a= lb,b= ub,mean = Xbeta + b, sd = sqrt(r))
+
     V<- solve(t(X) %*% ((1/r)* X))
-    m<- V%*%( t(X) %*% ((1/r)*(newZ-b)))
+    m<- V%*%( t(X) %*% ((1/r)*(Z-b)))
     cholV<- t(chol(V))
     ind_normal<- rnorm(p)
     new_beta <- cholV%*% ind_normal + m
     new_Xbeta <- X%*%new_beta
-    densityNewBeta<- sum(dnorm(ind_normal,log = T)) -0.5* log(det(V))
-    
-    # 2. compute reverse density
-    
-    m<- V%*%( t(X) %*% ((1/r)*(newZ-b)))
-    ind_normal<- solve(cholV,(beta - m))
-    densityOldBeta<- sum(dnorm(ind_normal,log = T)) -0.5* log(det(V))
-    
-    densityOldZ<- log(dtruncnorm(Z, a=lb, b=ub, mean = Xbeta + b, sd= sqrt(r)))
-    
 
     new_prob <- pnorm(new_Xbeta)
     new_loglik<-  log(1-new_prob) * (y==0) + log(new_prob) * (y==1)
@@ -79,11 +67,6 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
     
     # inidividual likelihood ratio
     alpha<- exp(new_loglik + q_loglik  - loglik - new_q_loglik  )
-    # alpha<- exp(new_loglik  - loglik  )
-
-    # if(i>burnin)
-    # alpha<- exp(new_loglik + densityOldZ    - loglik - densityNewZ +  (densityOldBeta -  densityNewBeta )/n )
-    
     
     # fixing NA and INF issue
     alpha[is.na(alpha)]<- 0.00001
@@ -96,16 +79,20 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
       # b<- (sqrt(r)-1) * new_Xbeta
       
       if(!fixR){
+        #
+        dprob<- dnorm(Xbeta)
+        r<-    c(prob*(1 - prob)/dprob^2)
+        
         # reduce r for those Xbeta in the region that don't have slow mixing problems (> -4) & having likelihood ratio<1.
         # r_adapt_set<-  ((alpha< 1) & (Xbeta> -4))
-        r_adapt_set<- alpha<1
-        r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
-        
-        r_adapt_set<- (alpha>1)
-        r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
-
-        # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
-        r[r<1]<- 1
+        # r_adapt_set<- alpha<1
+        # r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
+        # 
+        # r_adapt_set<- (alpha>1)
+        # r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
+        # 
+        # # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
+        # r[r<1]<- 1
         r[r>5000]<- 5000
       }
     }
@@ -118,7 +105,6 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
       Xbeta<- new_Xbeta
       prob<- new_prob
       loglik<- new_loglik
-      Z<- newZ
       if(i>= burnin)      accept<- accept +1
       if(tuning) {
         tune_accept<- tune_accept+1

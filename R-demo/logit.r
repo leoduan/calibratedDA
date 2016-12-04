@@ -1,6 +1,6 @@
 require("BayesLogit")
 
-logitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
+logitCDA<- function(y,X, r_ini= 1,burnin=500, run=500 ,fixR = FALSE){
   
   n<- length(y)
   p<- ncol(X)
@@ -8,7 +8,7 @@ logitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
   #initialize beta
   beta<- rep(1,p)
   Xbeta<- X%*%beta
-  # prob<- pnorm(Xbeta)
+  prob<- plogis(Xbeta)
   
   #initialize r and b
   
@@ -16,8 +16,7 @@ logitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
   b<- rep(0,n)
   
   #individual log-likelihood
-  # loglik <- log(1-prob) * (y==0) + log(prob) * (y==1)
-  
+  loglik <- - log(1+exp(Xbeta)) 
   
   #objects to store trace
   trace_beta<- numeric()
@@ -39,75 +38,90 @@ logitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
     m<- V%*%( t(X) %*% (y- r/2 -Z*b))
     cholV<- t(chol(V))
     
-    beta<- cholV%*% rnorm(p) + m
-    Xbeta <- X%*%beta
+    new_beta <- cholV%*% rnorm(p) + m
+    new_Xbeta <- X%*%new_beta
+    # new_prob <- plogis(new_Xbeta)
+    new_loglik<-  - log(1+exp(new_Xbeta)) 
     
-    b<- -log(r)
-    
-    # new_beta <- cholV%*% rnorm(p) + m
-    # new_Xbeta <- X%*%new_beta
-    # new_prob <- pnorm(new_Xbeta)
-    # new_loglik<-  log(1-new_prob) * (y==0) + log(new_prob) * (y==1)
+    ###
+    q_loglik<-    -r*log(1+exp(Xbeta+b)) 
+    new_q_loglik<-  -r*log(1+exp(new_Xbeta+b)) 
     
     # inidividual likelihood ratio
-    # alpha<- exp(new_loglik- loglik)
+    alpha<- exp(new_loglik + q_loglik  - loglik - new_q_loglik  )
+    # alpha<- exp(new_loglik +   - loglik   )
     # 
     # # fixing NA and INF issue
-    # alpha[is.na(alpha)]<- 0.00001
-    # alpha[is.infinite(alpha)]<- 1
+    alpha[is.na(alpha)]<- 0.00001
+    alpha[is.infinite(alpha)]<- 1
     # 
     # #use the first half of burnin steps to adaptively tune r and b
-    # if(tuning){
+    if(tuning){
     #   
     #   # set bias correction to the value that L(y|xbeta) = L_{r,b}(y|xbeta)
     #   # b<- (sqrt(r)-1) * new_Xbeta
     #   
-    #   if(!fixR){
-    #     # reduce r for those Xbeta in the region that don't have slow mixing problems (> -4) & having likelihood ratio<1.
-    #     # r_adapt_set<-  ((alpha< 1) & (Xbeta> -4))
-    #     r_adapt_set<- alpha<1
-    #     r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
-    #     
-    #     r_adapt_set<- (alpha>1)
-    #     r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
-    # 
+      if(!fixR){
+        
+        #
+        dprob<- exp(Xbeta)/(1+exp(Xbeta))^2
+        prob<- plogis(Xbeta)
+        r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta))) )
+        
+        # r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta)))  )
+        
+        # r<-  dprob^2 /prob/(1 - prob)
+        #   
+          
+        # r<- exp(Xbeta)*10
+        # 
+        # # reduce r for those Xbeta in the region that don't have slow mixing problems (> -4) & having likelihood ratio<1.
+        # r_adapt_set<- alpha<1
+        # r[r_adapt_set] <- r[r_adapt_set]/ (alpha[r_adapt_set]^0.5)
+        # 
+        # r_adapt_set<- (alpha>1)
+        # r[r_adapt_set] <- r[r_adapt_set]/ (alpha[r_adapt_set]^0.5)
+        # #
     #     # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
-    #     r[r<1]<- 1
-    #     r[r>5000]<- 5000
-    #   }
-    # }
-    # b<- (sqrt(r)-1) * new_Xbeta
+        r[r>1]<- 1
+        # r[r<1/5000]<- 1/5000
+      }
+    }
+    
+    b= -log(r)
+    # b=0
+    # b = log( (1+ exp(Xbeta))^{1/r}-1) -Xbeta
     # 
     # 
-    # #metropolis-hastings
-    # if(runif(1)< prod(alpha)){   # the transition kernel P(beta|new_beta) = P(new_beta|beta), so the MH ratio is just likelihood ratio
-    #   beta<- new_beta
-    #   Xbeta<- new_Xbeta
-    #   prob<- new_prob
-    #   loglik<- new_loglik
-    #   if(i>= burnin)      accept<- accept +1
-    #   if(tuning) {
-    #     tune_accept<- tune_accept+1
-    #   }
-    # }
-    # 
-    # if(tuning){
-    #   tune_step<- tune_step+1
-    #   if(tune_accept / tune_step > 0.3 & tune_step>100) tuning = FALSE
-    #   
-    #   print(tune_accept / tune_step)
-    # }
+    #metropolis-hastings
+    if(runif(1)< prod(alpha)){  
+      beta<- new_beta
+      Xbeta<- new_Xbeta
+      # prob<- new_prob
+      loglik<- new_loglik
+      if(i>= burnin)      accept<- accept +1
+      if(tuning) {
+        tune_accept<- tune_accept+1
+      }
+    }
+
+    if(tuning){
+      tune_step<- tune_step+1
+      if(tune_accept / tune_step > 0.3 & tune_step>100) tuning = FALSE
+      # if(tune_accept / tune_step > 0.3 ) tuning = FALSE
+      print(tune_accept / tune_step)
+    }
     # 
     # 
     if(i>= burnin){
-      # trace_proposal<- rbind(trace_proposal,t(new_beta))
+      trace_proposal<- rbind(trace_proposal,t(new_beta))
       trace_beta<- rbind(trace_beta,t(beta))
     }
     
     print(i)
   }
-  # return(list("beta"=trace_beta, "proposal"=trace_proposal , "r"=r, "b"=b, "accept_rate"= accept/run))
+  return(list("beta"=trace_beta, "proposal"=trace_proposal , "r"=r, "b"=b, "accept_rate"= accept/run))
   
   
-  return(list("beta"=trace_beta))
+  # return(list("beta"=trace_beta))
 }

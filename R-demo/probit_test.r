@@ -18,7 +18,7 @@ sum(y)
 
 
 #run cDA
-fit<-probitCDA(y,X, burnin = 200, run = 200,r_ini = 1000,fixR = F)
+fit<-probitCDA(y,X, burnin = 200, run = 200,r_ini = 1,fixR = F)
 fit$r
 
 fit$accept_rate
@@ -37,7 +37,7 @@ beta<- colMeans(fit$beta)
 
 
 #run the original Albert-Chib
-fit_AC<-probitCDA(y,X, r_ini = 1,burnin = 1000, run = 1000)
+fit_AC<-probitCDA(y,X, r_ini = 1,burnin = 1000, run = 1000,fixR = T)
 
 
 ts.plot(fit_AC$beta)
