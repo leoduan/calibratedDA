@@ -55,6 +55,7 @@
 \DeclareMathOperator{\cov}{cov}
 \DeclareMathOperator{\var}{var}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Diag}{Diag}
 \DeclareMathOperator{\bigO}{\mc O}
 \newcommand{\James}[1]{\textcolor{blue}{#1}}
 
@@ -240,9 +241,9 @@ We started CDA with the adaptive algorithm for 100 iterations, obtaining an acce
 
 \subsection{Calibrating Random Conditional Variance via Latent Variable}
 
-It is easy to obtain good acceptance rate in CDA, because the increase in conditional variance does not affect  the existence of marginal closed-form, and the calibrated marginal is close to the original form. This is because of the data augmentation form $\pi(\theta|y)=\int f(\theta|z,y)\pi(z|y) dz$.
+It is easy to obtain good acceptance rate in CDA, because the increase in conditional variance does not affect  the existence of marginal closed-form, and the calibrated marginal is close to the original one.
 
- In the previous example, since $\mbox{var}(\theta|z,y)$ does not involve the random latent variable $z$, one can directly use $r$ on it to increase the conditional variance. On the other hand, when $\mbox{var}(\theta|z,y)$ depends on the random value of $z$, including $r$ in it is effective and  could lead to integration difficulty. Therefore, we instead modify $\pi(z|y)$ to stochastically influence the the value of $z$. 
+ In the previous examples, as $\mbox{var}(\theta|z,y)$ does not involve the random latent variable $z$, one can directly use $r$ on it to increase the conditional variance. On the other hand, when $\mbox{var}(\theta|z,y)$ depends on the random value of $z$, including $r$ in it is effective and  could cause difficulty in integration $\pi(\theta|y)=\int f(\theta|z,y)\pi(z|y) dz$. Therefore, in this section we show a different strategy that modifies $\pi(z|y)$ to increase $\bb E_z \mbox{var}(\theta|z,y)$.
 
 To illustrate, consider the logistic regression:
 
@@ -257,7 +258,10 @@ and improper prior $\pi(\theta)=1$. The Polya-Gamma data augmentation has the up
 \ee
 where $Z= \diag(z_1,\ldots,z_n)$. This algorithm is derived based on $L(y_i \mid \xbeta)=  \int \exp\{ \xbeta (y_i-1/2)\} \exp(-\frac{z_i (\xbeta)^2}{2}) \PG(z_i \mid 1,0) dz_i$. As described above, multiplying $r_i$ on $z_i$ is ineffective and makes the integration intractable.
 
-Instead, observing the value of $z$ can be influenced by the first parameter in $\PG(a_1,a_2)$, $\bb{E}z_i= \frac{a_1}{2 a_2}\tanh(\frac{a_2}{2})$, we replace $\PG(z_i \mid 1,0)$ with $\PG(z_i \mid r_i,0)$. It can be verified the integration is still tractable, applying the mean adjusting term $b_i$ on $\xbeta$, leading to:
+Instead, observing the value of $z$ can be influenced by the first parameter in $\PG(a_1,a_2)$, $\bb{E}z_i= \frac{a_1}{2 a_2}\tanh(\frac{a_2}{2})$, we replace $\PG(z_i \mid 1,0)$ with $\PG(z_i \mid r_i,0)$. Smaller $r_i$ can lead to larger  $\bb E_z \mbox{var}(\theta|z,y)$.
+
+
+It can be verified the integration is still tractable, applying the mean adjusting term $b_i$ on $\xbeta$, leading to:
 
 \be
 L_r(\xbeta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xbeta+b_i) (y_i-r_i/2)\} \exp(-\frac{z_i (\xbeta+b_i)^2}{2}) \PG(z_i \mid r_i,0) dz_i \\
@@ -279,9 +283,9 @@ with acceptance probability:
 \ee
 where $L(\theta;y_i)=\frac{\exp(\theta y_i)}{1+\exp(\theta)}$.
 
-Smaller $r_i$ induces larger $(X' Z X)^{-1}$ with large probability. Formally, combining \cite{cressie1981moment} and \cite{polson2013bayesian}, the first negative moment can be derived as $\bb{E}z_i^{-1}= \int_0^{\infty} \prod_{k=1}^{\infty} (1+ d_k^{-1} t) ^{-r_i} dt$ with $d_k=2(k-\frac{1}{2})^2\pi^2 + \frac{(x_i\theta+b_i)^2}{2}$, the conditional variance is increased in its expectation $\bb E (X' Z X)^{-1}$ with decreased $r_i$'s.
+To see exactly why the smaller $r_i$ leads to larger $\bb E_z (X' Z X)^{-1}$, we compute the  first negative moment of the Polya-Gamma distribution. Combining \cite{cressie1981moment} and \cite{polson2013bayesian}, $\bb{E}z_i^{-1}= \int_0^{\infty} \prod_{k=1}^{\infty} (1+ d_k^{-1} t) ^{-r_i} dt$ with $d_k=2(k-\frac{1}{2})^2\pi^2 + \frac{(x_i\theta+b_i)^2}{2}$.
 
-For choosing $r$ during tuning, we compare the two Fisher information matrices based on the marginal and conditional; for the latter, since it depends on $z_i$, we marginalize it over by taking its expectation.
+For choosing $r$ during tuning, we compare the two Fisher information matrices based on the marginal and conditional; for the latter, since it depends on $z_i$, we marginalize it out by taking its expectation.
 
 \be
 X' \diag\{\frac{\exp(\xbeta)}{ \{1+\exp(\xbeta) \} ^2}\} X, \quad X'  \diag\{ \frac{r_i}{2 |\xbeta+b_i|}\tanh(\frac{|\xbeta+b_i|}{2})\} X
@@ -290,10 +294,7 @@ X' \diag\{\frac{\exp(\xbeta)}{ \{1+\exp(\xbeta) \} ^2}\} X, \quad X'  \diag\{ \f
 To correct the difference, we choose $r_i$ to be $\frac{\exp(\xbeta)}{ \{1+\exp(\xbeta)\} ^2} {2 |\xbeta+b_i|}/ \tanh(\frac{|\xbeta+b_i|}{2})$. To optimize the acceptance rate, given the value of $r_i$ and $\xbeta$,  setting $ \{1+\exp(\xbeta)\}  = \{1+\exp(\xbeta+b_i)\}^{r_i}  $ yields an analytical choice for $b_i$ as $\log[  \{1+\exp(\xbeta)\}^{1/r_i} -1] - \xbeta$ at the end of each tuning iteration.
 
 
-For numerical illustration, we use a two parameter intercept-slope model with $x_1\sim \No(0,1)$ and $\theta=\{-9,1\}$. With $n= 10^5$, it leads to rare positive outcome $\sum y_{i} = 50 $. We adapt the $r$ and $b$ for $100$ steps, reaching an acceptance rate of $0.8$; then stop adaption and run $100$ and $500$ steps for burn-in and the posterior collecting.
-
-The different mixing performances in the original DA and the calibrated one are shown in Figure~\ref{logit_random_mixing}.
-
+As a numerical illustration, we use a two parameter intercept-slope model with $x_1\sim \No(0,1)$ and $\theta=\{-9,1\}$. With $n= 10^5$, it leads to rare positive outcome $\sum y_{i} = 50 $. To compare, we ran the original DA  \citep{polson2013bayesian} and the M-H with simple multivariate normal proposal $\theta^*|\theta \sim \No(\theta^*| \theta, {\mc I}^{-1}(\theta))$, with ${\mc I}(\theta)$ being the Fisher information matrix based on the marginal posterior. For CDA we tuned the $r$ and $b$ for $100$ steps, reaching an acceptance rate of $0.8$; then stop adaption and run $100$ and $500$ steps for burn-in and the posterior collecting. Shown in Figure~\ref{logit_random_mixing}, both DA and M-H with normal proposal mix slowly, exhibiting strong autocorrelation even after $40$ lags; whereas CDA substantially accelerates the mixing.
 
 \begin{figure}[H]
  % \centering
@@ -306,7 +307,7 @@ The different mixing performances in the original DA and the calibrated one are 
  \includegraphics[width=1\textwidth]{logit_demo_acf}
   \caption{ACF for the DA and CDA algorithms, and the M-H algorithm with multivariate normal proposal.}
 \end{subfigure}
- \caption{Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in logistic regression with rare event data, compared with the original DA \citep{polson2013bayesian}.}
+ \caption{Panel (a) demonstrates in traceplot and panel (b) in autocorrelation about the substantial improvement in CDA by correcting the variance mis-match in logistic regression with rare event data, compared with the original DA \citep{polson2013bayesian} and  the M-H algorithm with multivariate normal proposal (MH-MVN).}
     \label{logit_random_mixing}
  \end{figure}
 
@@ -319,9 +320,9 @@ Before proceeding into theory, we summarize the general algorithm for CDA. We as
 Assume $\theta$ can be augmented with latent variable $z$ but is susceptible to slow mixing issue. The total augmented likelihood is the product:
 
 \be \label{eq:da_decomposition}
-\prod_i L(m_i(\theta);y_i) =\prod_i  C_i \int \pi\left(m_i(\theta)|z_i,y_i \right)\pi(z_i|y_i) d z_i
+\prod_i L(m_i(\theta);y_i) =\prod_i   \int \pi\left(m_i(\theta)|z_i,y_i \right)\pi(z_i|y_i) d z_i
 \ee
-where  $m_i(\theta)$ is the function $m_i:\bb R^p \mapsto \bb R$, conditioning on which, each integral on the right hand side is independent. For example,  $m_i (\theta) = x_i\theta$ is the linear predictor in regression; $C_i$ is the constant free from $\theta$. Let the the conditional distribution for $z$ and $\theta$ be:
+where  $m_i(\theta)$ is a continuous and differentiable function $m_i:\bb R^p \mapsto \bb R^d$, conditioning on which, each integral on the right hand side is independent. For example,  $m_i (\theta) = x_i\theta$ is the linear predictor in regression; $C_i$ is the constant free from $\theta$. Let the the conditional distribution for $z$ and $\theta$ be:
 
 \be
 z_i \mid \theta, y &\sim \pi (z_i; m_i(\theta), y)\\
@@ -330,14 +331,14 @@ z_i \mid \theta, y &\sim \pi (z_i; m_i(\theta), y)\\
 where $f( \theta; \mu,\Sigma)\propto \pi(\theta) \prod_i \pi\left(m_i(\theta)|z_i,y_i \right)$. To calibrate the variance $\Sigma$, we introduce a parameter $r_i$. When $\Sigma$ is free from $z$, we put $r_i$ in each $\pi\left(m_i(\theta)|z_i,y_i \right)$. When $\Sigma$ involves $z$, we put $r_i$ in $\pi(z_i|y_i)$ to increase $\bb E_z\Sigma$. Then using another parameter $b_i$ to accomodate the shift in $m_i(\theta)$ , we obtain the calibrated data augmentation:
 
 \be \label{eq:cda_decomposition}
-\prod_i L_r(m_i(\theta) ; y_i,  r_i, b_i) = \prod_i C_{r,i}\int \pi_r\left(m_i(\theta)+b_i|z_i,y_i \right)\pi_r(z_i|y_i) d z_i
+\prod_i L_r(m_i(\theta) ; y_i,  r_i, b_i) = \prod_i \int \pi_r\left(m_i(\theta)+b_i|z_i,y_i \right)\pi_r(z_i|y_i) d z_i
 \ee
 
-The proposal can then be sampled from the calibrated distribution:
+With prior $\pi(\theta)$, the proposal can then be sampled from the calibrated distribution:
 
 \be
 z_i & \sim \pi(z_i; m_i(\theta)+b_i, y) \\
-\theta^* &\sim f( \theta^*|\mu(r_i, b_i),\Sigma(r_i)).
+\theta^* &\sim f( \theta^*|\mu(r, b),\Sigma(r)).
 \ee
 in a M-H step with accepting probability:
 \be
@@ -345,20 +346,24 @@ in a M-H step with accepting probability:
 \label{eq:mh-criterion}
 \ee
 
-We initially run the algorithm by adaptively estimating $r$ and $b$. To choose the value for $r$, we first compute the Fisher information matrix based on $L(m_i(\theta);y_i)$:
+We initially run the algorithm by adaptively estimating $r$ and $b$. To choose the value for $r$, we first compute the Fisher information matrix based on the marginal posterior $\pi(\theta|y)= C_L \pi(\theta) \prod_i L(m_i(\theta);y_i)$:
 
 \be
-I(\theta) = \left [  \bb E_y  \left( \frac { \partial \log L( \theta)} {\partial \theta_{j_1}} \right)  \left( \frac { \partial \log  L(\theta)} {\partial \theta_{j_2}} \right) \right ]_{j_1,j_2}
-= J' \left [ \bb E_y \left( \frac { \partial \log L( \theta)} {\partial m_{i_1}(\theta)} \right)  \left( \frac { \partial \log  L(\theta)} {\partial m_{i_2}(\theta)} \right) \right]_{i_1,i_2} J,
+\mc I(\theta) = & \left [  \bb E_y  \left( \frac { \partial \log  \pi(\theta) \prod_i L(m_i(\theta);y_i) } {\partial \theta_{j_1}} \right)  \left( \frac { \partial \log \pi(\theta) \prod_i L(m_i(\theta);y_i)} {\partial \theta_{j_2}} \right) \right ]_{j_1,j_2} \\
+= & J' \Diag \left [ \bb E_y \left( \frac { \partial \log L(m_i(\theta);y_i)} {\partial m_{i}(\theta)} \right)  \left( \frac { \partial \log L(m_i(\theta);y_i)} {\partial m_{i}(\theta)} \right) \right]_{i} J + \left [ \left( \frac { \partial \log  \pi(\theta)  } {\partial \theta_{j_1}} \right)\left( \frac { \partial \log  \pi(\theta)  } {\partial \theta_{j_2}} \right)\right ]_{j_1,j_2},
 \ee
-where $J_{i,j} = \frac {\partial m_{i}(\theta)}  { \partial \theta_j}$; then the Fisher information matrix based on $ f( \theta;\mu(b_i, z),\Sigma(z, r_i))$, marginalized over $z$:
+where $J = [\frac {\partial m_{i}(\theta)}  { \partial \theta_j}]_{i,j}$, and $\Diag$ is the block diagonal matrix (or simple diagonal matrix when all $ m_{i}(\theta)$'s are scalars). Then the Fisher information matrix based on the conditional $  f( \theta|\mu(r, b),\Sigma(r)) =  C_f \pi(\theta) \prod_i \pi_r \left(m_i(\theta)|z_i,y_i \right)$, marginalized over $z$:
+
 
 \be
-\bb E_z I(\theta| z)= \bb E_z \left [  \bb E_y  \left( \frac { \partial \log f( \theta; \mu, \Sigma)} {\partial \theta_{j_1}} \right)  \left( \frac { \partial \log  f(\theta; \mu, \Sigma)} {\partial \theta_{j_2}} \right) \right ]_{j_1,j_2}
-= J' \left [ \bb E_z \bb E_y \left( \frac { \partial \log f( \theta; \mu, \Sigma)} {\partial m_{i_1}(\theta)} \right)  \left( \frac { \partial \log  f(\theta; \mu, \Sigma)} {\partial m_{i_2}(\theta)} \right) \right]_{i_1,i_2} J.
+\bb E_z \mc I(\theta| z)= & \left [  \bb E_y  \left( \frac { \partial \log  \pi(\theta) \prod_i \pi_r \left(m_i(\theta)|z_i,y_i \right) } {\partial \theta_{j_1}} \right)  \left( \frac { \partial  \pi(\theta) \prod_i \pi_r \left(m_i(\theta)|z_i,y_i \right)} {\partial \theta_{j_2}} \right) \right ]_{j_1,j_2} \\
+= & J' \Diag \left [ \bb E_z \bb E_y \left( \frac { \partial \log \pi_r \left(m_i(\theta)|z_i,y_i \right) } {\partial m_{i}(\theta)} \right)  \left( \frac { \partial \log \pi_r\left(m_i(\theta)|z_i,y_i \right) } {\partial m_{i}(\theta)} \right) \right]_{i} J + \left [ \left( \frac { \partial \log  \pi(\theta)  } {\partial \theta_{j_1}} \right)\left( \frac { \partial \log  \pi(\theta)  } {\partial \theta_{j_2}} \right)\right ]_{j_1,j_2},
 \ee
 
-Since $r_i$'s are parameters in $\bb E_z I(\theta| z)$, we set them to the values that minimizes the difference from $I(\theta)$. Due to the conditional independence induced by $m_i(\theta)$,  computing  $r_i$ is often straightforward. Then conditional on $r_i$, we choose $b_i$ to optimize the acceptance rate, one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. After the acceptance rate reaches satisfactory value, we stop tuning $r$ and $b$, and continue in burn-in and posterior sample collecting.
+Since $r_i$ is in $\pi_r \left(m_i(\theta)|z_i,y_i \right)$, we use it to minimize the difference between 
+$ \bb E_y \left( \frac { \partial \log L(m_i(\theta);y_i)} {\partial m_{i}(\theta)} \right)  \left( \frac { \partial \log L(m_i(\theta);y_i)} {\partial m_{i}(\theta)} \right) $
+and 
+$ \bb E_z \bb E_y \left( \frac { \partial \log \pi_r \left(m_i(\theta)|z_i,y_i \right) } {\partial m_{i}(\theta)} \right)  \left( \frac { \partial \log \pi_r\left(m_i(\theta)|z_i,y_i \right) } {\partial m_{i}(\theta)} \right) $ for all $i$. Due to the conditional independence induced by $m_i(\theta)$,  computing  $r_i$ is often straightforward; and often their difference can be completely removed given $\theta$. Then conditional on $r_i$, we choose $b_i$ to optimize the acceptance rate, one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. After the acceptance rate reaches satisfactory value, we stop tuning $r$ and $b$, and continue in burn-in and posterior sample collecting.
 
 \section{Theory: Mixing Acceleration}
 
