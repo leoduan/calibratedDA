@@ -1,51 +1,37 @@
 setwd("~/git/ImbalancedPG/R-demo/")
+require("ggplot2")
 
 #generate data
 N <- 1E4
 
-X0 <- 1
-X1 <- rnorm(N, 1, 1)
-X <- cbind(X0, X1)
-# X<- matrix(rep(X0,N))
-beta <- c(-5, 1)
-# beta<- -4
-theta <- pnorm(X %*% beta)
 
-a<-numeric()
-y <- as.numeric(runif(N) < theta)
+#intercept only
 
-sum(y)
+y<- rep(0,N)
+y[1]<-1
 
+X<- matrix(1,N)
+# sum(y)
+
+source("probit.r")
 
 #run cDA
-fit<-probitCDA(y,X, burnin = 200, run = 200,r_ini = 1,fixR = F)
-fit$r
+fit10<-probitCDA(y,X, burnin = 1000, run = 1000,r_ini = 10,fixR = T)
+fit100<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 100,fixR = T)
+fit1000<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 1000,fixR = T)
+fit5000<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 5000,fixR = T)
+fit10000<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 10000,fixR = T)
 
-fit$accept_rate
-ts.plot(fit$beta)
+posterior<- data.frame(theta= c( fit1000$beta[,1]
+                                 ,fit10$proposal[,1]
+                                 ,fit100$proposal[,1]
+                                 ,fit1000$proposal[,1]
+                                 ,fit5000$proposal[,1]
+                                ), r= as.factor(rep(c(1,10,100,1000,5000), each=1000)))
 
-acf(fit$beta, lag.max = 40)
-acf(fit$proposal, lag.max = 40)
-
-
-fit$b
-
-
-#posterior mean
-beta<- colMeans(fit$beta)
-
-
-
-#run the original Albert-Chib
-fit_AC<-probitCDA(y,X, r_ini = 1,burnin = 1000, run = 1000,fixR = T)
-
-
-ts.plot(fit_AC$beta)
-acf(fit_AC$beta, lag.max = 40)
-
-
-
-
+pdf("./density_probit.pdf",5,3)
+ggplot(posterior, aes(theta, linetype = r, col=r))+  geom_density(alpha = 0.2,bw = 0.2,lwd=1) + xlim(-8,0)
+dev.off()
 
 
 fit1 <-probitCDA(y,X, r_ini = 1,burnin = 500, run = 500, fixR = T)
@@ -93,17 +79,17 @@ y <- as.numeric(runif(N) < theta)
 sum(y)
 
 
-fit6 <-probitCDA(y,X, r_ini = 1000,burnin = 1000, run = 500, fixR = F)
+fit6 <-probitCDA(y,X, burnin = 200, run = 500, fixR = F)
 fit6$accept_rate
 
 ts.plot(fit6$beta)
 
 # fit6$r[fit6$r>10000]<-NA
 
-plot(X%*%beta,fit6$r)
+plot(X%*%beta,log(fit6$r))
 
 acf(fit6$beta)
-acf(fit6$proposal)
+ts.plot(fit6$beta[,1])
 
 mean(fit6$r)
 

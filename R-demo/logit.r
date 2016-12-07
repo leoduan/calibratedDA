@@ -65,9 +65,9 @@ logitCDA<- function(y,X, r_ini= 1,burnin=500, run=500 ,fixR = FALSE){
         
         #
         dprob<- exp(Xbeta)/(1+exp(Xbeta))^2
-        prob<- plogis(Xbeta)
-        r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta))) )
-        
+        # prob<- plogis(Xbeta)
+        # r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta))) )
+        r<-       dprob/(tanh(abs(Xbeta+b)/2)/2/abs(Xbeta+b)) 
         # r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta)))  )
         
         # r<-  dprob^2 /prob/(1 - prob)
@@ -83,14 +83,14 @@ logitCDA<- function(y,X, r_ini= 1,burnin=500, run=500 ,fixR = FALSE){
         # r[r_adapt_set] <- r[r_adapt_set]/ (alpha[r_adapt_set]^0.5)
         # #
     #     # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
-        r[r>1]<- 1
+        r[r>100]<- 100
         # r[r<1/5000]<- 1/5000
       }
     }
     
-    b= -log(r)
+    # b= -log(r)
     # b=0
-    # b = log( (1+ exp(Xbeta))^{1/r}-1) -Xbeta
+    b = log( (1+ exp(Xbeta))^{1/r}-1) -Xbeta
     # 
     # 
     #metropolis-hastings
@@ -107,13 +107,13 @@ logitCDA<- function(y,X, r_ini= 1,burnin=500, run=500 ,fixR = FALSE){
 
     if(tuning){
       tune_step<- tune_step+1
-      if(tune_accept / tune_step > 0.3 & tune_step>100) tuning = FALSE
+      if(tune_accept / tune_step > 0.3 & tune_step>=100) tuning = FALSE
       # if(tune_accept / tune_step > 0.3 ) tuning = FALSE
       print(tune_accept / tune_step)
     }
     # 
     # 
-    if(i>= burnin){
+    if(i> burnin){
       trace_proposal<- rbind(trace_proposal,t(new_beta))
       trace_beta<- rbind(trace_beta,t(beta))
     }

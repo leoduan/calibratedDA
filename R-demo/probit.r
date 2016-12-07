@@ -1,6 +1,6 @@
 require("truncnorm")
 
-probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
+probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE){
   
   n<- length(y)
   p<- ncol(X)
@@ -16,7 +16,7 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
   
   #initialize r and b
   
-  r<- rep(r_ini,n)
+  r<- rep(1,n)
   b<- rep(0,n)
   
   #individual log-likelihood
@@ -40,6 +40,9 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
   ind_normal<- rnorm(p)
   beta <- cholV%*% ind_normal + m
   Xbeta <- X%*%beta
+  
+  r<- rep(r_ini,n)
+  
   
   for(i in 1: (burnin+run)){
     
@@ -92,8 +95,8 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
         # r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
         # 
         # # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
-        # r[r<1]<- 1
-        r[r>5000]<- 5000
+        r[r<0.01]<- 0.01
+        # r[r>10000]<- 10000
       }
     }
     b<- (sqrt(r)-1) * new_Xbeta
@@ -113,14 +116,14 @@ probitCDA<- function(y,X, r_ini=200,burnin=500, run=500 ,fixR = FALSE){
     
     if(tuning){
       tune_step<- tune_step+1
-      if(tune_accept / tune_step > 0.3 & tune_step>100) tuning = FALSE
+      if(tune_accept / tune_step > 0.2 & tune_step>100) tuning = FALSE
       
       print(tune_accept / tune_step)
       print(beta)
     }
     
     
-    if(i>= burnin & !tuning){
+    if(i> burnin & !tuning){
       trace_proposal<- rbind(trace_proposal,t(new_beta))
       trace_beta<- rbind(trace_beta,t(beta))
     }
