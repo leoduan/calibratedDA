@@ -374,7 +374,7 @@ The mixing of Markov chain can be described by the geometric convergence rate. L
 
 We first utilize another related quantity, the norm of the forward operator $||\bf{F}||$, which is defined as  ${\bf F}s(\theta)=\int \mathcal{P}(\theta,\theta') s(\theta') d\theta' = E\{ s(\theta') | \theta \}$. In a Hilbert space $L^2(\pi)=\{s(\theta): \bb E s(\theta)=0, \mbox{var}\{s(\theta)\}<\infty \}$, the norm is defined as the maximal correlation between two states $||{\bf F}||=\underset{s(\theta),t(\theta)\in L^2(\pi)}{\sup}\;\mbox{corr}(s(\theta),t(\theta^{'}))$ \citep{liu2008monte}. This norm is related to $\rho$: when the chain is reversible with detailed balance (e.g. M-H), $\lim_{k\rightarrow \infty}||{\bf F}^k||^{1/k}=\rho$; when the chain is non-reversible, $||{\bf F}||^2$ is equal to the convergence rate of the reversibilized chain \citep{fill1991eigenvalue}.
 
-In each iteration, the original DA samples in the sequence of $\theta' \rightarrow z' \rightarrow \theta \rightarrow z$, where $a\rightarrow b\rightarrow c$ represents $c$ being generated from a conditionally distribution of $b$, and conditionally independent of $a$. Omitting $y$ for simpler notation, by Lemma 4 in \cite{liu1994collapsed}:
+In each iteration, the original DA samples in the sequence of $\theta' \rightarrow z' \rightarrow \theta \rightarrow z$, where $a\rightarrow b\rightarrow c$ means that given $b$, $c$ is conditionally independent of $a$. Omitting $y$ for simpler notation, by Lemma 4 in \cite{liu1994collapsed}:
 
 \be
 ||{\bf F}_{DA}|| =\underset{s(\theta)\in L^2(\pi)}{\sup}\; \frac{\mbox{var}_{DA} [ \bb E_{DA} \{ s(\theta,z)|\theta^{'},z'\}]}{\mbox{var}_{DA}\{s(\theta,z) \} }  & = \underset{s(\theta)\in L^2(\pi)}{\sup}\; \frac{\mbox{var}_{DA} [ \bb E_{DA} \{ s(\theta)|z'\}]}{\mbox{var}_{DA}\{s(\theta) \} } \\
@@ -397,7 +397,7 @@ To compare the \eqref{eq:norm_da} and \eqref{eq:norm_cda} directly, we rely on t
 	In Metropolis-Hastings step with current state $\theta'$ and proposal state $\theta^*$ from $f(\theta^*; z')$, if the acceptance probability $p\ge p_0$, the generated state $\theta$ satisfies $\mbox{var}_{CDA}\{ s(\theta)|z', \theta'\} \ge   p_0\cdot \mbox{var}_{CDA} (s(\theta^*)|z')$.
 \end{lemma}
 
-Therefore, we can induce an increase in $\bb E [\mbox{var}\{ s(\theta)|z'\}]$ by $\gamma$ times, and obtain the following acceleration:
+Therefore, we can induce an increase in $\bb E [\mbox{var}\{ s(\theta')|z'\}]$ by $\gamma$ times over $\bb E [\mbox{var}\{ s(\theta)|z'\}]$, and obtain the following acceleration:
 
 \begin{theorem}
 Let ${\bf F}_{DA}$ and ${\bf F}_{CDA}$ be the forward operators corresponding to the standard DA and the calibrated DA; $\theta$ be the random variable from the DA updating rule and $\theta^*$ be the one from the CDA proposal. Assume the conditional variance increase in the CDA proposal has ${  \bb E [\mbox {var}_{CDA}\{ s(\theta^*)|z,y\}]  } \ge \gamma \cdot { \bb E [\mbox {var}_{DA}\{ s(\theta)|z,y\}]}$ with the Metropolis-Hastings acceptance probability in \eqref{eq:mh-criterion} greater or equal to $p_0>0$. Then if $p_0 \gamma \ge 1$, 
@@ -405,14 +405,7 @@ $$||{\bf F}_{CDA}||\le 1- \gamma p_0 \cdot \underset{s(\theta)\in L^2(\pi)}{\inf
 \le ||{\bf F}_{DA}||.$$
 \end{theorem}
 
-%In practice, $\underset{k=1\ldots p}{\sup}\;\mbox{corr}(\theta_k,\theta^{'}_k) $ is often used as a more tractable approximate to $||\bf F||$. In the probit example, since $z$ is not in the conditional variance, direct increase of $r$ in $\bb E [\mbox {var}_{CDA}\{ s(\theta)|z,y\}] =(X'R^{-1}X)^{-1}$ leads to mixing acceleration. In the logit example, the increase in $\bb E [\mbox {var}_{CDA}\{ s(\theta)|z,y\}] =\bb E(X'ZX)^{-1}$ can be numerically evaluated  (see section 2.2).
-
-As the result, with an increase in $\gamma$ by raising the conditional variance, and acceptance rate $p_0>0$, one can significantly accelerate the mixing. The large $p_0$ is attributed to the similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}, as the result of adaptation. For example, in the logit CDA:
-
-\be
-\alpha_i = \frac{ \{1+\exp(\xbeta)\}   \{1+\exp(\xbeta^*+b_i)\}^{r_i} } {  \{1+\exp(\xbeta^*)\}  \{1+\exp(\xbeta+b_i)\}^{r_i}    } 
-\ee
-when $\xbeta$ is negative (corresponding to large variance gap that causes slow mixing), the adapted bias reduction term $b_i  = \log\{ 1/r_{i} + O (\frac{\exp(\xbeta)}{r_i} )\} \approx -\log r_i$. Then $\{ 1+\exp(\xbeta-\log r_i)\}^{r_i} = 1+\exp(\xbeta) + O(\frac{\exp(2\xbeta) }{r_i})$.
+Since $r_i$ allows us to freely increase $\gamma$, we choose it to be close to $\frac{\mbox{var}_{DA}\{s(\theta) \} } {\bb E_{DA}  [  \mbox{var}_{DA}\{ s(\theta)|z'\}]}$. Both the numerator and the denominator often lack closed-forms for finite sample, but can be approximately estimated with Fisher information. As the result, $||{\bf F}_{CDA}||\approx 1 - p_0$. Then it suffices to verify $p_0>0$. In our study cases, all of the CDA's have large $p_0$, which is attributed to the similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}. For example, in the logit CDA. The acceptance probability is $1\wedge \prod_i\frac{ \{1+\exp(\xbeta)\}   \{1+\exp(\xbeta^*+b_i)\}^{r_i} } {  \{1+\exp(\xbeta^*)\}  \{1+\exp(\xbeta+b_i)\}^{r_i}    }$. When $\xbeta$ is negative (corresponding to large variance gap that causes slow mixing), the adapted $b_i  = \log\{ 1/r_{i} + \bigO (\frac{\exp(\xbeta)}{r_i} )\} \approx -\log r_i$. Then $\{ 1+\exp(\xbeta-\log r_i)\}^{r_i} = 1+\exp(\xbeta) + \bigO(\frac{\exp(2\xbeta) }{r_i})$.
 
 
 \section{Real Data Application: Poisson Regression for Online Advertisement Tracking}
