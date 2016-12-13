@@ -1,4 +1,4 @@
-\begin{thebibliography}{23}
+\begin{thebibliography}{22}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -113,14 +113,6 @@ Bala Rajaratnam and Doug Sparks.
 Gareth~O Roberts, Jeffrey~S Rosenthal, et~al.
 \newblock General state space {Markov chains and MCMC algorithms}.
 \newblock \emph{Probability Surveys}, 1:\penalty0 20--71, 2004.
-
-\bibitem[Scott et~al.(2016)Scott, Blocker, Bonassi, Chipman, George, and
-  McCulloch]{scott2016bayes}
-Steven~L Scott, Alexander~W Blocker, Fernando~V Bonassi, Hugh~A Chipman,
-  Edward~I George, and Robert~E McCulloch.
-\newblock Bayes and big data: The consensus monte carlo algorithm.
-\newblock \emph{International Journal of Management Science and Engineering
-  Management}, 11\penalty0 (2):\penalty0 78--88, 2016.
 
 \bibitem[Srivastava et~al.(2015)Srivastava, Cevher, Tran-Dinh, and
   Dunson]{srivastava2015wasp}

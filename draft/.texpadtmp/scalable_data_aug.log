@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 DEC 2016 08:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  13 DEC 2016 12:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -286,163 +286,138 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 80.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] <probit_demo_acf_prop.pdf, id=34, 361.35pt x 216.81pt>
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] <probit_demo_acf_prop.pdf, id=31, 361.35pt x 216.81pt>
 File: probit_demo_acf_prop.pdf Graphic file (type pdf)
  <use probit_demo_acf_prop.pdf>
-Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 184.
+Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 175.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <density_probit.pdf, id=35, 361.35pt x 216.81pt>
+ <density_probit.pdf, id=32, 361.35pt x 216.81pt>
 File: density_probit.pdf Graphic file (type pdf)
  <use density_probit.pdf>
-Package pdftex.def Info: density_probit.pdf used on input line 190.
+Package pdftex.def Info: density_probit.pdf used on input line 181.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <probit_demo_acf.pdf, id=36, 361.35pt x 216.81pt>
+ <probit_demo_acf.pdf, id=33, 361.35pt x 216.81pt>
 File: probit_demo_acf.pdf Graphic file (type pdf)
  <use probit_demo_acf.pdf>
-Package pdftex.def Info: probit_demo_acf.pdf used on input line 196.
+Package pdftex.def Info: probit_demo_acf.pdf used on input line 187.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>] <probit15_trace_plot.pdf, id=59, 433.62pt x 259.97125pt>
+ [5] <probit15_trace_plot.pdf, id=37, 433.62pt x 259.97125pt>
 File: probit15_trace_plot.pdf Graphic file (type pdf)
  <use probit15_trace_plot.pdf>
-Package pdftex.def Info: probit15_trace_plot.pdf used on input line 229.
+Package pdftex.def Info: probit15_trace_plot.pdf used on input line 216.
 (pdftex.def)             Requested size: 212.16118pt x 127.20058pt.
- <probit15_acf.pdf, id=60, 361.35pt x 216.81pt>
+ <probit15_acf.pdf, id=38, 361.35pt x 216.81pt>
 File: probit15_acf.pdf Graphic file (type pdf)
  <use probit15_acf.pdf>
-Package pdftex.def Info: probit15_acf.pdf used on input line 235.
+Package pdftex.def Info: probit15_acf.pdf used on input line 222.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>]
-Overfull \hbox (42.74445pt too wide) in paragraph at lines 258--260
-\OT1/cmr/m/n/10 where $\OML/cmm/m/it/10 Z \OT1/cmr/m/n/10 = [](\OML/cmm/m/it/10 z[]; [] ; z[]\OT1/cmr/m/n/10 )$. This al-go-rithm is de-rived based on $\OML/cmm/m/it/10 L\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[] \OMS/cmsy/m/n/10 j \OML/cmm/m/it/10 x[]^^R\OT1/cmr/m/n/10 ) = [] []\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 x[]^^R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 2)\OMS/cmsy/m/n/10 g []\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 ^^@[]\OT1/cmr/m/n/10 ) [](\OML/cmm/m/it/10 z[] \OMS/cmsy/m/n/10 j
- []
-
-
-Overfull \hbox (1.50644pt too wide) in paragraph at lines 261--262
-[]\OT1/cmr/m/n/10 Instead, ob-serv-ing the value of $\OML/cmm/m/it/10 z$ \OT1/cmr/m/n/10 can be in-flu-enced by the first pa-ram-e-ter in $[](\OML/cmm/m/it/10 a[]; a[]\OT1/cmr/m/n/10 )$, $\U/msb/m/n/10 E\OML/cmm/m/it/10 z[] \OT1/cmr/m/n/10 = [] []([])$,
- []
-
-[8] <logit_demo_trace_plot.pdf, id=78, 361.35pt x 216.81pt>
+ [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>] [7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] <logit_demo_trace_plot.pdf, id=74, 361.35pt x 216.81pt>
 File: logit_demo_trace_plot.pdf Graphic file (type pdf)
  <use logit_demo_trace_plot.pdf>
-Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 302.
+Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 278.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- <logit_demo_acf.pdf, id=79, 361.35pt x 216.81pt>
+ <logit_demo_acf.pdf, id=75, 361.35pt x 216.81pt>
 File: logit_demo_acf.pdf Graphic file (type pdf)
  <use logit_demo_acf.pdf>
-Package pdftex.def Info: logit_demo_acf.pdf used on input line 307.
+Package pdftex.def Info: logit_demo_acf.pdf used on input line 283.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- [9 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>]
-Overfull \hbox (33.19522pt too wide) in paragraph at lines 354--356
-\OT1/cmr/m/n/10 scalars). Then the Fisher in-for-ma-tion ma-trix based on the con-di-tional $\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 ^^V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r; b\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 ^^F(\OML/cmm/m/it/10 r\OT1/cmr/m/n/10 )) = \OML/cmm/m/it/10 C[]^^Y\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R\OT1/cmr/m/n/10 ) [][] \OML/cmm/m/it/10 ^^Y[] []$\OT1/cmr/m/n/10 ,
- []
-
-
-Overfull \hbox (22.44574pt too wide) in paragraph at lines 363--367
-[]\OT1/cmr/m/n/10 Since $\OML/cmm/m/it/10 r[]$ \OT1/cmr/m/n/10 is in $\OML/cmm/m/it/10 ^^Y[] []$\OT1/cmr/m/n/10 , we use it to min-i-mize the dif-fer-ence be-tween $\U/msb/m/n/10 E[] [] []$
- []
-
-[10]
-Overfull \hbox (1.20775pt too wide) in paragraph at lines 386--387
-[]\OT1/cmr/m/n/10 The cal-i-brated DA sam-ples a lit-tle dif-fer-ently: by propos-ing $\OML/cmm/m/it/10 ^^R[]$ \OT1/cmr/m/n/10 in the cal-i-brated sam-ple and use Metropolis-
- []
-
-[11] [12] <traceplot_poisson_da.pdf, id=103, 433.62pt x 433.62pt>
+ [8] [9 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [10] [11] [12] <traceplot_poisson_da.pdf, id=102, 433.62pt x 433.62pt>
 File: traceplot_poisson_da.pdf Graphic file (type pdf)
  <use traceplot_poisson_da.pdf>
-Package pdftex.def Info: traceplot_poisson_da.pdf used on input line 447.
+Package pdftex.def Info: traceplot_poisson_da.pdf used on input line 397.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_da_acf.pdf, id=104, 433.62pt x 433.62pt>
+ <poisson_da_acf.pdf, id=103, 433.62pt x 433.62pt>
 File: poisson_da_acf.pdf Graphic file (type pdf)
  <use poisson_da_acf.pdf>
-Package pdftex.def Info: poisson_da_acf.pdf used on input line 453.
+Package pdftex.def Info: poisson_da_acf.pdf used on input line 403.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <traceplot_poisson_cda.pdf, id=105, 433.62pt x 433.62pt>
+ <traceplot_poisson_cda.pdf, id=104, 433.62pt x 433.62pt>
 File: traceplot_poisson_cda.pdf Graphic file (type pdf)
  <use traceplot_poisson_cda.pdf>
-Package pdftex.def Info: traceplot_poisson_cda.pdf used on input line 458.
+Package pdftex.def Info: traceplot_poisson_cda.pdf used on input line 408.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_cda_acf.pdf, id=106, 433.62pt x 433.62pt>
+ <poisson_cda_acf.pdf, id=105, 433.62pt x 433.62pt>
 File: poisson_cda_acf.pdf Graphic file (type pdf)
  <use poisson_cda_acf.pdf>
-Package pdftex.def Info: poisson_cda_acf.pdf used on input line 464.
+Package pdftex.def Info: poisson_cda_acf.pdf used on input line 414.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- [13] [14 <./traceplot_poisson_da.pdf> <./poisson_da_acf.pdf> <./traceplot_poisson_cda.pdf> <./poisson_cda_acf.pdf>] [15] (/Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.bbl
+ [13 <./traceplot_poisson_da.pdf> <./poisson_da_acf.pdf> <./traceplot_poisson_cda.pdf> <./poisson_cda_acf.pdf>] [14] (/Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.bbl
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
- [16] [17]) <traceplot_poisson_zip_da.pdf, id=144, 433.62pt x 433.62pt>
+ [15] [16]) <traceplot_poisson_zip_da.pdf, id=140, 433.62pt x 433.62pt>
 File: traceplot_poisson_zip_da.pdf Graphic file (type pdf)
  <use traceplot_poisson_zip_da.pdf>
-Package pdftex.def Info: traceplot_poisson_zip_da.pdf used on input line 739.
+Package pdftex.def Info: traceplot_poisson_zip_da.pdf used on input line 689.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_zip_da_acf.pdf, id=145, 216.81pt x 216.81pt>
+ <poisson_zip_da_acf.pdf, id=141, 216.81pt x 216.81pt>
 File: poisson_zip_da_acf.pdf Graphic file (type pdf)
  <use poisson_zip_da_acf.pdf>
-Package pdftex.def Info: poisson_zip_da_acf.pdf used on input line 744.
+Package pdftex.def Info: poisson_zip_da_acf.pdf used on input line 694.
 (pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
- [18] <poisson_fitting_da.png, id=149, 1204.5pt x 1204.5pt>
+ [17] <poisson_fitting_da.png, id=145, 1204.5pt x 1204.5pt>
 File: poisson_fitting_da.png Graphic file (type png)
  <use poisson_fitting_da.png>
-Package pdftex.def Info: poisson_fitting_da.png used on input line 758.
+Package pdftex.def Info: poisson_fitting_da.png used on input line 708.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_fitting_ada.png, id=151, 1204.5pt x 1204.5pt>
+ <poisson_fitting_ada.png, id=147, 1204.5pt x 1204.5pt>
 File: poisson_fitting_ada.png Graphic file (type png)
  <use poisson_fitting_ada.png>
-Package pdftex.def Info: poisson_fitting_ada.png used on input line 763.
+Package pdftex.def Info: poisson_fitting_ada.png used on input line 713.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_da.png, id=152, 1204.5pt x 1204.5pt>
+ <poisson_cv_da.png, id=148, 1204.5pt x 1204.5pt>
 File: poisson_cv_da.png Graphic file (type png)
  <use poisson_cv_da.png>
-Package pdftex.def Info: poisson_cv_da.png used on input line 767.
+Package pdftex.def Info: poisson_cv_da.png used on input line 717.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_ada.png, id=153, 1204.5pt x 1204.5pt>
+ <poisson_cv_ada.png, id=149, 1204.5pt x 1204.5pt>
 File: poisson_cv_ada.png Graphic file (type png)
  <use poisson_cv_ada.png>
-Package pdftex.def Info: poisson_cv_ada.png used on input line 772.
+Package pdftex.def Info: poisson_cv_ada.png used on input line 722.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- [19 <./traceplot_poisson_zip_da.pdf> <./poisson_zip_da_acf.pdf>] <CDAvsHMC_mean.pdf, id=169, 433.62pt x 433.62pt>
+ [18 <./traceplot_poisson_zip_da.pdf> <./poisson_zip_da_acf.pdf>] <CDAvsHMC_mean.pdf, id=164, 433.62pt x 433.62pt>
 File: CDAvsHMC_mean.pdf Graphic file (type pdf)
  <use CDAvsHMC_mean.pdf>
-Package pdftex.def Info: CDAvsHMC_mean.pdf used on input line 784.
+Package pdftex.def Info: CDAvsHMC_mean.pdf used on input line 734.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <CDAvsHMC_sd.pdf, id=170, 433.62pt x 433.62pt>
+ <CDAvsHMC_sd.pdf, id=165, 433.62pt x 433.62pt>
 File: CDAvsHMC_sd.pdf Graphic file (type pdf)
  <use CDAvsHMC_sd.pdf>
-Package pdftex.def Info: CDAvsHMC_sd.pdf used on input line 789.
+Package pdftex.def Info: CDAvsHMC_sd.pdf used on input line 739.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
-Underfull \hbox (badness 1748) in paragraph at lines 790--790
+Underfull \hbox (badness 1748) in paragraph at lines 740--740
 []\OT1/cmr/m/n/9 (b) |Com-par-ing pos-te-rior stan-dard de-vi-a-tion for
  []
 
-[20 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_da.png> <./poisson_cv_ada.png>] <traceplot_poisson_hmc.pdf, id=178, 433.62pt x 433.62pt>
+[19 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_da.png> <./poisson_cv_ada.png>] <traceplot_poisson_hmc.pdf, id=174, 433.62pt x 433.62pt>
 File: traceplot_poisson_hmc.pdf Graphic file (type pdf)
  <use traceplot_poisson_hmc.pdf>
-Package pdftex.def Info: traceplot_poisson_hmc.pdf used on input line 801.
+Package pdftex.def Info: traceplot_poisson_hmc.pdf used on input line 751.
 (pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_hmc_acf.pdf, id=179, 216.81pt x 216.81pt>
+ <poisson_hmc_acf.pdf, id=175, 216.81pt x 216.81pt>
 File: poisson_hmc_acf.pdf Graphic file (type pdf)
  <use poisson_hmc_acf.pdf>
-Package pdftex.def Info: poisson_hmc_acf.pdf used on input line 806.
+Package pdftex.def Info: poisson_hmc_acf.pdf used on input line 756.
 (pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
- [21 <./CDAvsHMC_mean.pdf> <./CDAvsHMC_sd.pdf> <./traceplot_poisson_hmc.pdf> <./poisson_hmc_acf.pdf>] (/Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.aux)
+ [20 <./CDAvsHMC_mean.pdf> <./CDAvsHMC_sd.pdf> <./traceplot_poisson_hmc.pdf> <./poisson_hmc_acf.pdf>] (/Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5017 strings out of 493014
- 74332 string characters out of 6133351
- 145852 words of memory out of 5000000
- 8450 multiletter control sequences out of 15000+600000
+ 5014 strings out of 493014
+ 74266 string characters out of 6133351
+ 144764 words of memory out of 5000000
+ 8447 multiletter control sequences out of 15000+600000
  14633 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,43p,1424b,485s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on /Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.pdf (21 pages, 721365 bytes).
+ 42i,12n,43p,1396b,485s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on /Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.pdf (20 pages, 710235 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 208 compressed objects within 3 object streams
+ 299 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

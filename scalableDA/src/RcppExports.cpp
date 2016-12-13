@@ -22,24 +22,6 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// logistic_reg
-SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0, int mc_draws);
-RcppExport SEXP scalableDA_logistic_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP, SEXP mc_drawsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
-    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
-    Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
-    Rcpp::traits::input_parameter< int >::type mc_draws(mc_drawsSEXP);
-    __result = Rcpp::wrap(logistic_reg(y, X, b, B, burnin, run, r0, mc_draws));
-    return __result;
-END_RCPP
-}
 // logistic_reg_random_effect
 SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int mc_draws, int da_ver, double sigma2_ini, bool track_r, bool update_sigma2);
 RcppExport SEXP scalableDA_logistic_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP mc_drawsSEXP, SEXP da_verSEXP, SEXP sigma2_iniSEXP, SEXP track_rSEXP, SEXP update_sigma2SEXP) {
@@ -61,9 +43,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0ini, double c, int fixed_R);
-RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0iniSEXP, SEXP cSEXP, SEXP fixed_RSEXP) {
+// logistic_reg
+SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0);
+RcppExport SEXP scalableDA_logistic_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -73,10 +55,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0ini(r0iniSEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    Rcpp::traits::input_parameter< int >::type fixed_R(fixed_RSEXP);
-    __result = Rcpp::wrap(poisson_reg(y, X, b, B, burnin, run, r0ini, c, fixed_R));
+    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
+    __result = Rcpp::wrap(logistic_reg(y, X, b, B, burnin, run, r0));
     return __result;
 END_RCPP
 }
@@ -96,6 +76,22 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type max_r(max_rSEXP);
     Rcpp::traits::input_parameter< bool >::type update_sigma(update_sigmaSEXP);
     __result = Rcpp::wrap(poisson_reg_random_effect(y, X, burnin, run, tau, c, da_ver, max_r, update_sigma));
+    return __result;
+END_RCPP
+}
+// poisson_reg
+SEXP poisson_reg(SEXP y, SEXP X, int tune, int burnin, int run, int fixR);
+RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type tune(tuneSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type run(runSEXP);
+    Rcpp::traits::input_parameter< int >::type fixR(fixRSEXP);
+    __result = Rcpp::wrap(poisson_reg(y, X, tune, burnin, run, fixR));
     return __result;
 END_RCPP
 }

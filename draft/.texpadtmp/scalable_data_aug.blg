@@ -8,45 +8,45 @@ Repeated entry---line 395 of file ../reference.bib
  :                            ,
 I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in conrad2015accelerating
-You've used 23 entries,
+You've used 22 entries,
             2773 wiz_defined-function locations,
-            738 strings with 9322 characters,
-and the built_in function-call counts, 11121 in all, are:
-= -- 982
-> -- 680
+            732 strings with 9046 characters,
+and the built_in function-call counts, 10483 in all, are:
+= -- 929
+> -- 623
 < -- 14
-+ -- 230
-- -- 207
-* -- 934
-:= -- 1717
-add.period$ -- 70
-call.type$ -- 23
-change.case$ -- 134
-chr.to.int$ -- 23
-cite$ -- 47
-duplicate$ -- 496
-empty$ -- 887
-format.name$ -- 242
-if$ -- 2309
++ -- 211
+- -- 189
+* -- 870
+:= -- 1615
+add.period$ -- 67
+call.type$ -- 22
+change.case$ -- 125
+chr.to.int$ -- 22
+cite$ -- 45
+duplicate$ -- 475
+empty$ -- 848
+format.name$ -- 223
+if$ -- 2182
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 25
-newline$ -- 123
-num.names$ -- 92
-pop$ -- 262
+missing$ -- 24
+newline$ -- 118
+num.names$ -- 88
+pop$ -- 246
 preamble$ -- 1
-purify$ -- 113
+purify$ -- 105
 quote$ -- 0
-skip$ -- 381
+skip$ -- 363
 stack$ -- 0
-substring$ -- 428
-swap$ -- 47
+substring$ -- 407
+swap$ -- 46
 text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 243
+type$ -- 232
 warning$ -- 1
-while$ -- 102
+while$ -- 97
 width$ -- 0
-write$ -- 302
+write$ -- 289
 (There was 1 error message)

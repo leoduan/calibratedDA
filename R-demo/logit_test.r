@@ -1,9 +1,10 @@
+setwd("~/git/ImbalancedPG/R-demo/")
 N<- 1E4
 
 X0<- 1#rnorm(N, 1, 1)
 X1<- rnorm(N, 1, 1)
 X<- cbind(X0,X1)
-beta<- c(-9,1)
+beta<- c(-1,1)
 
 
 Xbeta<- X%*%beta

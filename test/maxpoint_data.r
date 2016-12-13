@@ -1,6 +1,6 @@
 
 require('R.matlab')
-
+setwd("~/git/ImbalancedPG/test/")
 mp<-readMat("./convdat.mat")
 
 

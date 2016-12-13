@@ -65,34 +65,17 @@ logitCDA<- function(y,X, r_ini= 1,burnin=500, run=500 ,fixR = FALSE){
         
         #
         dprob<- exp(Xbeta)/(1+exp(Xbeta))^2
-        # prob<- plogis(Xbeta)
         # r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta))) )
         r<-       dprob/(tanh(abs(Xbeta+b)/2)/2/abs(Xbeta+b)) 
-        # r<-      ( dprob^2 /prob/(1 - prob)/(tanh(abs(Xbeta)/2)/2/(abs(Xbeta)))  )
         
-        # r<-  dprob^2 /prob/(1 - prob)
-        #   
-          
-        # r<- exp(Xbeta)*10
-        # 
-        # # reduce r for those Xbeta in the region that don't have slow mixing problems (> -4) & having likelihood ratio<1.
-        # r_adapt_set<- alpha<1
-        # r[r_adapt_set] <- r[r_adapt_set]/ (alpha[r_adapt_set]^0.5)
-        # 
-        # r_adapt_set<- (alpha>1)
-        # r[r_adapt_set] <- r[r_adapt_set]/ (alpha[r_adapt_set]^0.5)
-        # #
-    #     # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
-        r[r>100]<- 100
-        # r[r<1/5000]<- 1/5000
+        r[Xbeta> -2]<- 1
+      
       }
+      
+      b = log( (1+ exp(Xbeta))^{1/r}-1) -Xbeta
+      
     }
     
-    # b= -log(r)
-    # b=0
-    b = log( (1+ exp(Xbeta))^{1/r}-1) -Xbeta
-    # 
-    # 
     #metropolis-hastings
     if(runif(1)< prod(alpha)){  
       beta<- new_beta
