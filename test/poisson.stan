@@ -1,7 +1,7 @@
 data {
   int<lower=0> N; //
   int<lower=0> p; //
-  int<lower=0> y[N]; // number of schools
+  int<lower=0> y[N]; 
   matrix[N,p] X;
 }
 parameters {

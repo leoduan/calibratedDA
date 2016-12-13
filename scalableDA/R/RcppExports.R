@@ -17,8 +17,8 @@ poisson_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, tau = 10,
     .Call('scalableDA_poisson_reg_random_effect', PACKAGE = 'scalableDA', y, X, burnin, run, tau, c, da_ver, max_r, update_sigma)
 }
 
-poisson_reg <- function(y, X, tune = 100L, burnin = 500L, run = 500L, fixR = FALSE) {
-    .Call('scalableDA_poisson_reg', PACKAGE = 'scalableDA', y, X, tune, burnin, run, fixR)
+poisson_reg <- function(y, X, tune = 100L, burnin = 500L, run = 500L, fixR = FALSE, bigR = 20) {
+    .Call('scalableDA_poisson_reg', PACKAGE = 'scalableDA', y, X, tune, burnin, run, fixR, bigR)
 }
 
 probit_reg_px <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L, nu0 = 1) {

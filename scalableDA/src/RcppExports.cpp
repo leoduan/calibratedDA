@@ -80,8 +80,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, int tune, int burnin, int run, int fixR);
-RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP) {
+SEXP poisson_reg(SEXP y, SEXP X, int tune, int burnin, int run, int fixR, double bigR);
+RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP, SEXP bigRSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -91,7 +91,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
     Rcpp::traits::input_parameter< int >::type fixR(fixRSEXP);
-    __result = Rcpp::wrap(poisson_reg(y, X, tune, burnin, run, fixR));
+    Rcpp::traits::input_parameter< double >::type bigR(bigRSEXP);
+    __result = Rcpp::wrap(poisson_reg(y, X, tune, burnin, run, fixR, bigR));
     return __result;
 END_RCPP
 }

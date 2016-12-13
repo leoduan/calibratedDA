@@ -3,7 +3,7 @@ using namespace arma;
 
 // [[Rcpp::export]]
 SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
-                 int run = 500, int fixR = false) {
+                 int run = 500, int fixR = false, double bigR = 20) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -14,7 +14,8 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
   int n = X_mat.n_rows;
   int p = X_mat.n_cols;
 
-  vec beta = ones(p);
+  // vec beta = ones(p);
+  vec beta = solve(X_mat.t() * X_mat, X_mat.t() * log(y_vec + 1));
   vec Xbeta = X_mat * beta;
 
   vec r = ones(n);
@@ -32,7 +33,7 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
       vec dprob = exp(Xbeta);
       r = dprob / (tanh(abs(Xbeta) / 2.0) / 2.0 / abs(Xbeta));
       uvec bigXbeta = find(Xbeta > -2);
-      r(bigXbeta) = exp(Xbeta(bigXbeta)) * 20;
+      r(bigXbeta) = exp(Xbeta(bigXbeta)) * bigR;
       b = log(r) + log(exp(exp(Xbeta - log(y_vec + r))) - 1) - Xbeta;
     }
 
@@ -45,14 +46,14 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
     mat ZX_tilde = X_mat.each_col() % Z;
     mat invV = (X_mat.t() * ZX_tilde + eye(p, p) * 1E-5);
     mat cholInvV = chol(invV);
-    mat V = inv(V);
+    mat V = inv(invV);
 
     vec k = y_vec - (y_vec + r) / 2.0 - Z % (b - log(r));
 
     vec m = V * (X_mat.t() * k);
 
     // vec new_beta = trans(chol(V)) * randn(p) + m;
-    vec new_beta = solve(cholInvV, randn(p)) + m;
+    vec new_beta = inv(cholInvV) * randn(p) + m;
     vec new_Xbeta = X_mat * new_beta;
 
     // compute likelihood
