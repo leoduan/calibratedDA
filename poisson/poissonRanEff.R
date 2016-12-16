@@ -30,7 +30,7 @@ data = list('X' = X,
             'p' = p
 )
 
-fit <- stan(file = 'poissonRanEff.stan', data = data, iter = 2000, chains = 1)
+fit <- stan(file = 'poissonRanEff.stan', data = data, iter = 2000, chains = 1, init="0")
 
 save(fit,file="stan_fit_poisson.Rda")
 

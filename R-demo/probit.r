@@ -1,6 +1,6 @@
 require("truncnorm")
 
-probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE){
+probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE,MH= FALSE){
   
   n<- length(y)
   p<- ncol(X)
@@ -26,6 +26,7 @@ probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE){
   #objects to store trace
   trace_beta<- numeric()
   trace_proposal<- numeric()
+  trace_importance<- numeric()
   
   accept<- 0
   tune_accept<- 0
@@ -70,6 +71,7 @@ probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE){
     
     # inidividual likelihood ratio
     alpha<- exp(new_loglik + q_loglik  - loglik - new_q_loglik  )
+    importance<-  sum(new_loglik  - new_q_loglik)
     
     # fixing NA and INF issue
     alpha[is.na(alpha)]<- 0.00001
@@ -98,12 +100,12 @@ probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE){
         r[r<0.01]<- 0.01
         # r[r>10000]<- 10000
       }
+      b<- (sqrt(r)-1) * new_Xbeta
     }
-    b<- (sqrt(r)-1) * new_Xbeta
     
     
     #metropolis-hastings
-    if(runif(1)< prod(alpha)){   # the transition kernel P(beta|new_beta) = P(new_beta|beta), so the MH ratio is just likelihood ratio
+    if(runif(1)< prod(alpha)|| !MH){   # the transition kernel P(beta|new_beta) = P(new_beta|beta), so the MH ratio is just likelihood ratio
       beta<- new_beta
       Xbeta<- new_Xbeta
       prob<- new_prob
@@ -126,11 +128,12 @@ probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE){
     if(i> burnin & !tuning){
       trace_proposal<- rbind(trace_proposal,t(new_beta))
       trace_beta<- rbind(trace_beta,t(beta))
+      trace_importance<- c(trace_importance, importance)
     }
     
     print(i)
   }
   
   
-  return(list("beta"=trace_beta, "proposal"=trace_proposal , "r"=r, "b"=b, "accept_rate"= accept/run))
+  return(list("beta"=trace_beta, "proposal"=trace_proposal , "r"=r, "b"=b, "accept_rate"= accept/run, "importance"=trace_importance))
 }

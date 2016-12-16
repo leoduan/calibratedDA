@@ -7,25 +7,29 @@ data {
 parameters {
   vector[p] beta;
   real<lower=0> sigma2;
-  vector[N] eta;
 }
 transformed parameters {
-  vector[N] mu;
+  
   real sigma;
-  mu= exp(X * beta + eta);
   sigma= sqrt(sigma2); 
 }
 model {
+  vector[N] mu;
+  vector[N] eta;
 
-	for (i in 1:N) {
-		y[i] ~ poisson(mu[i]);
-	}
 	for (i in 1:N){
 	  eta[i] ~ normal(0, sigma);
 	}
 	for(i in 1:p){
 		beta[i] ~ normal(0, 1000);
 	}
+	
+	mu= X * beta + eta;
+	
 	sigma2 ~ inv_gamma(2, 1);
+	
+	for (i in 1:N) {
+		y[i] ~ poisson_log(mu[i]);
+	}
 }
 

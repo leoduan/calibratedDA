@@ -67,21 +67,25 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Theory: Mixing Acceleration}{10}}
 \newlabel{eq:norm_da}{{10}{10}}
 \newlabel{eq:norm_cda}{{11}{11}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Poisson Regression for Online Add Tracking}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Data Application in Online Advertisement Tracking}{11}}
 \citation{zhou2012lognormal}
-\newlabel{traceplot_poi_da}{{4a}{13}}
-\newlabel{sub@traceplot_poi_da}{{a}{13}}
-\newlabel{acf_poi_da}{{4b}{13}}
-\newlabel{sub@acf_poi_da}{{b}{13}}
-\newlabel{traceplot_poi_ada}{{4c}{13}}
-\newlabel{sub@traceplot_poi_ada}{{c}{13}}
-\newlabel{acf_poi_ada}{{4d}{13}}
-\newlabel{sub@acf_poi_ada}{{d}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Panels (c) and (d) show significant improvement of the mixing in Poisson data augmentation. Panel (d) show the CDA reduces the autocorrelation for all of the parameters.\relax }}{13}}
-\newlabel{data_poisson}{{4}{13}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of DA, CDA and HMC in Poisson log-linear regression with online advertisement tracking data. Posterior estimates for the intercept and the norm of the coefficients are shown. The CDA shows much improved fit statistics such as root-mean-squared error (RMSE) and deviance (D). In cross-validation (CV-RMSE), the CDA outperforms DA in nearly $4$ times lower in error. The CDA converges much more rapidly than DA. CDA agrees with the HMC very well but takes significantly less time and the adaptation is simpler.\relax }}{14}}
-\newlabel{table:Poisson}{{1}{14}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Binomial Random Effect Model}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Panels (c) and (d) show significant improvement of the mixing in Poisson data augmentation. Panel (d) show the CDA reduces the autocorrelation for all of the parameters.\relax }}{12}}
+\newlabel{data_binomial}{{4}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Poisson Random Effect Model}{12}}
+\newlabel{traceplot_poi_da}{{5a}{14}}
+\newlabel{sub@traceplot_poi_da}{{a}{14}}
+\newlabel{acf_poi_da}{{5b}{14}}
+\newlabel{sub@acf_poi_da}{{b}{14}}
+\newlabel{traceplot_poi_ada}{{5c}{14}}
+\newlabel{sub@traceplot_poi_ada}{{c}{14}}
+\newlabel{acf_poi_ada}{{5d}{14}}
+\newlabel{sub@acf_poi_ada}{{d}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Panels (c) and (d) show significant improvement of the mixing in Poisson data augmentation. Panel (d) show the CDA reduces the autocorrelation for all of the parameters.\relax }}{14}}
+\newlabel{data_poisson}{{5}{14}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of DA, CDA and HMC in Poisson log-linear regression with online advertisement tracking data. Posterior estimates for the intercept and the norm of the coefficients are shown. The CDA shows much improved fit statistics such as root-mean-squared error (RMSE) and deviance (D). In cross-validation (CV-RMSE), the CDA outperforms DA in nearly $4$ times lower in error. The CDA converges much more rapidly than DA. CDA agrees with the HMC very well but takes significantly less time and the adaptation is simpler.\relax }}{15}}
+\newlabel{table:Poisson}{{1}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{15}}
 \bibdata{reference}
 \bibcite{albert1993bayesian}{{1}{1993}{{Albert and Chib}}{{}}}
 \bibcite{conrad2015accelerating}{{2}{2015}{{Conrad et~al.}}{{Conrad, Marzouk, Pillai, and Smith}}}
@@ -106,15 +110,15 @@
 \bibcite{wang2010click}{{21}{2010}{{Wang et~al.}}{{Wang, Li, Cui, Zhang, and Mao}}}
 \bibcite{zhou2012lognormal}{{22}{2012}{{Zhou et~al.}}{{Zhou, Li, Dunson, and Carin}}}
 \bibstyle{plainnat}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Proofs}{17}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Lemma 1}{17}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Theorem 1}{17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Mixing of Zero-inflated Poisson without Calibration}{18}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The hierarchy in the zero-inflated Poisson model does NOT help reduce the autocorrelation.\relax }}{18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Goodness-of-Fit and Cross-Validation for Poisson Regression}{19}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The posterior estimates produced by CDA is better fitted to the data and have more accurate prediction than DA.\relax }}{19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Comparing posterior samples of CDA with HMC}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The results from CDA and HMC agree very well.\relax }}{20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Mixing of HMC}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The posterior estimates produced by HMC.\relax }}{20}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Proofs}{18}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Lemma 1}{18}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Theorem 1}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Mixing of Zero-inflated Poisson without Calibration}{19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The hierarchy in the zero-inflated Poisson model does NOT help reduce the autocorrelation.\relax }}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Goodness-of-Fit and Cross-Validation for Poisson Regression}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The posterior estimates produced by CDA is better fitted to the data and have more accurate prediction than DA.\relax }}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Comparing posterior samples of CDA with HMC}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The results from CDA and HMC agree very well.\relax }}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Mixing of HMC}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The posterior estimates produced by HMC.\relax }}{21}}

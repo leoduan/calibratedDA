@@ -1,6 +1,6 @@
-# require("BayesLogit")
+# require("scalableDA")
 
-poissonCDA<- function(y,X, r_ini= 1,tune= 100,burnin=500, run=500 ,fixR = FALSE, randomEffect= FALSE,sigma2= 0.1, bigR=20){
+poissonCDA<- function(y,X, r_ini= 1,tune= 100,burnin=500, run=500 ,fixR = FALSE, randomEffect= FALSE,sigma2= 0.1, bigR=20, MH= FALSE){
   
   n<- length(y)
   p<- ncol(X)
@@ -52,18 +52,18 @@ poissonCDA<- function(y,X, r_ini= 1,tune= 100,burnin=500, run=500 ,fixR = FALSE,
         dprob<- exp(Xbeta+eta)
        
         r<-       dprob/(tanh(abs(Xbeta+eta )/2)/2/abs(Xbeta+eta))
-        r[Xbeta> -2]<- exp(Xbeta[Xbeta> -2])*bigR
+        # r[Xbeta> -2]<- exp(Xbeta[Xbeta> -2])*bigR
       }
       b = log(r) + log(  exp(exp(Xbeta + eta - log(y+r)))    -1) -Xbeta -eta
     }
     
     
     # generate latent variable
-    Z<- rpg( r+y, abs(Xbeta+b -log(r) + eta))
+    Z<- rpg( r, abs(Xbeta+b -log(r) + eta))
     # generate proposal:
     
     V<- solve(t(X) %*% ((Z)* X))
-    m<- V%*%( t(X) %*% (y- (y+r)/2 -Z*(b-log(r)+ eta)))
+    m<- V%*%( t(X) %*% (y- (r)/2 -Z*(b-log(r)+ eta)))
     
     cholV<- t(chol(V))
     
@@ -86,7 +86,7 @@ poissonCDA<- function(y,X, r_ini= 1,tune= 100,burnin=500, run=500 ,fixR = FALSE,
     alpha[is.infinite(alpha)]<- 1E6
     
     #metropolis-hastings
-    if(log(runif(1))< sum(alpha)){  
+    if(log(runif(1))< sum(alpha) ||!MH){  
       beta<- new_beta
       Xbeta<- new_Xbeta
       loglik<- new_loglik

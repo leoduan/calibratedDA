@@ -358,9 +358,31 @@ $$||{\bf F}_{CDA}||\le 1- \gamma p_0 \cdot \underset{s(\theta)\in L^2(\pi)}{\inf
 Since $r_i$ allows us to freely increase $\gamma$, we choose it to be close to $\frac{\mbox{var}_{DA}\{s(\theta) \} } {\bb E_{DA}  [  \mbox{var}_{DA}\{ s(\theta)|z'\}]}$. Both the numerator and the denominator often lack closed-forms for finite sample, but can be approximately estimated with Fisher information. As the result, $||{\bf F}_{CDA}||\approx 1 - p_0$. Then it suffices to verify $p_0>0$. In our study cases, all of the CDA's have large $p_0$, which is attributed to the similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}. For example, in the logit CDA. The acceptance probability is $1\wedge \prod_i\frac{ \{1+\exp(\xbeta)\}   \{1+\exp(\xbeta^*+b_i)\}^{r_i} } {  \{1+\exp(\xbeta^*)\}  \{1+\exp(\xbeta+b_i)\}^{r_i}    }$. When $\xbeta$ is negative (corresponding to large variance gap that causes slow mixing), the adapted $b_i  = \log\{ 1/r_{i} + \bigO (\frac{\exp(\xbeta)}{r_i} )\} \approx -\log r_i$. Then $\{ 1+\exp(\xbeta-\log r_i)\}^{r_i} = 1+\exp(\xbeta) + \bigO(\frac{\exp(2\xbeta) }{r_i})$.
 
 
-\section{Poisson Regression for Online Add Tracking}
+\section{Data Application in Online Advertisement Tracking}
 
 We apply CDA to an online advertisement tracking data set.  The data set consists of $96$ different advertisements and $n=59,792$ originating websites, with the count of the number of click-throughs recorded for each combination.  The counts contain many zeros ($95.5\%$), as not all $96$ advertisements are shown on all the websites. For commercial interests, it is useful  to predict the traffic of the new advertisements using the existing ones. Therefore, we use the data of $95$ advertisements as predictors $x_i$ and the one left as the outcome $y_i$ for a count regression. We use training data collected from a two-week period, and a validation data set collected during another two-week window. 
+
+\subsection{Binomial Random Effect Model}
+
+ \begin{figure}[H]
+ % \centering
+   \begin{subfigure}[b]{0.45\textwidth}
+ \includegraphics[width=1\textwidth]{binomial_random_acf_da.pdf}
+ \caption{Trace plots of three parameters from DA.}
+ \end{subfigure}
+  \hfill 
+ \begin{subfigure}[b]{0.45\textwidth}
+ \includegraphics[width=1\textwidth]{binomial_random_acf_cda.pdf}
+ \caption{Autocorrelation of all the 96 $\theta$'s from DA.}
+ \end{subfigure} 
+ \caption{Panels (c) and (d) show significant improvement of the mixing in Poisson data augmentation. Panel (d) show the CDA reduces the autocorrelation for all of the parameters.}
+ \label{data_binomial}
+ \end{figure}
+
+
+\subsection{Poisson Random Effect Model}
+
+
 
 One common practice to handle the large proportion of zeros is to use zero-inflated Poisson. However, for predictive modeling, this is suboptimal as it would require another set of coefficients to predict the latent binary event, e.g. $y_i\sim p\left( g(x_i\eta)\right)  \delta_0+ \{ 1-p\left( g(x_i \eta) \right) \} Poisson\{\exp (x_i \theta)\}$, while does not solve the slow mixing issue (see appendix). Instead, it is rather useful to consider a simpler model  $y_i\sim Poisson\{\exp(\theta_0+ \sum_j x_{i,j}\theta_j)\}$ with a quite negative intercept $\theta_0$.
 

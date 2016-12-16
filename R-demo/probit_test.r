@@ -79,10 +79,23 @@ y <- as.numeric(runif(N) < theta)
 sum(y)
 
 
-fit6 <-probitCDA(y,X, burnin = 200, run = 500, fixR = F)
+fit6 <-probitCDA(y,X, burnin = 500, run = 500, fixR = F, MH=T)
 fit6$accept_rate
 
 ts.plot(fit6$beta)
+acf(fit6$beta)
+colMeans(fit6$beta)
+
+fit7 <-probitCDA(y,X, burnin = 500, run = 500, fixR = F,MH = F)
+ts.plot(fit7$beta)
+acf(fit7$beta)
+
+
+
+colMeans(fit7$beta^2)
+sum(exp(fit7$importance)* fit7$beta[,1]^2) /sum(exp(fit7$importance))
+sum(exp(fit7$importance)* fit7$beta[,2]^2) /sum(exp(fit7$importance))
+sum(exp(fit7$importance)* fit7$beta[,3]^2) /sum(exp(fit7$importance))
 
 # fit6$r[fit6$r>10000]<-NA
 
