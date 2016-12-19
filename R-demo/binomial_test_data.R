@@ -14,9 +14,19 @@ setwd("~/git/ImbalancedPG/R-demo/")
 source("logit.r")
 source("logitRanIntercept.r")
 
+DIC<- function(x){
+ -2*sum(x*y - N*log(1+exp(x)))
+}
+
 #MH
 fit2<- logitRanIntercept(y, N,r_ini= 1,tune = 100,burnin=100, run=1000 ,fixR = F,MH = T,c=2,priorMean = -12,priorVar = 49)
 fit2$accept_rate
+
+mean(fit2$sigma0)
+
+mean(apply(fit2$beta[1:500,], 1,DIC))
+mean(apply(fit2$beta[500:1000,], 1,DIC))
+
 
 ACFfit2<-apply(fit2$proposal, MARGIN = 2, function(x){c(c(acf(x,plot = F,lag.max = 40))$acf[,,1])})
 # ts.plot(ACFfit2[,1:2000])
@@ -39,15 +49,23 @@ ggplot(data = dfCDAacf, aes(x=Lag, y=ACF)) + geom_boxplot(outlier.shape = NA)+
   scale_y_continuous(limits = c(-0.2,1))+ scale_x_discrete(breaks = c(0:8)*5)
 dev.off()
 
-# save(fit2,file="binomialCDA.Rda")
+acf(fit2$beta0,lag.max = 100)
+acf(fit2$sigma0,lag.max = 100)
+
+mean(fit2$beta0[500:1000])
+sd(fit2$beta0[500:1000])
+
+mean(fit2$sigma0[500:1000])
+sd(fit2$sigma0[500:1000])
 
 #r fixed to 1
-fit3<- logitRanIntercept(y, N,r_ini= 1,tune = 200,burnin=300, run=1000 ,fixR = T,MH = F,c=5,priorMean = -12,priorVar = 49)
+fit3<- logitRanIntercept(y, N,r_ini= 1,tune = 200,burnin=2000, run=1000 ,fixR = T,MH = F,c=5,priorMean = -12,priorVar = 49)
 fit3$accept_rate
 ACFfit3<-apply(fit3$beta, MARGIN = 2, function(x){c(c(acf(x,plot = F,lag.max = 40))$acf[,,1])})
-# ts.plot(ACFfit3)
 
-# save(fit3,file="binomialDA.Rda")
+
+mean(apply(fit3$beta, 1,DIC))
+
 
 CDAacf<- t(ACFfit3)
 p<- nrow(CDAacf)
@@ -63,13 +81,12 @@ ggplot(data = dfCDAacf, aes(x=Lag, y=ACF)) + geom_boxplot(outlier.shape = NA)+
   scale_y_continuous(limits = c(-0.2,1))+ scale_x_discrete(breaks = c(0:8)*5)
 dev.off()
 
+mean(fit3$beta0[500:1000])
+sd(fit3$beta0[500:1000])
 
+mean(fit3$sigma0[500:1000])
+sd(fit3$sigma0[500:1000])
 
-
-
-
-acf(fit3$beta0)
-acf(fit3$sigma0)
 
 #No MH
 fit4<- logitRanIntercept(y, N,r_ini= 1,tune = 300,burnin=300, run=1000 ,fixR = F,MH = F,c=1,priorMean = -12,priorVar = 49)

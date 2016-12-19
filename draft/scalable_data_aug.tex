@@ -49,8 +49,11 @@
 \DeclareMathOperator{\Binom}{Binomial}
 \DeclareMathOperator{\No}{No}
 \DeclareMathOperator{\PG}{PG}
+\DeclareMathOperator{\IG}{Inverse-Gamma}
+\DeclareMathOperator{\Ga}{Gamma}
 \DeclareMathOperator{\Bern}{Bernoulli}
 \DeclareMathOperator{\U}{Uniform}
+\DeclareMathOperator{\Poi}{Poisson}
 \DeclareMathOperator{\NB}{NB}
 \DeclareMathOperator{\cov}{cov}
 \DeclareMathOperator{\var}{var}
@@ -252,7 +255,7 @@ L_r(\xbeta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xbeta+b_i) (y_i-r_i/2)\} \exp\bi
 and the update rule for the proposal:
 \be
  z_i &\sim {\PG}(r_i, |\xbeta+b_i|),\\
-\theta^* &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r_i/2- Zb) ,  (X' Z X)^{-1}  \right),
+\theta^* &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r/2- Zb) ,  (X' Z X)^{-1}  \right),
 \ee
 with acceptance probability:
 \be
@@ -324,17 +327,25 @@ The mixing rate of a Markov chain can be described by the geometric convergence 
 
 We first utilize another related quantity, the norm of the forward operator $||\bf{F}||$, which is defined as  ${\bf F}s(\theta)=\int \mathcal{P}(\theta,\theta') s(\theta') d\theta' = E\{ s(\theta') | \theta \}$. In a Hilbert space $L^2(\pi)=\{s(\theta): \bb E s(\theta)=0, \mbox{var}\{s(\theta)\}<\infty \}$, the norm is defined as the maximal correlation between two states $||{\bf F}||=\underset{s(\theta),t(\theta)\in L^2(\pi)}{\sup}\;\mbox{corr}(s(\theta),t(\theta^{'}))$ \citep{liu2008monte}. This norm is related to $\rho$: when the chain is reversible with detailed balance (e.g. M-H), $\lim_{k\rightarrow \infty}||{\bf F}^k||^{1/k}=\rho$; when the chain is non-reversible, $||{\bf F}||^2$ is equal to the convergence rate of the reversibilized chain \citep{fill1991eigenvalue}.
 
-In each iteration, the original DA samples in the sequence of $\theta' \rightarrow z' \rightarrow \theta \rightarrow z$, where $a\rightarrow b\rightarrow c$ means that given $b$, $c$ is conditionally independent of $a$. Omitting $y$ for simpler notation, by Lemma 4 in \cite{liu1994collapsed}:
+In each iteration, Gibbs sampling sequentially update all the parameters $\theta$ and the latent variable $z$. We denote the last state as $z'$ and $\theta'$ and the new state as $z$ and $\theta$. Then the original DA sample in the order of $\theta' \rightarrow z' \rightarrow \theta \rightarrow z$, where $a\rightarrow b\rightarrow c$ means that given $b$, $c$ is conditionally independent of $a$.
+
+In calculation, omitting the first and last steps do not alter the maximal autocorrelation (Lemma 4 in \cite{liu1994collapsed}), leading to:
 
 \be
 ||{\bf F}_{DA}|| =\underset{s(\theta)\in L^2(\pi)}{\sup}\; \frac{\mbox{var}_{DA} [ \bb E_{DA} \{ s(\theta,z)|\theta^{'},z'\}]}{\mbox{var}_{DA}\{s(\theta,z) \} }  & = \underset{s(\theta)\in L^2(\pi)}{\sup}\; \frac{\mbox{var}_{DA} [ \bb E_{DA} \{ s(\theta)|z'\}]}{\mbox{var}_{DA}\{s(\theta) \} } \\
 & = 1- \underset{s(\theta)\in L^2(\pi)}{\inf}\; \frac{\bb E_{DA}  [  \mbox{var}_{DA}\{ s(\theta)|z'\}]}{\mbox{var}_{DA}\{s(\theta) \} } 
 \label{eq:norm_da}
 \ee
-in which, slow mixing occurs when ${\bb E_{DA}  [  \mbox{var}_{DA}\{ s(\theta)|z'\}]} \ll {\mbox{var}_{DA}\{s(\theta) \} }$.
+where the last form without the infimum is known as Bayesian fraction of missing information \citep{papaspiliopoulos2007general}. Slow mixing occurs when ${\bb E_{DA}  [  \mbox{var}_{DA}\{ s(\theta)|z'\}]} \ll {\mbox{var}_{DA}\{s(\theta) \} }$.
 
-Calibrated DA samples a little differently: by proposing $\theta^*$ in the calibrated sample and using Metropolis-Hastings to accept the new state $\theta^*$ or keep the previous state $\theta$, it in fact samples in the sequence of $( \theta' , z' )\rightarrow \theta \rightarrow z$, similarly we obtain:
-{\bf DD - NOT CLEAR ON THIS AS $(\theta',z')$ ARE NOT SAMPLED JOINTLY IN THE PROPOSAL}
+Calibrated DA samples a little differently: by proposing $\theta^*$ in the calibrated sample and using Metropolis-Hastings to accept the new state $\theta^*$ with probability $p(\theta^*,\theta')$ or keep the previous state $\theta$, it in fact samples from a two-component mixture:
+
+\be
+\theta  \sim (1-p(\theta^*,\theta') ) \delta _{\theta'} + p(\theta^*,\theta') f(\theta^*\mid z').
+\ee
+
+Therefore, the updating sequence is $\theta'\rightarrow z'$ and $(\theta', z')\rightarrow \theta \rightarrow z$. Similarly, omitting the last step of updating $z$ does not alter the maximal autocorrelation, leading to:
+
 \be
 ||{\bf F}_{CDA}|| =\underset{s(\theta)\in L^2(\pi)}{\sup}\; \frac{\mbox{var}_{CDA} [ \bb E_{CDA} \{ s(\theta,z)|\theta^{'},z'\}]}{\mbox{var}_{CDA}\{s(\theta,z) \} }  = 1- \underset{s(\theta)\in L^2(\pi)}{\inf}\; \frac{\bb E _{CDA} [  \mbox{var}_{CDA}\{ s(\theta)|z',\theta'\}]}{\mbox{var}_{CDA}\{s(\theta) \} } 
 \label{eq:norm_cda}
@@ -347,7 +358,7 @@ To compare the \eqref{eq:norm_da} and \eqref{eq:norm_cda} directly, we rely on t
 	In Metropolis-Hastings step with current state $\theta'$ and proposal state $\theta^*$ from $f(\theta^*; z')$, if the acceptance probability $p\ge p_0$, the generated state $\theta$ satisfies $\mbox{var}_{CDA}\{ s(\theta)|z', \theta'\} \ge   p_0\cdot \mbox{var}_{CDA} (s(\theta^*)|z')$.
 \end{lemma}
 
-Therefore, we can induce an increase in $\bb E [\mbox{var}\{ s(\theta')|z'\}]$ by $\gamma$ times over $\bb E [\mbox{var}\{ s(\theta)|z'\}]$, and obtain the following acceleration:
+Therefore, for a given $s(\theta)$, we can induce an increase in $\bb E [\mbox{var}\{ s(\theta')|z'\}]$ by $\gamma$ times over $\bb E [\mbox{var}\{ s(\theta)|z'\}]$, and obtain the following acceleration:
 
 \begin{theorem}
 Let ${\bf F}_{DA}$ and ${\bf F}_{CDA}$ be the forward operators corresponding to the standard DA and the calibrated DA; $\theta$ be the random variable from the DA updating rule and $\theta^*$ be the one from the CDA proposal. Assume the conditional variance increase in the CDA proposal has ${  \bb E [\mbox {var}_{CDA}\{ s(\theta^*)|z,y\}]  } \ge \gamma \cdot { \bb E [\mbox {var}_{DA}\{ s(\theta)|z,y\}]}$ with the Metropolis-Hastings acceptance probability in \eqref{eq:mh-criterion} greater or equal to $p_0>0$. Then if $p_0 \gamma \ge 1$, 
@@ -355,98 +366,137 @@ $$||{\bf F}_{CDA}||\le 1- \gamma p_0 \cdot \underset{s(\theta)\in L^2(\pi)}{\inf
 \le ||{\bf F}_{DA}||.$$
 \end{theorem}
 
-Since $r_i$ allows us to freely increase $\gamma$, we choose it to be close to $\frac{\mbox{var}_{DA}\{s(\theta) \} } {\bb E_{DA}  [  \mbox{var}_{DA}\{ s(\theta)|z'\}]}$. Both the numerator and the denominator often lack closed-forms for finite sample, but can be approximately estimated with Fisher information. As the result, $||{\bf F}_{CDA}||\approx 1 - p_0$. Then it suffices to verify $p_0>0$. In our study cases, all of the CDA's have large $p_0$, which is attributed to the similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}. For example, in the logit CDA. The acceptance probability is $1\wedge \prod_i\frac{ \{1+\exp(\xbeta)\}   \{1+\exp(\xbeta^*+b_i)\}^{r_i} } {  \{1+\exp(\xbeta^*)\}  \{1+\exp(\xbeta+b_i)\}^{r_i}    }$. When $\xbeta$ is negative (corresponding to large variance gap that causes slow mixing), the adapted $b_i  = \log\{ 1/r_{i} + \bigO (\frac{\exp(\xbeta)}{r_i} )\} \approx -\log r_i$. Then $\{ 1+\exp(\xbeta-\log r_i)\}^{r_i} = 1+\exp(\xbeta) + \bigO(\frac{\exp(2\xbeta) }{r_i})$.
+It is often not tractable to examine every $s(\theta)\in L^2(\pi)$; but in practice, it suffices to check $s(\theta)=\theta_j$ for every element in $\theta$ \citep{yang2013sequential}. Therefore, the ideal $r_i$ would be close to $\frac{\mbox{var}_{DA}\{\theta \} } {\bb E_{DA}  [  \mbox{var}_{DA}\{ \theta|z'\}]}$ so that $||{\bf F}_{CDA}||\approx 1 - p_0$. Both the numerator and the denominator often lack closed-forms for finite sample, but can be approximately estimated with a term proportional to the Fisher information. As the result, . In our study cases, all of the CDA's have large $p_0$, which is attributed to the distributional similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}.
 
 
-\section{Data Application in Online Advertisement Tracking}
+\section{Data Applications}
 
-We apply CDA to an online advertisement tracking data set.  The data set consists of $96$ different advertisements and $n=59,792$ originating websites, with the count of the number of click-throughs recorded for each combination.  The counts contain many zeros ($95.5\%$), as not all $96$ advertisements are shown on all the websites. For commercial interests, it is useful  to predict the traffic of the new advertisements using the existing ones. Therefore, we use the data of $95$ advertisements as predictors $x_i$ and the one left as the outcome $y_i$ for a count regression. We use training data collected from a two-week period, and a validation data set collected during another two-week window. 
+We apply CDA to an online browsing activity data. The dataset contains a two-way count table of users who visited one of $96$ client websites of interests, and one of the  $n=59,792$ high-traffic sites during the same browsing session. For simplicity, we name this behavior as ``co-browsing''. For each of the client websites, it is of large commercial interests to find out the high-traffic sites with relatively high co-browsing rates, so that the ads can be more effectively placed. For the ads company, it is also useful to understand the correlation and predict the traffic patterns among the clients. Therefore, We now consider two models in this section.
 
-\subsection{Binomial Random Effect Model}
+
+ % The data set consists of $96$ different advertisements and $n=59,792$ originating websites, with the count of the number of click-throughs recorded for each combination.  The counts contain many zeros ($95.5\%$), as not all $96$ advertisements are shown on all the websites. For commercial interests, it is useful  to predict the traffic of the new advertisements using the existing ones. Therefore, we use the data of $95$ advertisements as predictors $x_i$ and the one left as the outcome $y_i$ for a count regression. We use training data collected from a two-week period, and a validation data set collected during another two-week window. 
+
+\subsection{Hierarchical Binomial Model for Estimating Co-browsing Rates}
+
+We first illustrate CDA in the scenario when there are large number of the random effects that requires the data augmentation for their posterior sampling. We focus on one client website and analyze its co-browsing rates with the high-traffic ones. With the total visit count $N_i$ available for each high-traffic site, the count of co-browsing $y_i$ can be considered as the result of binomial trials. As the rates are often quite small ($0.00011 \pm  0.00093$) due to the dramatic difference between $y_i$ and $N_i$, using empirical ratio ${y_i}/{N_i}$ can lead to unrealistic estimate. For example, when $y_i=0$, estimating the rate as exactly $0$ is not ideal since it is merely a result of extremely low probability. Therefore, it is useful to consider a hierarchical model to allow borrowing of information across outcomes.
+
+\be
+y_i \sim \Binom\left(N_i, \frac{\exp(\theta_i)}{1+\exp(\theta_i)}\right), \quad \theta_i\stackrel{iid}{\sim} \No(\theta_0, \sigma^2_0), \quad i=1\ldots n\\
+(\theta_0,\sigma^2_0) \sim  \pi(\theta_0,\sigma^2_0) 
+\ee
+Based on expert opinion in quantitative advertising, we use a weakly informative prior $\theta_0\sim \No(-12,49)$ and non-informative prior on $\pi(\sigma^2_0)= 1/\sigma^2_0$. Similar to the logistic regression, we calibrate the binomial Polya-Gamma augmentation, leading to the proposal likelihood:
+
+\be
+L_r(\theta_i: y_i,N_i, r_i, b_i) = \frac{\exp(\theta_i+b_i)^y_i}{\{ 1+\exp(\theta_i+b_i)\}^{N_ir_i}}
+\ee
+
+Conditioned on the latent Polya-Gamma latent variable $z_i$, each proposal $\theta^*_i$ can be sampled from:
+
+\be
+z_i &\sim \PG\left ( (N_ir_i),\theta_i+b_i \right)\\
+\theta_i^* &\sim \No \left( \frac{ y_i - r_i N_i/2 -z_i b_i + \theta_0/\sigma^2_0}{z_i+ 1/\sigma^2_0}, \frac{1}{z_i+ 1/\sigma^2_0}\right),
+\ee
+and accepted / rejected using the M-H step. Since the $\theta_i$'s are conditionally independent, the calibrated proposal can be individually accepted with high probability for each $i$. This leads to a high average acceptance of $0.9$, despite of the high dimensionality $59,792$ of $\theta_i$'s.
+
+Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. We compare the result with the original DA \citep{polson2013bayesian}. We run each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample. All of the parameters mixes poorly in DA, caused by the small binomial probability; CDA leads to significant improvement that the autocorrelation rapidly decays to ignorable level within $5$ lags. Table~\ref{tab:binomial} lists the posterior mean and standard deviation for $\theta_0$ and $\sigma_0^2$, as well as the computing time per every $1,000$ steps. To provide a reference, we ran Hamiltonian Monte Carlo (HMC) provided by the Stan software \citep{carpenter2016stan}. HMC enjoys good mixing performance but is computationally intensive due to the numeric leapfrog steps. The parameter estimates from CDA and HMC are remarkably close, while slow mixing in the original DA caused poor estimates.
+
 
  \begin{figure}[H]
  % \centering
    \begin{subfigure}[b]{0.45\textwidth}
  \includegraphics[width=1\textwidth]{binomial_random_acf_da.pdf}
- \caption{Trace plots of three parameters from DA.}
+ \caption{ACFs of the rate parameters $\theta_i$ using DA.}
  \end{subfigure}
   \hfill 
  \begin{subfigure}[b]{0.45\textwidth}
  \includegraphics[width=1\textwidth]{binomial_random_acf_cda.pdf}
- \caption{Autocorrelation of all the 96 $\theta$'s from DA.}
+ \caption{ACFs of the rate parameters $\theta_i$ using CDA.}
  \end{subfigure} 
- \caption{Panels (c) and (d) show significant improvement of the mixing in Poisson data augmentation. Panel (d) show the CDA reduces the autocorrelation for all of the parameters.}
+ \caption{Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep{polson2013bayesian} and the CDA.}
  \label{data_binomial}
  \end{figure}
+ 
+ 
+ 
+\begin{table}[H]
+\centering
+\begin{tabular}{|l |r |r| r| r |} 
+ \hline
+                          & DA & CDA & HMC\\
+ [0.5ex]
+ \hline
+$\theta_0$                         & -9.33 (0.12)& -12.05 (0.02) &  -12.01 (0.02)\\
+$\sigma^2$         & 0.76 (0.10)&   7.70 (0.10)  & 7.67 (0.10)\\
+DIC  &      $3.6747 \times 10^7$  & $3.6663 \times 10^7$       & $3.6663 \times 10^7$\\
+Computing Time (per 1,000 steps)  & 20 mins       & 20 mins        & 200 mins\\
+ \hline
+\end{tabular}
+\caption{Parameter estimates and computing speed of the DA, CDA and HMC in hierarchical binomial model. CDA provides parameter estimates as accurate as HMC, while adds almost no computational cost based on DA.}
+\label{tab:binomial}
+\end{table}
 
 
-\subsection{Poisson Random Effect Model}
+\subsection{Poisson Regression for Web Traffic Prediction}
 
+We now focus on a slightly different problem: it is useful to predict the traffic to one client website, using the information from the other $95$. Therefore, we consider a Poisson regression model with random effects:
 
-
-One common practice to handle the large proportion of zeros is to use zero-inflated Poisson. However, for predictive modeling, this is suboptimal as it would require another set of coefficients to predict the latent binary event, e.g. $y_i\sim p\left( g(x_i\eta)\right)  \delta_0+ \{ 1-p\left( g(x_i \eta) \right) \} Poisson\{\exp (x_i \theta)\}$, while does not solve the slow mixing issue (see appendix). Instead, it is rather useful to consider a simpler model  $y_i\sim Poisson\{\exp(\theta_0+ \sum_j x_{i,j}\theta_j)\}$ with a quite negative intercept $\theta_0$.
-
-It is known that the posterior sampling for Poisson is hindered by slow mixing, which is especially worse with large amount of zeros. The traditional M-H lacks a good strategy to propose multidimensional variables ($p=96$ in this case). There is a Gibbs sampling strategy, first discovered by \citep{zhou2012lognormal} with negative binomial approximation. We further simplify and present the algorithm.
-
-The Poisson density can be viewed as a limit:
 \be
-L(\xbeta;y)=\frac{ \exp(y_i \xbeta)}{\exp\{\exp(\xbeta)\}y!} =\lim_{\lambda\rightarrow\infty}\frac{\exp(y_i \xbeta)}{\{1+ \exp(\xbeta)/\lambda\}^{\lambda}y!}.
+y_i \sim \Poi\left( \tau_i \exp  (\xbeta )\right),  \quad \tau_i\stackrel{iid}{\sim} \Ga(1, 1), \quad i=1\ldots n\\
+\theta \sim  \No(0,\Sigma).
 \ee
 
-With large but finite $\lambda$ (e.g. $10,000$), one can sample from the approximate posterior:
+Since the dimensionality of the fixed effect random parameters $\theta$ is moderately large ($96$ with the intercept), we assign a diffuse prior with $\Sigma= I\cdot 100$. To allow over-dispersion, we use a gamma prior for $\tau_i$ with prior mean $1$, and the random effect can be sampled from $\tau_i \sim \Ga\left(1+y_i, 1+\exp(\xbeta) \right)$. As an alternative, one can assign normal random effect $\log \tau_i \sim N(0,\sigma^2_0)$ and use CDA to sample its posterior given $\xbeta$, similar to the binomial example. For simplicity, we choose Gamma prior for $\tau$ for its closed-form posterior.
+
+The data augmentation for Poisson log-normal model is much less known. \cite{zhou2012lognormal} proposed to utilize a limit form. We present a simplified form:
 
 \be
-z_i \sim & \PG\left (\lambda, \xbeta -\log \lambda\right)\\
-\theta \sim & \No \left( \big[ (X' ZX )^{-1} X'  \big ( y - \lambda/2 + z \log \lambda \big) ,(X' Z X )^{-1} \right)
+L(\xbeta,\tau_i;y)=\frac{\tau_i^{y_i}}{ y!}\frac{ \exp(y_i \xbeta) }{\exp\{\tau_i\exp(\xbeta)\}} =\frac{\tau_i^{y_i}}{ y!} \lim_{\lambda\rightarrow\infty}\frac{\exp(y_i \xbeta)}{\{1+ \exp(\xbeta + \log \tau_i)/\lambda\}^{\lambda}}.
 \ee
 
-The problem with this DA is that as $\lambda$ increases, the accuracy is improved but the large $z$ quickly reduces the conditional variance for $\theta$, creating mixing bottleneck. It inevitably becomes a dilemma to trade between accuracy or mixing rate in choosing $\lambda$.
-
-As $\lambda$ control the magnitude of the latent $z$, the calibration is straightforward by replacing $\lambda$ with small $r_i$ and $-\log \lambda$ with $b_i$, giving the calibrated likelihood:
+\cite{zhou2012lognormal} used a moderate $\lambda=1,000$ to approximate the likelihood, hence enabled a Polya-Gamma augmented sampling:
 
 \be
-L_r(\xbeta;y)=\frac{\exp \{ y_i (\xbeta + b_i)\}}{\{1+ \exp (\xbeta + b_i)\}^{r_i}},
+z_i \sim & \PG\left (\lambda, \xbeta + \log \tau_i-\log \lambda\right)\\
+\theta \sim & \No \left( \big[ (X' Z X+  0.01 \cdot I )^{-1}  X'  \big ( y - \lambda/2 - z (\log \tau_i-\log \lambda)\big) ,(X' Z X+  0.01 \cdot I )^{-1} \right)
 \ee
-which generates the same sampling algorithm as the CDA in logit regression, except that $r_i>y_i$ to ensure the posterior properiety.
 
-We run the approximate DA with large $\lambda=10,000$ and the exact CDA for posterior computation. For CDA, we adapt for $100$ iterations and reaches an acceptance rate of $0.6$. We then run each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample.
+ However, this augmentation has a critical issue: we discover that $\lambda$ needs to be much larger to ensure low approximation error. With $\eta_i=\xbeta + \log\tau_i$, the log of the denominator on the right hand side has $\lambda\log(1+\exp\left(\eta_i)/\lambda\right)= \exp(\eta_i) + \bigO(\exp(2\eta_i)/\lambda)$, hence $\lambda$ needs to be around $10^9$ to accommodate moderately large $\eta_i \approx 10$. On the other hand, large $\lambda$ would lead to extremely large $z_i$ and hence very slow mixing.
 
-The mixing of DA and CDA is compared in traceplots and autocorrelation plots in Figure~\ref{data_poisson}. DA shows slow mixing for several parameters (Figure\ref{acf_poi_da}), including the important intercept estimate $\theta_0$ (first plot in Figure\ref{traceplot_poi_da}). After calibration, the slow mixing problem is solved:  {\it all} of 96 parameters show very low autocorrelation.
+Using the calibration on the Polya-Gamma augmentation, we obtain the calibrated proposal likelihood:
+
+\be
+L_r(\xbeta;y_i)=\frac{\exp(\xbeta  +\log \tau_i -\log \lambda +b_i)^{y_i}}{\{1+ \exp(\xbeta + \log \tau_i -\log \lambda +b_i)\}^{\lambda r_i}},
+\ee
+and update rule:
+
+\be
+z_i \sim & \PG\left (\lambda r_i, \xbeta + \log \tau_i-\log \lambda+b_i\right)\\
+\theta^{*} \sim & \No \left( \big[ (X' Z X+  0.01 \cdot I )^{-1}  X'  \big ( y - \lambda r/2 - z (\log \tau_i-\log \lambda + b)\big) ,(X' Z X+  0.01 \cdot I )^{-1} \right),
+\ee
+with acceptance probability.
+\be
+1 \wedge \prod_i  \frac{ \exp \{ \tau_i\exp (\xbeta)\}}{ \exp \{ \tau_i\exp (\xbeta^*)\}} \frac {{\{1+ \exp(\xbeta^{*} + \log \tau_i -\log \lambda +b_i)\}^{\lambda r_i}}}{{\{1+ \exp(\xbeta + \log \tau_i -\log \lambda +b_i)\}^{\lambda r_i}}},
+\ee
+which is based on the exact Poisson log-normal density.
+
+To compare the mixing performance, we run the approximate DA with supposedly efficient albeit inaccurate $\lambda=1,000$, the CDA with $\lambda=10^9$ in the M-H proposal and the HMC. We ran each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample. For CDA, we used the first $1,000$ steps for adaptating $r$ and $b$, and obtained an acceptance rate of $0.6$. Figure~\ref{data_poisson} shows the mixings of DA and CDA. Even with relatively moderate $\lambda$, the DA still shows very slow mixing that all of the parameters mixes poorly; the CDA substantially improves the mixing.
 
  \begin{figure}[H]
  % \centering
-   \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{traceplot_poisson_da}
- \caption{Trace plots of three parameters from DA.}
-  \label{traceplot_poi_da}
- \end{subfigure}
-  \hfill 
- \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{poisson_da_acf.pdf}
- \caption{Autocorrelation of all the 96 $\theta$'s from DA.}
-   \label{acf_poi_da}
- \end{subfigure} 
   \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{traceplot_poisson_cda}
- \caption{Trace plots of three parameters from CDA.}
-  \label{traceplot_poi_ada}
+ \includegraphics[width=1\textwidth]{poisson_acf_da}
+ \caption{Autocorrelation of the parameters from DA.}
  \end{subfigure}
   \hfill 
  \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{poisson_cda_acf.pdf}
- \caption{Autocorrelation of all the 96 $\theta$'s from CDA.}
-   \label{acf_poi_ada}
+ \includegraphics[width=1\textwidth]{poisson_acf_cda}
+ \caption{Autocorrelation of the parameters from CDA.}
  \end{subfigure}
- \caption{Panels (c) and (d) show significant improvement of the mixing in Poisson data augmentation. Panel (d) show the CDA reduces the autocorrelation for all of the parameters.}
+ \caption{CDA significantly improves the mixing of the parameters in the Poisson log-normal.}
  \label{data_poisson}
  \end{figure}
 
-
-To empirically evaluate the accuracy of the estimates, we also run Hamiltonian Monte Carlo (HMC) as the reference. HMC is known for its good mixing properties, despite of its costly evaluation. We list the parameter estimates and fit statistics in Table~\ref{table:Poisson}. For simplicity, we include the posterior mean and standard deviation for the intercept $\theta_0$ and the norm of the coefficients $\sum_{j=0}^{95} |\theta_j|$. For goodness-of-fit, we compute root-mean-squared error $RMSE= \sqrt{ \sum_{i=1}^n  (y_i-\mu_i)^2/n}$ and the deviance $D=2\sum_{i=1}^n \{ y_i \log(y_i/\mu_i) -(y_i-\mu_i)\}$, with $\mu_i=\exp( x_i{\hat\theta})$ and ${\hat\theta}$ as the posterior mean. For prediction performance, we use the testing dataset and $\hat y_{i,new}=\exp( x_{i,new}{\hat\theta})$ as the estimator. We evaluate the cross-validation RMSE between $y_{i,new}$ and $\hat y_{i,new}$.
-
-As expected, the estimates for $\theta_0$ from all models are quite negative. However, the DA severely underestimates the variance of the intercept. The coefficient norm also differs greatly from CDA and HMC. Obviously, the poor mixing causes the Markov chain in DA to be trapped in a suboptimal state. After calibration, CDA performs exceptionally well in fit statistics and the validation error that is almost $4$ times lower. The results of CDA and HMC are nearly identical (see appendix for more comparison).
-
-Lastly, it is worth to compare the computing time needed for the three methods. The CDA operates at almost the same cost as the original DA in each iteration. After the extra adaptation period (about $100$ iterations), CDA quickly converges to the target in the first few iterations; whereas DA seems to be stuck even after $2,000$ iterations. HMC is computationally intensive as it requires evaluation of the gradient and multiple Hamiltonian steps in generating a proposal, therefore the speed is about $10$ times slower; and the adaptation in both step size and step number is also time-consuming. In conclusion, CDA is most computationally efficient.
+Table~\ref{table:Poisson} lists the comparison for all three models. We include the posterior mean and standard deviation of the $1$-norm of the coefficients $\sum_{j=0}^{95} |\theta_j|$. For goodness-of-fit, we compute the root-mean-squared error $\text{RMSE}= \sqrt{ \sum_{i=1}^n  (y_i-\hat\tau_i\exp( x_i{\hat\theta}))^2/n}$ with ${\hat\theta}$ and $\hat\tau$ as the posterior mean. To evaluate the prediction performance, we use another validation dataset and $\hat y_{i,new}=\hat\tau_i\exp( x_{i,new}{\hat\theta})$ as the predictor. We evaluate the cross-validation RMSE between $y_{i,new}$ and $\hat y_{i,new}$. CDA and HMC perform quite well and the validation error that is $4$ times lower than DA. Like the binomial application, the CDA is almost 10 times faster than HMC.
 
 
 \begin{table}[H]
@@ -456,29 +506,26 @@ Lastly, it is worth to compare the computing time needed for the three methods. 
                           & DA & CDA & HMC\\
  [0.5ex]
  \hline
-$\theta_0$                         & -4.21 (0.042)& -4.38 (0.075) & -4.47 (0.071) \\
-$\sum_{j=0}^{95} |\theta_j|$         & 12.24 (0.10)&  8.58 (0.11)  & 8.68 (0.11)  \\
-RMSE                              & 32.86        & 5.06          & 4.88\\
-D                                 & 182127.7     & 107076.9      & 106791.3\\
-CV-RMSE                           & 32.01        & 8.61          & 8.28\\
-Steps for Adaptation \& Burn-in                & 2000         & 100            & 500 \\
-Computing Speed (per 1,000 steps)  & 25 mins       & 26 mins        & 300 mins\\
+$\sum_{j=0}^{95} |\theta_j|$         & 11.53 (0.10)&  7.42 (0.11)  & 7.51 (0.11)  \\
+RMSE                              & 30.83        & 4.03          & 4.38\\
+DIC                                 & $-4.1131 \times 10^5$     & $-5.1953 \times 10^5$      & $-5.1954 \times 10^5$\\
+CV-RMSE                           & 33.21        & 8.52          & 8.18\\
+Computing Time (per 1,000 steps)  & 25 mins       & 26 mins        & 300 mins\\
  \hline
 \end{tabular}
-\caption{Performance of DA, CDA and HMC in Poisson log-linear regression with online advertisement tracking data. Posterior estimates for the intercept and the norm of the coefficients are shown. The CDA shows much improved fit statistics such as root-mean-squared error (RMSE) and deviance (D). In cross-validation (CV-RMSE), the CDA outperforms DA in nearly $4$ times lower in error. The CDA converges much more rapidly than DA. CDA agrees with the HMC very well but takes significantly less time and the adaptation is simpler.}
+\caption{Parameter estimates and computing speed of the DA, CDA and HMC in Poisson regression model. CDA shows similar performance as HMC in both parameter estimation and cross-validation in prediction, but is about 10 times faster.}
 \label{table:Poisson}
 \end{table}
 
-
 \section{Discussion}
 
-In posterior sampling, when the parameters lack closed-form in the marginal distribution, data augmentation is a useful technique. It has been realized that this practice could severely stall the mixing, due to the gap between the conditional variance with the augmented data and the marginal one. With data size increases and become complex, it is common for the conditional distribution of the parameter to deviate from the area that has reasonable mixing performance. As we show in the previous examples, this quickly leads to an un-manageable increase in the computational time and poor estimation. On the other hand, it is not feasible to directly use the marginals with Metropolis-Hastings, when the parameters are in multi-dimensions, since it is challenging  finding a proposal with the right correlation structure.
+In posterior sampling, when the parameters lack closed-form in the marginal distribution, data augmentation is a useful technique. It has been realized that this practice could severely stall the mixing, due to the gap between the conditional variance with the augmented data and the marginal one. With data size increases and become complex, it is common for the conditional distribution of the parameter to deviate from the area that has reasonable mixing performance. As we show in the previous examples, this quickly leads to an un-manageable increase in the computational time and poor estimation.
 
-To solve this problem, we propose a general class of method to calibrate the variance conditional on the latent variable. With a mechanism to adjust the step size, the transition in each iteration is corrected onto the same order of the marginal variance. The generated samples are used as proposal in the Metropolis-Hastings for exact posterior. In this article, we demonstrate that this strategy is applicable when $\theta \mid z$ belongs to the location-scale family. We expect that it can be extensible to any distribution with a variance / scale, possibly with a different bias-reducing machineary.
+To solve this problem, we propose a general class of method to calibrate the variance conditional on the latent variable. With a mechanism to adjust the step size, the transition in each iteration is corrected onto the same order of the marginal variance. The generated samples are used as proposal in the Metropolis-Hastings for exact posterior. In this article, we demonstrate that this strategy is applicable when $\theta \mid z$ belongs to the location-scale family. We expect that it can be extensible to any distribution with a variance / scale, possibly with a different bias-reducing mechanism.
 
-There is some similarity between CDA and HMC. Both algorithms excel in seeking proposal with high acceptance rate. The difference is that when the Hamiltonian lacks  closed-form solution (which is mostly true), it requires multiple steps numeric evaluations of the dynamics for one step; whereas CDA only needs one step. Therefore, when the data augmentation exists, CDA is always more preferable.
+There is some similarity between CDA and HMC. Both algorithms excel in seeking proposal with high acceptance rate. The difference is that quite often, the Hamiltonian lacks closed-form solution, and requires multiple steps numeric evaluations of the dynamics for one proposal; whereas CDA only needs one step. Therefore, when the data augmentation exists, CDA is always more efficient in computation.
 
-In this article, we insist on obtaining the exact posterior, to provide a rigorous analysis on the mixing property. Without the Metropolis-Hastings step, the sampling strategy in calibrated data augmentation can be used alone to generate approximate posterior. This can be useful when the evaluation of the marginal likelihood is costly. 
+In this article, we insist on obtaining the exact posterior, to provide an analysis on the mixing property. Without the Metropolis-Hastings step, the sampling strategy in calibrated data augmentation can be used alone to generate approximate posterior. This can be useful when the evaluation of the marginal likelihood is costly.
 
 \bibliography{reference}
 \bibliographystyle{plainnat}

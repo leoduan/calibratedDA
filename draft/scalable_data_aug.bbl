@@ -1,0 +1,165 @@
+\begin{thebibliography}{25}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Albert and Chib(1993)]{albert1993bayesian}
+James~H Albert and Siddhartha Chib.
+\newblock {Bayesian} analysis of binary and polychotomous response data.
+\newblock \emph{Journal of the American statistical Association}, 88\penalty0
+  (422):\penalty0 669--679, 1993.
+
+\bibitem[Carpenter et~al.(2016)Carpenter, Gelman, Hoffman, Lee, Goodrich,
+  Betancourt, Brubaker, Guo, Li, and Riddell]{carpenter2016stan}
+Bob Carpenter, Andrew Gelman, Matt Hoffman, Daniel Lee, Ben Goodrich, Michael
+  Betancourt, Michael~A Brubaker, Jiqiang Guo, Peter Li, and Allen Riddell.
+\newblock Stan: A probabilistic programming language.
+\newblock \emph{J Stat Softw}, 2016.
+
+\bibitem[Conrad et~al.(2015)Conrad, Marzouk, Pillai, and
+  Smith]{conrad2015accelerating}
+Patrick~R Conrad, Youssef~M Marzouk, Natesh~S Pillai, and Aaron Smith.
+\newblock Accelerating asymptotically exact mcmc for computationally intensive
+  models via local approximations.
+\newblock \emph{Journal of the American Statistical Association}, \penalty0
+  ((to appear)), 2015.
+
+\bibitem[Cressie et~al.(1981)Cressie, Davis, Folks, and
+  Folks]{cressie1981moment}
+Noel Cressie, Anne~S Davis, J~Leroy Folks, and J~Leroy Folks.
+\newblock The moment-generating function and negative integer moments.
+\newblock \emph{The American Statistician}, 35\penalty0 (3):\penalty0 148--150,
+  1981.
+
+\bibitem[Fill(1991)]{fill1991eigenvalue}
+James~Allen Fill.
+\newblock Eigenvalue bounds on convergence to stationarity for nonreversible
+  markov chains, with an application to the exclusion process.
+\newblock \emph{The annals of applied probability}, pages 62--87, 1991.
+
+\bibitem[Hairer et~al.(2011)Hairer, Mattingly, and
+  Scheutzow]{hairer2011asymptotic}
+Martin Hairer, Jonathan~C Mattingly, and Michael Scheutzow.
+\newblock Asymptotic coupling and a general form of harris’ theorem with
+  applications to stochastic delay equations.
+\newblock \emph{Probability Theory and Related Fields}, 149\penalty0
+  (1-2):\penalty0 223--259, 2011.
+
+\bibitem[Hairer et~al.(2014)Hairer, Stuart, Vollmer,
+  et~al.]{hairer2014spectral}
+Martin Hairer, Andrew~M Stuart, Sebastian~J Vollmer, et~al.
+\newblock Spectral gaps for a {Metropolis--Hastings} algorithm in infinite
+  dimensions.
+\newblock \emph{The Annals of Applied Probability}, 24\penalty0 (6):\penalty0
+  2455--2490, 2014.
+
+\bibitem[Johndrow et~al.(2016)Johndrow, Smith, Pillai, and
+  Dunson]{johndrow2016inefficiency}
+James~E Johndrow, Aaron Smith, Natesh Pillai, and David~B Dunson.
+\newblock Inefficiency of data augmentation for large sample imbalanced data.
+\newblock \emph{arXiv preprint arXiv:1605.05798}, 2016.
+
+\bibitem[Liu(1994)]{liu1994collapsed}
+Jun~S Liu.
+\newblock The collapsed gibbs sampler in bayesian computations with
+  applications to a gene regulation problem.
+\newblock \emph{Journal of the American Statistical Association}, 89\penalty0
+  (427):\penalty0 958--966, 1994.
+
+\bibitem[Liu(2008)]{liu2008monte}
+Jun~S Liu.
+\newblock \emph{{Monte Carlo} strategies in scientific computing}.
+\newblock Springer Science \& Business Media, 2008.
+
+\bibitem[Liu and Wu(1999)]{liu1999parameter}
+Jun~S Liu and Ying~Nian Wu.
+\newblock Parameter expansion for data augmentation.
+\newblock \emph{Journal of the American Statistical Association}, 94\penalty0
+  (448):\penalty0 1264--1274, 1999.
+
+\bibitem[Meng and Van~Dyk(1999)]{meng1999seeking}
+Xiao-Li Meng and David~A Van~Dyk.
+\newblock Seeking efficient data augmentation schemes via conditional and
+  marginal augmentation.
+\newblock \emph{Biometrika}, 86\penalty0 (2):\penalty0 301--320, 1999.
+
+\bibitem[Meyn and Tweedie(2012)]{meyn2012markov}
+Sean~P Meyn and Richard~L Tweedie.
+\newblock \emph{Markov chains and stochastic stability}.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem[Minsker et~al.(2014)Minsker, Srivastava, Lin, and
+  Dunson]{minsker2014robust}
+Stanislav Minsker, Sanvesh Srivastava, Lizhen Lin, and David~B Dunson.
+\newblock Robust and scalable bayes via a median of subset posterior measures.
+\newblock \emph{arXiv preprint arXiv:1403.2660}, 2014.
+
+\bibitem[Ngai et~al.(2011)Ngai, Hu, Wong, Chen, and Sun]{ngai2011application}
+EWT Ngai, Yong Hu, YH~Wong, Yijun Chen, and Xin Sun.
+\newblock The application of data mining techniques in financial fraud
+  detection: A classification framework and an academic review of literature.
+\newblock \emph{Decision Support Systems}, 50\penalty0 (3):\penalty0 559--569,
+  2011.
+
+\bibitem[Papaspiliopoulos et~al.(2007)Papaspiliopoulos, Roberts, and
+  Sk{\"o}ld]{papaspiliopoulos2007general}
+Omiros Papaspiliopoulos, Gareth~O Roberts, and Martin Sk{\"o}ld.
+\newblock A general framework for the parametrization of hierarchical models.
+\newblock \emph{Statistical Science}, pages 59--73, 2007.
+
+\bibitem[Polson et~al.(2013)Polson, Scott, and Windle]{polson2013bayesian}
+Nicholas~G Polson, James~G Scott, and Jesse Windle.
+\newblock {Bayesian} inference for logistic models using p{\'o}lya--gamma
+  latent variables.
+\newblock \emph{Journal of the American statistical Association}, 108\penalty0
+  (504):\penalty0 1339--1349, 2013.
+
+\bibitem[Rajaratnam and Sparks(2015)]{rajaratnam2015mcmc}
+Bala Rajaratnam and Doug Sparks.
+\newblock {MCMC}-based inference in the era of big data: A fundamental analysis
+  of the convergence complexity of high-dimensional chains.
+\newblock \emph{arXiv preprint arXiv:1508.00947}, 2015.
+
+\bibitem[Roberts et~al.(2004)Roberts, Rosenthal, et~al.]{roberts2004general}
+Gareth~O Roberts, Jeffrey~S Rosenthal, et~al.
+\newblock General state space {Markov chains and MCMC algorithms}.
+\newblock \emph{Probability Surveys}, 1:\penalty0 20--71, 2004.
+
+\bibitem[Srivastava et~al.(2015)Srivastava, Cevher, Tran-Dinh, and
+  Dunson]{srivastava2015wasp}
+Sanvesh Srivastava, Volkan Cevher, Quoc Tran-Dinh, and David~B Dunson.
+\newblock Wasp: Scalable bayes via barycenters of subset posteriors.
+\newblock In \emph{AISTATS}, 2015.
+
+\bibitem[Tanner and Wong(1987)]{tanner1987calculation}
+Martin~A Tanner and Wing~Hung Wong.
+\newblock The calculation of posterior distributions by data augmentation.
+\newblock \emph{Journal of the American statistical Association}, 82\penalty0
+  (398):\penalty0 528--540, 1987.
+
+\bibitem[Wakefield(2007)]{wakefield2007disease}
+Jon Wakefield.
+\newblock Disease mapping and spatial regression with count data.
+\newblock \emph{Biostatistics}, 8\penalty0 (2):\penalty0 158--183, 2007.
+
+\bibitem[Wang et~al.(2010)Wang, Li, Cui, Zhang, and Mao]{wang2010click}
+Xuerui Wang, Wei Li, Ying Cui, Ruofei Zhang, and Jianchang Mao.
+\newblock Click-through rate estimation for rare events in online advertising.
+\newblock \emph{Online Multimedia Advertising: Techniques and Technologies},
+  pages 1--12, 2010.
+
+\bibitem[Yang and Dunson(2013)]{yang2013sequential}
+Yun Yang and David~B Dunson.
+\newblock Sequential markov chain monte carlo.
+\newblock \emph{arXiv preprint arXiv:1308.3861}, 2013.
+
+\bibitem[Zhou et~al.(2012)Zhou, Li, Dunson, and Carin]{zhou2012lognormal}
+Mingyuan Zhou, Lingbo Li, David Dunson, and Lawrence Carin.
+\newblock Lognormal and gamma mixed negative binomial regression.
+\newblock In \emph{Machine learning: proceedings of the International
+  Conference. International Conference on Machine Learning}, volume 2012, page
+  1343. NIH Public Access, 2012.
+
+\end{thebibliography}

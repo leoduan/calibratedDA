@@ -107,7 +107,7 @@ SEXP probit_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin = 500, int run = 500,
       r(find(r < 1)).fill(1);
     }
 
-    if (c11r.runif() < prod(mh) & mh.is_finite()) {
+    if ((c11r.runif() < prod(mh)) & mh.is_finite()) {
       beta = new_beta;
       Xbeta = new_Xbeta;
       prob = new_prob;

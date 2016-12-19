@@ -2,8 +2,9 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
-                 int run = 500, int fixR = false, double bigR = 20) {
+SEXP poisson_reg(SEXP y, SEXP X, double r_ini = 1, int tune = 100,
+                 int burnin = 500, int run = 500, bool fixR = false,
+                 double C = 1E4, double c_ini = 1, bool MH = true) {
   C11RNG c11r;
 
   Rcpp::NumericVector yr(y);
@@ -14,33 +15,48 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
   int n = X_mat.n_rows;
   int p = X_mat.n_cols;
 
-  // vec beta = ones(p);
   vec beta = solve(X_mat.t() * X_mat, X_mat.t() * log(y_vec + 1));
   vec Xbeta = X_mat * beta;
 
-  vec r = ones(n);
+  vec r = ones(n) * r_ini;
   vec b = zeros(n);
 
+  double c = c_ini;
+
+  double logC = log(C);
+
   vec loglik = -exp(Xbeta);
+  double max_loglik = -INFINITY;
 
   mat trace_beta(run, p);
+  mat trace_proposal(run, p);
+  vec trace_accept_alpha(run);
 
   int accept = 0;
   int tune_accept = 0;
+  vec r0 = ones(n);
 
   for (int i = 0; i < (burnin + run); ++i) {
     if (i < tune) {
-      vec dprob = exp(Xbeta);
-      r = dprob / (tanh(abs(Xbeta) / 2.0) / 2.0 / abs(Xbeta));
-      uvec bigXbeta = find(Xbeta > -2);
-      r(bigXbeta) = exp(Xbeta(bigXbeta)) * bigR;
-      b = log(r) + log(exp(exp(Xbeta - log(y_vec + r))) - 1) - Xbeta;
+      if (!fixR) {
+        if (max_loglik < accu(loglik)) {
+          vec dprob = exp(Xbeta);
+          r0 = dprob / (tanh(abs(Xbeta + b - logC) / 2.0) / 2.0 /
+                        abs(Xbeta + b - logC)) /
+               C;
+        }
+        r = r0 * c;
+        r(find(r > 1)).fill(1);
+        r(find(r * C < y_vec)) = y_vec(find(r * C < y_vec)) / C;
+
+        b = log(exp(exp(Xbeta - logC - log(r))) - 1.0) - Xbeta + logC;
+        b(find_nonfinite(b)) = -log(r(find_nonfinite(b)));
+        max_loglik = accu(loglik);
+      }
     }
 
-    // compute  Xbeta
-
-    vec alpha1 = r + y_vec;
-    vec alpha2 = abs(Xbeta + b - log(r));
+    vec alpha1 = r * C;
+    vec alpha2 = abs(Xbeta + b - logC);
     vec Z = rpg(alpha1, alpha2);
 
     mat ZX_tilde = X_mat.each_col() % Z;
@@ -48,7 +64,7 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
     mat cholInvV = chol(invV);
     mat V = inv(invV);
 
-    vec k = y_vec - (y_vec + r) / 2.0 - Z % (b - log(r));
+    vec k = y_vec - (r * C) / 2.0 - Z % (b - logC);
 
     vec m = V * (X_mat.t() * k);
 
@@ -58,15 +74,15 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
 
     // compute likelihood
     vec new_loglik = -exp(new_Xbeta);
-    vec q_loglik = -(y_vec + r) % log(1 + exp(Xbeta + b) / r);
-    vec new_q_loglik = -(y_vec + r) % log(1 + exp(new_Xbeta + b) / r);
+    vec q_loglik = -C * r % log(1 + exp(Xbeta + b - logC));
+    vec new_q_loglik = -C * r % log(1 + exp(new_Xbeta + b - logC));
 
     // metropolis-hastings
 
     vec alpha = new_loglik + q_loglik - loglik - new_q_loglik;
-    alpha(find_nonfinite(alpha)).ones();
+    alpha(find_nonfinite(alpha)).fill(10);
 
-    if (log(c11r.runif()) < accu(alpha)) {
+    if (log(c11r.runif()) < accu(alpha) || !MH) {
       beta = new_beta;
       Xbeta = new_Xbeta;
       loglik = new_loglik;
@@ -77,6 +93,10 @@ SEXP poisson_reg(SEXP y, SEXP X, int tune = 100, int burnin = 500,
     if (i < tune) {
       cout << exp(accu(alpha)) << endl;
       cout << (double)tune_accept / (double)(i + 1) << endl;
+      if (i > 50)
+        c *= exp((0.6 - (double)tune_accept / (double)(i + 1)) / 10.0);
+      if (c < 1) c = 1;
+      if (!MH) c = c_ini;
     }
 
     cout << i << endl;

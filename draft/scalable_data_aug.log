@@ -1,0 +1,526 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  18 DEC 2016 22:06
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**scalable_data_aug.tex
+(./scalable_data_aug.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2016/05/09 v1.1c Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 144.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip43
+\bibsep=\skip44
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count88
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 96.
+)
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count89
+\rotFPtop=\skip45
+\rotFPbot=\skip46
+\rot@float@box=\box26
+\rot@mess@toks=\toks15
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen105
+\captionmargin@=\dimen106
+\captionwidth=\dimen107
+\caption@tempdima=\dimen108
+\caption@indent=\dimen109
+\caption@parindent=\dimen110
+\caption@hangindent=\dimen111
+)
+\c@ContinuedFloat=\count90
+Package caption Info: rotating package is loaded.
+)
+\c@subfigure=\count91
+\c@subtable=\count92
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count93
+\float@exts=\toks16
+\float@box=\box27
+\@float@everytoks=\toks17
+\@floatcapt=\box28
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks18
+\thm@bodyfont=\toks19
+\thm@headfont=\toks20
+\thm@notefont=\toks21
+\thm@headpunct=\toks22
+\thm@preskip=\skip47
+\thm@postskip=\skip48
+\thm@headsep=\skip49
+\dth@everypar=\toks23
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/03/10 v2.15b AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks24
+\ex@=\dimen112
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen113
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count94
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count95
+\leftroot@=\count96
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count97
+\DOTSCASE@=\count98
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box29
+\strutbox@=\box30
+\big@size=\dimen114
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
+\macc@depth=\count99
+\c@MaxMatrixCols=\count100
+\dotsspace@=\muskip10
+\c@parentequation=\count101
+\dspbrk@lvl=\count102
+\tag@help=\toks25
+\row@=\count103
+\column@=\count104
+\maxfields@=\count105
+\andhelp@=\toks26
+\eqnshift@=\dimen115
+\alignsep@=\dimen116
+\tagshift@=\dimen117
+\tagwidth@=\dimen118
+\totwidth@=\dimen119
+\lineht@=\dimen120
+\@envbody=\toks27
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks28
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+\c@theorem=\count106
+\c@lemma=\count107
+\c@corollary=\count108
+\c@remark=\count109
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+\@float@every@algorithm=\toks29
+\c@algorithm=\count110
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count111
+\c@ALG@rem=\count112
+\c@ALG@nested=\count113
+\ALG@tlm=\skip53
+\ALG@thistlm=\skip54
+\c@ALG@Lnr=\count114
+\c@ALG@blocknr=\count115
+\c@ALG@storecount=\count116
+\c@ALG@tmpcounter=\count117
+\ALG@tmplength=\skip55
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/mhequ/mhequ.sty
+Package: mhequ 
+\@MHnocols=\count118
+\@MHnocolstot=\count119
+\@MHLength=\count120
+\MHcenter=\skip56
+\MHbig=\skip57
+\@MHlineskip=\skip58
+\MHC@ls=\count121
+\MHt@tc@ls=\count122
+\MHrem@inc@ls=\count123
+)
+(./scalable_data_aug.aux
+
+LaTeX Warning: Label `eq:mh-criterion' multiply defined.
+
+)
+\openout1 = `scalable_data_aug.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+ (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count124
+\scratchdimen=\dimen121
+\scratchbox=\box31
+\nofMPsegments=\count125
+\nofMParguments=\count126
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count127
+\MPscratchDim=\dimen122
+\MPnumerator=\count128
+\makeMPintoPDFobject=\count129
+\everyMPtoPDFconversion=\toks31
+) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 83.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 83.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+ [4]
+<probit_demo_acf_prop.pdf, id=31, 361.35pt x 216.81pt>
+File: probit_demo_acf_prop.pdf Graphic file (type pdf)
+
+<use probit_demo_acf_prop.pdf>
+Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 178.
+(pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
+
+<density_probit.pdf, id=32, 361.35pt x 216.81pt>
+File: density_probit.pdf Graphic file (type pdf)
+ <use density_probit.pdf>
+Package pdftex.def Info: density_probit.pdf used on input line 184.
+(pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
+
+<probit_demo_acf.pdf, id=33, 361.35pt x 216.81pt>
+File: probit_demo_acf.pdf Graphic file (type pdf)
+ <use probit_demo_acf.pdf>
+Package pdftex.def Info: probit_demo_acf.pdf used on input line 190.
+(pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
+
+[5] <probit15_trace_plot.pdf, id=37, 433.62pt x 259.97125pt>
+File: probit15_trace_plot.pdf Graphic file (type pdf)
+
+<use probit15_trace_plot.pdf>
+Package pdftex.def Info: probit15_trace_plot.pdf used on input line 219.
+(pdftex.def)             Requested size: 212.16118pt x 127.20058pt.
+ <probit15_acf.pdf, id=38, 361.35pt x 216.81pt>
+File: probit15_acf.pdf Graphic file (type pdf)
+
+<use probit15_acf.pdf>
+Package pdftex.def Info: probit15_acf.pdf used on input line 225.
+(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
+ [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>
+] [7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>]
+<logit_demo_trace_plot.pdf, id=74, 361.35pt x 216.81pt>
+File: logit_demo_trace_plot.pdf Graphic file (type pdf)
+
+<use logit_demo_trace_plot.pdf>
+Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 281.
+(pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
+
+<logit_demo_acf.pdf, id=75, 361.35pt x 216.81pt>
+File: logit_demo_acf.pdf Graphic file (type pdf)
+ <use logit_demo_acf.pdf>
+Package pdftex.def Info: logit_demo_acf.pdf used on input line 286.
+(pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
+
+[8] [9 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [10] [11] [12]
+<binomial_random_acf_da.pdf, id=102, 361.35pt x 216.81pt>
+File: binomial_random_acf_da.pdf Graphic file (type pdf)
+
+<use binomial_random_acf_da.pdf>
+Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 407.
+(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
+
+<binomial_random_acf_cda.pdf, id=103, 361.35pt x 216.81pt>
+File: binomial_random_acf_cda.pdf Graphic file (type pdf)
+
+<use binomial_random_acf_cda.pdf>
+Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 412.
+(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
+ [13 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf>] [14] <pois
+son_acf_da.pdf, id=123, 361.35pt x 216.81pt>
+File: poisson_acf_da.pdf Graphic file (type pdf)
+
+<use poisson_acf_da.pdf>
+Package pdftex.def Info: poisson_acf_da.pdf used on input line 487.
+(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
+ <poisson_acf_cda.pdf, id=124, 361.35pt x 216.81pt>
+File: poisson_acf_cda.pdf Graphic file (type pdf)
+
+<use poisson_acf_cda.pdf>
+Package pdftex.def Info: poisson_acf_cda.pdf used on input line 492.
+(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
+ [15 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf>]
+(./scalable_data_aug.bbl [16]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [17]) [18]
+<traceplot_poisson_zip_da.pdf, id=147, 433.62pt x 433.62pt>
+File: traceplot_poisson_zip_da.pdf Graphic file (type pdf)
+
+<use traceplot_poisson_zip_da.pdf>
+Package pdftex.def Info: traceplot_poisson_zip_da.pdf used on input line 758.
+(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
+
+<poisson_zip_da_acf.pdf, id=148, 216.81pt x 216.81pt>
+File: poisson_zip_da_acf.pdf Graphic file (type pdf)
+
+<use poisson_zip_da_acf.pdf>
+Package pdftex.def Info: poisson_zip_da_acf.pdf used on input line 763.
+(pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
+
+<poisson_fitting_da.png, id=149, 1204.5pt x 1204.5pt>
+File: poisson_fitting_da.png Graphic file (type png)
+
+<use poisson_fitting_da.png>
+Package pdftex.def Info: poisson_fitting_da.png used on input line 777.
+(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
+
+<poisson_fitting_ada.png, id=151, 1204.5pt x 1204.5pt>
+File: poisson_fitting_ada.png Graphic file (type png)
+
+<use poisson_fitting_ada.png>
+Package pdftex.def Info: poisson_fitting_ada.png used on input line 782.
+(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
+ <poisson_cv_da.png, id=152, 1204.5pt x 1204.5pt>
+File: poisson_cv_da.png Graphic file (type png)
+
+<use poisson_cv_da.png>
+Package pdftex.def Info: poisson_cv_da.png used on input line 786.
+(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
+ <poisson_cv_ada.png, id=153, 1204.5pt x 1204.5pt>
+File: poisson_cv_ada.png Graphic file (type png)
+
+<use poisson_cv_ada.png>
+Package pdftex.def Info: poisson_cv_ada.png used on input line 791.
+(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
+ [19 <./traceplot_poisson_zip_da.pdf> <./poisson_zip_da_acf.pdf>] <CDAvsHMC_mea
+n.pdf, id=169, 433.62pt x 433.62pt>
+File: CDAvsHMC_mean.pdf Graphic file (type pdf)
+
+<use CDAvsHMC_mean.pdf>
+Package pdftex.def Info: CDAvsHMC_mean.pdf used on input line 803.
+(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
+ <CDAvsHMC_sd.pdf, id=170, 433.62pt x 433.62pt>
+File: CDAvsHMC_sd.pdf Graphic file (type pdf)
+
+<use CDAvsHMC_sd.pdf>
+Package pdftex.def Info: CDAvsHMC_sd.pdf used on input line 808.
+(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
+
+Underfull \hbox (badness 1748) in paragraph at lines 809--809
+[]\OT1/cmr/m/n/9 (b) |Com-par-ing pos-te-rior stan-dard de-vi-a-tion for
+ []
+
+[20 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_da.png
+> <./poisson_cv_ada.png>]
+<traceplot_poisson_hmc.pdf, id=178, 433.62pt x 433.62pt>
+File: traceplot_poisson_hmc.pdf Graphic file (type pdf)
+
+<use traceplot_poisson_hmc.pdf>
+Package pdftex.def Info: traceplot_poisson_hmc.pdf used on input line 820.
+(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
+
+<poisson_hmc_acf.pdf, id=179, 216.81pt x 216.81pt>
+File: poisson_hmc_acf.pdf Graphic file (type pdf)
+ <use poisson_hmc_acf.pdf>
+Package pdftex.def Info: poisson_hmc_acf.pdf used on input line 825.
+(pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
+
+[21 <./CDAvsHMC_mean.pdf> <./CDAvsHMC_sd.pdf> <./traceplot_poisson_hmc.pdf> <./
+poisson_hmc_acf.pdf>] (./scalable_data_aug.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 5023 strings out of 493014
+ 73924 string characters out of 6133351
+ 145002 words of memory out of 5000000
+ 8457 multiletter control sequences out of 15000+600000
+ 14633 words of font info for 56 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 42i,12n,43p,1396b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on scalable_data_aug.pdf (21 pages, 660640 bytes).
+PDF statistics:
+ 306 PDF objects out of 1000 (max. 8388607)
+ 208 compressed objects within 3 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+
