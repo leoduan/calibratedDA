@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex scalable_data_aug"] 1482116449 "scalable_data_aug.aux" "scalable_data_aug.bbl" "scalable_data_aug" 1482116775
+["bibtex scalable_data_aug"] 1482268650 "scalable_data_aug.aux" "scalable_data_aug.bbl" "scalable_data_aug" 1482272296
   "/usr/local/texlive/2016/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
   "reference.bib" 1482115487 13958 730580938e4a0089ab521007f5c6cf53 ""
-  "scalable_data_aug.aux" 1482116775 9047 d82ec786c7613c36807ec5245d5b0e5d ""
+  "scalable_data_aug.aux" 1482268659 9058 7d1eb15cd079963b7d5086078b7d4099 ""
   "scalable_data_aug.bcf" 0 -1 0 ""
   (generated)
-  "scalable_data_aug.blg"
   "scalable_data_aug.bbl"
-["pdflatex"] 1482116774 "scalable_data_aug.tex" "scalable_data_aug.pdf" "scalable_data_aug" 1482116775
+  "scalable_data_aug.blg"
+["pdflatex"] 1482268657 "scalable_data_aug.tex" "scalable_data_aug.pdf" "scalable_data_aug" 1482272296
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -128,12 +128,12 @@
   "probit15_trace_plot.pdf" 1475877211 12772 9e666b1c8a2bb4d12d72d0b997db652c ""
   "probit_demo_acf.pdf" 1478435800 5897 ae6289217f8666daca0845d30253fd0c ""
   "probit_demo_acf_prop.pdf" 1478435820 5897 646ac4ed8c98e673c063d702a60247df ""
-  "scalable_data_aug.aux" 1482116775 9047 d82ec786c7613c36807ec5245d5b0e5d ""
-  "scalable_data_aug.bbl" 1482116449 7507 7a4160782f4c438750a88853a2542947 "bibtex scalable_data_aug"
-  "scalable_data_aug.tex" 1482116773 67034 e3903c08d6e56ed81caa0b7e1598570e ""
+  "scalable_data_aug.aux" 1482268659 9058 7d1eb15cd079963b7d5086078b7d4099 ""
+  "scalable_data_aug.bbl" 1482268651 7507 7a4160782f4c438750a88853a2542947 "bibtex scalable_data_aug"
+  "scalable_data_aug.tex" 1482268657 66307 daa30550552218946e5412496e50a4ab ""
   "traceplot_poisson_hmc.pdf" 1480538712 21623 6b0b5c1b7592874d9af8bda50c616689 ""
   "traceplot_poisson_zip_da.pdf" 1474910707 21350 999138bb15c31b25850db89e52c11233 ""
   (generated)
   "scalable_data_aug.aux"
-  "scalable_data_aug.pdf"
   "scalable_data_aug.log"
+  "scalable_data_aug.pdf"

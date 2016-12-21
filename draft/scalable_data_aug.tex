@@ -369,22 +369,20 @@ $$||{\bf F}_{CDA}||\le 1- \gamma p_0 \cdot \underset{s(\theta)\in L^2(\pi)}{\inf
 It is often not tractable to examine every $s(\theta)\in L^2(\pi)$; but in practice, it suffices to check $s(\theta)=\theta_j$ for every element in $\theta$ \citep{yang2013sequential}. Therefore, the ideal $r_i$ would be close to $\frac{\mbox{var}_{DA}\{\theta \} } {\bb E_{DA}  [  \mbox{var}_{DA}\{ \theta|z'\}]}$ so that $||{\bf F}_{CDA}||\approx 1 - p_0$. Both the numerator and the denominator often lack closed-forms for finite sample, but can be approximately estimated with a term proportional to the Fisher information. As the result, . In our study cases, all of the CDA's have large $p_0$, which is attributed to the distributional similarity between $L_r$ and $L$ in \eqref{eq:mh-criterion}.
 
 
-\section{Data Applications}
+\section{Co-Browsing Behavior Application}
 
-We apply CDA to an online browsing activity data. The dataset contains a two-way count table of users who visited one of $96$ client websites of interests, and one of the  $n=59,792$ high-traffic sites during the same browsing session. For simplicity, we name this behavior as ``co-browsing''. For each of the client websites, it is of large commercial interests to find out the high-traffic sites with relatively high co-browsing rates, so that the ads can be more effectively placed. For the ads company, it is also useful to understand the correlation and predict the traffic patterns among the clients. Therefore, We now consider two models in this section.
+We apply CDA to an online browsing activity dataset. The dataset contains a two-way  table of visit count by users who browsed one of $96$ client websites of interests, and one of the  $n=59,792$ high-traffic sites during the same browsing session. We refer to visiting more than one site during the same session as co-browsing. For each of the client websites, it is of large commercial interests find out the high-traffic sites with relatively high co-browsing rates, so that ads can be more effectively placed. For the computational advertising company, it is also useful understand the the co-browsing behavior and predict traffic pattern of users. We consider two models for these data.
 
-
- % The data set consists of $96$ different advertisements and $n=59,792$ originating websites, with the count of the number of click-throughs recorded for each combination.  The counts contain many zeros ($95.5\%$), as not all $96$ advertisements are shown on all the websites. For commercial interests, it is useful  to predict the traffic of the new advertisements using the existing ones. Therefore, we use the data of $95$ advertisements as predictors $x_i$ and the one left as the outcome $y_i$ for a count regression. We use training data collected from a two-week period, and a validation data set collected during another two-week window. 
 
 \subsection{Hierarchical Binomial Model for Estimating Co-browsing Rates}
 
-We first illustrate CDA in the scenario when there are large number of the random effects that requires the data augmentation for their posterior sampling. We focus on one client website and analyze its co-browsing rates with the high-traffic ones. With the total visit count $N_i$ available for each high-traffic site, the count of co-browsing $y_i$ can be considered as the result of binomial trials. As the rates are often quite small ($0.00011 \pm  0.00093$) due to the dramatic difference between $y_i$ and $N_i$, using empirical ratio ${y_i}/{N_i}$ can lead to unrealistic estimate. For example, when $y_i=0$, estimating the rate as exactly $0$ is not ideal since it is merely a result of extremely low probability. Therefore, it is useful to consider a hierarchical model to allow borrowing of information across outcomes.
+We initially focus on one client website and analyze co-browsing rates with the high-traffic sites. With the total visit count $N_i$ available for the $i$th high-traffic site, the count of co-browsing $y_i$ can be considered as the result of a binomial trial. with $y_i$ extremely small relative to $N_i$ (with ratio  ($0.00011 \pm  0.00093$)), the maximum likelihood estimate $y_i/N_i$ can have poor performance. For example, when $y_i=0$, estimating the rate as exactly $0$ is not ideal. Therefore, it is useful to consider a hierarchical model to allow borrowing of information across high-traffic sites.
 
 \be
 y_i \sim \Binom\left(N_i, \frac{\exp(\theta_i)}{1+\exp(\theta_i)}\right), \quad \theta_i\stackrel{iid}{\sim} \No(\theta_0, \sigma^2_0), \quad i=1\ldots n\\
 (\theta_0,\sigma^2_0) \sim  \pi(\theta_0,\sigma^2_0) 
 \ee
-Based on expert opinion in quantitative advertising, we use a weakly informative prior $\theta_0\sim \No(-12,49)$ and non-informative prior on $\pi(\sigma^2_0)= 1/\sigma^2_0$. Similar to the logistic regression, we calibrate the binomial Polya-Gamma augmentation, leading to the proposal likelihood:
+Based on expert opinion in quantitative advertising, we use a weakly informative prior $\theta_0\sim \No(-12,49)$ and uniform prior on $\sigma^2_0$. Similar to the logistic regression, we calibrate the binomial Polya-Gamma augmentation, leading to the proposal likelihood:
 
 \be
 L_r(\theta_i: y_i,N_i, r_i, b_i) = \frac{\exp(\theta_i+b_i)^y_i}{\{ 1+\exp(\theta_i+b_i)\}^{N_ir_i}}
@@ -396,9 +394,9 @@ Conditioned on the latent Polya-Gamma latent variable $z_i$, each proposal $\the
 z_i &\sim \PG\left ( (N_ir_i),\theta_i+b_i \right)\\
 \theta_i^* &\sim \No \left( \frac{ y_i - r_i N_i/2 -z_i b_i + \theta_0/\sigma^2_0}{z_i+ 1/\sigma^2_0}, \frac{1}{z_i+ 1/\sigma^2_0}\right),
 \ee
-and accepted / rejected using the M-H step. Since the $\theta_i$'s are conditionally independent, the calibrated proposal can be individually accepted with high probability for each $i$. This leads to a high average acceptance of $0.9$, despite of the high dimensionality $59,792$ of $\theta_i$'s.
+and accepted or rejected using an M-H step. Similar to logistic regression, the auxiliary parameters are chosen as $r_i =\frac{\exp(\theta_i)}{ \{1+\exp(\theta_i)\} ^2} {2 |\theta_i+b_i|}/ \tanh(\frac{|\theta_i+b_i|}{2})$ and $b_i=\log[  \{1+\exp(\theta_i)\}^{1/r_i} -1] - \theta_i$ during adaptation. Since $\theta_i$'s are conditionally independent, the calibrated proposal can be individually accepted with high probability for each $i$. This leads to a high average acceptance of $0.9$, despite the high dimensionality of $59,792$ $\theta_i$'s.
 
-Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. We compare the result with the original DA \citep{polson2013bayesian}. We run each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample. All of the parameters mixes poorly in DA, caused by the small binomial probability; CDA leads to significant improvement that the autocorrelation rapidly decays to ignorable level within $5$ lags. Table~\ref{tab:binomial} lists the posterior mean and standard deviation for $\theta_0$ and $\sigma_0^2$, as well as the computing time per every $1,000$ steps. To provide a reference, we ran Hamiltonian Monte Carlo (HMC) provided by the Stan software \citep{carpenter2016stan}. HMC enjoys good mixing performance but is computationally intensive due to the numeric leapfrog steps. The parameter estimates from CDA and HMC are remarkably close, while slow mixing in the original DA caused poor estimates.
+Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. We compare the result with the original DA \citep{polson2013bayesian}. We run each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample. All of the parameters mix poorly in DA; CDA leads to significant improvement with autocorrelation rapidly decaying to close to zero within $5$ lags. Table~\ref{tab:binomial} lists the posterior mean and standard deviation for $\theta_0$ and $\sigma_0^2$, as well as the computing time per every $1,000$ steps. To provide a reference, we ran Hamiltonian Monte Carlo (HMC) provided by the Stan software \citep{carpenter2016stan}. HMC enjoys good mixing performance but is computationally intensive due to the numeric leapfrog steps. The parameter estimates from CDA and HMC are remarkably close, while critically slow mixing in the original DA caused poor estimates.
 
 
  \begin{figure}[H]
@@ -412,7 +410,7 @@ Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. 
  \includegraphics[width=1\textwidth]{binomial_random_acf_cda.pdf}
  \caption{ACFs of the rate parameters $\theta_i$ using CDA.}
  \end{subfigure} 
- \caption{Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep{polson2013bayesian} and the CDA.}
+ \caption{Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep{polson2013bayesian} and CDA.}
  \label{data_binomial}
  \end{figure}
  
@@ -427,7 +425,6 @@ Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. 
  \hline
 $\theta_0$                         & -9.33 (0.12)& -12.05 (0.02) &  -12.01 (0.02)\\
 $\sigma^2$         & 0.76 (0.10)&   7.70 (0.10)  & 7.67 (0.10)\\
-DIC  &      $3.6747 \times 10^7$  & $3.6663 \times 10^7$       & $3.6663 \times 10^7$\\
 Computing Time (per 1,000 steps)  & 20 mins       & 20 mins        & 200 mins\\
  \hline
 \end{tabular}
