@@ -154,6 +154,7 @@ INPUT ./logit_demo_acf.pdf
 INPUT ./logit_demo_acf.pdf
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT binomial_random_acf_da.pdf
 INPUT ./binomial_random_acf_da.pdf
 INPUT ./binomial_random_acf_da.pdf
@@ -167,11 +168,16 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm1
 INPUT binomial_random_acf_cda.pdf
 INPUT ./binomial_random_acf_cda.pdf
 INPUT ./binomial_random_acf_cda.pdf
+INPUT binomial_random_acf_hmc.pdf
+INPUT ./binomial_random_acf_hmc.pdf
+INPUT ./binomial_random_acf_hmc.pdf
 INPUT poisson_acf_da.pdf
 INPUT ./poisson_acf_da.pdf
 INPUT ./poisson_acf_da.pdf
 INPUT poisson_acf_cda.pdf
 INPUT ./poisson_acf_cda.pdf
+INPUT ./poisson_acf_cda.pdf
+INPUT poisson_acf_cda.pdf
 INPUT ./poisson_acf_cda.pdf
 INPUT scalable_data_aug.bbl
 INPUT scalable_data_aug.bbl
@@ -208,6 +214,7 @@ INPUT ./poisson_hmc_acf.pdf
 INPUT scalable_data_aug.aux
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
@@ -226,5 +233,6 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb

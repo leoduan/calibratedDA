@@ -60,28 +60,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// poisson_reg_random_effect
-SEXP poisson_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int da_ver, double max_r, bool update_sigma);
-RcppExport SEXP scalableDA_poisson_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP da_verSEXP, SEXP max_rSEXP, SEXP update_sigmaSEXP) {
+// poisson_reg_block_random
+SEXP poisson_reg_block_random(SEXP y, SEXP X, double r_ini, int tune, int burnin, int run, bool fixR, double C, double c_ini, double c_ini2, double theta_ts, bool MH, double nu_ini, double sigma2, bool adaptC, bool fixNu, bool centeredRanEff);
+RcppExport SEXP scalableDA_poisson_reg_block_random(SEXP ySEXP, SEXP XSEXP, SEXP r_iniSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP, SEXP CSEXP, SEXP c_iniSEXP, SEXP c_ini2SEXP, SEXP theta_tsSEXP, SEXP MHSEXP, SEXP nu_iniSEXP, SEXP sigma2SEXP, SEXP adaptCSEXP, SEXP fixNuSEXP, SEXP centeredRanEffSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
     Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type r_ini(r_iniSEXP);
+    Rcpp::traits::input_parameter< int >::type tune(tuneSEXP);
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
-    Rcpp::traits::input_parameter< double >::type c(cSEXP);
-    Rcpp::traits::input_parameter< int >::type da_ver(da_verSEXP);
-    Rcpp::traits::input_parameter< double >::type max_r(max_rSEXP);
-    Rcpp::traits::input_parameter< bool >::type update_sigma(update_sigmaSEXP);
-    rcpp_result_gen = Rcpp::wrap(poisson_reg_random_effect(y, X, burnin, run, tau, c, da_ver, max_r, update_sigma));
+    Rcpp::traits::input_parameter< bool >::type fixR(fixRSEXP);
+    Rcpp::traits::input_parameter< double >::type C(CSEXP);
+    Rcpp::traits::input_parameter< double >::type c_ini(c_iniSEXP);
+    Rcpp::traits::input_parameter< double >::type c_ini2(c_ini2SEXP);
+    Rcpp::traits::input_parameter< double >::type theta_ts(theta_tsSEXP);
+    Rcpp::traits::input_parameter< bool >::type MH(MHSEXP);
+    Rcpp::traits::input_parameter< double >::type nu_ini(nu_iniSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2(sigma2SEXP);
+    Rcpp::traits::input_parameter< bool >::type adaptC(adaptCSEXP);
+    Rcpp::traits::input_parameter< bool >::type fixNu(fixNuSEXP);
+    Rcpp::traits::input_parameter< bool >::type centeredRanEff(centeredRanEffSEXP);
+    rcpp_result_gen = Rcpp::wrap(poisson_reg_block_random(y, X, r_ini, tune, burnin, run, fixR, C, c_ini, c_ini2, theta_ts, MH, nu_ini, sigma2, adaptC, fixNu, centeredRanEff));
     return rcpp_result_gen;
 END_RCPP
 }
 // poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, double r_ini, int tune, int burnin, int run, bool fixR, double C, double c_ini, bool MH);
-RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP r_iniSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP, SEXP CSEXP, SEXP c_iniSEXP, SEXP MHSEXP) {
+SEXP poisson_reg(SEXP y, SEXP X, double r_ini, int tune, int burnin, int run, bool fixR, double C, double c_ini, bool MH, bool randomEff, double nu, bool adaptC);
+RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP r_iniSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP, SEXP CSEXP, SEXP c_iniSEXP, SEXP MHSEXP, SEXP randomEffSEXP, SEXP nuSEXP, SEXP adaptCSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -95,7 +103,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type C(CSEXP);
     Rcpp::traits::input_parameter< double >::type c_ini(c_iniSEXP);
     Rcpp::traits::input_parameter< bool >::type MH(MHSEXP);
-    rcpp_result_gen = Rcpp::wrap(poisson_reg(y, X, r_ini, tune, burnin, run, fixR, C, c_ini, MH));
+    Rcpp::traits::input_parameter< bool >::type randomEff(randomEffSEXP);
+    Rcpp::traits::input_parameter< double >::type nu(nuSEXP);
+    Rcpp::traits::input_parameter< bool >::type adaptC(adaptCSEXP);
+    rcpp_result_gen = Rcpp::wrap(poisson_reg(y, X, r_ini, tune, burnin, run, fixR, C, c_ini, MH, randomEff, nu, adaptC));
     return rcpp_result_gen;
 END_RCPP
 }

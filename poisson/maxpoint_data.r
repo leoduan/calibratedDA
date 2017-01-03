@@ -1,4 +1,3 @@
-
 require('R.matlab')
 setwd("~/git/ImbalancedPG/poisson/")
 mp<-readMat("./convdat.mat")
@@ -10,13 +9,13 @@ mp<-readMat("./convdat.mat")
 # dim(mp$Nts)
 # dim(mp$Yts)
 # 
-nonzero<-  c(mp$Ntr!=0) & c(mp$Nts!=0)
+# nonzero<-  c(mp$Ntr!=0) & c(mp$Nts!=0)
 # 
-Ytr<- mp$Ytr[nonzero,]
-Ntr<- mp$Ntr[nonzero]
+# Ytr<- mp$Ytr[nonzero,]
+# Ntr<- mp$Ntr[nonzero]
 # 
-y<- Ytr[,46]
-N<- Ntr
+# y<- Ytr[,46]
+# N<- Ntr
 # X<- matrix(rep(1, length(N)))
 # N<-N[1:4000]
 # y<-y[1:4000]
@@ -60,14 +59,12 @@ X<- data[,feature]
 X2<- data2[,feature]
 
 y<- data[,pick]
-y2<- data[,pick]
+y2<- data2[,pick]
 
 keep <- apply(X, 2, sd)>0
 X<- X[,keep]
 
 X2<- X2[,keep]
-
-
 
 X<- log(X+1)
 X<- cbind(1,X)

@@ -63,35 +63,34 @@
 \citation{liu2008monte}
 \citation{fill1991eigenvalue}
 \citation{liu1994collapsed}
-\newlabel{eq:mh-criterion}{{9}{10}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Theory: Mixing Acceleration}{10}}
 \citation{papaspiliopoulos2007general}
 \citation{yang2013sequential}
-\newlabel{eq:norm_da}{{10}{11}}
-\newlabel{eq:norm_cda}{{11}{11}}
+\newlabel{eq:norm_da}{{9}{11}}
+\newlabel{eq:norm_cda}{{10}{11}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Co-Browsing Behavior Application}{12}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Hierarchical Binomial Model for Estimating Co-browsing Rates}{12}}
 \citation{polson2013bayesian}
 \citation{carpenter2016stan}
 \citation{polson2013bayesian}
 \citation{polson2013bayesian}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep  {polson2013bayesian} and CDA.\relax }}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep  {polson2013bayesian}, CDA and HMC.\relax }}{13}}
 \newlabel{data_binomial}{{4}{13}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Parameter estimates and computing speed of the DA, CDA and HMC in hierarchical binomial model. CDA provides parameter estimates as accurate as HMC, while adds almost no computational cost based on DA.\relax }}{13}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Parameter estimates (with 95\% credible intervals) and effective sample sizes ($T_{eff}$) of the DA, CDA and HMC in hierarchical binomial model. CDA provides parameter estimates as accurate as HMC, and is more computationally efficient than HMC.\relax }}{13}}
 \newlabel{tab:binomial}{{1}{13}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Poisson Regression for Web Traffic Prediction}{13}}
 \citation{zhou2012lognormal}
-\citation{zhou2012lognormal}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces CDA significantly improves the mixing of the parameters in the Poisson log-normal.\relax }}{15}}
-\newlabel{data_poisson}{{5}{15}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Parameter estimates and computing speed of the DA, CDA and HMC in Poisson regression model. CDA shows similar performance as HMC in both parameter estimation and cross-validation in prediction, but is about 10 times faster.\relax }}{15}}
-\newlabel{table:Poisson}{{2}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Poisson Log-Normal Model for Web Traffic Prediction}{14}}
+\newlabel{eq:pos_approx}{{11}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces CDA significantly improves the mixing of the parameters in the Poisson log-normal.\relax }}{16}}
+\newlabel{data_poisson}{{5}{16}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Parameter estimates, prediction error and computing speed of the DA, CDA and HMC in Poisson regression model. Compared with HMC, CDA shows similar performance in both parameter estimation and prediction, but is about 5 times faster.\relax }}{16}}
+\newlabel{table:Poisson}{{2}{16}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{16}}
 \bibdata{reference}
 \bibcite{albert1993bayesian}{{1}{1993}{{Albert and Chib}}{{}}}
 \bibcite{carpenter2016stan}{{2}{2016}{{Carpenter et~al.}}{{Carpenter, Gelman, Hoffman, Lee, Goodrich, Betancourt, Brubaker, Guo, Li, and Riddell}}}
 \bibcite{conrad2015accelerating}{{3}{2015}{{Conrad et~al.}}{{Conrad, Marzouk, Pillai, and Smith}}}
 \bibcite{cressie1981moment}{{4}{1981}{{Cressie et~al.}}{{Cressie, Davis, Folks, and Folks}}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{16}}
 \bibcite{fill1991eigenvalue}{{5}{1991}{{Fill}}{{}}}
 \bibcite{hairer2011asymptotic}{{6}{2011}{{Hairer et~al.}}{{Hairer, Mattingly, and Scheutzow}}}
 \bibcite{hairer2014spectral}{{7}{2014}{{Hairer et~al.}}{{Hairer, Stuart, Vollmer, et~al.}}}
@@ -114,15 +113,15 @@
 \bibcite{yang2013sequential}{{24}{2013}{{Yang and Dunson}}{{}}}
 \bibcite{zhou2012lognormal}{{25}{2012}{{Zhou et~al.}}{{Zhou, Li, Dunson, and Carin}}}
 \bibstyle{plainnat}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Proofs}{18}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Lemma 1}{18}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Appendix}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Proofs}{19}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Lemma 1}{19}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Theorem 1}{19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Mixing of Zero-inflated Poisson without Calibration}{19}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The hierarchy in the zero-inflated Poisson model does NOT help reduce the autocorrelation.\relax }}{19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Goodness-of-Fit and Cross-Validation for Poisson Regression}{20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The posterior estimates produced by CDA is better fitted to the data and have more accurate prediction than DA.\relax }}{20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Comparing posterior samples of CDA with HMC}{21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The results from CDA and HMC agree very well.\relax }}{21}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Mixing of HMC}{21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The posterior estimates produced by HMC.\relax }}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Mixing of Zero-inflated Poisson without Calibration}{20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The hierarchy in the zero-inflated Poisson model does NOT help reduce the autocorrelation.\relax }}{20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Goodness-of-Fit and Cross-Validation for Poisson Regression}{21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The posterior estimates produced by CDA is better fitted to the data and have more accurate prediction than DA.\relax }}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Comparing posterior samples of CDA with HMC}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The results from CDA and HMC agree very well.\relax }}{22}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Mixing of HMC}{22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The posterior estimates produced by HMC.\relax }}{22}}

@@ -14,9 +14,10 @@
 \usepackage{color}
 \newcommand{\leo}[1]{{\color{blue}{\it leo: #1}}}
 
-\newcommand{\Xbeta}{ X_i \theta}
-\newcommand{\xbeta}{ x_i \theta}
-\newcommand{\xbetaij}{ x_{ij}^T \theta}
+% \newcommand{\Xbeta}{ X_i \theta}
+\newcommand{\xbeta}{ x_i \beta}
+\newcommand{\xtheta}{ x_i \theta}
+% \newcommand{\xbetaij}{ x_{ij}^T \theta}
 \newcommand{\sgamma}{s_{ij}^T\gamma_i}
 
 \usepackage[round]{natbib}
@@ -144,7 +145,7 @@ where $R = \diag(r_1,\ldots,r_n)$, $b = (b_1,\ldots,b_n)'$, and we let $\pi^*( \
 The update in \eqref{eq:cda-probit} alters the invariant measure from $\pi(\theta |y)$ to $\pi^*(\theta | y)$, and hence the Gibbs samples for $\theta$ will not be exactly from $\pi( \theta | y)$ even after convergence.  To adjust for the bias caused by the difference between $\pi(\theta|y)$ and $\pi^*(\theta|y)$, we use (\ref{eq:cda-probit}) as an M-H proposal.  Letting $Q(\theta^*;\theta) = \int f(\theta^*|z)  \pi(z|\theta) dz $ be the proposal defined by \eqref{eq:cda-probit} marginalized over $z$, the proposal is accepted with probability
 %Generate one uniform random variable $u\sim \U(0,1)$ and accept the new $\theta^*$ if
 \be
-1 \wedge \frac{Q(\theta; \theta^*) \pi(\theta^*) \prod_i L(\xbeta^*;y_i)}{Q(\theta^*; \theta)\pi(\theta) \prod_i L(\xbeta;y_i) } = 1 \wedge  \frac{  \prod_i L_r(\xbeta;y_i) L(\xbeta^*;y_i)}{\prod_i  L_r(\xbeta^*;y_i)L(\xbeta;y_i) },
+1 \wedge \frac{Q(\theta; \theta^*) \pi(\theta^*) \prod_i L(\xtheta^*;y_i)}{Q(\theta^*; \theta)\pi(\theta) \prod_i L(\xtheta;y_i) } = 1 \wedge  \frac{  \prod_i L_r(\xtheta;y_i) L(\xtheta^*;y_i)}{\prod_i  L_r(\xtheta^*;y_i)L(\xtheta;y_i) },
 \label{eq:mh-criterion}
 \ee
 where $L(\eta_i;y_i)=\Phi(\eta_i)^{y_i} (1-\Phi(\eta_i))^{(1-y_i)}$ and  $L_r(\eta_i;y_i)=\Phi( \frac{\eta_i+b_i}{\sqrt{r_i}} )^{y_i} (1-\Phi(\frac{\eta_i+b_i}{\sqrt{r_i}}))^{(1-y_i)}$. The second equality holds since $Q(\theta; \theta^*) Q(\theta^*) = Q(\theta; \theta^*)Q(\theta)$ and $ Q(\theta) = C\pi(\theta) \prod_i L_r(x_i\theta;y_i)$, which is the posterior density under the altered $L_r$ with $C$ a constant. Setting $r_i=1$ and $b_i=0$ leads to acceptance rate of $1$, which corresponds to the original Gibbs sampling step.
@@ -238,28 +239,28 @@ y_i \sim \Bern(p_i), \quad p_i = \frac{\exp(x_i \theta)}{1+\exp(x_i \theta)},
 \ee
 and improper prior $\pi(\theta)=1$. For this model, \cite{polson2013bayesian} proposed Polya-Gamma data augmentation:
 \be
- z_i &\sim {\PG}(1, |\xbeta|),\\
+ z_i &\sim {\PG}(1, |\xtheta|),\\
 \theta &\sim \No \left(  (X' Z X)^{-1}   X'  (y-0.5)  ,  (X' Z X)^{-1}  \right),
 \ee
 where $Z= \diag(z_1,\ldots,z_n)$.  This algorithm relies on expressing the logistic regression likelihood as
-$$L(y_i \mid \xbeta)=  \int \exp\{ \xbeta (y_i-1/2)\} \exp\bigg\{ -\frac{z_i (\xbeta)^2}{2}\bigg\} \PG(z_i \mid 1,0) dz_i,$$
+$$L(y_i \mid \xtheta)=  \int \exp\{ \xtheta (y_i-1/2)\} \exp\bigg\{ -\frac{z_i (\xtheta)^2}{2}\bigg\} \PG(z_i \mid 1,0) dz_i,$$
 where $\mbox{PG}(a_1,a_2)$ denote the Polya-Gamma distribution with parameters $a_1,a_2$, with $\bb{E}z_i= \frac{a_1}{2 a_2}\tanh(\frac{a_2}{2})$.
 %As described above, multiplying $r_i$ on $z_i$ is ineffective and makes the integration intractable.
 
 Our previous calibration approach would have relied on inflating the variance in the conditional update of $\theta$, but this unfortunately no longer works well due to the occurence of $Z$ in the conditional covariance.  Instead, we rely on replacing $\PG(z_i \mid 1,0)$ with $\PG(z_i \mid r_i,0)$ in the step for updating the latent data.  Smaller $r_i$ can lead to larger  $\bb E_z \mbox{var}(\theta|z,y)$, providing a route towards calibration.  Applying the bias-adjustment term $b_i$ to the linear predictor $\eta_i = x_i\theta$ leads to 
 \be
-L_r(\xbeta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xbeta+b_i) (y_i-r_i/2)\} \exp\bigg\{ -\frac{z_i (\xbeta+b_i)^2}{2}\bigg\} \PG(z_i \mid r_i,0) dz_i \\
-= &  \frac{\exp \{ (x_i \theta + b_i)y_i \}}{\{1+\exp(\xbeta +b_i)\}^{r_i}},
+L_r(\xtheta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xtheta+b_i) (y_i-r_i/2)\} \exp\bigg\{ -\frac{z_i (\xtheta+b_i)^2}{2}\bigg\} \PG(z_i \mid r_i,0) dz_i \\
+= &  \frac{\exp \{ (x_i \theta + b_i)y_i \}}{\{1+\exp(\xtheta +b_i)\}^{r_i}},
 \label{eq:prop-marginal-logit}
 \ee
 and the update rule for the proposal:
 \be
- z_i &\sim {\PG}(r_i, |\xbeta+b_i|),\\
+ z_i &\sim {\PG}(r_i, |\xtheta+b_i|),\\
 \theta^* &\sim \No \left(  (X' Z X)^{-1}  X'  (y -r/2- Zb) ,  (X' Z X)^{-1}  \right),
 \ee
 with acceptance probability:
 \be
-1 \wedge  \frac{  \prod_i L_r(\xbeta;y_i) L(\xbeta^*;y_i)}{\prod_i  L_r(\xbeta^*;y_i)L(\xbeta;y_i) } =1 \wedge \prod_i  \frac{ \{1+\exp(\xbeta)\}   \{1+\exp(\xbeta^*+b_i)\}^{r_i} } {  \{1+\exp(\xbeta^*)\}  \{1+\exp(\xbeta+b_i)\}^{r_i}    },
+1 \wedge  \frac{  \prod_i L_r(\xtheta;y_i) L(\xtheta^*;y_i)}{\prod_i  L_r(\xtheta^*;y_i)L(\xtheta;y_i) } =1 \wedge \prod_i  \frac{ \{1+\exp(\xtheta)\}   \{1+\exp(\xtheta^*+b_i)\}^{r_i} } {  \{1+\exp(\xtheta^*)\}  \{1+\exp(\xtheta+b_i)\}^{r_i}    },
 \ee
 where $L(\theta;y_i)=\frac{\exp(\theta y_i)}{1+\exp(\theta)}$.
 
@@ -267,9 +268,9 @@ To demonstrate why smaller $r_i$ leads to larger $\bb E_z (X' Z X)^{-1}$, we com
 
 For choosing $r$ during tuning, we compare the two Fisher information matrices based on the marginal and conditional; for the latter, we marginalize out $z_i$ by taking the expectation:
 \be
-X' \diag\bigg\{\frac{\exp(\xbeta)}{ \{1+\exp(\xbeta)\} ^2}\bigg\} X, \quad X'  \diag\bigg\{ \frac{r_i}{2 |\xbeta+b_i|}\tanh\Big(\frac{|\xbeta+b_i|}{2} \Big)\bigg\} X
+X' \diag\bigg\{\frac{\exp(\xtheta)}{ \{1+\exp(\xtheta)\} ^2}\bigg\} X, \quad X'  \diag\bigg\{ \frac{r_i}{2 |\xtheta+b_i|}\tanh\Big(\frac{|\xtheta+b_i|}{2} \Big)\bigg\} X
 \ee
-To correct the difference, we choose $r_i$ to be $\frac{\exp(\xbeta)}{ \{1+\exp(\xbeta)\} ^2} {2 |\xbeta+b_i|}/ \tanh(\frac{|\xbeta+b_i|}{2})$. To optimize the acceptance rate, given the value of $r_i$ and $\xbeta$,  setting $ \{1+\exp(\xbeta)\}  = \{1+\exp(\xbeta+b_i)\}^{r_i}  $ yields $b_i = \log[  \{1+\exp(\xbeta)\}^{1/r_i} -1] - \xbeta$.
+To correct the difference, we choose $r_i$ to be $\frac{\exp(\xtheta)}{ \{1+\exp(\xtheta)\} ^2} {2 |\xtheta+b_i|}/ \tanh(\frac{|\xtheta+b_i|}{2})$. To optimize the acceptance rate, given the value of $r_i$ and $\xtheta$,  setting $ \{1+\exp(\xtheta)\}  = \{1+\exp(\xtheta+b_i)\}^{r_i}  $ yields $b_i = \log[  \{1+\exp(\xtheta)\}^{1/r_i} -1] - \xtheta$.
 
 
 As a numerical illustration, we use a two parameter intercept-slope model with $x_1\sim \No(0,1)$ and $\theta=(-9,1)'$. With $n= 10^5$, we obtain rare outcome data with 
@@ -314,7 +315,7 @@ z_i & \sim \pi_r(z_i; m_i(\theta)+b_i, y) \\
 in an M-H step with acceptance probability:
 \be
 1 \wedge \prod_i  \frac{L(m_i(\theta^*); y_i) L_r(m_i(\theta) ; y_i)} {L(m_i(\theta); y_i, r_i, b_i) L_r(m_i(\theta^*); y_i, r_i, b_i)}.
-\label{eq:mh-criterion}
+% \label{eq:mh-criterion}
 \ee
 In an initial tuning phase, we adaptively update $r$ and $b$. We choose $r$ at each sampling step to minimize the difference between the Fisher information matrices based on the marginal posterior with the latent data integrated out and the conditional posterior given the latent data.  As illustrated in subsection 2.3-2.4 for the two different strategies of augmentation, simple and computationally efficient closed forms are typically available for the $r_i$'s, which avoid potentially expensive calculation of the full information matrix.
 Then conditional on $r_i$, we choose $b_i$ to increase the M-H acceptance rate; one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. 
@@ -394,23 +395,30 @@ Conditioned on the latent Polya-Gamma latent variable $z_i$, each proposal $\the
 z_i &\sim \PG\left ( (N_ir_i),\theta_i+b_i \right)\\
 \theta_i^* &\sim \No \left( \frac{ y_i - r_i N_i/2 -z_i b_i + \theta_0/\sigma^2_0}{z_i+ 1/\sigma^2_0}, \frac{1}{z_i+ 1/\sigma^2_0}\right),
 \ee
-and accepted or rejected using an M-H step. Similar to logistic regression, the auxiliary parameters are chosen as $r_i =\frac{\exp(\theta_i)}{ \{1+\exp(\theta_i)\} ^2} {2 |\theta_i+b_i|}/ \tanh(\frac{|\theta_i+b_i|}{2})$ and $b_i=\log[  \{1+\exp(\theta_i)\}^{1/r_i} -1] - \theta_i$ during adaptation. Since $\theta_i$'s are conditionally independent, the calibrated proposal can be individually accepted with high probability for each $i$. This leads to a high average acceptance of $0.9$, despite the high dimensionality of $59,792$ $\theta_i$'s.
+and accepted or rejected using an M-H step. Similar to logistic regression, the auxiliary parameters are chosen as $r_i =\frac{\exp(\theta_i)}{ \{1+\exp(\theta_i)\} ^2} / \left (   \frac{1}{2 |\theta_i+b_i|} \tanh\frac{|\theta_i+b_i|}{2} \right)$ and $b_i=\log[  \{1+\exp(\theta_i)\}^{1/r_i} -1] - \theta_i$ during adaptation. Since $\theta_i$'s are conditionally independent, the calibrated proposal can be individually accepted with high probability for each $i$. This leads to a high average acceptance of $0.9$, despite the high dimensionality of $59,792$ $\theta_i$'s.
 
-Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. We compare the result with the original DA \citep{polson2013bayesian}. We run each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample. All of the parameters mix poorly in DA; CDA leads to significant improvement with autocorrelation rapidly decaying to close to zero within $5$ lags. Table~\ref{tab:binomial} lists the posterior mean and standard deviation for $\theta_0$ and $\sigma_0^2$, as well as the computing time per every $1,000$ steps. To provide a reference, we ran Hamiltonian Monte Carlo (HMC) provided by the Stan software \citep{carpenter2016stan}. HMC enjoys good mixing performance but is computationally intensive due to the numeric leapfrog steps. The parameter estimates from CDA and HMC are remarkably close, while critically slow mixing in the original DA caused poor estimates.
+Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. We compare the result with the original DA \citep{polson2013bayesian}. We run DA for $100,000$ steps and CDA for $2,000$ steps, so that they have approximately the same effective sample size. All of the parameters mix poorly in DA; CDA leads to significant improvement with autocorrelation rapidly decaying to close to zero within $5$ lags. Table~\ref{tab:binomial} lists the posterior mean and credible intervals for the parameters, as well as the effective sample size ($T_{eff}$) per iteration, calculated with the \texttt{CODA} package in \texttt{R}.
+
+ To provide a reference, we ran Hamiltonian Monte Carlo (HMC) provided by the \texttt{STAN} software \citep{carpenter2016stan}. HMC enjoys very good mixing performance but is computationally intensive due to the numeric leapfrog steps. The parameter estimates from CDA and HMC are remarkably close, while critically slow mixing in the original DA caused poor estimates.
 
 
  \begin{figure}[H]
  % \centering
-   \begin{subfigure}[b]{0.45\textwidth}
+   \begin{subfigure}[b]{0.32\textwidth}
  \includegraphics[width=1\textwidth]{binomial_random_acf_da.pdf}
  \caption{ACFs of the rate parameters $\theta_i$ using DA.}
  \end{subfigure}
   \hfill 
- \begin{subfigure}[b]{0.45\textwidth}
+ \begin{subfigure}[b]{0.32\textwidth}
  \includegraphics[width=1\textwidth]{binomial_random_acf_cda.pdf}
  \caption{ACFs of the rate parameters $\theta_i$ using CDA.}
  \end{subfigure} 
- \caption{Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep{polson2013bayesian} and CDA.}
+   \hfill 
+ \begin{subfigure}[b]{0.32\textwidth}
+ \includegraphics[width=1\textwidth]{binomial_random_acf_hmc.pdf}
+ \caption{ACFs of the rate parameters $\theta_i$ using HMC.}
+ \end{subfigure} 
+ \caption{Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep{polson2013bayesian}, CDA and HMC.}
  \label{data_binomial}
  \end{figure}
  
@@ -422,78 +430,96 @@ Figure~\ref{data_binomial} shows the boxplots of the ACFs for all $\theta_i$'s. 
  \hline
                           & DA & CDA & HMC\\
  [0.5ex]
- \hline
-$\theta_0$                         & -9.33 (0.12)& -12.05 (0.02) &  -12.01 (0.02)\\
-$\sigma^2$         & 0.76 (0.10)&   7.70 (0.10)  & 7.67 (0.10)\\
-Computing Time (per 1,000 steps)  & 20 mins       & 20 mins        & 200 mins\\
+
+ $ \sum \theta_i/n$      & -10.03 (-10.16, -9.87)& -12.05 (-12.09, -12.02) &  -12.06 (-12.09, -12.01)\\
+ $ \sum \theta_i^2/n$      & 102.25 (98.92, 105.23)& 153.04 (152.06, 154.05) &  153.17 (152.02, 154.29)\\
+$\theta_0$          & -10.03 (-10.17, -9.87)& -12.05 (-12.09,-12.01) &  -12.06 (-12.10, -12.01)\\
+$\sigma^2$         & 1.60 (1.36, 1.82)&   7.70 (7.49, 7.88)  & 7.71 (7.51, 7.91)\\
+$T_{eff} / T$ & 0.0085 (0.0013 0.0188) & 0.5013 (0.1101,1.0084) & 0.8404 (0.5149, 1.2470)\\
+Avg Computing Time /  $T$  & 1.2 sec       & 1.2 sec        & 6 sec\\
+Avg Computing Time /  $T_{eff}$  & 140.4 sec       & 0.48 sec        & 1.3 sec\\
  \hline
 \end{tabular}
-\caption{Parameter estimates and computing speed of the DA, CDA and HMC in hierarchical binomial model. CDA provides parameter estimates as accurate as HMC, while adds almost no computational cost based on DA.}
+\caption{Parameter estimates (with 95\% credible intervals) and effective sample sizes ($T_{eff}$) of the DA, CDA and HMC in hierarchical binomial model. CDA provides parameter estimates as accurate as HMC, and is more computationally efficient than HMC.}
 \label{tab:binomial}
 \end{table}
 
 
-\subsection{Poisson Regression for Web Traffic Prediction}
+\subsection{Poisson Log-Normal Model for Web Traffic Prediction}
 
-We now focus on a slightly different problem: it is useful to predict the traffic to one client website, using the information from the other $95$. Therefore, we consider a Poisson regression model with random effects:
+The co-browsing on one high-traffic site and one client site is commonly related to the click-through of user from the former to the latter. Therefore, the count of the co-browsing is a useful indication of the click-through traffic. For any given client website, being able to predict the high traffic sites that could generate most traffic is certainly of high values. Therefore, we consider a Poisson regression model. We choose the co-browsing count of one client website as the outcome $y_i$, and the count of other $95$ websites as the predictor $x^*_{ij}$ for $i=1\ldots 59,792$ and $j=1\ldots 95$. To use them as predictors in Poisson log-normal model, we transform the count onto the log scale with $x_{ij}=\log (x^*_{ij}+1)$. To allow over-dispersion, we use a random intercept for each $i$.
 
-\be
-y_i \sim \Poi\left( \tau_i \exp  (\xbeta )\right),  \quad \tau_i\stackrel{iid}{\sim} \Ga(1, 1), \quad i=1\ldots n\\
-\theta \sim  \No(0,\Sigma).
-\ee
-
-Since the dimensionality of the fixed effect random parameters $\theta$ is moderately large ($96$ with the intercept), we assign a diffuse prior with $\Sigma= I\cdot 100$. To allow over-dispersion, we use a gamma prior for $\tau_i$ with prior mean $1$, and the random effect can be sampled from $\tau_i \sim \Ga\left(1+y_i, 1+\exp(\xbeta) \right)$. As an alternative, one can assign normal random effect $\log \tau_i \sim N(0,\sigma^2_0)$ and use CDA to sample its posterior given $\xbeta$, similar to the binomial example. For simplicity, we choose Gamma prior for $\tau$ for its closed-form posterior.
-
-The data augmentation for Poisson log-normal model is much less known. \cite{zhou2012lognormal} proposed to utilize a limit form. We present a simplified form:
 
 \be
-L(\xbeta,\tau_i;y)=\frac{\tau_i^{y_i}}{ y!}\frac{ \exp(y_i \xbeta) }{\exp\{\tau_i\exp(\xbeta)\}} =\frac{\tau_i^{y_i}}{ y!} \lim_{\lambda\rightarrow\infty}\frac{\exp(y_i \xbeta)}{\{1+ \exp(\xbeta + \log \tau_i)/\lambda\}^{\lambda}}.
+ y_i \sim \Poi \left( \exp  (\xbeta + \tau_i )\right),  \quad \tau_i\stackrel{iid}{\sim} \No(\tau_0, \nu^2), \quad i=1\ldots n\\
+ \beta \sim  \No(0, I \sigma_\beta^2), \quad \tau_0 \sim \No(0,\sigma_\tau^2) \quad \nu^2\sim \pi(\nu^2).
 \ee
+We assign a weakly informative prior for $\beta$ and $\tau_0$ with $ \sigma_\beta^2=\sigma_\tau^2=100$. For the over-dispersion parameter $\nu^2$, we assign a non-informative uniform prior.
 
-\cite{zhou2012lognormal} used a moderate $\lambda=1,000$ to approximate the likelihood, hence enabled a Polya-Gamma augmented sampling:
+To focus on data augmentation, we first rule out other factors that can potentially contribute to slow mixing. In this case,  random effects $\tau_i$ can be problematic for $\beta$ when they are sampled separately. Therefore, we consider sampling $\beta$ and $\tau$ jointly. Using $\tilde X = [ I_n || X ]$ for the $n \times (n+p)$ juxtaposed projection matrix, and $\eta_i=\xbeta + \tau_i$ for the linear predictor, the model can be viewed as a linear predictor with $n+p$ coefficients, for which the parameters $\theta= \{\tau, \beta\}'$ can be sampled jointly in a block. 
+
+The data augmentation for Poisson log-normal model is less known. \cite{zhou2012lognormal} proposed to utilize $\Poi(\eta_i)$ as the limit of the negative binomial $\NB(\lambda,\frac{\eta_i}{\lambda+\eta_i})$ with $\lambda\rightarrow \infty$, and used moderate $\lambda=1,000$ for approximation. The method can be simplified as the following:
 
 \be
-z_i \sim & \PG\left (\lambda, \xbeta + \log \tau_i-\log \lambda\right)\\
-\theta \sim & \No \left( \big[ (X' Z X+  0.01 \cdot I )^{-1}  X'  \big ( y - \lambda/2 - z (\log \tau_i-\log \lambda)\big) ,(X' Z X+  0.01 \cdot I )^{-1} \right)
+L(\xbeta,\tau_i;y)=\frac{1}{ y!}\frac{ \exp(y_i \eta_i \} }{\exp\{\exp(\eta_i)\}} =\frac{1}{ y!} \lim_{\lambda\rightarrow\infty}\frac{\exp(y_i \eta_i)}{\{1+ \exp(\eta_i )/\lambda\}^{\lambda }}.
+\label{eq:pos_approx}
 \ee
 
- However, this augmentation has a critical issue: we discover that $\lambda$ needs to be much larger to ensure low approximation error. With $\eta_i=\xbeta + \log\tau_i$, the log of the denominator on the right hand side has $\lambda\log(1+\exp\left(\eta_i)/\lambda\right)= \exp(\eta_i) + \bigO(\exp(2\eta_i)/\lambda)$, hence $\lambda$ needs to be around $10^9$ to accommodate moderately large $\eta_i \approx 10$. On the other hand, large $\lambda$ would lead to extremely large $z_i$ and hence very slow mixing.
-
-Using the calibration on the Polya-Gamma augmentation, we obtain the calibrated proposal likelihood:
+With finite $\lambda$ approximation, it has a Polya-Gamma augmented sampling. Using Gibbs sampler, the approximate posterior can be obtained via:
 
 \be
-L_r(\xbeta;y_i)=\frac{\exp(\xbeta  +\log \tau_i -\log \lambda +b_i)^{y_i}}{\{1+ \exp(\xbeta + \log \tau_i -\log \lambda +b_i)\}^{\lambda r_i}},
+z_i \sim  \PG ( & \lambda, \eta_i -\log \lambda)\\
+\theta \sim  \No (  &  (\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix})^{-1} \{  \tilde X'  \big ( y - \lambda/2 + Z \log \lambda\big) +   \begin{bmatrix} \tau_0/\sigma^2_{\tau}  1_n \\  0_p \end{bmatrix} \} , \\
+& (\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix})^{-1} ).
 \ee
-and update rule:
+
+However, this approximate based data augmentation is inherently problematic. For finite $\lambda$ approximation, setting $1,000$ would cause large approximation error. As in \eqref{eq:pos_approx}, the approximating denominator has $(1+\exp\left(\eta_i)/\lambda\right)^\lambda= \exp \{ \exp(\eta_i) + \bigO(\exp(2\eta_i)/\lambda) \}$; for moderately large $\eta_i \approx 10$, $\lambda$ needs to be at least $10^9$ to make $\exp(2\eta_i)/\lambda$ close to $0$. This large error cannot be corrected with an additional M-H step, since the acceptance rate would be too low. On the other hand, it is not practical to use a large $\lambda$  in a Gibbs sampler, since it would otherwise create extremely large $z_i$ and small conditional covariance for $\theta$.
+
+This is where calibration can solve this dilemma. We first choose a very large $\lambda$ ($10^9$) to control the approximation error, then use a small fractional $r_i$ multiplying to $\lambda$ for calibration. This leads to a proposal likelihood similar to the logistic CDA:
 
 \be
-z_i \sim & \PG\left (\lambda r_i, \xbeta + \log \tau_i-\log \lambda+b_i\right)\\
-\theta^{*} \sim & \No \left( \big[ (X' Z X+  0.01 \cdot I )^{-1}  X'  \big ( y - \lambda r/2 - z (\log \tau_i-\log \lambda + b)\big) ,(X' Z X+  0.01 \cdot I )^{-1} \right),
+L_r(\xtheta;y_i)=\frac{\exp(\eta_i   -\log \lambda +b_i)^{y_i}}{\{1+ \exp(\eta_i -\log \lambda +b_i)\}^{r_i\lambda  }},
 \ee
-with acceptance probability.
-\be
-1 \wedge \prod_i  \frac{ \exp \{ \tau_i\exp (\xbeta)\}}{ \exp \{ \tau_i\exp (\xbeta^*)\}} \frac {{\{1+ \exp(\xbeta^{*} + \log \tau_i -\log \lambda +b_i)\}^{\lambda r_i}}}{{\{1+ \exp(\xbeta + \log \tau_i -\log \lambda +b_i)\}^{\lambda r_i}}},
-\ee
-which is based on the exact Poisson log-normal density.
+and proposal update rule:
 
-To compare the mixing performance, we run the approximate DA with supposedly efficient albeit inaccurate $\lambda=1,000$, the CDA with $\lambda=10^9$ in the M-H proposal and the HMC. We ran each algorithm for $4,000$ steps and use the last $1,000$ as the posterior sample. For CDA, we used the first $1,000$ steps for adaptating $r$ and $b$, and obtained an acceptance rate of $0.6$. Figure~\ref{data_poisson} shows the mixings of DA and CDA. Even with relatively moderate $\lambda$, the DA still shows very slow mixing that all of the parameters mixes poorly; the CDA substantially improves the mixing.
+\be
+z_i \sim  \PG ( & r_i\lambda, \eta_i -\log \lambda + b_i)\\
+\theta^* \sim  \No (  &  (\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix})^{-1} \{  \tilde X'  \big ( y - r\lambda/2 + Z \log (\lambda -b )\big) +   \begin{bmatrix} \tau_0/\sigma^2_{\tau}  1_n \\  0_p \end{bmatrix} \} , \\
+& (\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix})^{-1} )
+\ee
+
+Let $\eta_i^* = \tilde X \theta^*$, the proposal is accepted with probability ( based on Poisson density and the approximation $L_r(\xtheta;y_i)$):
+\be
+1 \wedge \prod_i  \frac{ \exp \{ \exp (\eta_i)\}}{ \exp \{ \exp (\eta_i^*)\}} \frac {{\{1+ \exp(\eta_i^{*}  -\log \lambda +b_i)\}^{r_i\lambda }}}{{\{1+ \exp(\eta_i  -\log \lambda +b_i)\}^{r_i\lambda  }}}.
+\ee
+ 
+During the adaptation, we set $r_i= \tau_i\exp(\eta_i) /  \left( \frac{\lambda } {2|\eta_i + b_i - \log\lambda|}  \tanh\frac{ |\eta_i + b_i - \log\lambda|}{2} \right )$ based on the Fisher information and $b_i=\log[ \exp \{ \exp(\eta_i - \log\lambda -\log r_i)   \}-1] -\eta_i + \log\lambda$.
+
+To compare, we ran approximate DA Gibbs sampler with $\lambda=1,000$, CDA with M-H proposal and HMC. We ran approximate DA for $100,000$ steps, CDA for $20,000$ steps and HMC for $2,000$ steps so that they have approximately the same effective sample size. For CDA, we used the first $1,000$ steps for adaptating $r$ and $b$, and obtained an acceptance rate of $0.6$. Figure~\ref{data_poisson} shows the mixings of DA and CDA. Surprisingly, even with small $\lambda$, in approximate DA, all of the parameters still mix poorly; CDA substantially improves the mixing.
 
  \begin{figure}[H]
  % \centering
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.32\textwidth}
  \includegraphics[width=1\textwidth]{poisson_acf_da}
  \caption{Autocorrelation of the parameters from DA.}
  \end{subfigure}
   \hfill 
- \begin{subfigure}[b]{0.45\textwidth}
+ \begin{subfigure}[b]{0.32\textwidth}
  \includegraphics[width=1\textwidth]{poisson_acf_cda}
  \caption{Autocorrelation of the parameters from CDA.}
+ \end{subfigure}  \hfill 
+ \begin{subfigure}[b]{0.32\textwidth}
+ \includegraphics[width=1\textwidth]{poisson_acf_cda}
+ \caption{Autocorrelation of the parameters from HMC. {\bf \color{red} needs new figure}}
  \end{subfigure}
  \caption{CDA significantly improves the mixing of the parameters in the Poisson log-normal.}
  \label{data_poisson}
  \end{figure}
 
-Table~\ref{table:Poisson} lists the comparison for all three models. We include the posterior mean and standard deviation of the $1$-norm of the coefficients $\sum_{j=0}^{95} |\theta_j|$. For goodness-of-fit, we compute the root-mean-squared error $\text{RMSE}= \sqrt{ \sum_{i=1}^n  (y_i-\hat\tau_i\exp( x_i{\hat\theta}))^2/n}$ with ${\hat\theta}$ and $\hat\tau$ as the posterior mean. To evaluate the prediction performance, we use another validation dataset and $\hat y_{i,new}=\hat\tau_i\exp( x_{i,new}{\hat\theta})$ as the predictor. We evaluate the cross-validation RMSE between $y_{i,new}$ and $\hat y_{i,new}$. CDA and HMC perform quite well and the validation error that is $4$ times lower than DA. Like the binomial application, the CDA is almost 10 times faster than HMC.
+Table~\ref{table:Poisson} compares all three algorithms. Like the binomial case, HMC is the most efficient in mixing and provides the highest effective sample size per iteration, but is quite costly in computation. CDA provides similar mixing performance and is significantly more efficient. Overall, CDA is clearly the best choice to generate the highest effective sample size within the same computing time.
+
+
+To evaluate the prediction performance, we use another dataset $\{y_{i,new},x_{i,new} \}$ collected during a different time period for validation. We use the posterior mean $\{\hat\tau, \hat \beta\}$ for the prediction $\hat y_{i,new}=\exp( x_{i,new}{\hat\theta} + \hat\tau_i)$; cross-validation root-mean-squared error between $y_{i,new}$ and $\hat y_{i,new}$ is computed. CDA and HMC perform quite well and the validation error that is $4$ times lower than DA.
 
 
 \begin{table}[H]
@@ -502,21 +528,23 @@ Table~\ref{table:Poisson} lists the comparison for all three models. We include 
  \hline
                           & DA & CDA & HMC\\
  [0.5ex]
- \hline
-$\sum_{j=0}^{95} |\theta_j|$         & 11.53 (0.10)&  7.42 (0.11)  & 7.51 (0.11)  \\
-RMSE                              & 30.83        & 4.03          & 4.38\\
-DIC                                 & $-4.1131 \times 10^5$     & $-5.1953 \times 10^5$      & $-5.1954 \times 10^5$\\
-CV-RMSE                           & 33.21        & 8.52          & 8.18\\
-Computing Time (per 1,000 steps)  & 25 mins       & 26 mins        & 300 mins\\
+$\sum \theta_j / 95$         & 0.072 (0.071, 0.075)&  -0.041 (-0.042, -0.038)  & -0.040 (-0.042, -0.037) \\
+$\sum \theta_j^2 / 95$         & 0.0034 (0.0033, 0.0035)&  0.231 (0.219 0.244)  & 0.232 (0.216 0.244)   \\
+$\sum\tau_i/n$         & -0.405 (-0.642, -0.155)&  -1.292 (-2.351, -0.446)  &  -1.297 (-2.354, -0.451)  \\
+$\sum\tau_i^2/n$         & 1.126 (0.968, 1.339)&  3.608 (0.696, 7.928)  & 3.589 (0.678, 8.011)  \\
+% RMSE                              & 30.83        & 4.03          & 4.38\\
+Prediction RMSE                           & 33.21        & 8.52          & 8.18\\
+$T_{eff} / T$ & 0.0037 (0.0011 0.0096) & 0.3348 (0.0279, 0.699) & ???\\
+Avg Computing Time /  $T$  & 1.3 sec       & 1.3 sec        & ??? sec\\
+Avg Computing Time /  $T_{eff}$  & 346.4 sec       & 11.5 sec        & ??? sec\\
  \hline
 \end{tabular}
-\caption{Parameter estimates and computing speed of the DA, CDA and HMC in Poisson regression model. CDA shows similar performance as HMC in both parameter estimation and cross-validation in prediction, but is about 10 times faster.}
+\caption{Parameter estimates, prediction error and computing speed of the DA, CDA and HMC in Poisson regression model. Compared with HMC, CDA shows similar performance in both parameter estimation and prediction, but is about 5 times faster.}
 \label{table:Poisson}
 \end{table}
 
 \section{Discussion}
-
-In posterior sampling, when the parameters lack closed-form in the marginal distribution, data augmentation is a useful technique. It has been realized that this practice could severely stall the mixing, due to the gap between the conditional variance with the augmented data and the marginal one. With data size increases and become complex, it is common for the conditional distribution of the parameter to deviate from the area that has reasonable mixing performance. As we show in the previous examples, this quickly leads to an un-manageable increase in the computational time and poor estimation.
+Data augmentation is a useful technique to sample posterior from the closed-form conditional. It has been realized that this practice could severely stall the mixing, due to the gap between the conditional variance with the augmented data and the marginal one. With data size increases and become complex, it is common for the conditional distribution of the parameter to deviate from the area that has reasonable mixing performance. As we show in the previous examples, this quickly leads to an un-manageable increase in the computational time and poor estimation.
 
 To solve this problem, we propose a general class of method to calibrate the variance conditional on the latent variable. With a mechanism to adjust the step size, the transition in each iteration is corrected onto the same order of the marginal variance. The generated samples are used as proposal in the Metropolis-Hastings for exact posterior. In this article, we demonstrate that this strategy is applicable when $\theta \mid z$ belongs to the location-scale family. We expect that it can be extensible to any distribution with a variance / scale, possibly with a different bias-reducing mechanism.
 
@@ -695,7 +723,7 @@ Since the marginal variances are the same for two algorithms $\mbox{var}_{DA}\{s
 %
 %\subsubsection{Total Variation Distance}
 %
-%With $\eta_i=\xbeta$, the individual Kullback-Leibler distance:
+%With $\eta_i=\xtheta$, the individual Kullback-Leibler distance:
 %
 %\begin{equation}
 %\begin{aligned}

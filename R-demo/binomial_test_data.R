@@ -22,10 +22,38 @@ DIC<- function(x){
 fit2<- logitRanIntercept(y, N,r_ini= 1,tune = 100,burnin=100, run=1000 ,fixR = F,MH = T,c=2,priorMean = -12,priorVar = 49)
 fit2$accept_rate
 
-mean(fit2$sigma0)
+# save(fit2,file="../../CDA_data/binomialCDA.RDa")
 
-mean(apply(fit2$beta[1:500,], 1,DIC))
-mean(apply(fit2$beta[500:1000,], 1,DIC))
+load("../../CDA_data/binomialCDA.RDa")
+require("coda")
+
+fit2$beta<- fit2$beta[200:1000,]
+fit2$beta0<- fit2$beta0[200:1000]
+
+mean(rowMeans((fit2$beta)))
+quantile(rowMeans((fit2$beta)),c(0.025,0.975))
+
+mean(rowMeans((fit2$beta^2)))
+quantile(rowMeans((fit2$beta^2)),c(0.025,0.975))
+
+mean(fit2$beta0)
+quantile(fit2$beta0,c(0.025,0.975))
+
+mean(fit2$sigma0)
+quantile(fit2$sigma0,c(0.025,0.975))
+
+essFit2<-effectiveSize(fit2$beta[,1:2000])/800
+# essFit2<- essFit2*1000/800
+mean(essFit2)
+quantile(essFit2,c(0.025,0.975))
+
+
+# acf(fit2$beta[,1])
+# 
+# mean(fit2$sigma0)
+# 
+# mean(apply(fit2$beta[1:500,], 1,DIC))
+# mean(apply(fit2$beta[500:1000,], 1,DIC))
 
 
 ACFfit2<-apply(fit2$proposal, MARGIN = 2, function(x){c(c(acf(x,plot = F,lag.max = 40))$acf[,,1])})
@@ -60,9 +88,39 @@ sd(fit2$sigma0[500:1000])
 
 #r fixed to 1
 fit3<- logitRanIntercept(y, N,r_ini= 1,tune = 200,burnin=2000, run=1000 ,fixR = T,MH = F,c=5,priorMean = -12,priorVar = 49)
+
+# save(fit3,file="../../CDA_data/binomialDA.RDa")
+load("../../CDA_data/binomialDA.RDa")
+
+
 fit3$accept_rate
 ACFfit3<-apply(fit3$beta, MARGIN = 2, function(x){c(c(acf(x,plot = F,lag.max = 40))$acf[,,1])})
 
+# ts.plot(fit3$beta[,1])
+
+mean(rowMeans((fit3$beta)))
+quantile(rowMeans((fit3$beta)),c(0.025,0.975))
+
+mean(rowMeans((fit3$beta^2)))
+quantile(rowMeans((fit3$beta^2)),c(0.025,0.975))
+
+
+
+mean(colMeans((fit3$beta)))
+quantile(colMeans((fit3$beta)),c(0.025,0.975))
+
+mean(fit3$beta0)
+quantile(fit3$beta0,c(0.025,0.975))
+
+mean(fit3$sigma0)
+quantile(fit3$sigma0,c(0.025,0.975))
+
+essFit3<-effectiveSize(fit3$beta[,1:2000])/1000
+
+20/ (mean(essFit3)*1000)
+
+mean(essFit3)
+quantile(essFit3,c(0.025,0.975))
 
 mean(apply(fit3$beta, 1,DIC))
 

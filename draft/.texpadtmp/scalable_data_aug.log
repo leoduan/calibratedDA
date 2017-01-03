@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 DEC 2016 17:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  2 JAN 2017 17:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -212,21 +212,33 @@ Package: mhequ
 LaTeX Warning: Label `eq:mh-criterion' multiply defined.
 
 )
+Runaway argument?
+{\contentsline {subsection}{\numberline {4.1}Hierarchical Binomial Mo\ETC.
+./scalable_data_aug.tex:82: File ended while scanning use of \@writefile.
+<inserted text> 
+                \par 
+l.82 \begin{document}
+                     
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
 \openout1 = `scalable_data_aug.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
- (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count124
 \scratchdimen=\dimen121
@@ -277,158 +289,246 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 80.
+LaTeX Font Info:    Try loading font information for U+msa on input line 84.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 80.
+LaTeX Font Info:    Try loading font information for U+msb on input line 84.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] <probit_demo_acf_prop.pdf, id=31, 361.35pt x 216.81pt>
+Package natbib Warning: Citation `ngai2011application' on page 1 undefined on input line 99.
+
+
+Package natbib Warning: Citation `wakefield2007disease' on page 1 undefined on input line 99.
+
+
+Package natbib Warning: Citation `wang2010click' on page 1 undefined on input line 99.
+
+[1
+
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `minsker2014robust' on page 2 undefined on input line 103.
+
+
+Package natbib Warning: Citation `srivastava2015wasp' on page 2 undefined on input line 103.
+
+
+Package natbib Warning: Citation `conrad2015accelerating' on page 2 undefined on input line 103.
+
+
+Package natbib Warning: Citation `roberts2004general' on page 2 undefined on input line 106.
+
+
+Package natbib Warning: Citation `meyn2012markov' on page 2 undefined on input line 106.
+
+
+Package natbib Warning: Citation `rajaratnam2015mcmc' on page 2 undefined on input line 106.
+
+
+Package natbib Warning: Citation `hairer2011asymptotic' on page 2 undefined on input line 106.
+
+
+Package natbib Warning: Citation `hairer2014spectral' on page 2 undefined on input line 106.
+
+
+Package natbib Warning: Citation `johndrow2016inefficiency' on page 2 undefined on input line 108.
+
+
+Package natbib Warning: Citation `albert1993bayesian' on page 2 undefined on input line 108.
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 2 undefined on input line 108.
+
+
+Package natbib Warning: Citation `hairer2014spectral' on page 2 undefined on input line 108.
+
+[2]
+
+Package natbib Warning: Citation `tanner1987calculation' on page 3 undefined on input line 127.
+
+
+Package natbib Warning: Citation `albert1993bayesian' on page 3 undefined on input line 127.
+
+[3]
+
+Package natbib Warning: Citation `liu1999parameter' on page 4 undefined on input line 143.
+
+
+Package natbib Warning: Citation `meng1999seeking' on page 4 undefined on input line 143.
+
+
+Package natbib Warning: Citation `johndrow2016inefficiency' on page 4 undefined on input line 162.
+
+[4]
+
+Package natbib Warning: Citation `johndrow2016inefficiency' on page 5 undefined on input line 166.
+
+
+Package natbib Warning: Citation `albert1993bayesian' on page 5 undefined on input line 172.
+
+<probit_demo_acf_prop.pdf, id=31, 361.35pt x 216.81pt>
 File: probit_demo_acf_prop.pdf Graphic file (type pdf)
  <use probit_demo_acf_prop.pdf>
-Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 175.
+Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 179.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
  <density_probit.pdf, id=32, 361.35pt x 216.81pt>
 File: density_probit.pdf Graphic file (type pdf)
  <use density_probit.pdf>
-Package pdftex.def Info: density_probit.pdf used on input line 181.
+Package pdftex.def Info: density_probit.pdf used on input line 185.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
  <probit_demo_acf.pdf, id=33, 361.35pt x 216.81pt>
 File: probit_demo_acf.pdf Graphic file (type pdf)
  <use probit_demo_acf.pdf>
-Package pdftex.def Info: probit_demo_acf.pdf used on input line 187.
+Package pdftex.def Info: probit_demo_acf.pdf used on input line 191.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [5] <probit15_trace_plot.pdf, id=37, 433.62pt x 259.97125pt>
+ [5]
+
+Package natbib Warning: Citation `albert1993bayesian' on page 6 undefined on input line 211.
+
+
+Package natbib Warning: Citation `liu1999parameter' on page 6 undefined on input line 212.
+
+<probit15_trace_plot.pdf, id=37, 433.62pt x 259.97125pt>
 File: probit15_trace_plot.pdf Graphic file (type pdf)
  <use probit15_trace_plot.pdf>
-Package pdftex.def Info: probit15_trace_plot.pdf used on input line 216.
+Package pdftex.def Info: probit15_trace_plot.pdf used on input line 220.
 (pdftex.def)             Requested size: 212.16118pt x 127.20058pt.
  <probit15_acf.pdf, id=38, 361.35pt x 216.81pt>
 File: probit15_acf.pdf Graphic file (type pdf)
  <use probit15_acf.pdf>
-Package pdftex.def Info: probit15_acf.pdf used on input line 222.
+Package pdftex.def Info: probit15_acf.pdf used on input line 226.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>] [7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] <logit_demo_trace_plot.pdf, id=74, 361.35pt x 216.81pt>
+
+
+Package natbib Warning: Citation `albert1993bayesian' on page 6 undefined on input line 230.
+
+
+Package natbib Warning: Citation `liu1999parameter' on page 6 undefined on input line 230.
+
+
+Package natbib Warning: Citation `albert1993bayesian' on page 6 undefined on input line 230.
+
+
+Package natbib Warning: Citation `liu1999parameter' on page 6 undefined on input line 230.
+
+[6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>]
+
+Package natbib Warning: Citation `polson2013bayesian' on page 7 undefined on input line 240.
+
+[7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>]
+
+Package natbib Warning: Citation `cressie1981moment' on page 8 undefined on input line 267.
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 8 undefined on input line 267.
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 8 undefined on input line 277.
+
+<logit_demo_trace_plot.pdf, id=74, 361.35pt x 216.81pt>
 File: logit_demo_trace_plot.pdf Graphic file (type pdf)
  <use logit_demo_trace_plot.pdf>
-Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 278.
+Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 282.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
  <logit_demo_acf.pdf, id=75, 361.35pt x 216.81pt>
 File: logit_demo_acf.pdf Graphic file (type pdf)
  <use logit_demo_acf.pdf>
-Package pdftex.def Info: logit_demo_acf.pdf used on input line 283.
+Package pdftex.def Info: logit_demo_acf.pdf used on input line 287.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- [8] [9 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [10] [11] <binomial_random_acf_da.pdf, id=99, 361.35pt x 216.81pt>
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 8 undefined on input line 290.
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 8 undefined on input line 290.
+
+[8] [9 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>]
+
+Package natbib Warning: Citation `liu2008monte' on page 10 undefined on input line 329.
+
+
+Package natbib Warning: Citation `fill1991eigenvalue' on page 10 undefined on input line 329.
+
+
+Package natbib Warning: Citation `liu1994collapsed' on page 10 undefined on input line 333.
+
+[10]
+
+Package natbib Warning: Citation `papaspiliopoulos2007general' on page 11 undefined on input line 340.
+
+
+Package natbib Warning: Citation `yang2013sequential' on page 11 undefined on input line 370.
+
+[11] [12]
+
+LaTeX Warning: Reference `data_binomial' on page 13 undefined on input line 400.
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 13 undefined on input line 400.
+
+
+LaTeX Warning: Reference `tab:binomial' on page 13 undefined on input line 400.
+
+
+Package natbib Warning: Citation `carpenter2016stan' on page 13 undefined on input line 402.
+
+<binomial_random_acf_da.pdf, id=102, 361.35pt x 216.81pt>
 File: binomial_random_acf_da.pdf Graphic file (type pdf)
  <use binomial_random_acf_da.pdf>
-Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 375.
+Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 408.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- <binomial_random_acf_cda.pdf, id=100, 361.35pt x 216.81pt>
+ <binomial_random_acf_cda.pdf, id=103, 361.35pt x 216.81pt>
 File: binomial_random_acf_cda.pdf Graphic file (type pdf)
  <use binomial_random_acf_cda.pdf>
-Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 380.
+Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 413.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [12 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf>] <traceplot_poisson_da.pdf, id=115, 433.62pt x 433.62pt>
-File: traceplot_poisson_da.pdf Graphic file (type pdf)
- <use traceplot_poisson_da.pdf>
-Package pdftex.def Info: traceplot_poisson_da.pdf used on input line 445.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
-<poisson_da_acf.pdf, id=116, 433.62pt x 433.62pt>
-File: poisson_da_acf.pdf Graphic file (type pdf)
- <use poisson_da_acf.pdf>
-Package pdftex.def Info: poisson_da_acf.pdf used on input line 451.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <traceplot_poisson_cda.pdf, id=117, 433.62pt x 433.62pt>
-File: traceplot_poisson_cda.pdf Graphic file (type pdf)
- <use traceplot_poisson_cda.pdf>
-Package pdftex.def Info: traceplot_poisson_cda.pdf used on input line 456.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_cda_acf.pdf, id=118, 433.62pt x 433.62pt>
-File: poisson_cda_acf.pdf Graphic file (type pdf)
- <use poisson_cda_acf.pdf>
-Package pdftex.def Info: poisson_cda_acf.pdf used on input line 462.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- [13] [14 <./traceplot_poisson_da.pdf> <./poisson_da_acf.pdf> <./traceplot_poisson_cda.pdf> <./poisson_cda_acf.pdf>] [15] (/Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.bbl
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- [16]) [17] <traceplot_poisson_zip_da.pdf, id=155, 433.62pt x 433.62pt>
-File: traceplot_poisson_zip_da.pdf Graphic file (type pdf)
- <use traceplot_poisson_zip_da.pdf>
-Package pdftex.def Info: traceplot_poisson_zip_da.pdf used on input line 737.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_zip_da_acf.pdf, id=156, 216.81pt x 216.81pt>
-File: poisson_zip_da_acf.pdf Graphic file (type pdf)
- <use poisson_zip_da_acf.pdf>
-Package pdftex.def Info: poisson_zip_da_acf.pdf used on input line 742.
-(pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
- [18] <poisson_fitting_da.png, id=160, 1204.5pt x 1204.5pt>
-File: poisson_fitting_da.png Graphic file (type png)
- <use poisson_fitting_da.png>
-Package pdftex.def Info: poisson_fitting_da.png used on input line 756.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_fitting_ada.png, id=162, 1204.5pt x 1204.5pt>
-File: poisson_fitting_ada.png Graphic file (type png)
- <use poisson_fitting_ada.png>
-Package pdftex.def Info: poisson_fitting_ada.png used on input line 761.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_da.png, id=163, 1204.5pt x 1204.5pt>
-File: poisson_cv_da.png Graphic file (type png)
- <use poisson_cv_da.png>
-Package pdftex.def Info: poisson_cv_da.png used on input line 765.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_ada.png, id=164, 1204.5pt x 1204.5pt>
-File: poisson_cv_ada.png Graphic file (type png)
- <use poisson_cv_ada.png>
-Package pdftex.def Info: poisson_cv_ada.png used on input line 770.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- [19 <./traceplot_poisson_zip_da.pdf> <./poisson_zip_da_acf.pdf>] <CDAvsHMC_mean.pdf, id=180, 433.62pt x 433.62pt>
-File: CDAvsHMC_mean.pdf Graphic file (type pdf)
- <use CDAvsHMC_mean.pdf>
-Package pdftex.def Info: CDAvsHMC_mean.pdf used on input line 782.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <CDAvsHMC_sd.pdf, id=181, 433.62pt x 433.62pt>
-File: CDAvsHMC_sd.pdf Graphic file (type pdf)
- <use CDAvsHMC_sd.pdf>
-Package pdftex.def Info: CDAvsHMC_sd.pdf used on input line 787.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
 
-Underfull \hbox (badness 1748) in paragraph at lines 788--788
-[]\OT1/cmr/m/n/9 (b) |Com-par-ing pos-te-rior stan-dard de-vi-a-tion for
+Package natbib Warning: Citation `polson2013bayesian' on page 13 undefined on input line 416.
+
+
+Package natbib Warning: Citation `polson2013bayesian' on page 13 undefined on input line 416.
+
+
+Overfull \hbox (2.70131pt too wide) in paragraph at lines 424--438
+ [][] 
  []
 
-[20 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_da.png> <./poisson_cv_ada.png>] <traceplot_poisson_hmc.pdf, id=190, 433.62pt x 433.62pt>
-File: traceplot_poisson_hmc.pdf Graphic file (type pdf)
- <use traceplot_poisson_hmc.pdf>
-Package pdftex.def Info: traceplot_poisson_hmc.pdf used on input line 799.
-(pdftex.def)             Requested size: 212.16118pt x 212.16469pt.
- <poisson_hmc_acf.pdf, id=191, 216.81pt x 216.81pt>
-File: poisson_hmc_acf.pdf Graphic file (type pdf)
- <use poisson_hmc_acf.pdf>
-Package pdftex.def Info: poisson_hmc_acf.pdf used on input line 804.
-(pdftex.def)             Requested size: 212.16118pt x 212.1713pt.
- [21 <./CDAvsHMC_mean.pdf> <./CDAvsHMC_sd.pdf> <./traceplot_poisson_hmc.pdf> <./poisson_hmc_acf.pdf>] (/Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.aux)
+[13 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf>]
 
-LaTeX Warning: There were multiply-defined labels.
+Package natbib Warning: Citation `zhou2012lognormal' on page 14 undefined on input line 456.
 
- ) 
-Here is how much of TeX's memory you used:
- 5026 strings out of 493014
- 74598 string characters out of 6133351
- 144782 words of memory out of 5000000
- 8457 multiletter control sequences out of 15000+600000
- 14633 words of font info for 56 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 42i,12n,43p,1396b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on /Volumes/shared_data/work/git/ImbalancedPG/draft/.texpadtmp/scalable_data_aug.pdf (21 pages, 724429 bytes).
-PDF statistics:
- 314 PDF objects out of 1000 (max. 8388607)
- 213 compressed objects within 3 object streams
- 0 named destinations out of 1000 (max. 500000)
- 116 words of extra memory for PDF output out of 10000 (max. 10000000)
+./scalable_data_aug.tex:466: Missing } inserted.
+<inserted text> 
+                }
+l.466 ... \PG (\lambda, \eta_i -\log \lambda\right
+                                                  )\\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+./scalable_data_aug.tex:466: Extra \right.
+l.466 ...\PG (\lambda, \eta_i -\log \lambda\right)
+                                                  \\
+I'm ignoring a \right that had no matching \left.
+
+./scalable_data_aug.tex:468: Incomplete \if; all text was ignored after line 468.
+<inserted text> 
+                \fi 
+l.468 \ee
+         
+A forbidden control sequence occurred in skipped text.
+This kind of error happens when you say `\if...' and forget
+the matching `\fi'. I've inserted a `\fi'; this might work.
+
+./scalable_data_aug.tex:468: Missing $ inserted.
+<inserted text> 
+                $
+l.468 \ee
+         
+I've inserted a begin-math/

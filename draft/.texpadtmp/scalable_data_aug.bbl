@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -10,6 +10,13 @@ James~H Albert and Siddhartha Chib.
 \newblock {Bayesian} analysis of binary and polychotomous response data.
 \newblock \emph{Journal of the American statistical Association}, 88\penalty0
   (422):\penalty0 669--679, 1993.
+
+\bibitem[Carpenter et~al.(2016)Carpenter, Gelman, Hoffman, Lee, Goodrich,
+  Betancourt, Brubaker, Guo, Li, and Riddell]{carpenter2016stan}
+Bob Carpenter, Andrew Gelman, Matt Hoffman, Daniel Lee, Ben Goodrich, Michael
+  Betancourt, Michael~A Brubaker, Jiqiang Guo, Peter Li, and Allen Riddell.
+\newblock Stan: A probabilistic programming language.
+\newblock \emph{J Stat Softw}, 2016.
 
 \bibitem[Conrad et~al.(2015)Conrad, Marzouk, Pillai, and
   Smith]{conrad2015accelerating}
@@ -96,6 +103,12 @@ EWT Ngai, Yong Hu, YH~Wong, Yijun Chen, and Xin Sun.
 \newblock \emph{Decision Support Systems}, 50\penalty0 (3):\penalty0 559--569,
   2011.
 
+\bibitem[Papaspiliopoulos et~al.(2007)Papaspiliopoulos, Roberts, and
+  Sk{\"o}ld]{papaspiliopoulos2007general}
+Omiros Papaspiliopoulos, Gareth~O Roberts, and Martin Sk{\"o}ld.
+\newblock A general framework for the parametrization of hierarchical models.
+\newblock \emph{Statistical Science}, pages 59--73, 2007.
+
 \bibitem[Polson et~al.(2013)Polson, Scott, and Windle]{polson2013bayesian}
 Nicholas~G Polson, James~G Scott, and Jesse Windle.
 \newblock {Bayesian} inference for logistic models using p{\'o}lya--gamma
@@ -136,6 +149,11 @@ Xuerui Wang, Wei Li, Ying Cui, Ruofei Zhang, and Jianchang Mao.
 \newblock Click-through rate estimation for rare events in online advertising.
 \newblock \emph{Online Multimedia Advertising: Techniques and Technologies},
   pages 1--12, 2010.
+
+\bibitem[Yang and Dunson(2013)]{yang2013sequential}
+Yun Yang and David~B Dunson.
+\newblock Sequential markov chain monte carlo.
+\newblock \emph{arXiv preprint arXiv:1308.3861}, 2013.
 
 \bibitem[Zhou et~al.(2012)Zhou, Li, Dunson, and Carin]{zhou2012lognormal}
 Mingyuan Zhou, Lingbo Li, David Dunson, and Lawrence Carin.

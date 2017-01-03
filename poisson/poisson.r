@@ -50,8 +50,9 @@ poissonCDA<- function(y,X, r_ini= 1,tune= 100,burnin=500, run=500 ,fixR = FALSE,
         if(  max_loglik< sum(loglik)){
           
           dprob<- exp(Xbeta+eta)
-          r0<-       dprob/(tanh(abs(Xbeta+eta + b - logC)/2)/2/abs(Xbeta+eta + b - logC))/C
-        }
+          curPGmean<- C/2/abs(Xbeta+eta + b - logC)*tanh(abs(Xbeta+eta + b - logC)/2)
+          r0<-       dprob/  curPGmean
+          }
         r<- r0*c
         r[r>1]<-1
         r[r*C<y]<- (y/C)[r*C<y]
