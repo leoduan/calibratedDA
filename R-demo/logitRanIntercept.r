@@ -27,7 +27,8 @@ logitRanIntercept<- function(y,N=1, r_ini= 1,tune =200,burnin=500, run=500,fixR 
   max_beta= rep(-Inf,n)
 
   #individual log-likelihood
-  loglik <- - N*log(1+exp(beta))
+  # loglik <- - N*log(1+exp(beta)) # Original
+  loglik <- - N*log(1+exp(beta)) - (beta-beta0)^2/2/sigma0 # Modified
   max_loglik<- -Inf
   # loglik<- -Inf
   #objects to store trace
@@ -74,7 +75,8 @@ logitRanIntercept<- function(y,N=1, r_ini= 1,tune =200,burnin=500, run=500,fixR 
     m<- V* (y- N*r/2 -Z*b + beta0/sigma0)
     cholV<- sqrt(V)
     new_beta <- cholV  * rnorm(p) + m
-    new_loglik<-  - N*log(1+exp(new_beta)) 
+    # new_loglik<-  - N*log(1+exp(new_beta)) # Original
+    new_loglik<-  - N*log(1+exp(new_beta)) - (new_beta-beta0)^2/2/sigma0 # Modified
 
     q_loglik<-    -N*r*log(1+exp(beta+b))  
     new_q_loglik<-  -N*r*log(1+exp(new_beta+b)) 
