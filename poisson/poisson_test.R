@@ -2,7 +2,7 @@
 
 require("scalableDA")
 require("coda")
-setwd("~/git/ImbalancedPG/poisson/")
+setwd("~/git/calibratedDA/poisson/")
 source("maxpoint_data.r")
 
 source("poisson.r")
@@ -111,6 +111,12 @@ mean(rowMeans(fit3$tau^2))
 quantile(rowMeans(fit3$tau^2),c(0.025,0.975))
 # save(fit3,file="../../CDA_data/poissonCDA.RDa")
 # save(fit4,file="../../CDA_data/poissonDA.RDa")
+
+mean(fit3$nu)
+quantile(rowMeans(fit3$tau^2),c(0.025,0.975))
+
+mean(fit4$nu)
+quantile(rowMeans(fit3$tau^2),c(0.025,0.975))
 
 require("reshape")
 require("ggplot2")

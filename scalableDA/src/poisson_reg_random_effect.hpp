@@ -156,7 +156,7 @@ SEXP poisson_reg_block_random(SEXP y, SEXP X, double r_ini = 1, int tune = 100,
 
     if (!fixNu)
       nu = 1 /
-           c11r.draw_gamma(n / 2.0 + 1,
+           c11r.draw_gamma(n / 2.0 - 1,
                            accu((logtau - eta0) % (logtau - eta0)) / 2.0);
     if (centeredRanEff) eta0 = c11r.rnorm(mean(logtau), sqrt(nu / n));
 

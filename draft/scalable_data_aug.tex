@@ -205,13 +205,12 @@ As illustrated in the previous subsection, efficiency of CDA is dependent on a g
 X' \diag\bigg\{\frac{\phi(\eta_i)^2}{ {\Phi(\eta_i)(1- \Phi(\eta_i))}}\bigg\} X,\quad \quad X' R^{-1} X
 \ee
 respectively, where $\phi$ is the standard normal density. Therefore, setting $r_i = \frac{\Phi(\eta_i)(1- \Phi(\eta_i))} {\phi(\eta_i)^2}$ completely adjusts for mis-calibration.  The $r_i$'s can be calculated using this expression quickly and easily without need to calculate the information matrix.
-The bias-adjustment parameters $b$ are then chosen to increase the acceptance rate in the M-H step, $1\wedge \prod_i \frac{   L_r(\eta_i;y_i) L(\eta_i^*;y_i)}{ L_r(\eta_i^*;y_i)L(\eta_i;y_i) }$. In particular, by setting $b_i = \eta_i (\sqrt{r_i}-1)$ we ensure that $L_r(\eta_i;y_i) = L(\eta_i;y_i)$.
-% LEO - CAN WE ACTUALLY CHOOSE b_i's to technically maximize the acceptance rate.  This is a bit squishy as is.
+The bias-adjustment parameters $b$ are then chosen to increase the acceptance rate in the M-H step, $1\wedge \prod_i \frac{   L_r(\eta_i;y_i) L(\eta_i^*;y_i)}{ L_r(\eta_i^*;y_i)L(\eta_i;y_i) }$. As $\eta_i^*$ is unknown before proposed, we set $b_i = \eta_i (\sqrt{r_i}-1)$ to ensure that $L_r(\eta_i;y_i) = L(\eta_i;y_i)$ and proposals near $\eta_i$ have relatively large acceptance rate.
+
 
 Since $\theta$ and $\eta$ are not known before sampling, we use a short tuning period to sample them and update $r$ and $b$ at the end of each iteration.  After tuning, we stop adaptation and keep $r$ and $b$ fixed.  To illustrate, we consider a probit regression with an intercept and two predictors $x_{i,1},x_{i,2}\sim \No(1,1)$, with $\theta=(-5,1,-1)'$, generating $\sum y_i=20$ among $n=10,000$. The \cite{albert1993bayesian} DA algorithm mixes slowly (Figure~\ref{probit_reg_trace} and \ref{probit_reg_acf}). We also show the 
 results of the parameter expansion algorithm (PX-DA) proposed by \cite{liu1999parameter}. PX-DA only mildly reduces the correlation, as it does not solve the variance mismatch problem.  In contrast, applying CDA after a tuning period of 100 iterations, we obtain dramatically better mixing.
 
-%We started CDA with the adaptive algorithm for 100 iterations, obtaining an acceptance rate of $0.43$, then ran $100$ steps as burn-in and collected the posterior sample for $500$ steps. 
 
  
 \begin{figure}[H]
@@ -317,8 +316,7 @@ in an M-H step with acceptance probability:
 1 \wedge \prod_i  \frac{L(m_i(\theta^*); y_i) L_r(m_i(\theta) ; y_i)} {L(m_i(\theta); y_i, r_i, b_i) L_r(m_i(\theta^*); y_i, r_i, b_i)}.
 % \label{eq:mh-criterion}
 \ee
-In an initial tuning phase, we adaptively update $r$ and $b$. We choose $r$ at each sampling step to minimize the difference between the Fisher information matrices based on the marginal posterior with the latent data integrated out and the conditional posterior given the latent data.  As illustrated in subsection 2.3-2.4 for the two different strategies of augmentation, simple and computationally efficient closed forms are typically available for the $r_i$'s, which avoid potentially expensive calculation of the full information matrix.
-Then conditional on $r_i$, we choose $b_i$ to increase the M-H acceptance rate; one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. 
+In an initial tuning phase, we adaptively update $r$ and $b$. We choose $r$ at each sampling step to minimize the difference between the Fisher information matrices based on the marginal posterior with the latent data integrated out and the conditional posterior given the latent data.  As illustrated in subsection 2.3-2.4 for the two different strategies of augmentation, simple and computationally efficient closed forms are typically available for the $r_i$'s, which avoid potentially expensive calculation of the full information matrix. Then conditional on $r_i$, we choose $b_i$ to increase the M-H acceptance rate; one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. As a finite approximation for the variance, for some data augmentation, it is possible that Fisher information over estimates the mis-calibration and exhibit low acceptance rate; in that case, we suggest reduce all of the estimated $r_i$'s by a common small fraction to modulate the variance increase to generate higher acceptance rate.
 
 \section{Theory: Mixing Acceleration}
 
@@ -493,9 +491,11 @@ Let $\eta_i^* = \tilde X \theta^*$, the proposal is accepted with probability ( 
 1 \wedge \prod_i  \frac{ \exp \{ \exp (\eta_i)\}}{ \exp \{ \exp (\eta_i^*)\}} \frac {{\{1+ \exp(\eta_i^{*}  -\log \lambda +b_i)\}^{r_i\lambda }}}{{\{1+ \exp(\eta_i  -\log \lambda +b_i)\}^{r_i\lambda  }}}.
 \ee
  
-During the adaptation, we set $r_i= \tau_i\exp(\eta_i) /  \left( \frac{\lambda } {2|\eta_i + b_i - \log\lambda|}  \tanh\frac{ |\eta_i + b_i - \log\lambda|}{2} \right )$ based on the Fisher information and $b_i=\log[ \exp \{ \exp(\eta_i - \log\lambda -\log r_i)   \}-1] -\eta_i + \log\lambda$.
+During the adaptation, we set $r_i = 1/c_0 \tau_i\exp(\eta_i) /  \left( \frac{\lambda } {2|\eta_i + b_i - \log\lambda|}  \tanh\frac{ |\eta_i + b_i - \log\lambda|}{2} \right )$ based on the Fisher information. We found the acceptance rate too low with $c_0 =1$, which indicates an overestimation of mis-calibration. Therefore, we reduce $c_0$ and obtained an acceptance rate of $0.6$. Conditionally on $r_i$, we used $b_i=\log[ \exp \{ \exp(\eta_i - \log\lambda -\log r_i)   \}-1] -\eta_i + \log\lambda$.
 
-To compare, we ran approximate DA Gibbs sampler with $\lambda=1,000$, CDA with M-H proposal and HMC. We ran approximate DA for $100,000$ steps, CDA for $20,000$ steps and HMC for $2,000$ steps so that they have approximately the same effective sample size. For CDA, we used the first $1,000$ steps for adaptating $r$ and $b$, and obtained an acceptance rate of $0.6$. Figure~\ref{data_poisson} shows the mixings of DA and CDA. Surprisingly, even with small $\lambda$, in approximate DA, all of the parameters still mix poorly; CDA substantially improves the mixing.
+
+To compare, we ran approximate DA Gibbs sampler with $\lambda=1,000$, CDA with M-H proposal and HMC. We ran approximate DA for $200,000$ steps, CDA for $2,000$ steps and HMC for $20,000$ steps so that they have approximately the same effective sample size. For CDA, we used the first $1,000$ steps for adapting $r$ and $b$. Figure~\ref{data_poisson} shows the mixings of DA and CDA. Surprisingly, even with small $\lambda$, in approximate DA, all of the parameters still mix poorly; HMC seemed to be impacted by the random effects and most of parameters remain highly correlated within $40$ lags; CDA substantially improves the mixing. Table~\ref{table:Poisson} compares all three algorithms. CDA is clearly the best algorithm to generate the highest effective sample size within the same computing time.
+
 
  \begin{figure}[H]
  % \centering
@@ -509,17 +509,16 @@ To compare, we ran approximate DA Gibbs sampler with $\lambda=1,000$, CDA with M
  \caption{Autocorrelation of the parameters from CDA.}
  \end{subfigure}  \hfill 
  \begin{subfigure}[b]{0.32\textwidth}
- \includegraphics[width=1\textwidth]{poisson_acf_cda}
- \caption{Autocorrelation of the parameters from HMC. {\bf \color{red} needs new figure}}
+ \includegraphics[width=1\textwidth]{poisson_acf_hmc}
+ \caption{Autocorrelation of the parameters from HMC.}
  \end{subfigure}
  \caption{CDA significantly improves the mixing of the parameters in the Poisson log-normal.}
  \label{data_poisson}
  \end{figure}
 
-Table~\ref{table:Poisson} compares all three algorithms. Like the binomial case, HMC is the most efficient in mixing and provides the highest effective sample size per iteration, but is quite costly in computation. CDA provides similar mixing performance and is significantly more efficient. Overall, CDA is clearly the best choice to generate the highest effective sample size within the same computing time.
 
 
-To evaluate the prediction performance, we use another dataset $\{y_{i,new},x_{i,new} \}$ collected during a different time period for validation. We use the posterior mean $\{\hat\tau, \hat \beta\}$ for the prediction $\hat y_{i,new}=\exp( x_{i,new}{\hat\theta} + \hat\tau_i)$; cross-validation root-mean-squared error between $y_{i,new}$ and $\hat y_{i,new}$ is computed. CDA and HMC perform quite well and the validation error that is $4$ times lower than DA.
+To evaluate the prediction performance, we use another dataset $\{y_{i,new},x_{i,new} \}$ collected during a different time period for validation. We use the posterior mean $\{\hat\tau, \hat \beta\}$ for the prediction $\hat y_{i,new}=\exp( x_{i,new}{\hat\theta} + \hat\tau_i)$; cross-validation root-mean-squared error between $y_{i,new}$ and $\hat y_{i,new}$ is computed. CDA performs quite well and the validation error that is $4$ times lower than DA.
 
 
 \begin{table}[H]
@@ -528,29 +527,29 @@ To evaluate the prediction performance, we use another dataset $\{y_{i,new},x_{i
  \hline
                           & DA & CDA & HMC\\
  [0.5ex]
-$\sum \theta_j / 95$         & 0.072 (0.071, 0.075)&  -0.041 (-0.042, -0.038)  & -0.040 (-0.042, -0.037) \\
-$\sum \theta_j^2 / 95$         & 0.0034 (0.0033, 0.0035)&  0.231 (0.219 0.244)  & 0.232 (0.216 0.244)   \\
+$\sum \beta_j / 95$         & 0.072 (0.071, 0.075)&  -0.041 (-0.042, -0.038)  & -0.010 (-0.042, -0.037) \\
+$\sum \beta_j^2 / 95$         & 0.0034 (0.0033, 0.0035)&  0.231 (0.219 0.244)  & 0.232 (0.216 0.244)   \\
 $\sum\tau_i/n$         & -0.405 (-0.642, -0.155)&  -1.292 (-2.351, -0.446)  &  -1.297 (-2.354, -0.451)  \\
 $\sum\tau_i^2/n$         & 1.126 (0.968, 1.339)&  3.608 (0.696, 7.928)  & 3.589 (0.678, 8.011)  \\
-% RMSE                              & 30.83        & 4.03          & 4.38\\
-Prediction RMSE                           & 33.21        & 8.52          & 8.18\\
-$T_{eff} / T$ & 0.0037 (0.0011 0.0096) & 0.3348 (0.0279, 0.699) & ???\\
-Avg Computing Time /  $T$  & 1.3 sec       & 1.3 sec        & ??? sec\\
-Avg Computing Time /  $T_{eff}$  & 346.4 sec       & 11.5 sec        & ??? sec\\
+% RMSE                              & 30.83        & 4.03          & 7.38\\
+Prediction RMSE                           & 33.21        & 8.52          & 13.18\\
+$T_{eff} / T$ & 0.0037 (0.0011 0.0096) & 0.3348 (0.0279, 0.699) &  0.0173 (0.0065, 0.0655) \\
+Avg Computing Time /  $T$  & 1.3 sec       & 1.3 sec        & 56 sec\\
+Avg Computing Time /  $T_{eff}$  & 346.4 sec       & 11.5 sec        & 3240.6 sec\\
  \hline
 \end{tabular}
-\caption{Parameter estimates, prediction error and computing speed of the DA, CDA and HMC in Poisson regression model. Compared with HMC, CDA shows similar performance in both parameter estimation and prediction, but is about 5 times faster.}
+\caption{Parameter estimates, prediction error and computing speed of the DA, CDA and HMC in Poisson regression model.}
 \label{table:Poisson}
 \end{table}
 
 \section{Discussion}
-Data augmentation is a useful technique to sample posterior from the closed-form conditional. It has been realized that this practice could severely stall the mixing, due to the gap between the conditional variance with the augmented data and the marginal one. With data size increases and become complex, it is common for the conditional distribution of the parameter to deviate from the area that has reasonable mixing performance. As we show in the previous examples, this quickly leads to an un-manageable increase in the computational time and poor estimation.
+Data augmentation is a useful technique to sample posterior from the closed-form conditional. It has been discovered that it could severely slow down the mixing, caused by the gap between conditional variance given augmented data and marginal variance. With data size increases and become complex, it is common for the conditional distribution of the parameter to deviate from the area that has reasonable mixing performance. As we show in the previous examples, this quickly leads to an un-manageable increase in the computational time and poor performance in estimation.
 
-To solve this problem, we propose a general class of method to calibrate the variance conditional on the latent variable. With a mechanism to adjust the step size, the transition in each iteration is corrected onto the same order of the marginal variance. The generated samples are used as proposal in the Metropolis-Hastings for exact posterior. In this article, we demonstrate that this strategy is applicable when $\theta \mid z$ belongs to the location-scale family. We expect that it can be extensible to any distribution with a variance / scale, possibly with a different bias-reducing mechanism.
+To address this problem, we propose a general class of method to calibrate the conditional variance. With a new parameter to adjust the step size, the transition in each iteration is increased onto the same order of the marginal variance. The generated samples are used as proposal in the Metropolis-Hastings to obtain correct posterior. In this article, we demonstrate that this strategy is generally applicable when $\theta \mid z$ belongs to the location-scale family. We expect it to be extensible to any conditional distribution with a variance or scale.
 
-There is some similarity between CDA and HMC. Both algorithms excel in seeking proposal with high acceptance rate. The difference is that quite often, the Hamiltonian lacks closed-form solution, and requires multiple steps numeric evaluations of the dynamics for one proposal; whereas CDA only needs one step. Therefore, when the data augmentation exists, CDA is always more efficient in computation.
+We would like to draw some further comparison between CDA and HMC. Both algorithms rely on finding good proposal by searching an area far from the current state. The key difference lies in the computing efficiency. HMC is computationally intensive since Hamiltonian dynamics often requires multiple numeric steps, as it lacks closed-form solution in most of time. CDA adds a little extra cost to the original Gibbs sampler and needs only one step for generating proposal. Therefore, when the data augmentation exists, CDA is always much more efficient.
 
-In this article, we insist on obtaining the exact posterior, to provide an analysis on the mixing property. Without the Metropolis-Hastings step, the sampling strategy in calibrated data augmentation can be used alone to generate approximate posterior. This can be useful when the evaluation of the marginal likelihood is costly.
+In this article, we insist on obtaining the exact posterior, to provide an analysis on the mixing property. Without the Metropolis-Hastings step, the sampling strategy in calibrated data augmentation can be used alone to generate approximate posterior.
 
 \bibliography{reference}
 \bibliographystyle{plainnat}
@@ -774,23 +773,6 @@ Since the marginal variances are the same for two algorithms $\mbox{var}_{DA}\{s
 
 
 
-\subsection{Mixing of Zero-inflated Poisson without Calibration}
-
-
- \begin{figure}[H]
- % \centering
-   \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{traceplot_poisson_zip_da.pdf}
- \caption{Trace plots of three parameters from DA ZIP model}
- \end{subfigure}
-  \hfill 
- \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{poisson_zip_da_acf.pdf}
- \caption{Autocorrelation of all the 96 $\theta$'s from DA ZIP model.}
- \end{subfigure}  
- \caption{The hierarchy in the zero-inflated Poisson model does NOT help reduce the autocorrelation.}
- \end{figure}
-
 
 
 \subsection{Goodness-of-Fit and Cross-Validation for Poisson Regression}
@@ -819,40 +801,23 @@ Since the marginal variances are the same for two algorithms $\mbox{var}_{DA}\{s
  \caption{The posterior estimates produced by CDA is better fitted to the data and have more accurate prediction than DA.}
  \end{figure}
 
- \subsection{Comparing posterior samples of CDA with HMC}
+ % \subsection{Comparing posterior samples of CDA with HMC}
+% \begin{figure}[H]
+%  % \centering
+%    \begin{subfigure}[b]{0.45\textwidth}
+%  \includegraphics[width=1\textwidth]{CDAvsHMC_mean.pdf}
+%  \caption{Comparing posterior means for $\theta_1,\dots \theta_{95}$ from the HMC and CDA. The  RMSE between the two is $0.0007$.}
+%  \end{subfigure}
+%   \hfill 
+%  \begin{subfigure}[b]{0.45\textwidth}
+%  \includegraphics[width=1\textwidth]{CDAvsHMC_sd.pdf}
+%  \caption{Comparing posterior standard deviation for $\theta_1,\dots \theta_{95}$ from the HMC and CDA.  The  RMSE between the two is $0.0004$.}
+%  \end{subfigure}  
+%  \caption{The results from CDA and HMC agree very well.}
+%  \end{figure}
 
 
-\begin{figure}[H]
- % \centering
-   \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{CDAvsHMC_mean.pdf}
- \caption{Comparing posterior means for $\theta_1,\dots \theta_{95}$ from the HMC and CDA. The  RMSE between the two is $0.0007$.}
- \end{subfigure}
-  \hfill 
- \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{CDAvsHMC_sd.pdf}
- \caption{Comparing posterior standard deviation for $\theta_1,\dots \theta_{95}$ from the HMC and CDA.  The  RMSE between the two is $0.0004$.}
- \end{subfigure}  
- \caption{The results from CDA and HMC agree very well.}
- \end{figure}
 
-\subsection{Mixing of HMC}
-
-
- \begin{figure}[H]
- % \centering
-   \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{traceplot_poisson_hmc.pdf}
- \caption{Traceplots}
- \end{subfigure}
-  \hfill 
- \begin{subfigure}[b]{0.45\textwidth}
- \includegraphics[width=1\textwidth]{poisson_hmc_acf.pdf}
- \caption{Autocorrelation}
- \end{subfigure}  
- \caption{The posterior estimates produced by HMC.}
- \end{figure}
- 
 
 
  
