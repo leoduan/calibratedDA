@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: scalable_data_aug.aux
 The style file: plainnat.bst
 Database file #1: reference.bib
 Warning--there's a number but no volume in conrad2015accelerating
-You've used 25 entries,
+You've used 20 entries,
             2773 wiz_defined-function locations,
-            745 strings with 9475 characters,
-and the built_in function-call counts, 12168 in all, are:
-= -- 1069
-> -- 767
-< -- 16
-+ -- 259
-- -- 234
-* -- 1012
-:= -- 1883
-add.period$ -- 76
-call.type$ -- 25
-change.case$ -- 149
-chr.to.int$ -- 25
-cite$ -- 51
-duplicate$ -- 542
-empty$ -- 952
-format.name$ -- 273
-if$ -- 2528
+            719 strings with 8762 characters,
+and the built_in function-call counts, 10119 in all, are:
+= -- 879
+> -- 686
+< -- 10
++ -- 230
+- -- 210
+* -- 878
+:= -- 1576
+add.period$ -- 61
+call.type$ -- 20
+change.case$ -- 127
+chr.to.int$ -- 20
+cite$ -- 41
+duplicate$ -- 428
+empty$ -- 765
+format.name$ -- 242
+if$ -- 2085
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 27
-newline$ -- 133
-num.names$ -- 100
-pop$ -- 294
+missing$ -- 21
+newline$ -- 108
+num.names$ -- 80
+pop$ -- 244
 preamble$ -- 1
-purify$ -- 126
+purify$ -- 108
 quote$ -- 0
-skip$ -- 425
+skip$ -- 338
 stack$ -- 0
-substring$ -- 437
-swap$ -- 56
-text.length$ -- 5
+substring$ -- 354
+swap$ -- 37
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 265
+type$ -- 215
 warning$ -- 1
-while$ -- 109
+while$ -- 86
 width$ -- 0
-write$ -- 326
+write$ -- 263
 (There was 1 warning)

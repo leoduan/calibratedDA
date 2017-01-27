@@ -343,81 +343,77 @@ As a numerical illustration, we use a two parameter intercept-slope model with $
     \label{logit_random_mixing}
  \end{figure}
 
-\James{The section that was previously here seemed mostly duplicative of my edits to earlier parts, so I commented it out} 
- 
-% \subsection{General Algorithm}
-% 
-% Before providing theoretical support for CDA, we summarize the algorithm in more generality, noting that substantial further generalizations are possible (e.g., to accommodate hierarchical, temporal and spatial dependence).  We assume the parameters are multi-dimensional and can be divided into two groups $\{ \theta, \tau\}$, with $\theta$ and $\tau$ sampled separately based on their conditional posterior distributions.  For notational ease, we focus on $\theta$ and omit the conditioning on $\tau$ in the rest of the subsection.  Assume $\theta$ can be augmented with latent variable $z$ but is susceptible to slow mixing. The augmented likelihood can be expressed as 
-% \be \label{eq:da_decomposition}
-% \prod_i L(m_i(\theta);y_i) =\prod_i   \int \pi\left(m_i(\theta)|z_i,y_i \right)\pi(z_i|y_i) d z_i,
-% \ee
-% where  $m_i(\theta)$ is a continuous and differentiable function $m_i:\bb R^p \mapsto \bb R^d$. For example,  $m_i (\theta) = x_i\theta$ is the linear predictor in regression. Let
-% the conditional distribution for $z$ and $\theta$ be, respectively,
-% \be
-% z_i \mid \theta, y &\sim \pi (z_i; m_i(\theta), y)\\
-% \theta \mid z,y &\sim f( \theta; \mu,\Sigma),
-% \ee
-% where $f( \theta; \mu,\Sigma)\propto \pi(\theta) \prod_i \pi\left(m_i(\theta)|z_i,y_i \right)$. To calibrate the variance $\Sigma$, we introduce a parameter $r_i$. When $\Sigma$ is free from $z$, we put $r_i$ in each $\pi\left(m_i(\theta)|z_i,y_i \right)$ as in the probit examples above. When $\Sigma$ involves $z$, we put $r_i$ in $\pi(z_i|y_i)$ to increase $\bb E_z\Sigma$ as in the logit examples. Then using another parameter $b_i$ to accommodate the shift in $m_i(\theta)$, we obtain the calibrated data augmentation:
-% \be \label{eq:cda_decomposition}
-% \prod_i L_r(m_i(\theta) ; y_i,  r_i, b_i) = \prod_i \int \pi_r\left(m_i(\theta)+b_i|z_i,y_i \right)\pi_r(z_i|y_i) d z_i.
-% \ee
-% With prior $\pi(\theta)$, the proposal can then be sampled from the calibrated distribution:
-% \be
-% z_i & \sim \pi_r(z_i; m_i(\theta)+b_i, y) \\
-% \theta^* &\sim f( \theta^*|\mu(r, b),\Sigma(r)).
-% \ee
-% in an M-H step with acceptance probability:
-% \be
-% 1 \wedge \prod_i  \frac{L(m_i(\theta^*); y_i) L_r(m_i(\theta) ; y_i)} {L(m_i(\theta); y_i, r_i, b_i) L_r(m_i(\theta^*); y_i, r_i, b_i)}.
-% % \label{eq:mh-criterion}
-% \ee
-% In an initial tuning phase, we adaptively update $r$ and $b$. We choose $r$ at each sampling step to minimize the difference between the Fisher information matrices based on the marginal posterior with the latent data integrated out and the conditional posterior given the latent data.  As illustrated in subsection 2.3-2.4 for the two different strategies of augmentation, simple and computationally efficient closed forms are typically available for the $r_i$'s, which avoid potentially expensive calculation of the full information matrix. Then conditional on $r_i$, we choose $b_i$ to increase the M-H acceptance rate; one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. As a finite approximation for the variance, for some data augmentation, it is possible that Fisher information over estimates the mis-calibration and exhibit low acceptance rate; in that case, we suggest reduce all of the estimated $r_i$'s by a common small fraction to modulate the variance increase to generate higher acceptance rate.
+\subsection{General Algorithm}
+
+Before providing theoretical support for CDA, we summarize the algorithm in more generality, noting that substantial further generalizations are possible (e.g., to accommodate hierarchical, temporal and spatial dependence).  We assume the parameters are multi-dimensional and can be divided into two groups $\{ \theta, \tau\}$, with $\theta$ and $\tau$ sampled separately based on their conditional posterior distributions.  For notational ease, we focus on $\theta$ and omit the conditioning on $\tau$ in the rest of the subsection.  Assume $\theta$ can be augmented with latent variable $z$ but is susceptible to slow mixing. The augmented likelihood can be expressed as 
+\be \label{eq:da_decomposition}
+\prod_i L(m_i(\theta);y_i) =\prod_i   \int \pi\left(m_i(\theta)|z_i,y_i \right)\pi(z_i|y_i) d z_i,
+\ee
+where  $m_i(\theta)$ is a continuous and differentiable function $m_i:\bb R^p \mapsto \bb R^d$. For example,  $m_i (\theta) = x_i\theta$ is the linear predictor in regression. Let
+the conditional distribution for $z$ and $\theta$ be, respectively,
+\be
+z_i \mid \theta, y &\sim \pi (z_i; m_i(\theta), y)\\
+\theta \mid z,y &\sim f( \theta; \mu,\Sigma),
+\ee
+where $f( \theta; \mu,\Sigma)\propto \pi(\theta) \prod_i \pi\left(m_i(\theta)|z_i,y_i \right)$. To calibrate the variance $\Sigma$, we introduce a parameter $r_i$. When $\Sigma$ is free from $z$, we put $r_i$ in each $\pi\left(m_i(\theta)|z_i,y_i \right)$ as in the probit examples above. When $\Sigma$ involves $z$, we put $r_i$ in $\pi(z_i|y_i)$ to increase $\bb E_z\Sigma$ as in the logit examples. Then using another parameter $b_i$ to accommodate the shift in $m_i(\theta)$, we obtain the calibrated data augmentation:
+\be \label{eq:cda_decomposition}
+\prod_i L_r(m_i(\theta) ; y_i,  r_i, b_i) = \prod_i \int \pi_r\left(m_i(\theta)+b_i|z_i,y_i \right)\pi_r(z_i|y_i) d z_i.
+\ee
+With prior $\pi(\theta)$, the proposal can then be sampled from the calibrated distribution:
+\be
+z_i & \sim \pi_r(z_i; m_i(\theta)+b_i, y) \\
+\theta^* &\sim f( \theta^*|\mu(r, b),\Sigma(r)).
+\ee
+in an M-H step with acceptance probability:
+\be
+1 \wedge \prod_i  \frac{L(m_i(\theta^*); y_i) L_r(m_i(\theta) ; y_i)} {L(m_i(\theta); y_i, r_i, b_i) L_r(m_i(\theta^*); y_i, r_i, b_i)}.
+% \label{eq:mh-criterion}
+\ee
+In an initial tuning phase, we adaptively update $r$ and $b$. We choose $r$ at each sampling step to minimize the difference between the Fisher information matrices based on the marginal posterior with the latent data integrated out and the conditional posterior given the latent data.  As illustrated in subsection 2.3-2.4 for the two different strategies of augmentation, simple and computationally efficient closed forms are typically available for the $r_i$'s, which avoid potentially expensive calculation of the full information matrix. Then conditional on $r_i$, we choose $b_i$ to increase the M-H acceptance rate; one choice is the solution to $L_r(m_i(\theta); y_i,  r_i, b_i)=L(m_i(\theta); y_i)$. As a finite approximation for the variance, for some data augmentation, it is possible that Fisher information over estimates the mis-calibration and exhibit low acceptance rate; in that case, we suggest reduce all of the estimated $r_i$'s by a common small fraction to modulate the variance increase to generate higher acceptance rate.
 
 
 
-\section{Theory: ergodicity and tuning}
+\section{Theory: Mixing Acceleration}
 In this section, we provide basic theoretical support for CDA algorithms. First, we show that CDA M-H is ergodic. This is basically a consequence of CDA Gibbs being ergodic for fixed $r,b$ and the fact that $\Pi_{r,b}$ and $\Pi$ are absolutely continuous with respect to Lebesgue measure on $\bb R^p$.
 \begin{remark}[ergodicity]
-Assume that $\Pi(d\theta)$ and $\Pi_{r,b}(d\theta)$ have densities with respect to Lebesgue measure on $\bb R^p$, and that $K_{r,b}((\theta,z);(\theta',z'))>0 \,\forall\, ((\theta,z),(\theta',z')) \in (\Theta \times \mc Z) \times (\Theta \times \mc Z)$. Then, for fixed $r,b$, CDA Gibbs is ergodic with invariant measure $\Pi_{r,b}(d\theta,dz)$. Moreover, a Metropolis-Hastings algorithm with proposal kernel $Q_{r,b}(\theta';\theta)$ as defined in \eqref{eq:Q} with fixed $r,b$ is ergodic with invariant measure $\Pi(d\theta)$.
+Assume that $\Pi(d\theta)$ and $\Pi_{r,b}(d\theta)$ have densities with respect to Lebesgue measure on $\bb R^p$, and that . Then, for fixed $r,b$, CDA Gibbs is ergodic with invariant measure $\Pi_{r,b}(d\theta,dz)$. Moreover, a Metropolis-Hastings algorithm with proposal kernel $Q_{r,b}(\theta';\theta)$ as defined in \eqref{eq:Q} with fixed $r,b$ is ergodic with invariant measure $\Pi(d\theta)$.
 \end{remark}
 \begin{proof}
-For any $r,b$, the conditionals $\Pi_{r,b}(z \mid \theta)$ and $\Pi_{r,b}(\theta \mid z)$ are well-defined for all $z \in \mc Z, \theta \in \Theta$, and therefore the Gibbs transition kernel $K_{r,b}((\theta,z);\cdot)$ and corresponding marginal kernels $Q_{r,b}(\theta;\cdot)$ are well-defined. Moreover, for any $(z,\theta) \in \mc Z \times \Theta$, we have $\bb P[(\theta',z') \in A \mid (\theta,z)] > 0$ by assumption. Thus $K_{r,b}$ is aperiodic and $\Pi_{r,b}$-irreducible.
+For any $r,b$, the conditionals $\Pi_{r,b}(z \mid \theta)$ and $\Pi_{r,b}(\theta \mid z)$ are well-defined for all $z \in \mc Z, \theta \in \Theta$, and therefore the Gibbs transition kernel $K_{r,b}((\theta,z);\cdot)$ and corresponding marginal kernels $Q_{r,b}(\theta;\cdot)$ are well-defined. Moreover, for any $(z,\theta) \in \mc Z \times \Theta$, we have $\bb P[(\theta',z') \in A \mid (\theta,z)] > 0$ whenever $\Pi_{r,b}(A) > 0$. Thus $K_{r,b}$ is aperiodic and $\Pi_{r,b}$-irreducible.
 
 $Q_{r,b}(\theta';\theta)$ is aperiodic and $\Pi_{r,b}(\theta)$-irreducible, since it is the $\theta$ marginal transition kernel induced by $K_{r,b}((\theta,z);\cdot)$. Thus, it is also $\Pi(\theta)$-irreducible so long as $\Pi \gg \Pi_{r,b}$, where for two measure $\mu,\nu$, $\mu \gg \nu$ indicates absolute continuity. Since $\Pi, \Pi_{r,b}$ have densities with respect to Lebesgue measure, $\Pi_{r,b}$-irreducibility implies $\Pi$ irreducibility. Moreover, $Q(\theta;\theta') > 0$ for all $\theta \in \Theta$. Thus, by Theorem 3 of [CITE Roberts 1994], CDA M-H is $\Pi$-irreducible and aperiodic. 
 \end{proof}
 
-%\James{some of the statements above should really become assumptions about CDA gibbs, for example that $\bb P[(\theta',z') \in A \mid (\theta,z)] > 0$ whenever $\Pi_{r,b}(A) > 0$.}
+\James{some of the statements above should really become assumptions about CDA gibbs, for example that $\bb P[(\theta',z') \in A \mid (\theta,z)] > 0$ whenever $\Pi_{r,b}(A) > 0$.}
 
-Having established ergodicity of both CDA Gibbs and CDA M-H under weak assumptions that hold for all of the data augmentation strategies we consider here, we now provide a semi-rigorous argument for why our approach to tuning $r$ and $b$ results in both rapid convergence and closeness of $\Pi_{r,b}$ to $\Pi$. Suppose there exists $r$ such that
+Having established ergodicity of both CDA Gibbs and CDA M-H, we now provide a semi-rigorous argument for why our approach to tuning $r$ and $b$ results in both rapid convergence and closeness of $\Pi_{r,b}$ to $\Pi$. In general, it is possible to choose $r$ to set
 \be
 \bb E_{\Pi_{r,b}}[\var(\theta \mid z)] = \var_{\Pi_{r,b}}(\theta)
 \ee
-for any value of $b$. This is a simplification, since our adaptation strategies only allow us to control the discrepancy between the Fisher information at the current state.
-%for any value of $b$. In general, the  although an analytic expression for the correct value of $r$ may not be available. \James{we should have more justification for this -- is it always true when $r$ is a scale parameter and $b$ a location parameter? What do we need for this to be true?}. 
-By tuning $r$ during the adaptation phase to make the lag-1 autocorrelation for the identity function small, we can numerically approximate the correct value of $r$. 
+for \emph{any value of} $b$, although an analytic expression for the correct value of $r$ may not be available. \James{we should have more justification for this -- is it always true when $r$ is a scale parameter and $b$ a location parameter? What do we need for this to be true?}. By tuning $r$ during the adaptation phase to make the lag-1 autocorrelation for the identity function small, we can numerically approximate the correct value of $r$. 
 
-This is obviously much weaker than minimizing the autocorrelation for worst-case functions. However, for the sake of exposition, we will proceed on the assumption that (1) we can make the lag-1 autocorrelation for the identity function zero by appropriately tuning $r$ and (2) this is sufficient to obtain a Gibbs transition kernel that generates nearly \emph{independent} samples. This makes the rationale for tuning $b$ to increase the Metropolis acceptance probability much clearer. First, we note the form of the Metropolis acceptance ratios, which we have used previously without rigorous justification.
+This is obviously much weaker than minimizing the autocorrelation for worst-case functions. However, for the sake of exposition, we will proceed on the assumption that (1) we can make the lag-1 autocorrelation for the identity function zero by appropriately tuning $r$ and (2) this is sufficient to obtain a Gibbs transition kernel that generates nearly \emph{independent} samples. This makes the rationale for tuning $b$ to increase the Metropolis acceptance probability much clearer. First, we note the form of the Metropolis acceptance ratios
 \begin{remark}
 The CDA M-H acceptance ratio is given by
 \be
-\frac{L(\theta';y) \Pi^0(\theta') Q_{r,b}(\theta;\theta')}{L(\theta;y) \Pi^0(\theta) Q_{r,b}(\theta';\theta)} = \frac{L(\theta';y)L_{r,b}(\theta;y)}{L(\theta;y) L_{r,b}(\theta';y)} \label{eq:mh-accrat}
+\frac{L(\theta';y) \Pi_0(\theta') q(\theta;\theta')}{L(\theta;y) \Pi_0(\theta) q(\theta';\theta)} = \frac{L(\theta';y)L_{r,b}(\theta;y)}{L(\theta;y) L_{r,b}(\theta';y)} \label{eq:mh-accrat}
 \ee
 \end{remark}
 \begin{proof}
-Since $Q_{r,b}(\theta;\theta')$ is the $\theta$ marginal of a Gibbs transition kernel, and Gibbs is reversible on its margins, we have
+Since $q(\theta;\theta') = K_{r,b}(\theta;\theta')$ is the $\theta$ marginal of a Gibbs transition kernel, and Gibbs is reversible on its margins, we have
 \be
-Q(\theta;\theta') \Pi_{r,b}(\theta) = Q(\theta';\theta) \Pi_{r,b}(\theta),
+q(\theta;\theta') \Pi_{r,b}(\theta') = q(\theta';\theta) \Pi_{r,b}(\theta),
 \ee 
 and so
 \be
-\frac{L(\theta';y) \Pi^0(\theta') Q(\theta;\theta')}{L(\theta;y) \Pi^0(\theta) Q(\theta';\theta)} &= \frac{L(\theta';y) \Pi^0(\theta') L_{r,b}(\theta;y) \Pi^0(\theta) }{L(\theta;y) \Pi^0(\theta) L_{r,b}(\theta';y) \Pi^0(\theta')} \\
+\frac{L(\theta';y) \Pi_0(\theta') q(\theta;\theta')}{L(\theta;y) \Pi_0(\theta) q(\theta';\theta)} &= \frac{L(\theta';y) \Pi_0(\theta') L_{r,b}(\theta;y) \Pi_0(\theta) }{L(\theta;y) \Pi_0(\theta) L_{r,b}(\theta';y) \Pi_0(\theta')} \\
 &= \frac{L(\theta';y)L_{r,b}(\theta;y)}{L(\theta;y) L_{r,b}(\theta';y)}.
 \ee
 \end{proof}
 
 The expression in \eqref{eq:mh-accrat} will be near 1 at stationarity if 
 \be 
-\int \log \left( \frac{L(\theta';y)L_{r,b}(\theta;y)}{L(\theta;y) L_{r,b}(\theta';y)} \right) Q_{r,b}(\theta';\theta) \Pi(d\theta) \approx 0.
+\int \log \left( \frac{L(\theta';y)L_{r,b}(\theta;y)}{L(\theta;y) L_{r,b}(\theta';y)} \right) K_{r,b}(\theta';\theta) \Pi(\theta) d\theta \approx 0.
 \ee
 Now, suppose that a Markov chain evolving according to $K_{r,b}$ is rapidly mixing, so that for starting measures satisfying a condition like
 \be
@@ -425,7 +421,7 @@ Now, suppose that a Markov chain evolving according to $K_{r,b}$ is rapidly mixi
 \ee 
 for $M$ not too large we have 
 \be
-\KL{\Pi_{r,b}}{\int Q_{r,b}(\theta';\theta) \nu(d\theta)} \quad \textnormal{small}.
+\KL{\Pi_{r,b}}{\int K_{r,b}(\theta';\theta) \nu(d\theta)} \quad \textnormal{small}.
 \ee
 Then the symmetric KL is 
 \be
