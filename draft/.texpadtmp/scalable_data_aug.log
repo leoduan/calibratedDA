@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  6 JAN 2017 15:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 FEB 2017 22:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -210,18 +210,18 @@ Package: mhequ
 ) (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.aux)
 \openout1 = `scalable_data_aug.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
  (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count124
@@ -273,11 +273,11 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 84.
+LaTeX Font Info:    Try loading font information for U+msa on input line 85.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 84.
+LaTeX Font Info:    Try loading font information for U+msb on input line 85.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -285,111 +285,96 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] <probit_demo_acf_prop.pdf, id=31, 361.35pt x 216.81pt>
 File: probit_demo_acf_prop.pdf Graphic file (type pdf)
  <use probit_demo_acf_prop.pdf>
-Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 179.
+Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 197.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
  <density_probit.pdf, id=32, 361.35pt x 216.81pt>
 File: density_probit.pdf Graphic file (type pdf)
  <use density_probit.pdf>
-Package pdftex.def Info: density_probit.pdf used on input line 185.
+Package pdftex.def Info: density_probit.pdf used on input line 203.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
  <probit_demo_acf.pdf, id=33, 361.35pt x 216.81pt>
 File: probit_demo_acf.pdf Graphic file (type pdf)
  <use probit_demo_acf.pdf>
-Package pdftex.def Info: probit_demo_acf.pdf used on input line 191.
+Package pdftex.def Info: probit_demo_acf.pdf used on input line 209.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [5] <probit15_trace_plot.pdf, id=37, 433.62pt x 259.97125pt>
+ [5] [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>] [7] [8] [9] <probit15_trace_plot.pdf, id=69, 433.62pt x 259.97125pt>
 File: probit15_trace_plot.pdf Graphic file (type pdf)
  <use probit15_trace_plot.pdf>
-Package pdftex.def Info: probit15_trace_plot.pdf used on input line 220.
+Package pdftex.def Info: probit15_trace_plot.pdf used on input line 348.
 (pdftex.def)             Requested size: 212.16118pt x 127.20058pt.
- <probit15_acf.pdf, id=38, 361.35pt x 216.81pt>
+ <probit15_acf.pdf, id=70, 361.35pt x 216.81pt>
 File: probit15_acf.pdf Graphic file (type pdf)
  <use probit15_acf.pdf>
-Package pdftex.def Info: probit15_acf.pdf used on input line 226.
+Package pdftex.def Info: probit15_acf.pdf used on input line 354.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>] [7 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] <logit_demo_trace_plot.pdf, id=74, 361.35pt x 216.81pt>
+
+Overfull \hbox (2.84143pt too wide) in paragraph at lines 366--368
+\OT1/cmr/m/n/10 Setting $\OML/cmm/m/it/10 r[] \OT1/cmr/m/n/10 = [][]\OML/cmm/m/it/10 = []\OT1/cmr/m/n/10 ([])$ makes $^^A[](\OML/cmm/m/it/10 ^^R[]\OT1/cmr/m/n/10 ) = 0$; and set-ting $\OML/cmm/m/it/10 b[] \OT1/cmr/m/n/10 = [][\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 1 + [](\OML/cmm/m/it/10 x[]^^R\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g[] ^^@
+ []
+
+<logit_demo_trace_plot.pdf, id=71, 361.35pt x 216.81pt>
 File: logit_demo_trace_plot.pdf Graphic file (type pdf)
  <use logit_demo_trace_plot.pdf>
-Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 282.
+Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 375.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- <logit_demo_acf.pdf, id=75, 361.35pt x 216.81pt>
+ <logit_demo_acf.pdf, id=72, 361.35pt x 216.81pt>
 File: logit_demo_acf.pdf Graphic file (type pdf)
  <use logit_demo_acf.pdf>
-Package pdftex.def Info: logit_demo_acf.pdf used on input line 287.
+Package pdftex.def Info: logit_demo_acf.pdf used on input line 380.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- [8] [9 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [10] [11] [12] <binomial_random_acf_da.pdf, id=102, 361.35pt x 216.81pt>
+ [10 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] [11 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [12] [13] [14] <binomial_random_acf_da.pdf, id=109, 361.35pt x 216.81pt>
 File: binomial_random_acf_da.pdf Graphic file (type pdf)
  <use binomial_random_acf_da.pdf>
-Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 408.
+Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 505.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <binomial_random_acf_cda.pdf, id=103, 361.35pt x 216.81pt>
+ <binomial_random_acf_cda.pdf, id=110, 361.35pt x 216.81pt>
 File: binomial_random_acf_cda.pdf Graphic file (type pdf)
  <use binomial_random_acf_cda.pdf>
-Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 413.
+Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 510.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <binomial_random_acf_hmc.pdf, id=104, 361.35pt x 216.81pt>
+ <binomial_random_acf_hmc.pdf, id=111, 361.35pt x 216.81pt>
 File: binomial_random_acf_hmc.pdf Graphic file (type pdf)
  <use binomial_random_acf_hmc.pdf>
-Package pdftex.def Info: binomial_random_acf_hmc.pdf used on input line 418.
+Package pdftex.def Info: binomial_random_acf_hmc.pdf used on input line 515.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
-
-Overfull \hbox (2.70131pt too wide) in paragraph at lines 429--443
+ [15]
+Overfull \hbox (2.70131pt too wide) in paragraph at lines 526--540
  [][] 
  []
 
-[13 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf> <./binomial_random_acf_hmc.pdf>] [14] <poisson_acf_da.pdf, id=130, 361.35pt x 216.81pt>
+[16 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf> <./binomial_random_acf_hmc.pdf>] [17] <poisson_acf_da.pdf, id=139, 361.35pt x 216.81pt>
 File: poisson_acf_da.pdf Graphic file (type pdf)
  <use poisson_acf_da.pdf>
-Package pdftex.def Info: poisson_acf_da.pdf used on input line 503.
+Package pdftex.def Info: poisson_acf_da.pdf used on input line 602.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <poisson_acf_cda.pdf, id=131, 361.35pt x 216.81pt>
+ <poisson_acf_cda.pdf, id=140, 361.35pt x 216.81pt>
 File: poisson_acf_cda.pdf Graphic file (type pdf)
  <use poisson_acf_cda.pdf>
-Package pdftex.def Info: poisson_acf_cda.pdf used on input line 508.
+Package pdftex.def Info: poisson_acf_cda.pdf used on input line 607.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <poisson_acf_hmc.pdf, id=132, 361.35pt x 216.81pt>
+ <poisson_acf_hmc.pdf, id=141, 361.35pt x 216.81pt>
 File: poisson_acf_hmc.pdf Graphic file (type pdf)
  <use poisson_acf_hmc.pdf>
-Package pdftex.def Info: poisson_acf_hmc.pdf used on input line 512.
+Package pdftex.def Info: poisson_acf_hmc.pdf used on input line 611.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [15] [16 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf> <./poisson_acf_hmc.pdf>] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.bbl
+ [18 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf> <./poisson_acf_hmc.pdf>] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.bbl [19]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
- [17] [18]) <poisson_fitting_da.png, id=160, 1204.5pt x 1204.5pt>
-File: poisson_fitting_da.png Graphic file (type png)
- <use poisson_fitting_da.png>
-Package pdftex.def Info: poisson_fitting_da.png used on input line 785.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_fitting_ada.png, id=162, 1204.5pt x 1204.5pt>
-File: poisson_fitting_ada.png Graphic file (type png)
- <use poisson_fitting_ada.png>
-Package pdftex.def Info: poisson_fitting_ada.png used on input line 790.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_da.png, id=163, 1204.5pt x 1204.5pt>
-File: poisson_cv_da.png Graphic file (type png)
- <use poisson_cv_da.png>
-Package pdftex.def Info: poisson_cv_da.png used on input line 794.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_ada.png, id=164, 1204.5pt x 1204.5pt>
-File: poisson_cv_ada.png Graphic file (type png)
- <use poisson_cv_ada.png>
-Package pdftex.def Info: poisson_cv_ada.png used on input line 799.
-(pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- [19] [20 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_da.png> <./poisson_cv_ada.png>] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.aux) ) 
+ [20]) [21] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.aux) ) 
 Here is how much of TeX's memory you used:
- 5006 strings out of 493014
- 74012 string characters out of 6133351
- 145958 words of memory out of 5000000
- 8442 multiletter control sequences out of 15000+600000
- 14801 words of font info for 57 fonts, out of 8000000 for 9000
+ 4980 strings out of 493014
+ 73495 string characters out of 6133351
+ 145013 words of memory out of 5000000
+ 8424 multiletter control sequences out of 15000+600000
+ 13562 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,43p,1396b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,12n,43p,1396b,485s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on /Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.pdf (20 pages, 583863 bytes).
+Output written on /Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug.pdf (21 pages, 425013 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
+ 243 PDF objects out of 1000 (max. 8388607)
+ 169 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
