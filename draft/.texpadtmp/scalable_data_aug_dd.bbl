@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -55,17 +55,11 @@ James~E Johndrow, Aaron Smith, Natesh Pillai, and David~B Dunson.
 \newblock Inefficiency of data augmentation for large sample imbalanced data.
 \newblock \emph{arXiv preprint arXiv:1605.05798}, 2016.
 
-\bibitem[Liu(1994)]{liu1994collapsed}
+\bibitem[Liu(1994)]{liu1994fraction}
 Jun~S Liu.
-\newblock The collapsed gibbs sampler in bayesian computations with
-  applications to a gene regulation problem.
-\newblock \emph{Journal of the American Statistical Association}, 89\penalty0
-  (427):\penalty0 958--966, 1994.
-
-\bibitem[Liu(2008)]{liu2008monte}
-Jun~S Liu.
-\newblock \emph{{Monte Carlo} strategies in scientific computing}.
-\newblock Springer Science \& Business Media, 2008.
+\newblock The fraction of missing information and convergence rate for data
+  augmentation.
+\newblock \emph{Computing Science and Statistics}, pages 490--490, 1994.
 
 \bibitem[Liu and Wu(1999)]{liu1999parameter}
 Jun~S Liu and Ying~Nian Wu.
@@ -121,13 +115,6 @@ Gareth~O Roberts and Jeffrey~S Rosenthal.
 \newblock Coupling and ergodicity of adaptive markov chain monte carlo
   algorithms.
 \newblock \emph{Journal of applied probability}, pages 458--475, 2007.
-
-\bibitem[Roberts and Smith(1994)]{roberts1994simple}
-Gareth~O Roberts and Adrian~FM Smith.
-\newblock Simple conditions for the convergence of the {Gibbs sampler and
-  Metropolis-Hastings} algorithms.
-\newblock \emph{Stochastic processes and their applications}, 49\penalty0
-  (2):\penalty0 207--216, 1994.
 
 \bibitem[Roberts et~al.(2004)Roberts, Rosenthal, et~al.]{roberts2004general}
 Gareth~O Roberts, Jeffrey~S Rosenthal, et~al.

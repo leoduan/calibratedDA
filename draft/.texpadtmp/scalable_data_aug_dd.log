@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 FEB 2017 14:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  14 FEB 2017 16:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**scalable_data_aug-2.tex
-(./scalable_data_aug-2.tex
+**scalable_data_aug_dd.tex
+(./scalable_data_aug_dd.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
@@ -169,7 +169,12 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
+)) (/usr/local/texlive/2016/texmf-dist/tex/latex/units/nicefrac.sty
+Package: nicefrac 1998/08/04 v0.9b Nice fractions
+\L@UnitsRaiseDisplaystyle=\skip53
+\L@UnitsRaiseTextstyle=\skip54
+\L@UnitsRaiseScriptstyle=\skip55
+)
 \c@theorem=\count106
 \c@lemma=\count107
 \c@corollary=\count108
@@ -187,13 +192,13 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@line=\count111
 \c@ALG@rem=\count112
 \c@ALG@nested=\count113
-\ALG@tlm=\skip53
-\ALG@thistlm=\skip54
+\ALG@tlm=\skip56
+\ALG@thistlm=\skip57
 \c@ALG@Lnr=\count114
 \c@ALG@blocknr=\count115
 \c@ALG@storecount=\count116
 \c@ALG@tmpcounter=\count117
-\ALG@tmplength=\skip55
+\ALG@tmplength=\skip58
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/mhequ/mhequ.sty
@@ -201,27 +206,27 @@ Package: mhequ
 \@MHnocols=\count118
 \@MHnocolstot=\count119
 \@MHLength=\count120
-\MHcenter=\skip56
-\MHbig=\skip57
-\@MHlineskip=\skip58
+\MHcenter=\skip59
+\MHbig=\skip60
+\@MHlineskip=\skip61
 \MHC@ls=\count121
 \MHt@tc@ls=\count122
 \MHrem@inc@ls=\count123
-) (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug-2.aux)
-\openout1 = `scalable_data_aug-2.aux'.
+) (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug_dd.aux)
+\openout1 = `scalable_data_aug_dd.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
  (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count124
@@ -273,94 +278,120 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 85.
+LaTeX Font Info:    Try loading font information for U+msa on input line 86.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 85.
+LaTeX Font Info:    Try loading font information for U+msb on input line 86.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] <probit_demo_acf.pdf, id=36, 361.35pt x 216.81pt>
-File: probit_demo_acf.pdf Graphic file (type pdf)
- <use probit_demo_acf.pdf>
-Package pdftex.def Info: probit_demo_acf.pdf used on input line 200.
-(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+
+Package natbib Warning: Citation `rubin1987multiple' on page 3 undefined on input line 137.
+
+[3] [4] [5] <probit_demo_acf_prop.pdf, id=36, 361.35pt x 216.81pt>
+File: probit_demo_acf_prop.pdf Graphic file (type pdf)
+ <use probit_demo_acf_prop.pdf>
+Package pdftex.def Info: probit_demo_acf_prop.pdf used on input line 240.
+(pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
  <density_probit.pdf, id=37, 361.35pt x 216.81pt>
 File: density_probit.pdf Graphic file (type pdf)
  <use density_probit.pdf>
-Package pdftex.def Info: density_probit.pdf used on input line 206.
-(pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [6 <./probit_demo_acf.pdf> <./density_probit.pdf>] [7] [8] [9] <probit15_trace_plot.pdf, id=64, 433.62pt x 259.97125pt>
+Package pdftex.def Info: density_probit.pdf used on input line 246.
+(pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
+ <probit_demo_acf.pdf, id=38, 361.35pt x 216.81pt>
+File: probit_demo_acf.pdf Graphic file (type pdf)
+ <use probit_demo_acf.pdf>
+Package pdftex.def Info: probit_demo_acf.pdf used on input line 252.
+(pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
+ [6 <./probit_demo_acf_prop.pdf> <./density_probit.pdf> <./probit_demo_acf.pdf>] [7] [8] [9] <probit15_trace_plot.pdf, id=69, 433.62pt x 259.97125pt>
 File: probit15_trace_plot.pdf Graphic file (type pdf)
  <use probit15_trace_plot.pdf>
-Package pdftex.def Info: probit15_trace_plot.pdf used on input line 311.
+Package pdftex.def Info: probit15_trace_plot.pdf used on input line 389.
 (pdftex.def)             Requested size: 212.16118pt x 127.20058pt.
- <probit15_acf.pdf, id=65, 361.35pt x 216.81pt>
+ <probit15_acf.pdf, id=70, 361.35pt x 216.81pt>
 File: probit15_acf.pdf Graphic file (type pdf)
  <use probit15_acf.pdf>
-Package pdftex.def Info: probit15_acf.pdf used on input line 317.
+Package pdftex.def Info: probit15_acf.pdf used on input line 395.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [10 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] <logit_demo_trace_plot.pdf, id=79, 361.35pt x 216.81pt>
+
+Overfull \hbox (2.84143pt too wide) in paragraph at lines 407--409
+\OT1/cmr/m/n/10 Setting $\OML/cmm/m/it/10 r[] \OT1/cmr/m/n/10 = [][]\OML/cmm/m/it/10 = []\OT1/cmr/m/n/10 ([])$ makes $^^A[](\OML/cmm/m/it/10 ^^R[]\OT1/cmr/m/n/10 ) = 0$; and set-ting $\OML/cmm/m/it/10 b[] \OT1/cmr/m/n/10 = [][\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 1 + [](\OML/cmm/m/it/10 x[]^^R\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g[] ^^@
+ []
+
+[10 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] <logit_demo_trace_plot.pdf, id=84, 361.35pt x 216.81pt>
 File: logit_demo_trace_plot.pdf Graphic file (type pdf)
  <use logit_demo_trace_plot.pdf>
-Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 342.
+Package pdftex.def Info: logit_demo_trace_plot.pdf used on input line 416.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- <logit_demo_acf.pdf, id=80, 361.35pt x 216.81pt>
+ <logit_demo_acf.pdf, id=85, 361.35pt x 216.81pt>
 File: logit_demo_acf.pdf Graphic file (type pdf)
  <use logit_demo_acf.pdf>
-Package pdftex.def Info: logit_demo_acf.pdf used on input line 347.
+Package pdftex.def Info: logit_demo_acf.pdf used on input line 421.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
- [11 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [12] [13] [14] [15] <binomial_random_acf_da.pdf, id=107, 361.35pt x 216.81pt>
+ [11 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [12] [13] <binomial_random_acf_da.pdf, id=106, 361.35pt x 216.81pt>
 File: binomial_random_acf_da.pdf Graphic file (type pdf)
  <use binomial_random_acf_da.pdf>
-Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 481.
+Package pdftex.def Info: binomial_random_acf_da.pdf used on input line 523.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <binomial_random_acf_cda.pdf, id=108, 361.35pt x 216.81pt>
+ <binomial_random_acf_cda.pdf, id=107, 361.35pt x 216.81pt>
 File: binomial_random_acf_cda.pdf Graphic file (type pdf)
  <use binomial_random_acf_cda.pdf>
-Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 486.
+Package pdftex.def Info: binomial_random_acf_cda.pdf used on input line 528.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <binomial_random_acf_hmc.pdf, id=109, 361.35pt x 216.81pt>
+ <binomial_random_acf_hmc.pdf, id=108, 361.35pt x 216.81pt>
 File: binomial_random_acf_hmc.pdf Graphic file (type pdf)
  <use binomial_random_acf_hmc.pdf>
-Package pdftex.def Info: binomial_random_acf_hmc.pdf used on input line 491.
+Package pdftex.def Info: binomial_random_acf_hmc.pdf used on input line 533.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [16 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf> <./binomial_random_acf_hmc.pdf>] [17] [18] <poisson_acf_da.pdf, id=135, 361.35pt x 216.81pt>
-File: poisson_acf_da.pdf Graphic file (type pdf)
+ [14]
+Overfull \hbox (2.70131pt too wide) in paragraph at lines 544--558
+ [][] 
+ []
 
-<use poisson_acf_da.pdf>
-Package pdftex.def Info: poisson_acf_da.pdf used on input line 578.
+[15 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf> <./binomial_random_acf_hmc.pdf>] [16] <poisson_acf_da.pdf, id=136, 361.35pt x 216.81pt>
+File: poisson_acf_da.pdf Graphic file (type pdf)
+ <use poisson_acf_da.pdf>
+Package pdftex.def Info: poisson_acf_da.pdf used on input line 620.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <poisson_acf_cda.pdf, id=136, 361.35pt x 216.81pt>
+ <poisson_acf_cda.pdf, id=137, 361.35pt x 216.81pt>
 File: poisson_acf_cda.pdf Graphic file (type pdf)
  <use poisson_acf_cda.pdf>
-Package pdftex.def Info: poisson_acf_cda.pdf used on input line 583.
+Package pdftex.def Info: poisson_acf_cda.pdf used on input line 625.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <poisson_acf_hmc.pdf, id=137, 361.35pt x 216.81pt>
+ <poisson_acf_hmc.pdf, id=138, 361.35pt x 216.81pt>
 File: poisson_acf_hmc.pdf Graphic file (type pdf)
  <use poisson_acf_hmc.pdf>
-Package pdftex.def Info: poisson_acf_hmc.pdf used on input line 587.
+Package pdftex.def Info: poisson_acf_hmc.pdf used on input line 629.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [19 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf> <./poisson_acf_hmc.pdf>] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug-2.bbl [20]
+ [17 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf> <./poisson_acf_hmc.pdf>] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug_dd.bbl [18]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
- [21]) [22] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug-2.aux) ) 
+ [19])
+
+Package natbib Warning: There were undefined citations.
+
+[20] (/Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug_dd.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4974 strings out of 493014
- 73312 string characters out of 6133351
- 149002 words of memory out of 5000000
- 8419 multiletter control sequences out of 15000+600000
+ 4998 strings out of 493014
+ 73881 string characters out of 6133351
+ 146599 words of memory out of 5000000
+ 8438 multiletter control sequences out of 15000+600000
  13562 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,43p,1398b,483s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug-2.pdf (22 pages, 426462 bytes).
+ 42i,12n,43p,1455b,485s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on /Volumes/shared_data/work/git/calibratedDA/draft/.texpadtmp/scalable_data_aug_dd.pdf (20 pages, 422661 bytes).
 PDF statistics:
- 236 PDF objects out of 1000 (max. 8388607)
- 164 compressed objects within 2 object streams
+ 240 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
