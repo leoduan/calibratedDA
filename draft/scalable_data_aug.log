@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.22)  27 JAN 2017 13:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.22)  6 FEB 2017 11:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -359,8 +359,8 @@ File: probit15_acf.pdf Graphic file (type pdf)
 <use probit15_acf.pdf>
 Package pdftex.def Info: probit15_acf.pdf used on input line 278.
 (pdftex.def)             Requested size: 212.16118pt x 127.29814pt.
- [8 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>]
-[9] <logit_demo_trace_plot.pdf, id=81, 361.35pt x 216.81pt>
+ [8] [9 <./probit15_trace_plot.pdf> <./probit15_acf.pdf>] <logit_demo_trace_plo
+t.pdf, id=81, 361.35pt x 216.81pt>
 File: logit_demo_trace_plot.pdf Graphic file (type pdf)
 
 <use logit_demo_trace_plot.pdf>
@@ -373,7 +373,7 @@ File: logit_demo_acf.pdf Graphic file (type pdf)
 Package pdftex.def Info: logit_demo_acf.pdf used on input line 339.
 (pdftex.def)             Requested size: 231.02411pt x 138.61566pt.
 
-[10 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [11] [12] [13]
+[10] [11 <./logit_demo_trace_plot.pdf> <./logit_demo_acf.pdf>] [12] [13]
 <binomial_random_acf_da.pdf, id=106, 361.35pt x 216.81pt>
 File: binomial_random_acf_da.pdf Graphic file (type pdf)
 
@@ -394,68 +394,68 @@ File: binomial_random_acf_hmc.pdf Graphic file (type pdf)
 <use binomial_random_acf_hmc.pdf>
 Package pdftex.def Info: binomial_random_acf_hmc.pdf used on input line 532.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
-
+ [14]
 Overfull \hbox (2.70131pt too wide) in paragraph at lines 543--557
  [][] 
  []
 
-[14 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf> <./binomial_
-random_acf_hmc.pdf>] [15] <poisson_acf_da.pdf, id=133, 361.35pt x 216.81pt>
+[15 <./binomial_random_acf_da.pdf> <./binomial_random_acf_cda.pdf> <./binomial_
+random_acf_hmc.pdf>] [16] <poisson_acf_da.pdf, id=136, 361.35pt x 216.81pt>
 File: poisson_acf_da.pdf Graphic file (type pdf)
 
 <use poisson_acf_da.pdf>
 Package pdftex.def Info: poisson_acf_da.pdf used on input line 619.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <poisson_acf_cda.pdf, id=134, 361.35pt x 216.81pt>
+ <poisson_acf_cda.pdf, id=137, 361.35pt x 216.81pt>
 File: poisson_acf_cda.pdf Graphic file (type pdf)
 
 <use poisson_acf_cda.pdf>
 Package pdftex.def Info: poisson_acf_cda.pdf used on input line 624.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- <poisson_acf_hmc.pdf, id=135, 361.35pt x 216.81pt>
+ <poisson_acf_hmc.pdf, id=138, 361.35pt x 216.81pt>
 File: poisson_acf_hmc.pdf Graphic file (type pdf)
 
 <use poisson_acf_hmc.pdf>
 Package pdftex.def Info: poisson_acf_hmc.pdf used on input line 628.
 (pdftex.def)             Requested size: 150.87465pt x 90.52364pt.
- [16] [17 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf> <./poisson_acf_hmc.pdf
->] (./scalable_data_aug.bbl
+ [17 <./poisson_acf_da.pdf> <./poisson_acf_cda.pdf> <./poisson_acf_hmc.pdf>] (.
+/scalable_data_aug.bbl [18]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
- [18]) [19]
-<poisson_fitting_da.png, id=164, 1204.5pt x 1204.5pt>
+ [19]) [20]
+<poisson_fitting_da.png, id=167, 1204.5pt x 1204.5pt>
 File: poisson_fitting_da.png Graphic file (type png)
 
 <use poisson_fitting_da.png>
 Package pdftex.def Info: poisson_fitting_da.png used on input line 900.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
 
-<poisson_fitting_ada.png, id=166, 1204.5pt x 1204.5pt>
+<poisson_fitting_ada.png, id=169, 1204.5pt x 1204.5pt>
 File: poisson_fitting_ada.png Graphic file (type png)
 
 <use poisson_fitting_ada.png>
 Package pdftex.def Info: poisson_fitting_ada.png used on input line 905.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_da.png, id=167, 1204.5pt x 1204.5pt>
+ <poisson_cv_da.png, id=170, 1204.5pt x 1204.5pt>
 File: poisson_cv_da.png Graphic file (type png)
 
 <use poisson_cv_da.png>
 Package pdftex.def Info: poisson_cv_da.png used on input line 909.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- <poisson_cv_ada.png, id=168, 1204.5pt x 1204.5pt>
+ <poisson_cv_ada.png, id=171, 1204.5pt x 1204.5pt>
 File: poisson_cv_ada.png Graphic file (type png)
 
 <use poisson_cv_ada.png>
 Package pdftex.def Info: poisson_cv_ada.png used on input line 914.
 (pdftex.def)             Requested size: 212.16118pt x 212.15071pt.
- [20] [21 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_
+ [21] [22 <./poisson_fitting_da.png> <./poisson_fitting_ada.png> <./poisson_cv_
 da.png> <./poisson_cv_ada.png>]
 (./scalable_data_aug.aux) ) 
 Here is how much of TeX's memory you used:
  4982 strings out of 493029
  72419 string characters out of 6136233
- 144829 words of memory out of 5000000
+ 144830 words of memory out of 5000000
  8417 multiletter control sequences out of 15000+600000
  13562 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -482,10 +482,10 @@ ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/symbols/msbm7.pfb>
-Output written on scalable_data_aug.pdf (21 pages, 588863 bytes).
+Output written on scalable_data_aug.pdf (22 pages, 590237 bytes).
 PDF statistics:
- 252 PDF objects out of 1000 (max. 8388607)
- 170 compressed objects within 2 object streams
+ 255 PDF objects out of 1000 (max. 8388607)
+ 172 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
