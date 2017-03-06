@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -124,6 +124,13 @@ Gareth~O Roberts and Jeffrey~S Rosenthal.
   algorithms.
 \newblock \emph{Journal of applied probability}, pages 458--475, 2007.
 
+\bibitem[Roberts and Smith(1994)]{roberts1994simple}
+Gareth~O Roberts and Adrian~FM Smith.
+\newblock Simple conditions for the convergence of the {Gibbs sampler and
+  Metropolis-Hastings} algorithms.
+\newblock \emph{Stochastic processes and their applications}, 49\penalty0
+  (2):\penalty0 207--216, 1994.
+
 \bibitem[Roberts et~al.(2004)Roberts, Rosenthal, et~al.]{roberts2004general}
 Gareth~O Roberts, Jeffrey~S Rosenthal, et~al.
 \newblock General state space {Markov chains and MCMC algorithms}.
@@ -145,6 +152,13 @@ Martin~A Tanner and Wing~Hung Wong.
 \newblock The calculation of posterior distributions by data augmentation.
 \newblock \emph{Journal of the American statistical Association}, 82\penalty0
   (398):\penalty0 528--540, 1987.
+
+\bibitem[Tran et~al.(2016)Tran, Pitt, and Kohn]{tran2016adaptive}
+Minh-Ngoc Tran, Michael~K Pitt, and Robert Kohn.
+\newblock Adaptive metropolis--hastings sampling using reversible dependent
+  mixture proposals.
+\newblock \emph{Statistics and Computing}, 26\penalty0 (1-2):\penalty0
+  361--381, 2016.
 
 \bibitem[Wakefield(2007)]{wakefield2007disease}
 Jon Wakefield.

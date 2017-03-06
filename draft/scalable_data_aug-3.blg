@@ -1,5 +1,52 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: scalable_data_aug-3.aux
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: scalable_data_aug-3.aux
 The style file: plainnat.bst
 Database file #1: reference.bib
+Repeated entry---line 486 of file reference.bib
+ : @article{roberts1994simple
+ :                           ,
+I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in conrad2015accelerating
-(There was 1 warning)
+You've used 27 entries,
+            2773 wiz_defined-function locations,
+            759 strings with 9931 characters,
+and the built_in function-call counts, 13367 in all, are:
+= -- 1189
+> -- 818
+< -- 19
++ -- 277
+- -- 249
+* -- 1117
+:= -- 2048
+add.period$ -- 82
+call.type$ -- 27
+change.case$ -- 160
+chr.to.int$ -- 26
+cite$ -- 55
+duplicate$ -- 595
+empty$ -- 1051
+format.name$ -- 292
+if$ -- 2789
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 29
+newline$ -- 143
+num.names$ -- 108
+pop$ -- 311
+preamble$ -- 1
+purify$ -- 135
+quote$ -- 0
+skip$ -- 469
+stack$ -- 0
+substring$ -- 531
+swap$ -- 72
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 287
+warning$ -- 1
+while$ -- 122
+width$ -- 0
+write$ -- 354
+(There was 1 error message)
