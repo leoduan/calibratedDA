@@ -1,0 +1,181 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Albert and Chib}{Albert and
+  Chib}{1993}]{albert1993bayesian}
+Albert, J.~H. and S.~Chib (1993).
+\newblock {Bayesian Analysis of Binary and Polychotomous Response Data}.
+\newblock {\em Journal of the American Statistical Association\/}~{\em
+  88\/}(422), 669--679.
+
+\bibitem[\protect\citeauthoryear{Carpenter, Gelman, Hoffman, Lee, Goodrich,
+  Betancourt, Brubaker, Guo, Li, and Riddell}{Carpenter
+  et~al.}{2016}]{carpenter2016stan}
+Carpenter, B., A.~Gelman, M.~Hoffman, D.~Lee, B.~Goodrich, M.~Betancourt, M.~A.
+  Brubaker, J.~Guo, P.~Li, and A.~Riddell (2016).
+\newblock {STAN: A Probabilistic Programming Language}.
+\newblock {\em Journal of Statistical Software\/}.
+
+\bibitem[\protect\citeauthoryear{Conrad, Marzouk, Pillai, and Smith}{Conrad
+  et~al.}{2015}]{conrad2015accelerating}
+Conrad, P.~R., Y.~M. Marzouk, N.~S. Pillai, and A.~Smith (2015).
+\newblock {Accelerating Asymptotically Exact MCMC for Computationally Intensive
+  Models via Local Approximations}.
+\newblock {\em Journal of the American Statistical Association\/}~(1591--1607).
+
+\bibitem[\protect\citeauthoryear{Hairer, Mattingly, and Scheutzow}{Hairer
+  et~al.}{2011}]{hairer2011asymptotic}
+Hairer, M., J.~C. Mattingly, and M.~Scheutzow (2011).
+\newblock {Asymptotic Coupling and a General Form of Harris’ Theorem with
+  Applications to Stochastic Delay Equations}.
+\newblock {\em Probability Theory and Related Fields\/}~{\em 149\/}(1-2),
+  223--259.
+
+\bibitem[\protect\citeauthoryear{Hairer, Stuart, and Vollmer}{Hairer
+  et~al.}{2014}]{hairer2014spectral}
+Hairer, M., A.~M. Stuart, and S.~J. Vollmer (2014).
+\newblock {Spectral Gaps for a Metropolis--Hastings Algorithm in Infinite
+  Dimensions}.
+\newblock {\em The Annals of Applied Probability\/}~{\em 24\/}(6), 2455--2490.
+
+\bibitem[\protect\citeauthoryear{Johndrow, Smith, Pillai, and Dunson}{Johndrow
+  et~al.}{2016}]{johndrow2016inefficiency}
+Johndrow, J.~E., A.~Smith, N.~Pillai, and D.~B. Dunson (2016).
+\newblock {Inefficiency of Data Augmentation for Large Sample Imbalanced Data}.
+\newblock {\em arXiv preprint arXiv:1605.05798\/}.
+
+\bibitem[\protect\citeauthoryear{Liu}{Liu}{1994a}]{liu1994collapsed}
+Liu, J.~S. (1994a).
+\newblock {The Collapsed Gibbs Sampler in Bayesian Computations with
+  Applications to a Gene Regulation Problem}.
+\newblock {\em Journal of the American Statistical Association\/}~{\em
+  89\/}(427), 958--966.
+
+\bibitem[\protect\citeauthoryear{Liu}{Liu}{1994b}]{liu1994fraction}
+Liu, J.~S. (1994b).
+\newblock {The Fraction of Missing Information and Convergence Rate for Data
+  Augmentation}.
+\newblock {\em Computing Science and Statistics\/}, 490--490.
+
+\bibitem[\protect\citeauthoryear{Liu and Wu}{Liu and
+  Wu}{1999}]{liu1999parameter}
+Liu, J.~S. and Y.~N. Wu (1999).
+\newblock {Parameter Expansion for Data Augmentation}.
+\newblock {\em Journal of the American Statistical Association\/}~{\em
+  94\/}(448), 1264--1274.
+
+\bibitem[\protect\citeauthoryear{Meng and Van~Dyk}{Meng and
+  Van~Dyk}{1999}]{meng1999seeking}
+Meng, X.-L. and D.~A. Van~Dyk (1999).
+\newblock {Seeking Efficient Data Augmentation Schemes via Conditional and
+  Marginal Augmentation}.
+\newblock {\em Biometrika\/}~{\em 86\/}(2), 301--320.
+
+\bibitem[\protect\citeauthoryear{Meyn and Tweedie}{Meyn and
+  Tweedie}{2012}]{meyn2012markov}
+Meyn, S.~P. and R.~L. Tweedie (2012).
+\newblock {\em Markov Chains and Stochastic Stability}.
+\newblock Springer Science \& Business Media.
+
+\bibitem[\protect\citeauthoryear{Minsker, Srivastava, Lin, and Dunson}{Minsker
+  et~al.}{2014}]{minsker2014robust}
+Minsker, S., S.~Srivastava, L.~Lin, and D.~B. Dunson (2014).
+\newblock {Robust and Scalable Bayes via a Median of Subset Posterior
+  Measures}.
+\newblock {\em arXiv preprint arXiv:1403.2660\/}.
+
+\bibitem[\protect\citeauthoryear{Ngai, Hu, Wong, Chen, and Sun}{Ngai
+  et~al.}{2011}]{ngai2011application}
+Ngai, E., Y.~Hu, Y.~Wong, Y.~Chen, and X.~Sun (2011).
+\newblock {The Application of Data Mining Techniques in Financial Fraud
+  Detection: A Classification Framework and an Academic Review of Literature}.
+\newblock {\em Decision Support Systems\/}~{\em 50\/}(3), 559--569.
+
+\bibitem[\protect\citeauthoryear{Papaspiliopoulos, Roberts, and
+  Sk{\"o}ld}{Papaspiliopoulos et~al.}{2007}]{papaspiliopoulos2007general}
+Papaspiliopoulos, O., G.~O. Roberts, and M.~Sk{\"o}ld (2007).
+\newblock {A General Framework for the Parametrization of Hierarchical Models}.
+\newblock {\em Statistical Science\/}, 59--73.
+
+\bibitem[\protect\citeauthoryear{Polson, Scott, and Windle}{Polson
+  et~al.}{2013}]{polson2013bayesian}
+Polson, N.~G., J.~G. Scott, and J.~Windle (2013).
+\newblock {Bayesian Inference for Logistic Models Using P{\'o}lya--Gamma Latent
+  Variables}.
+\newblock {\em Journal of the American Statistical Association\/}~{\em
+  108\/}(504), 1339--1349.
+
+\bibitem[\protect\citeauthoryear{Rajaratnam and Sparks}{Rajaratnam and
+  Sparks}{2015}]{rajaratnam2015mcmc}
+Rajaratnam, B. and D.~Sparks (2015).
+\newblock {MCMC-Based Inference in the Era of Big Data: A Fundamental Analysis
+  of the Convergence Complexity of High-Dimensional Chains}.
+\newblock {\em arXiv preprint arXiv:1508.00947\/}.
+
+\bibitem[\protect\citeauthoryear{Roberts and Rosenthal}{Roberts and
+  Rosenthal}{2007}]{roberts2007coupling}
+Roberts, G.~O. and J.~S. Rosenthal (2007).
+\newblock {Coupling and Ergodicity of Adaptive Markov chain Monte Carlo
+  Algorithms}.
+\newblock {\em Journal of Applied Probability\/}, 458--475.
+
+\bibitem[\protect\citeauthoryear{Roberts, Rosenthal, et~al.}{Roberts
+  et~al.}{2004}]{roberts2004general}
+Roberts, G.~O., J.~S. Rosenthal, et~al. (2004).
+\newblock {General State Space Markov Chains and MCMC Algorithms}.
+\newblock {\em Probability Surveys\/}~{\em 1}, 20--71.
+
+\bibitem[\protect\citeauthoryear{Roberts and Smith}{Roberts and
+  Smith}{1994}]{roberts1994simple}
+Roberts, G.~O. and A.~F. Smith (1994).
+\newblock {Simple Conditions for the Convergence of the Gibbs Sampler and
+  Metropolis-Hastings Algorithms}.
+\newblock {\em Stochastic Processes and Their Applications\/}~{\em 49\/}(2),
+  207--216.
+
+\bibitem[\protect\citeauthoryear{Rubin}{Rubin}{2004}]{rubin2004multiple}
+Rubin, D.~B. (2004).
+\newblock {\em {Multiple Imputation for Nonresponse in Surveys}}, Volume~81.
+\newblock John Wiley \& Sons.
+
+\bibitem[\protect\citeauthoryear{Srivastava, Cevher, Tran-Dinh, and
+  Dunson}{Srivastava et~al.}{2015}]{srivastava2015wasp}
+Srivastava, S., V.~Cevher, Q.~Tran-Dinh, and D.~B. Dunson (2015).
+\newblock {WASP: Scalable Bayes via Barycenters of Subset Posteriors}.
+\newblock In {\em Proceedings of the Eighteenth International Conference on
+  Artificial Intelligence and Statistics}, pp.\  912--920.
+
+\bibitem[\protect\citeauthoryear{Tanner and Wong}{Tanner and
+  Wong}{1987}]{tanner1987calculation}
+Tanner, M.~A. and W.~H. Wong (1987).
+\newblock {The Calculation of Posterior Distributions by Data Augmentation}.
+\newblock {\em Journal of the American Statistical Association\/}~{\em
+  82\/}(398), 528--540.
+
+\bibitem[\protect\citeauthoryear{Tran, Pitt, and Kohn}{Tran
+  et~al.}{2016}]{tran2016adaptive}
+Tran, M.-N., M.~K. Pitt, and R.~Kohn (2016).
+\newblock {Adaptive Metropolis--Hastings Sampling Using Reversible Dependent
+  Mixture Proposals}.
+\newblock {\em Statistics and Computing\/}~{\em 26\/}(1-2), 361--381.
+
+\bibitem[\protect\citeauthoryear{Wakefield}{Wakefield}{2007}]{wakefield2007disease}
+Wakefield, J. (2007).
+\newblock {Disease Mapping and Spatial Regression with Count Data}.
+\newblock {\em Biostatistics\/}~{\em 8\/}(2), 158--183.
+
+\bibitem[\protect\citeauthoryear{Wang, Li, Cui, Zhang, and Mao}{Wang
+  et~al.}{2010}]{wang2010click}
+Wang, X., W.~Li, Y.~Cui, R.~Zhang, and J.~Mao (2010).
+\newblock {Click-through Rate Estimation for Rare Events in Online
+  Advertising}.
+\newblock {\em Online Multimedia Advertising: Techniques and Technologies\/},
+  1--12.
+
+\bibitem[\protect\citeauthoryear{Zhou, Li, Dunson, and Carin}{Zhou
+  et~al.}{2012}]{zhou2012lognormal}
+Zhou, M., L.~Li, D.~B. Dunson, and L.~Carin (2012).
+\newblock {Lognormal and Gamma Mixed Negative Binomial Regression}.
+\newblock In {\em Proceedings of the International Conference on Machine
+  Learning}, Volume 2012, pp.\  1343.
+
+\end{thebibliography}
