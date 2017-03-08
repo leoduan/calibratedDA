@@ -1,6 +1,6 @@
 require("truncnorm")
 
-probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE,MH= FALSE){
+probitCDA<- function(y,X, burnin=500, run=500,fixR = FALSE,r_ini = 1,MH= T){
   
   n<- length(y)
   p<- ncol(X)
@@ -21,7 +21,6 @@ probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE,MH= FALSE){
   
   #individual log-likelihood
   loglik <- log(1-prob) * (y==0) + log(prob) * (y==1)
-  
   
   #objects to store trace
   trace_beta<- numeric()
@@ -80,25 +79,11 @@ probitCDA<- function(y,X, r_ini=1,burnin=500, run=500 ,fixR = FALSE,MH= FALSE){
     #use the first half of burnin steps to adaptively tune r and b
     if(tuning){
       
-      # set bias correction to the value that L(y|xbeta) = L_{r,b}(y|xbeta)
-      # b<- (sqrt(r)-1) * new_Xbeta
-      
       if(!fixR){
         #
         dprob<- dnorm(Xbeta)
         r<-    c(prob*(1 - prob)/dprob^2)
-        
-        # reduce r for those Xbeta in the region that don't have slow mixing problems (> -4) & having likelihood ratio<1.
-        # r_adapt_set<-  ((alpha< 1) & (Xbeta> -4))
-        # r_adapt_set<- alpha<1
-        # r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
-        # 
-        # r_adapt_set<- (alpha>1)
-        # r[r_adapt_set] <- r[r_adapt_set]* (alpha[r_adapt_set]^0.5)
-        # 
-        # # if any r falls under 1 (which mixes slower that the original Albert-Chib), put it back to 1
-        r[r<0.01]<- 0.01
-        # r[r>10000]<- 10000
+        r[r<1]<- 1
       }
       b<- (sqrt(r)-1) * new_Xbeta
     }
