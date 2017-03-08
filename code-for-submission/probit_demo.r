@@ -1,4 +1,3 @@
-setwd("c:/Users/leo/git/calibratedDA/code-for-submission/")
 source("probitCDA.r")
 require("coda")
 

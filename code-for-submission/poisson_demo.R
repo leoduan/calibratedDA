@@ -1,11 +1,9 @@
-setwd("c:/Users/leo/git/calibratedDA/code-for-submission/")
-
 require("coda")
 
 N<- 1E4
 
 
-#generate data using Beta= (-8,1)
+#generate data using Beta= (-6,3)
 X0<- 1
 X1<- rnorm(N, 1, 1)
 X<- cbind(X0,X1)
@@ -24,7 +22,7 @@ source("poissonCDA.r")
 #########################################################################################################################
 #Estimation with approximate MCMC using Polya-Gamma algorithm proposed by Zhou et al. (2015)
 #########################################################################################################################
-fit.PolyaGamma <-poissonCDA(y,X, burnin = 200, run = 1000, fixR = T,r_ini = 1, lambda = 1000,MH = F)
+fit.PolyaGamma <-poissonCDA(y,X, burnin = 200, run = 1000, fixR = T,r_ini = 1, lambda = 1E9,MH = F)
 
 #traceplot
 par(mfrow=c(1,1))
@@ -39,6 +37,9 @@ autocorr.plot(fit.PolyaGamma$beta[,2],lag.max =  100,auto.layout=F)
 
 #########################################################################################################################
 #Estimation using the calibrated data augmentation (CDA)
+#(note: for easier testing on the reviewer's computer, we use the R version of the Polya-Gamma generator,
+#which is slightly slower for r_i<1 cases due to the R implementation.
+#The C++ implementation does not have this issue.)
 ##########################################################################################################################
 
 

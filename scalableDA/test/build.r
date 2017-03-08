@@ -1,6 +1,6 @@
 library("devtools")
 
-setwd("c:/Users/leo/git/calibratedDA/")
+setwd("~/git/calibratedDA/")
 build('scalableDA')
 install.packages("scalableDA_1.0.tar.gz", repos = NULL, type = "source")
 

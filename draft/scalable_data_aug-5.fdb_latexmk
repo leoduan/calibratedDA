@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex scalable_data_aug-5"] 1488947579 "scalable_data_aug-5.aux" "scalable_data_aug-5.bbl" "scalable_data_aug-5" 1488947874
+["bibtex scalable_data_aug-5"] 1488948734 "scalable_data_aug-5.aux" "scalable_data_aug-5.bbl" "scalable_data_aug-5" 1488948735
   "/usr/share/texlive/texmf-dist/bibtex/bst/chicago/chicago.bst" 1198629289 37416 2ae04276c51f11eda70770f4081293b7 ""
   "reference.bib" 1488925114 15257 d0ef02004fafa969df5576fee667783c ""
-  "scalable_data_aug-5.aux" 1488947873 11961 2277430fcb4f0a33bb7345013514dff5 ""
+  "scalable_data_aug-5.aux" 1488948734 11961 2277430fcb4f0a33bb7345013514dff5 ""
   "scalable_data_aug-5.bcf" 0 -1 0 ""
   (generated)
   "scalable_data_aug-5.bbl"
-["latex"] 1488947873 "scalable_data_aug-5.tex" "scalable_data_aug-5.dvi" "scalable_data_aug-5" 1488947874
+["latex"] 1488948734 "scalable_data_aug-5.tex" "scalable_data_aug-5.dvi" "scalable_data_aug-5" 1488948735
   "/etc/texmf/web2c/texmf.cnf" 1488462076 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -46,7 +46,6 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
-  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1248133631 36118 fad905eba93cff5bce1e185fe980a177 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb" 1248133631 24252 1e4e051947e12dfb50fee0b7f4e26e3a ""
@@ -118,10 +117,10 @@
   "probit15_trace_plot.pdf" 1488814743 12772 9e666b1c8a2bb4d12d72d0b997db652c ""
   "probit_demo_acf.pdf" 1488814743 5897 ae6289217f8666daca0845d30253fd0c ""
   "probit_demo_acf_prop.pdf" 1488814743 5897 646ac4ed8c98e673c063d702a60247df ""
-  "scalable_data_aug-5.aux" 1488947873 11961 2277430fcb4f0a33bb7345013514dff5 ""
-  "scalable_data_aug-5.bbl" 1488947580 8219 4965ceb37654dd4f8a086c4a6ae720fb "bibtex scalable_data_aug-5"
-  "scalable_data_aug-5.out" 1488947873 962 d353a5e7db0f2c5d65d344421f66466b ""
-  "scalable_data_aug-5.tex" 1488947871 60110 36c60da8650068709a70610488289907 ""
+  "scalable_data_aug-5.aux" 1488948734 11961 2277430fcb4f0a33bb7345013514dff5 ""
+  "scalable_data_aug-5.bbl" 1488948734 8219 4965ceb37654dd4f8a086c4a6ae720fb "bibtex scalable_data_aug-5"
+  "scalable_data_aug-5.out" 1488948734 962 d353a5e7db0f2c5d65d344421f66466b ""
+  "scalable_data_aug-5.tex" 1488948731 60110 155273ef503c869537291de6f02003af ""
   (generated)
   "scalable_data_aug-5.dvi"
   "scalable_data_aug-5.out"

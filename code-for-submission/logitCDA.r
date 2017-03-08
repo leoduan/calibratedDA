@@ -1,12 +1,15 @@
 require("BayesLogit")
 
-logitCDA<- function(y,X,N=1, burnin=500, run=500,fixR = FALSE,r_ini= 1,MH= TRUE){
+logitCDA<- function(y,X,N=1,tune= 200, burnin=500, run=500,fixR = FALSE,r_ini= 1,MH= TRUE,c0= 1){
   
   n<- length(y)
   p<- ncol(X)
   
   #initialize beta
-  beta<- rep(1,p)
+  #use MLE as the starting value
+  model=glm(y ~ X-1,family=binomial(link=logit))
+  beta=model$coefficients
+  
   Xbeta<- X%*%beta
   prob<- plogis(Xbeta)
   
@@ -46,7 +49,7 @@ logitCDA<- function(y,X,N=1, burnin=500, run=500,fixR = FALSE,r_ini= 1,MH= TRUE)
         
           dprob<- exp(Xbeta)/(1+exp(Xbeta))^2
           r0<-  dprob/(tanh(abs(Xbeta+b)/2)/2/abs(Xbeta+b)) 
-          r<- r0
+          r<- r0/c0
           r[r>1]<-1
           r[r*N<y]<- (y/N)[r*N<y]
           
@@ -93,10 +96,15 @@ logitCDA<- function(y,X,N=1, burnin=500, run=500,fixR = FALSE,r_ini= 1,MH= TRUE)
     
     if(tuning){
       tune_step<- tune_step+1
-      if(tune_accept / tune_step > 0.3 & tune_step>200) tuning = FALSE
+      if(tune_step>tune) {
+        if(tune_accept / tune_step<0.2)
+          print("acceptance rate is too low, consider reducing c0")
+        tuning = FALSE
+      }
+      # print(c("Acceptance Rate: ", tune_accept / tune_step))
     }
-
-    if(i> burnin){
+    
+    if(i> burnin  & !tuning){
       trace_proposal<- rbind(trace_proposal,t(new_beta))
       trace_beta<- rbind(trace_beta,t(beta))
     }

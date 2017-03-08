@@ -1,6 +1,6 @@
 require("truncnorm")
 
-probitCDA<- function(y,X, burnin=500, run=500,fixR = FALSE,r_ini=1, MH= TRUE){
+probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH= TRUE,c0= 1){
   
   n<- length(y)
   p<- ncol(X)
@@ -79,7 +79,7 @@ probitCDA<- function(y,X, burnin=500, run=500,fixR = FALSE,r_ini=1, MH= TRUE){
       
       if(!fixR){
         dprob<- dnorm(Xbeta)
-        r<-    c(prob*(1 - prob)/dprob^2)
+        r<-    c(prob*(1 - prob)/dprob^2) * c0
         r[r<1]<- 1
       }
       b<- (sqrt(r)-1) * new_Xbeta
@@ -100,7 +100,12 @@ probitCDA<- function(y,X, burnin=500, run=500,fixR = FALSE,r_ini=1, MH= TRUE){
     
     if(tuning){
       tune_step<- tune_step+1
-      if(tune_accept / tune_step > 0.3 & tune_step>200) tuning = FALSE
+      if(tune_step>tune) {
+        if(tune_accept / tune_step<0.2)
+          print("acceptance rate is too low, consider reducing c0")
+        tuning = FALSE
+      }
+      # print(c("Acceptance Rate: ", tune_accept / tune_step))
     }
     
     

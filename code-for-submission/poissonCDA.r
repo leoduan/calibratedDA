@@ -1,17 +1,16 @@
 require("BayesLogit")
 
-poissonCDA<- function(y,X, tune= 100,burnin=500, run=500 ,fixR = FALSE,r_ini= 1, MH= T , lambda=1E9,c0= 0.1, ini_beta= NULL){
+poissonCDA<- function(y,X, tune= 100,burnin=500, run=500 ,fixR = FALSE,r_ini= 1, MH= T , lambda=1E9,c0= 0.1){
   
   n<- length(y)
   p<- ncol(X)
   
   #initialize beta
   
-  if(is.null(ini_beta)){
-    beta<- rep(1,p)
-  }else{
-    beta = ini_beta
-  }
+  #use MLE as the starting value
+  model=glm(y ~ X-1,family=poisson(link=log))
+  beta=model$coefficients
+  
   Xbeta<- X%*%beta
   
   
@@ -26,8 +25,7 @@ poissonCDA<- function(y,X, tune= 100,burnin=500, run=500 ,fixR = FALSE,r_ini= 1,
   loglambda<- log(lambda)
   
   loglik <-   - exp(Xbeta )
-  max_loglik<- -Inf
-  
+
   #objects to store trace
   trace_beta<- numeric()
   trace_proposal<- numeric()
@@ -97,7 +95,11 @@ poissonCDA<- function(y,X, tune= 100,burnin=500, run=500 ,fixR = FALSE,r_ini= 1,
     
     if(tuning){
       tune_step<- tune_step+1
-      if(tune_step>= tune) tuning = FALSE
+      if(tune_step>= tune) {
+        if(tune_accept / tune_step<0.2)
+          print("acceptance rate is too low, consider reducing c0")
+        tuning = FALSE
+        }
       print(c("Acceptance Rate: ", tune_accept / tune_step))
     }
     

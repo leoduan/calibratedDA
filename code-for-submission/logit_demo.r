@@ -1,5 +1,3 @@
-setwd("c:/Users/leo/git/calibratedDA/code-for-submission/")
-
 require("coda")
 
 N<- 1E4
@@ -39,9 +37,9 @@ autocorr.plot(fit.PolyaGamma$beta[,2],lag.max =  40,auto.layout=F)
 
 #########################################################################################################################
 #Estimation using the calibrated data augmentation (CDA)
-#(note: for easier testing on the reviewer's computer, we use the R version of the Polya-Gamma generator.
-#With parameters r_i<1, each iteration of CDA takes longer time to run, due to the inefficiency of R program.
-#The C++ version does not have this issue.)
+#(note: for easier testing on the reviewer's computer, we use the R version of the Polya-Gamma generator,
+#which is slightly slower for r_i<1 cases due to the R implementation.
+#The C++ implementation does not have this issue.)
 ##########################################################################################################################
 
 
