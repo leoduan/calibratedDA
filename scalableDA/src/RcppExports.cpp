@@ -22,23 +22,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// logistic_reg
-SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0);
-RcppExport SEXP scalableDA_logistic_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
-    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
-    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
-    Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
-    rcpp_result_gen = Rcpp::wrap(logistic_reg(y, X, b, B, burnin, run, r0));
-    return rcpp_result_gen;
-END_RCPP
-}
 // logistic_reg_random_effect
 SEXP logistic_reg_random_effect(SEXP y, SEXP X, int burnin, int run, double tau, double c, int mc_draws, int da_ver, double sigma2_ini, bool track_r, bool update_sigma2);
 RcppExport SEXP scalableDA_logistic_reg_random_effect(SEXP ySEXP, SEXP XSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP tauSEXP, SEXP cSEXP, SEXP mc_drawsSEXP, SEXP da_verSEXP, SEXP sigma2_iniSEXP, SEXP track_rSEXP, SEXP update_sigma2SEXP) {
@@ -60,26 +43,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// poisson_reg
-SEXP poisson_reg(SEXP y, SEXP X, double r_ini, int tune, int burnin, int run, bool fixR, double C, double c_ini, bool MH, bool randomEff, double nu, bool adaptC);
-RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP r_iniSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP, SEXP CSEXP, SEXP c_iniSEXP, SEXP MHSEXP, SEXP randomEffSEXP, SEXP nuSEXP, SEXP adaptCSEXP) {
+// logistic_reg
+SEXP logistic_reg(SEXP y, SEXP X, SEXP b, SEXP B, int burnin, int run, double r0);
+RcppExport SEXP scalableDA_logistic_reg(SEXP ySEXP, SEXP XSEXP, SEXP bSEXP, SEXP BSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP r0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
     Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    Rcpp::traits::input_parameter< double >::type r_ini(r_iniSEXP);
-    Rcpp::traits::input_parameter< int >::type tune(tuneSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type b(bSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type B(BSEXP);
     Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
     Rcpp::traits::input_parameter< int >::type run(runSEXP);
-    Rcpp::traits::input_parameter< bool >::type fixR(fixRSEXP);
-    Rcpp::traits::input_parameter< double >::type C(CSEXP);
-    Rcpp::traits::input_parameter< double >::type c_ini(c_iniSEXP);
-    Rcpp::traits::input_parameter< bool >::type MH(MHSEXP);
-    Rcpp::traits::input_parameter< bool >::type randomEff(randomEffSEXP);
-    Rcpp::traits::input_parameter< double >::type nu(nuSEXP);
-    Rcpp::traits::input_parameter< bool >::type adaptC(adaptCSEXP);
-    rcpp_result_gen = Rcpp::wrap(poisson_reg(y, X, r_ini, tune, burnin, run, fixR, C, c_ini, MH, randomEff, nu, adaptC));
+    Rcpp::traits::input_parameter< double >::type r0(r0SEXP);
+    rcpp_result_gen = Rcpp::wrap(logistic_reg(y, X, b, B, burnin, run, r0));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -107,6 +84,29 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type fixNu(fixNuSEXP);
     Rcpp::traits::input_parameter< bool >::type centeredRanEff(centeredRanEffSEXP);
     rcpp_result_gen = Rcpp::wrap(poisson_reg_block_random(y, X, r_ini, tune, burnin, run, fixR, C, c_ini, c_ini2, theta_ts, MH, nu_ini, sigma2, adaptC, fixNu, centeredRanEff));
+    return rcpp_result_gen;
+END_RCPP
+}
+// poisson_reg
+SEXP poisson_reg(SEXP y, SEXP X, double r_ini, int tune, int burnin, int run, bool fixR, double C, double c_ini, bool MH, bool randomEff, double nu, bool adaptC);
+RcppExport SEXP scalableDA_poisson_reg(SEXP ySEXP, SEXP XSEXP, SEXP r_iniSEXP, SEXP tuneSEXP, SEXP burninSEXP, SEXP runSEXP, SEXP fixRSEXP, SEXP CSEXP, SEXP c_iniSEXP, SEXP MHSEXP, SEXP randomEffSEXP, SEXP nuSEXP, SEXP adaptCSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type r_ini(r_iniSEXP);
+    Rcpp::traits::input_parameter< int >::type tune(tuneSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type run(runSEXP);
+    Rcpp::traits::input_parameter< bool >::type fixR(fixRSEXP);
+    Rcpp::traits::input_parameter< double >::type C(CSEXP);
+    Rcpp::traits::input_parameter< double >::type c_ini(c_iniSEXP);
+    Rcpp::traits::input_parameter< bool >::type MH(MHSEXP);
+    Rcpp::traits::input_parameter< bool >::type randomEff(randomEffSEXP);
+    Rcpp::traits::input_parameter< double >::type nu(nuSEXP);
+    Rcpp::traits::input_parameter< bool >::type adaptC(adaptCSEXP);
+    rcpp_result_gen = Rcpp::wrap(poisson_reg(y, X, r_ini, tune, burnin, run, fixR, C, c_ini, MH, randomEff, nu, adaptC));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -158,4 +158,21 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(rpg(b, c));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"scalableDA_binomial_reg", (DL_FUNC) &scalableDA_binomial_reg, 6},
+    {"scalableDA_logistic_reg_random_effect", (DL_FUNC) &scalableDA_logistic_reg_random_effect, 11},
+    {"scalableDA_logistic_reg", (DL_FUNC) &scalableDA_logistic_reg, 7},
+    {"scalableDA_poisson_reg_block_random", (DL_FUNC) &scalableDA_poisson_reg_block_random, 17},
+    {"scalableDA_poisson_reg", (DL_FUNC) &scalableDA_poisson_reg, 13},
+    {"scalableDA_probit_reg_px", (DL_FUNC) &scalableDA_probit_reg_px, 9},
+    {"scalableDA_probit_reg", (DL_FUNC) &scalableDA_probit_reg, 8},
+    {"scalableDA_rpg", (DL_FUNC) &scalableDA_rpg, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_scalableDA(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

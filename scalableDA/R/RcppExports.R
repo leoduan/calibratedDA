@@ -5,20 +5,20 @@ binomial_reg <- function(y_r, n_r, burnin = 500L, run = 500L, r0 = 20, mc_draws 
     .Call('scalableDA_binomial_reg', PACKAGE = 'scalableDA', y_r, n_r, burnin, run, r0, mc_draws)
 }
 
-logistic_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20) {
-    .Call('scalableDA_logistic_reg', PACKAGE = 'scalableDA', y, X, b, B, burnin, run, r0)
-}
-
 logistic_reg_random_effect <- function(y, X, burnin = 500L, run = 500L, tau = 10, c = 1, mc_draws = 1E4L, da_ver = 1L, sigma2_ini = 0.01, track_r = FALSE, update_sigma2 = FALSE) {
     .Call('scalableDA_logistic_reg_random_effect', PACKAGE = 'scalableDA', y, X, burnin, run, tau, c, mc_draws, da_ver, sigma2_ini, track_r, update_sigma2)
 }
 
-poisson_reg <- function(y, X, r_ini = 1, tune = 100L, burnin = 500L, run = 500L, fixR = FALSE, C = 1E4, c_ini = 1, MH = TRUE, randomEff = FALSE, nu = 1, adaptC = TRUE) {
-    .Call('scalableDA_poisson_reg', PACKAGE = 'scalableDA', y, X, r_ini, tune, burnin, run, fixR, C, c_ini, MH, randomEff, nu, adaptC)
+logistic_reg <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20) {
+    .Call('scalableDA_logistic_reg', PACKAGE = 'scalableDA', y, X, b, B, burnin, run, r0)
 }
 
 poisson_reg_block_random <- function(y, X, r_ini = 1, tune = 100L, burnin = 500L, run = 500L, fixR = FALSE, C = 1E4, c_ini = 1, c_ini2 = 1, theta_ts = 1, MH = TRUE, nu_ini = 1, sigma2 = 100, adaptC = TRUE, fixNu = FALSE, centeredRanEff = FALSE) {
     .Call('scalableDA_poisson_reg_block_random', PACKAGE = 'scalableDA', y, X, r_ini, tune, burnin, run, fixR, C, c_ini, c_ini2, theta_ts, MH, nu_ini, sigma2, adaptC, fixNu, centeredRanEff)
+}
+
+poisson_reg <- function(y, X, r_ini = 1, tune = 100L, burnin = 500L, run = 500L, fixR = FALSE, C = 1E4, c_ini = 1, MH = TRUE, randomEff = FALSE, nu = 1, adaptC = TRUE) {
+    .Call('scalableDA_poisson_reg', PACKAGE = 'scalableDA', y, X, r_ini, tune, burnin, run, fixR, C, c_ini, MH, randomEff, nu, adaptC)
 }
 
 probit_reg_px <- function(y, X, b, B, burnin = 500L, run = 500L, r0 = 20, mc_draws = 1E4L, nu0 = 1) {

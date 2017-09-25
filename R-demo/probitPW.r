@@ -1,6 +1,6 @@
 require("truncnorm")
 
-probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH= TRUE,c0= 1){
+probitCDA<- function(y,X, burnin=500, run=500,fixR = FALSE,r_ini = 1,MH= T,pw_precision = 1){
   
   n<- length(y)
   p<- ncol(X)
@@ -9,6 +9,18 @@ probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH
   lb[y==1]<-0
   ub[y==0]<-0
   
+  
+  {
+    theta_list = seq(0,-15,length.out = 15* (10^pw_precision) +1)
+    prob <- pnorm(theta_list)
+    dprob<- dnorm(theta_list)
+    r_list <-    c(prob*(1 - prob)/dprob^2)
+    b_list <- (sqrt(r_list)-1) * theta_list
+  }
+  
+  
+  
+  
   #initialize beta
   beta<- rep(1,p)
   Xbeta<- X%*%beta
@@ -16,17 +28,18 @@ probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH
   
   #initialize r and b
   
-  r<- rep(r_ini,n)
+  r<- rep(1,n)
   b<- rep(0,n)
   
   #individual log-likelihood
   loglik <- log(1-prob) * (y==0) + log(prob) * (y==1)
   
-  
   #objects to store trace
   trace_beta<- numeric()
   trace_proposal<- numeric()
-
+  trace_importance<- numeric()
+  trace_accept_ind<- numeric()
+  
   accept<- 0
   tune_accept<- 0
   tune_step<- 0
@@ -40,6 +53,9 @@ probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH
   ind_normal<- rnorm(p)
   beta <- cholV%*% ind_normal + m
   Xbeta <- X%*%beta
+  
+  r<- rep(r_ini,n)
+  
   
   for(i in 1: (burnin+run)){
     
@@ -57,6 +73,7 @@ probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH
     new_prob <- pnorm(new_Xbeta)
     new_loglik<-  log(1-new_prob) * (y==0) + log(new_prob) * (y==1)
     
+    
     q_prob <- pnorm((Xbeta+b)/sqrt(r))
     q_loglik<-  log(1-q_prob) * (y==0) + log(q_prob) * (y==1)
     
@@ -66,28 +83,30 @@ probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH
     
     # inidividual likelihood ratio
     alpha<- exp(new_loglik + q_loglik  - loglik - new_q_loglik  )
-
+    importance<-  sum(new_loglik  - new_q_loglik)
+    
     # fixing NA and INF issue
-    alpha[is.na(alpha)]<- 1E-8
+    alpha[is.na(alpha)]<- 0.00001
     alpha[is.infinite(alpha)]<- 1
     
     #use the first half of burnin steps to adaptively tune r and b
     if(tuning){
       
-      # set bias correction to the value that L(y;xbeta) = L_{r,b}(y;xbeta)
-      # b<- (sqrt(r)-1) * new_Xbeta
-      
       if(!fixR){
-        dprob<- dnorm(Xbeta)
-        r<-    c(prob*(1 - prob)/dprob^2) * c0
-        r[r<1]<- 1
+        # dprob<- dnorm(Xbeta)
+        # r<-    c(prob*(1 - prob)/dprob^2)
+        # r[r<1]<- 1
+        
+        idx =  abs(round(Xbeta,digits = 0))*(10^pw_precision)+1
+        r = r_list[idx]
+        b = b_list[idx]
       }
-      b<- (sqrt(r)-1) * new_Xbeta
+      # b<- (sqrt(r)-1) * new_Xbeta
     }
     
     
     #metropolis-hastings
-    if(runif(1)< prod(alpha)|| !MH){
+    if(runif(1)< prod(alpha)|| !MH){   # the transition kernel P(beta|new_beta) = P(new_beta|beta), so the MH ratio is just likelihood ratio
       beta<- new_beta
       Xbeta<- new_Xbeta
       prob<- new_prob
@@ -100,23 +119,23 @@ probitCDA<- function(y,X,tune= 100, burnin=500, run=500,fixR = FALSE,r_ini=1, MH
     
     if(tuning){
       tune_step<- tune_step+1
-      if(tune_step>tune) {
-        if(tune_accept / tune_step<0.2)
-          print("acceptance rate is too low, consider reducing c0")
-        tuning = FALSE
-      }
-      # print(c("Acceptance Rate: ", tune_accept / tune_step))
+      if(tune_accept / tune_step > 0.2 & tune_step>100) tuning = FALSE
+      
+      print(tune_accept / tune_step)
+      print(beta)
     }
     
     
     if(i> burnin & !tuning){
       trace_proposal<- rbind(trace_proposal,t(new_beta))
       trace_beta<- rbind(trace_beta,t(beta))
+      trace_importance<- c(trace_importance, importance)
+      trace_accept_ind<- rbind(trace_accept_ind, t(alpha))
     }
     
     print(i)
   }
   
   
-  return(list("beta"=trace_beta, "proposal"=trace_proposal , "r"=r, "b"=b, "accept_rate"= accept/run))
+  return(list("beta"=trace_beta, "proposal"=trace_proposal , "r"=r, "b"=b, "accept_rate"= accept/run, "importance"=trace_importance,"trace_accept_ind"=trace_accept_ind))
 }

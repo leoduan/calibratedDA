@@ -1,4 +1,4 @@
-setwd("~/git/ImbalancedPG/R-demo/")
+setwd("~/git/calibratedDA/R-demo/")
 require("ggplot2")
 
 #generate data
@@ -22,23 +22,31 @@ fit1000<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 1000,fixR = T)
 fit5000<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 5000,fixR = T)
 fit10000<-probitCDA(y,X, burnin = 200, run = 1000,r_ini = 10000,fixR = T)
 
-posterior<- data.frame(theta= c( fit1000$beta[,1]
-                                 ,fit10$proposal[,1]
-                                 ,fit100$proposal[,1]
-                                 ,fit1000$proposal[,1]
-                                 ,fit5000$proposal[,1]
-                                ), r= as.factor(rep(c(1,10,100,1000,5000), each=1000)))
+
+
+
+fit1 <-probitCDA(y,X, r_ini = 1,burnin = 500, run = 1000, fixR = T)
+fit2 <-probitCDA(y,X, r_ini = 10,burnin = 500, run = 1000, fixR = T)
+fit3 <-probitCDA(y,X, r_ini = 100,burnin = 500, run = 1000, fixR = T)
+fit4 <-probitCDA(y,X, r_ini = 1000,burnin = 500, run = 1000, fixR = T)
+fit5 <-probitCDA(y,X, r_ini = 5000,burnin = 500, run = 1000, fixR = T)
+
+
+
+posterior<- data.frame(theta= c( fit1$proposal[,1]
+                                 ,fit2$proposal[,1]
+                                 ,fit3$proposal[,1]
+                                 ,fit4$proposal[,1]
+                                 ,fit5$proposal[,1]
+), r= as.factor(rep(c(1,10,100,1000,5000), each=1000)))
+
+
 
 pdf("./density_probit.pdf",5,3)
-ggplot(posterior, aes(theta, linetype = r, col=r))+  geom_density(alpha = 0.2,bw = 0.2,lwd=1) + xlim(-8,0)
+ggplot(posterior, aes(theta, linetype = r))+  geom_density(alpha = 0.2,bw = 0.2,lwd=2) + xlim(-8,0)
 dev.off()
 
 
-fit1 <-probitCDA(y,X, r_ini = 1,burnin = 500, run = 500, fixR = T)
-fit2 <-probitCDA(y,X, r_ini = 10,burnin = 500, run = 500, fixR = T)
-fit3 <-probitCDA(y,X, r_ini = 100,burnin = 500, run = 500, fixR = T)
-fit4 <-probitCDA(y,X, r_ini = 1000,burnin = 500, run = 500, fixR = T)
-fit5 <-probitCDA(y,X, r_ini = 5000,burnin = 500, run = 500, fixR = T)
 
 
 acf_all <- apply(cbind(fit1$beta,fit2$beta,fit3$beta,fit4$beta,fit5$beta),2,function(x){ acf(x, lag.max = 40, plot=F)$acf})

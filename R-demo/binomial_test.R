@@ -1,4 +1,4 @@
-setwd("~/git/ImbalancedPG/R-demo/")
+setwd("~/git/calibratedDA/R-demo/")
 n<- 1E4
 
 X0<- 1#rnorm(N, 1, 1)
