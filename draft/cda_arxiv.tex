@@ -1,19 +1,22 @@
 %&latex
-\documentclass[11pt]{article}
-\usepackage{jmlr2e}
-\hypersetup{pageanchor=false}
+\documentclass[12pt]{article}
+% \usepackage{jmlr2e}
+% \hypersetup{pageanchor=false}
 
 \pdfoutput=1 
 
-% \usepackage{natbib}
-% \usepackage{hyperref}
-% \usepackage{rotating}
-% \usepackage{graphicx}
+\emergencystretch 3em
+
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{graphicx}
 \usepackage{subfigure}
 
 \usepackage{float}
 \usepackage{amsmath} 
-% \usepackage{amssymb}
+\usepackage{amssymb}
+\usepackage{amsthm}
 % \usepackage{nicefrac}
 % \usepackage{algorithm}
 % \usepackage{algpseudocode}
@@ -32,7 +35,7 @@
 % \newtheorem{theorem}{Theorem}
 % \newtheorem{lemma}{Lemma}
 % \newtheorem{corollary}{Corollary}
-% \newtheorem{remark}{Remark}
+\newtheorem{remark}{Remark}
 
 % \newcommand{\be}{\begin{equation}\begin{aligned}}
 % \newcommand{\ee}{\end{aligned}\end{equation}}
@@ -56,8 +59,8 @@
 \newcommand{\bigO}{\mc O}
 % \newcommand{\eqref}[1]{(\ref{#1})}
 
-\jmlrheading{1}{2017}{xxx}{xxx}{xxx}{duan00a}{Duan, Johndrow and Dunson}
-\ShortHeadings{Calibrated Data Augmentation}{Duan, Johndrow and Dunson}
+% \jmlrheading{1}{2017}{xxx}{xxx}{xxx}{duan00a}{Duan, Johndrow and Dunson}
+% \ShortHeadings{Calibrated Data Augmentation}{Duan, Johndrow and Dunson}
 % \firstpageno{1}
 
 
@@ -76,7 +79,9 @@
      David B. Dunson\thanks{Department of Statistical Science, Duke University, Durham, NC, email: dunson@duke.edu}
      }
 
-\editor{}
+\date{}
+
+% \editor{}
 \maketitle
 
 
@@ -161,7 +166,8 @@ A general strategy for tuning is given in Section \ref{sec:tuning}.
 
 We give a basic convergence guarantee that holds for the CDA M-H under weak assumptions on $L_{r,b}$, which is based on \cite[Theorem 3, also pp. 214]{roberts1994simple}. Basically, one needs $\Pi(\cdot) \ll \Pi_{r,b}(\cdot)$ for all $r,b$, where for two probability measures $\mu,\nu$, $\mu(\cdot) \ll \nu(\cdot)$ means $\mu$ is absolutely continuous with respect to $\nu$.
 \begin{remark}[Ergodicity] \label{rem:ergodic}
-Assume that $\Pi(d\theta)$ and $\Pi_{r,b}(d\theta)$ have densities with respect to Lebesgue measure on $\bb R^p$, and that $K_{r,b}((\theta,z);(\theta',z'))>0 \,\forall\, ((\theta,z),(\theta',z')) \in (\Theta \times \mc Z) \times (\Theta \times \mc Z)$. Then, 
+Assume that $\Pi(d\theta)$ and $\Pi_{r,b}(d\theta)$ have densities with
+respect to Lebesgue measure on $\bb R^p$, and that \\ $K_{r,b}((\theta,z);(\theta',z'))>0 \,\forall\, ((\theta,z),(\theta',z')) \in (\Theta \times \mc Z) \times (\Theta \times \mc Z)$. Then, 
 \begin{itemize}
 \item For fixed $r,b$, CDA Gibbs is ergodic with invariant measure $\Pi_{r,b}(d\theta,dz)$.
 \item A Metropolis-Hastings algorithm with proposal kernel $Q_{r,b}(\theta';\theta)$ as defined in \eqref{eq:Q} with fixed $r,b$ is ergodic with invariant measure $\Pi(d\theta)$.
@@ -184,7 +190,8 @@ where $\No_{[a,b]}(\mu,\sigma^2)$ is the normal distribution with mean $\mu$ and
 
 As the conditional variance $\mbox{var}(\theta\mid z,y)$ is independent of $z$, we introduce a scale parameter $r$ in the update for $z$, then adjust the conditional mean by a location parameter $b$.  This is equivalent to changing the scale of $z_i \mid\theta,y_i$ from $1$ to $r$ and the mean from $\theta$ to $\theta+b$. These adjustments yield 
 \be
-\mbox{pr}(y_i = 1 | \theta, r, b) = \int_{0}^{\infty} \frac{1}{\sqrt{2 \pi r} } \exp\left(-\frac{(z_i-\theta-b)^2}{2 r^2} \right) dz_i = \Phi\bigg( \frac{\theta+b}{\sqrt{r}}\bigg),
+\mbox{pr}(y_i = 1 | \theta, r, b) =& \int_{0}^{\infty} \frac{1}{\sqrt{2 \pi r} } \exp\left(-\frac{(z_i-\theta-b)^2}{2 r^2} \right) dz_i 
+\\ = & \Phi\bigg( \frac{\theta+b}{\sqrt{r}}\bigg),
 \label{eq:prop-marginal-probit-intercept}
 \ee
 leading to the modified data augmentation algorithm
@@ -239,7 +246,10 @@ z_i \mid \theta, x_i, y_i &\sim \left\{ \begin{array}{cc} \No_{[0,\infty)}(x_i \
 \ee
 where $R = \diag(r_1,\ldots,r_n)$, $b = (b_1,\ldots,b_n)'$, under the Bernoulli likelihood:
 \be
-\mbox{pr}(y_i = 1 | \theta, x_i, r_i, b_i) = \int_{0}^{\infty} \frac{1}{\sqrt{2 \pi r_i} } \exp\left(-\frac{(z_i-x_i\theta-b_i)^2}{2 r_i} \right) dz_i = \Phi\bigg( \frac{x_i\theta+b_i}{\sqrt{r_i}}\bigg).
+\mbox{pr}(y_i = 1 | \theta, x_i, r_i, b_i) = & \int_{0}^{\infty}
+\frac{1}{\sqrt{2 \pi r_i} } \exp\left(-\frac{(z_i-x_i\theta-b_i)^2}{2 r_i}
+\right) dz_i \\
+= & \Phi\bigg( \frac{x_i\theta+b_i}{\sqrt{r_i}}\bigg).
 \label{eq:prop-marginal-probit}
 \ee
 For fixed $r = (r_1,\ldots,r_n)$ and $b = (b_1,\ldots,b_n)$, \eqref{eq:prop-marginal-probit} defines a proper Bernoulli likelihood for $y_i$ conditional on parameters, and therefore the transition kernel $K_{r,b}((\theta,z);\cdot)$ defined by the Gibbs update rule in \eqref{eq:cda-probit} would have a unique invariant measure for fixed $r,b$, which we denote $\Pi_{r,b}(\theta,z \mid y)$. 
@@ -247,7 +257,7 @@ For fixed $r = (r_1,\ldots,r_n)$ and $b = (b_1,\ldots,b_n)$, \eqref{eq:prop-marg
 
 For insight into the relationship between $r$ and step size, consider the $\theta$-marginal autocovariance in a Gibbs sampler evolving according to $K_{r,b}$:
 \be
-\cov_{r,b}(\theta_t \mid \theta_{t-1},X,z,y) &= (X'R^{-1}X)^{-1} + (X'R^{-1}X)^{-1} X'R^{-1}\cov(z-b | R) R^{-1}X(X'R^{-1}X)^{-1} \\
+\cov_{r,b}(\theta_t \mid \theta_{t-1},X,z,y) &= (X'R^{-1}X)^{-1} \\ & + (X'R^{-1}X)^{-1} X'R^{-1}\cov(z-b | R) R^{-1}X(X'R^{-1}X)^{-1} \\
 &\ge (X'R^{-1}X)^{-1}, \label{eq:varlb-probit}
 \ee
 In the special case where $r_i = r_0$ for all $i$, we have
@@ -277,7 +287,8 @@ where $\mbox{PG}(a_1,a_2)$ denotes the Polya-Gamma distribution with parameters 
 
 We replace $\PG(z_i \mid 1,0)$ with $\PG(z_i \mid r_i,0)$ in the step for updating the latent data. Since $\bb E_z \mbox{var}(\theta|z,y)$ lacks closed-form, we focus on the precision matrix $\bb E_z \big( \mbox{var}(\theta|z,y)\big)^{-1} = X' \bb E Z X$. Smaller $r_i$ can lead to smaller $\bb E z_i$, providing a route to calibration. Applying the bias-adjustment term $b_i$ to the linear predictor $\eta_i = x_i\theta$ leads to 
 \be
-L_{r,b}(\xtheta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xtheta+b_i) (y_i-r_i/2)\} \exp\bigg\{ -\frac{z_i (\xtheta+b_i)^2}{2}\bigg\} \PG(z_i \mid r_i,0) dz_i \\
+L_{r,b}(\xtheta;y_i) = & \int_{0}^{\infty}  \exp\{ (\xtheta+b_i)
+(y_i-r_i/2)\} \\ & \quad \exp\bigg\{ -\frac{z_i (\xtheta+b_i)^2}{2}\bigg\} \PG(z_i \mid r_i,0) dz_i \\
 = &  \frac{\exp \{ (x_i \theta + b_i)y_i \}}{\{1+\exp(\xtheta +b_i)\}^{r_i}},
 \label{eq:prop-marginal-logit}
 \ee
@@ -327,7 +338,7 @@ $\eta_{k}(\theta)$ with respect to $\theta_j$. It suffices to reduce the differe
 
 {
 In all CDA algorithms presented in
-this article,  $\mc I_{y\mid \theta}(\eta({\theta}))$  and $\mc I_{y\mid \theta,z}(\eta({\theta)};r,b)$ are simple diagonal matrices, and 
+this article,  $\mc I_{y\mid \theta}(\eta({\theta}))$  and  $\mc I_{y\mid \theta,z}(\eta({\theta)};r,b)$ are simple diagonal matrices, and 
  it can be made exactly $\mc I_{y\mid \theta}({\theta})=\bb E_{z\mid \theta}\mc I_{y\mid \theta,z}({\theta};r,b)$ for given $\theta$ with a closed-form
 solution. As there could be more complicated
 scenarios, we suggest the following. When the difference cannot
@@ -350,9 +361,10 @@ density region. This approach is similar to using the frequentist Fisher informa
 the MAP. It works well empirically in examples we have considered.}
 
  Specifically, we choose $r_{t+1}$ to minimize the  difference between $\mc  I_{y\mid \theta_{t}}(\theta_{t})$
-and \\ $\bb E_{z\mid \theta_{t}}\mc I_{y\mid \theta_{t},z}(\theta_{t};r_{t+1},b_{t})$, or $\mc  I^{-1}_{y\mid \theta_{t}}(\theta_{t})$
+and  $\bb E_{z\mid \theta_{t}}\mc I_{y\mid \theta_{t},z}(\theta_{t};r_{t+1},b_{t})$, or $\mc  I^{-1}_{y\mid \theta_{t}}(\theta_{t})$
 and $\bb E_{z\mid \theta_{t}}\mc I^{-1}_{y\mid \theta_{t},z}(\theta_{t};r_{t+1},b_{t})$.
-Additionally, we set $b_{t+1}$ to minimize the difference between $L_{1,0}(\theta_t;y)$ and $L_{r_{t+1},b_{t+1}}(\theta_t;y)$. Thus, we use $r$ to adjust the conditional variance based on $L_{r,b}$ to match the marginal variance based on $L$ and $b$ to make $L_{r,b}$ close to $L_{1,0}$ in the neighborhood of $\theta_t$. Intuitively, this will make the target distribution closer to the invariant measure of calibrated Gibbs, and correspondingly increase the MH acceptance rate. {Some illustrative results about the adaptation
+Additionally, we set $b_{t+1}$ to minimize the difference between
+$L_{1,0}(\theta_t;y)$ and  $L_{r_{t+1},b_{t+1}}(\theta_t;y)$. Thus, we use $r$ to adjust the conditional variance based on $L_{r,b}$ to match the marginal variance based on $L$ and $b$ to make $L_{r,b}$ close to $L_{1,0}$ in the neighborhood of $\theta_t$. Intuitively, this will make the target distribution closer to the invariant measure of calibrated Gibbs, and correspondingly increase the MH acceptance rate. {Some illustrative results about the adaptation
 are provided in the appendix.} The proposal kernel we describe above is \emph{adaptive}; that is, we have a collection of proposal kernels $\mc Q = \{Q_{r,b}\}_{(r,b) \in \bb R_+ \times \bb R}$, and we choose a different member of $\mc Q$ at each iteration to create the proposal. 
 %The \emph{target} for the resulting transition kernel is $\Pi_{1,0}$ for every $Q_{r,b}$ because of the Metropolis-Hastings rejection step.  
 In general, ergodicity of adaptive algorithms requires a diminishing adaptation condition \citep{roberts2007coupling}.  {For simplicity, we satisfy this condition by stopping adaptation after a tuning phase.}
@@ -428,13 +440,13 @@ As motivated above,  two factors are necessary for obtaining usable posterior sa
 To start, we consider a simple Bernoulli logistic regression with a common intercept:
 
 $$y_i\stackrel{iid}{\sim} \Bern\Big(\frac{\exp(\theta)}{1+\exp(\theta)}\Big), \quad i=1,\ldots,n,$$
-with a flat improper prior for $\theta$. As the likelihood is $L(y;\theta )= {\exp(\theta\sum y_i)}{(1+\exp(\theta))^{-n}} $, it enjoys efficient computing per iteration
+with a flat improper prior for $\theta$. As the likelihood is \\ $L(y;\theta )= {\exp(\theta\sum y_i)}{(1+\exp(\theta))^{-n}} $, it enjoys efficient computing per iteration
 that only involves $1$  Polya-Gamma latent variable. Alternatively, using calibration parameters $(r,b)$, a  proposal can be simulated from
 \be
 z &\sim \PG\left ( n r,\theta+b \right),\\
 \theta^* &\sim \No \left( \frac{ \sum y_i - r n/2 -z b }{z}, \frac{1}{z}\right),
 \ee
-and M-H acceptance step as described above using $L_{r,b}(\theta; y) = {\exp(\theta+b)^{\sum y_i}}{\{ 1+\exp(\theta+b)\}^{-nr}}$.
+and M-H acceptance step as described above using \\ $L_{r,b}(\theta; y) = {\exp(\theta+b)^{\sum y_i}}{\{ 1+\exp(\theta+b)\}^{-nr}}$.
 To have a proper $L_{r,b}(\theta;y)$, we further require $r \ge (\sum y_i-1)/n + \epsilon$ with $\epsilon$ a small positive constant. 
 %As usual, one would obtain the  Gibbs sampling algorithm \citep{polson2013bayesian} via $(r,b)=(1,0)$. 
  Using Fisher information, the  parameters are adapted initially for $200$
@@ -465,7 +477,8 @@ strategy with such subsampling to scale DA-MCMC up to enormous data sample sizes
 coupling here.}
 
 We consider the same two-parameter intercept-slope model in logistic regression
-as described in the last section, except we now vary data sample size from  $n=10^5$ to $10^8$. We simulate Bernoulli outcome $y_i\sim \Bern\big(({1+\exp(-x_i\theta)})^{-1}\big)$ based on $x_1\sim \No(0,1)$ and $\theta=(-\theta_0,1)'$. We vary $\theta_0$ and induce $\sum{y_i}\approx
+as described in the last section, except we now vary data sample size from
+$n=10^5$ to $10^8$. We simulate Bernoulli outcome \\$y_i\sim \Bern\big(({1+\exp(-x_i\theta)})^{-1}\big)$ based on $x_1\sim \No(0,1)$ and $\theta=(-\theta_0,1)'$. We vary $\theta_0$ and induce $\sum{y_i}\approx
 10$ for each $n$. We utilize the sub-sampled-Polya-Gamma algorithm described by \cite{johndrow2015approximations},
 and apply CDA to calibrate the variance discrepancy. Since $y$ is highly imbalanced in
 the number of $0$ and $1$s, we apply biased-sampling by including all data
@@ -543,19 +556,17 @@ Shown in Table~\ref{tab:binomial}, CDA and HMC have very close estimates in post
   {\caption{Boxplots of the ACFs show the mixing of the $59,792$ parameters in the hierarchical binomial model, for the original DA\citep{polson2013bayesian}, CDA and HMC. \label{data_binomial}}}
   {%
     \subfigure[ACFs of the rate parameters $\theta_i$ using DA.]{%
-      \includegraphics[width=0.3\linewidth]{binomial_random_acf_da}}%
-    \qquad
+      \includegraphics[width=0.32\linewidth]{binomial_random_acf_da}}%
     \subfigure[ACFs of the rate parameters $\theta_i$ using CDA.]{%
-      \includegraphics[width=0.3\linewidth]{binomial_random_acf_cda}}
-     \qquad
+      \includegraphics[width=0.32\linewidth]{binomial_random_acf_cda}}
     \subfigure[ACFs of the rate parameters $\theta_i$ using HMC.]{%
-      \includegraphics[width=0.3\linewidth]{binomial_random_acf_hmc}}
+      \includegraphics[width=0.32\linewidth]{binomial_random_acf_hmc}}
   }
 \end{figure}
  
  
 \begin{table}[H]
-\small
+\tiny
 \centering
 \begin{tabular}{|l |r |r| r| r |} 
  \hline
@@ -596,7 +607,10 @@ L(\eta_i;y_i)=\frac{ \exp(y_i \eta_i \} }{\exp\{\exp(\eta_i)\}} = \lim_{\lambda\
 With finite $\lambda$ approximation, the posterior can be sampled via Polya-Gamma augmented Gibbs sampling:
 \be
 z_i \mid \eta_i \sim  \PG ( & \lambda, \eta_i -\log \lambda)  \quad i=1\ldots n\\
-\theta \mid z, y \sim  \No \bigg(  &  \Big(\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix}\Big)^{-1} \{  \tilde X'  \big ( y - \lambda/2 + Z \log \lambda\big) +   \begin{bmatrix} \tau_0/\nu^2  1_n \\  0_p \end{bmatrix} \} , \\
+\theta \mid z, y \sim  \No \bigg(  &  \Big(\tilde X' Z \tilde X+
+\begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p
+\end{bmatrix}\Big)^{-1} \\
+& \quad \{  \tilde X'  \big ( y - \lambda/2 + Z \log \lambda\big) +   \begin{bmatrix} \tau_0/\nu^2  1_n \\  0_p \end{bmatrix} \} , \\
 & \Big(\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix}\Big)^{-1} \bigg),
 \ee
 where $Z = \diag\{ z_1, \ldots,  z_n\}$, $1_n = \{1, \ldots 1\}'$ and $0_p = \{0, \ldots 0\}'$.
@@ -610,8 +624,12 @@ L_{r,b}(\xtheta;y_i)=\frac{\exp(\eta_i   -\log \lambda +b_i)^{y_i}}{\{1+ \exp(\e
 \ee
 with $r_i \ge (y_i-1)/\lambda + \epsilon$ for proper likelihood, and proposal update rule:
 \be
+\small
 z_i \sim  \PG ( & r_i\lambda, \eta_i -\log \lambda + b_i)  \quad i=1\ldots n\\
-\theta^* \sim  \No \bigg(  &  \Big(\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix}\Big)^{-1} \Big\{  \tilde X'  \big( y - r\lambda/2 + Z \log (\lambda -b )\big) +   \begin{bmatrix} \tau_0/\nu^2  1_n \\  0_p \end{bmatrix} \Big\} , \\
+\theta^* \sim  \No \bigg(  &  \Big(\tilde X' Z \tilde X+  \begin{bmatrix}
+	1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p
+	\end{bmatrix}\Big)^{-1} \\
+& \quad \Big\{  \tilde X'  \big( y - r\lambda/2 + Z \log (\lambda -b )\big) +   \begin{bmatrix} \tau_0/\nu^2  1_n \\  0_p \end{bmatrix} \Big\} , \\
 & \Big(\tilde X' Z \tilde X+  \begin{bmatrix} 1/\nu^2 \cdot I_n & 0\\ 0 & 1/\sigma^2_{\beta}  \cdot I_p \end{bmatrix}\Big)^{-1} \bigg)
 \ee
 
@@ -626,8 +644,13 @@ During the tuning, we set
 r_i & = \tau_i\exp(\eta_i) /  \left( \frac{\lambda } {2|\eta_i + b_i - \log\lambda|}  \tanh\frac{ |\eta_i + b_i - \log\lambda|}{2} \right ) \vee \big( (y_i-1)/\lambda + \epsilon \big), \\
 b_i &=\log[ \exp \{ \exp(\eta_i - \log\lambda -\log r_i)   \}-1] -\eta_i + \log\lambda.
 \ee
-After $\theta$ is updated, the other parameters can be sampled via $\tau_0\sim \No\left( (n/ \nu^2 + 1/ \sigma^2_\tau)^{-1} \sum_i \tau_i/\nu^2 , (n/ \nu^2 + 1/ \sigma^2_\tau)^{-1}  \right)$ and $\nu^2 \sim \IG ( n/2-1, \sum_i (\tau_i-\tau_0)^2 /2)$.
-
+After $\theta$ is updated, the other parameters can be sampled via
+\be
+\tau_0 &\sim \No\left( (n/ \nu^2 + 1/ \sigma^2_\tau)^{-1} \sum_i
+\tau_i/\nu^2 , (n/ \nu^2 + 1/ \sigma^2_\tau)^{-1}  \right)\\
+\nu^2 &\sim
+\IG ( n/2-1, \sum_i (\tau_i-\tau_0)^2 /2)
+\ee
 
 We ran the basic DA with $\lambda=1,000$ approximation, CDA with $\lambda=10^9$ and HMC. We ran DA for $200,000$ steps, CDA for $2,000$ steps and HMC for $20,000$ steps so that they have approximately the same effective sample size. For CDA, we used the first $1,000$ steps for adapting $r$ and $b$. Figure~\ref{data_poisson} shows the mixing of DA, CDA and HMC. Even with small $\lambda = 1,000$ in DA, all of the parameters mix poorly; HMC seemed to be affected by the presence of random effects, and most of parameters remain highly correlated within $40$ lags; CDA substantially improves the mixing. Table~\ref{table:Poisson} compares all three algorithms. CDA has the most efficient computing time per effective sample, and is about $30-300$ times more efficient than the other two algorithms.
 
@@ -636,10 +659,8 @@ We ran the basic DA with $\lambda=1,000$ approximation, CDA with $\lambda=10^9$ 
   {%
     \subfigure[Autocorrelation of the parameters from DA.]{%
       \includegraphics[width=0.3\linewidth]{poisson_acf_da}}%
-    \qquad
     \subfigure[Autocorrelation of the parameters from CDA.]{%
       \includegraphics[width=0.3\linewidth]{poisson_acf_cda}}
-     \qquad
     \subfigure[Autocorrelation of the parameters from HMC.]{%
       \includegraphics[width=0.3\linewidth]{poisson_acf_hmc}}
   }
@@ -649,7 +670,7 @@ To evaluate the prediction performance, we use another co-browsing count table f
 $x^\dagger_{ij} = \log(   x_{ij}^{\dagger*} +1 )$ for the  $j = 1,\ldots,95$ clients to predict the count for the client of interest $y_i^\dagger$, over the high traffic site $i=1,\ldots, 59792$. We carry out prediction using $\hat y_i^\dagger= \bb E_{ \beta, \tau \mid y,x}   y_{i}^\dagger =\bb E_{ \beta, \tau \mid y,x}\exp(  x_{i}^\dagger\beta + \tau_i)$ on the client site. The expectation is taken over posterior sample $\beta, \tau \mid y,x$ with training set $\{y,x\}$ discussed above. Cross-validation root-mean-squared error $\big(\sum_i(\hat y_i^\dagger - y_i^\dagger)^2/n\big)^{1/2}$ between the prediction and actual count $ y_i^\dagger$'s is computed. Shown in Table~\ref{table:Poisson}, slow mixing in DA and HMC cause poor estimation of the parameters and high prediction error, while CDA has significantly lower error. 
 
 \begin{table}[H]
-\small
+\tiny
 \centering
 \begin{tabular}{|l |r |r| r| r |} 
  \hline
@@ -748,7 +769,7 @@ Adapting based on \cite{johndrow2015approximations}, we first randomly sample
 a subset of indices $V$ of size $|V|$. This algorithm  generates proposals from
 
 \be
-V & = V_1\cup V_0,\quad V_1= \{i\in\{1,\ldots,n\}: y_i=1\}, \quad V_0  \sim \text{Subset}(|V|,\{i\in\{1,\ldots,n\}: y_i=0\})
+V & = V_1\cup V_0,\quad V_1= \{i\in\{1,\ldots,n\}: y_i=1\}, \\ \quad V_0 & \sim \text{Subset}(|V|,\{i\in\{1,\ldots,n\}: y_i=0\})
 \\ z_i &\sim {\PG}(k_{i}r_i, |\xtheta+b_i|) \quad i\in V,\\
 \theta^* &\sim \No \left(  (X_V' Z_{V} X_V)^{-1}  X_V'  (y_V -k_{V}r_V/2- Z_Vb_V) ,  (X_V' Z_V X_V)^{-1}  \right),
 \ee
@@ -767,5 +788,5 @@ b_{i} & =\log[  \{1+\exp(x_i\theta+b_{i})\}^{1/r_{i}} -1] - x_i\theta.\ee
 
 
 \bibliography{reference}
-% \bibliographystyle{chicago}
+\bibliographystyle{chicago}
 \end{document}
