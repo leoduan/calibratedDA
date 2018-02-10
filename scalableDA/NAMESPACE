@@ -1,3 +1,0 @@
-useDynLib(scalableDA)
-importFrom(Rcpp, evalCpp)
-exportPattern("^[[:alpha:]]+")
